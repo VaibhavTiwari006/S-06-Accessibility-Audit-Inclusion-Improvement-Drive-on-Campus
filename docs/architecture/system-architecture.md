@@ -26,7 +26,7 @@ The system architecture is designed to:
 
 # High-Level System Architecture
 
-![System Architecture](./images/system-architecture.png)
+![System Architecture](./images/system-architecture-diagram.png)
 
 The architecture consists of three primary layers:
 
