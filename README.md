@@ -68,4 +68,3 @@ Inclusion requires proactive evaluation. An audit of physical and digital campus
 ## Bonus Impact Opportunities
 - Develop a student-led disability ally network
 - Create a tactile campus map for visually impaired students
-- Propose a recurring annual audit process
