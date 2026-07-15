@@ -2,25 +2,26 @@ import React, { useEffect, useState } from 'react';
 import issueService from '../services/issueService';
 import { AlertCircle, Plus, MapPin, User, Clock, CheckCircle } from 'lucide-react';
 import { toast } from 'react-toastify';
+import ReportIssueModal from '../components/ReportIssueModal';
 
 const IssueList = () => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const fetchIssues = async () => {
-      try {
-        const data = await issueService.getAllIssues();
-        setIssues(data);
-      } catch (error) {
-        toast.error('Failed to fetch issues.');
-        console.error('Failed to fetch issues', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchIssues();
-  }, []);
+  const fetchIssues = async () => {
+    try {
+      setLoading(true);
+      const data = await issueService.getAllIssues();
+      setIssues(data);
+    } catch (error) {
+      toast.error('Failed to fetch issues.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchIssues(); }, []);
 
   const statusBadge = (status) => {
     const map = {
@@ -39,6 +40,7 @@ const IssueList = () => {
 
   return (
     <div className="space-y-6">
+      {showModal && <ReportIssueModal onClose={() => setShowModal(false)} onSuccess={fetchIssues} />}
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-textMain flex items-center gap-2">
@@ -46,7 +48,7 @@ const IssueList = () => {
           </h2>
           <p className="text-textLight mt-1">Student-reported accessibility barriers and their resolution status.</p>
         </div>
-        <button className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
+        <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
           <Plus size={18} /> Report Issue
         </button>
       </div>

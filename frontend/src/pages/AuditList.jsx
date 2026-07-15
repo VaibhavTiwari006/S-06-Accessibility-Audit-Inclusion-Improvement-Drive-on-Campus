@@ -2,25 +2,26 @@ import React, { useEffect, useState } from 'react';
 import auditService from '../services/auditService';
 import { ClipboardList, Play, FileText, Calendar, User } from 'lucide-react';
 import { toast } from 'react-toastify';
+import StartAuditModal from '../components/StartAuditModal';
 
 const AuditList = () => {
   const [audits, setAudits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const fetchAudits = async () => {
-      try {
-        const data = await auditService.getAllAudits();
-        setAudits(data);
-      } catch (error) {
-        toast.error('Failed to fetch audits.');
-        console.error('Failed to fetch audits', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchAudits();
-  }, []);
+  const fetchAudits = async () => {
+    try {
+      setLoading(true);
+      const data = await auditService.getAllAudits();
+      setAudits(data);
+    } catch (error) {
+      toast.error('Failed to fetch audits.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchAudits(); }, []);
 
   const statusColor = (status) => {
     const map = {
@@ -44,6 +45,7 @@ const AuditList = () => {
 
   return (
     <div className="space-y-6">
+      {showModal && <StartAuditModal onClose={() => setShowModal(false)} onSuccess={fetchAudits} />}
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-textMain flex items-center gap-2">
@@ -51,7 +53,7 @@ const AuditList = () => {
           </h2>
           <p className="text-textLight mt-1">All campus building audits and compliance scores.</p>
         </div>
-        <button className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
+        <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
           <Play size={18} /> Start New Audit
         </button>
       </div>

@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import buildingService from '../services/buildingService';
-import { Building2, Plus, MapPin, Layers, CheckCircle, Clock } from 'lucide-react';
+import { Building2, Plus, MapPin, Layers } from 'lucide-react';
 import { toast } from 'react-toastify';
+import AddBuildingModal from '../components/AddBuildingModal';
 
 const BuildingList = () => {
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const fetchBuildings = async () => {
-      try {
-        const data = await buildingService.getAllBuildings();
-        setBuildings(data);
-      } catch (error) {
-        toast.error('Failed to fetch buildings.');
-        console.error('Failed to fetch buildings', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBuildings();
-  }, []);
+  const fetchBuildings = async () => {
+    try {
+      setLoading(true);
+      const data = await buildingService.getAllBuildings();
+      setBuildings(data);
+    } catch (error) {
+      toast.error('Failed to fetch buildings.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchBuildings(); }, []);
 
   const statusBadge = (status) => {
     const map = {
@@ -33,6 +34,7 @@ const BuildingList = () => {
 
   return (
     <div className="space-y-6">
+      {showModal && <AddBuildingModal onClose={() => setShowModal(false)} onSuccess={fetchBuildings} />}
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold text-textMain flex items-center gap-2">
@@ -40,7 +42,7 @@ const BuildingList = () => {
           </h2>
           <p className="text-textLight mt-1">All campus buildings and their accessibility status.</p>
         </div>
-        <button className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
+        <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
           <Plus size={18} /> Add Building
         </button>
       </div>
