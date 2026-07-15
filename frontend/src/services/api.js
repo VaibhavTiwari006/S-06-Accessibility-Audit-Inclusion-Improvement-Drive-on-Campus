@@ -24,9 +24,8 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // Clear token and redirect to login if unauthorized
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('userRole');
+      // Clear ALL stored session data and redirect to login
+      localStorage.clear();
       window.location.href = '/login';
     }
     return Promise.reject(error);
