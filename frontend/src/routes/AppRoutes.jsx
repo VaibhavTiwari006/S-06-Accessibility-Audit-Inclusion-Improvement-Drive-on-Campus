@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import BuildingList from '../pages/BuildingList';
 import AuditList from '../pages/AuditList';
+import IssueList from '../pages/IssueList';
 
 // Placeholder Pages
 const NotFound = () => <div className="p-10 text-danger font-semibold">404 - Page Not Found</div>;
@@ -21,6 +22,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>} />
         <Route path="/buildings" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><BuildingList /></MainLayout></ProtectedRoute>} />
         <Route path="/audits" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><AuditList /></MainLayout></ProtectedRoute>} />
+        <Route path="/issues" element={<ProtectedRoute><MainLayout><IssueList /></MainLayout></ProtectedRoute>} />
 
         
         {/* Catch All */}
