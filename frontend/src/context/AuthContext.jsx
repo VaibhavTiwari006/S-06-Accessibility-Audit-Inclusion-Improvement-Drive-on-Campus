@@ -5,32 +5,51 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
+// Validate that a JWT token has the correct 3-part structure
+const isValidJwt = (token) => {
+  if (!token || typeof token !== 'string') return false;
+  const parts = token.split('.');
+  return parts.length === 3;
+};
+
+const clearSession = () => {
+  localStorage.clear();
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const initAuth = async () => {
+    const initAuth = () => {
       const token = localStorage.getItem('accessToken');
-      if (token) {
-        try {
-          const userData = await authService.getCurrentUser();
-          setUser(userData);
-        } catch (error) {
-          console.error("Failed to restore session", error);
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('userRole');
-        }
+      const role = localStorage.getItem('userRole');
+      const fullName = localStorage.getItem('userFullName');
+      const email = localStorage.getItem('userEmail');
+
+      // Validate JWT structure — 3 parts separated by dots
+      if (!isValidJwt(token)) {
+        // Corrupt or missing token — wipe everything
+        clearSession();
+        setLoading(false);
+        return;
       }
+
+      // Token looks valid — restore the session from localStorage
+      setUser({ role, fullName, email });
       setLoading(false);
     };
+
     initAuth();
   }, []);
 
   const login = async (email, password) => {
     try {
       const data = await authService.login(email, password);
-      // data is now the unwrapped AuthResponse: { token, role, fullName, email, userId }
+      // data is the unwrapped AuthResponse: { token, role, fullName, email, userId }
+      if (!isValidJwt(data.token)) {
+        return { success: false, message: 'Invalid token received from server.' };
+      }
       localStorage.setItem('accessToken', data.token);
       localStorage.setItem('userRole', data.role);
       localStorage.setItem('userFullName', data.fullName);
@@ -43,10 +62,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userFullName');
-    localStorage.removeItem('userEmail');
+    clearSession();
     setUser(null);
   };
 

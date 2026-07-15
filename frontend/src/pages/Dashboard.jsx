@@ -79,7 +79,9 @@ const Dashboard = () => {
         const res = await dashboardService.getStats();
         if (res.success) setStats(res.data);
       } catch (error) {
-        // Non-admin roles may get 403 — silently ignore, show empty cards
+        const status = error?.response?.status;
+        if (status === 401) throw error; // Let interceptor handle redirect to login
+        // 403 means role doesn't have access to admin stats — that's fine, show dashes
         console.warn('Could not load dashboard stats', error);
       }
     };
