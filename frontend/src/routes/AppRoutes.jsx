@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import ProtectedRoute from './ProtectedRoute';
 import MainLayout from '../layout/MainLayout';
 import Login from '../pages/Login';
+import Dashboard from '../pages/Dashboard';
 
 // Placeholder Pages
-const Dashboard = () => <div className="p-10 text-xl font-semibold">Welcome to Dashboard</div>;
 const NotFound = () => <div className="p-10 text-danger font-semibold">404 - Page Not Found</div>;
 
 const AppRoutes = () => {
