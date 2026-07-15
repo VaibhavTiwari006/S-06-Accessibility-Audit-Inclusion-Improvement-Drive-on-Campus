@@ -60,11 +60,16 @@ const BuildingList = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100 bg-transparent">
-            {loading && (
-              <tr>
-                <td colSpan="6" className="px-6 py-12 text-center text-textLight font-medium">Loading buildings...</td>
+            {loading && [...Array(3)].map((_, i) => (
+              <tr key={i}>
+                <td className="px-6 py-4 whitespace-nowrap"><div className="h-10 w-48 skeleton"></div></td>
+                <td className="px-6 py-4 whitespace-nowrap"><div className="h-6 w-16 skeleton"></div></td>
+                <td className="px-6 py-4 whitespace-nowrap"><div className="h-6 w-32 skeleton"></div></td>
+                <td className="px-6 py-4 whitespace-nowrap"><div className="h-6 w-12 skeleton"></div></td>
+                <td className="px-6 py-4 whitespace-nowrap"><div className="h-6 w-24 skeleton rounded-full"></div></td>
+                <td className="px-6 py-4 whitespace-nowrap text-right"><div className="h-6 w-10 skeleton ml-auto"></div></td>
               </tr>
-            )}
+            ))}
             {buildings.map((building) => (
               <tr key={building.id} className="hover:bg-white/60 transition-all duration-200 group">
                 <td className="px-6 py-4 whitespace-nowrap">

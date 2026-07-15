@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       {/* Mobile Backdrop */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-textMain/20 backdrop-blur-sm z-10 md:hidden transition-opacity"
+          className="fixed inset-0 bg-textMain/40 backdrop-blur-sm z-30 md:hidden animate-fade-in"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         ></div>
@@ -33,7 +33,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
       {/* Sidebar Navigation */}
       <aside 
-        className={`w-64 glass shadow-glass h-[calc(100vh-73px)] fixed md:static top-[73px] left-0 z-20 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 overflow-y-auto`}
+        className={`w-64 glass shadow-glass h-[calc(100vh-73px)] fixed md:static top-[73px] left-0 z-40 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 overflow-y-auto`}
         aria-label="Sidebar Navigation"
       >
         <div className="py-6 px-4 flex flex-col gap-2">

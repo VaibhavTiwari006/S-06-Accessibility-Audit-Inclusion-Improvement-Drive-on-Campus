@@ -59,7 +59,25 @@ const AuditList = () => {
       </div>
 
       {loading && (
-        <div className="text-center py-16 text-gray-400">Loading audits...</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="glass-panel p-6 rounded-xl flex flex-col gap-4">
+              <div className="flex justify-between">
+                <div className="h-6 w-1/2 skeleton"></div>
+                <div className="h-6 w-1/4 skeleton rounded-full"></div>
+              </div>
+              <div className="h-4 w-1/3 skeleton"></div>
+              <div className="h-4 w-1/3 skeleton"></div>
+              <div className="mt-2 flex justify-between">
+                <div>
+                  <div className="h-3 w-16 skeleton mb-1"></div>
+                  <div className="h-8 w-12 skeleton"></div>
+                </div>
+                <div className="h-10 w-24 skeleton rounded-lg"></div>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

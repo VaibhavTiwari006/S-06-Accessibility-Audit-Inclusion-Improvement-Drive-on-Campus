@@ -54,7 +54,22 @@ const IssueList = () => {
       </div>
 
       {loading && (
-        <div className="text-center py-16 text-gray-400">Loading issues...</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="glass-panel p-5 rounded-xl flex flex-col gap-3">
+              <div className="flex justify-between">
+                <div className="h-5 w-1/2 skeleton"></div>
+                <div className="h-5 w-20 skeleton rounded-full"></div>
+              </div>
+              <div className="h-4 w-full skeleton mt-2"></div>
+              <div className="h-4 w-3/4 skeleton"></div>
+              <div className="mt-4 flex justify-between">
+                <div className="h-4 w-1/3 skeleton"></div>
+                <div className="h-4 w-16 skeleton"></div>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

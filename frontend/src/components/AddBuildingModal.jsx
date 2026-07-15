@@ -28,58 +28,59 @@ const AddBuildingModal = ({ onClose, onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden">
-        <div className="bg-primary px-6 py-4 flex justify-between items-center">
-          <h3 className="text-white font-bold text-lg flex items-center gap-2">
-            <Building2 size={20} /> Add New Building
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden animate-fade-in">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="relative glass-panel rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden animate-slide-up border border-white/60">
+        <div className="bg-gradient-to-r from-primary to-primary-dark px-6 py-5 flex justify-between items-center shadow-inner">
+          <h3 className="text-white font-heading font-bold text-lg flex items-center gap-2">
+            <Building2 size={22} className="text-primary-50" /> Add New Building
           </h3>
-          <button onClick={onClose} className="text-white/80 hover:text-white transition-colors">
-            <X size={22} />
+          <button onClick={onClose} className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-all">
+            <X size={20} />
           </button>
         </div>
-        <form onSubmit={submit} className="p-6 space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={submit} className="p-7 space-y-5 bg-white/40">
+          <div className="grid grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Building Name *</label>
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Building Name *</label>
               <input name="buildingName" value={form.buildingName} onChange={handle} required
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="e.g. Main Academic Block" />
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain" placeholder="e.g. Main Academic Block" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Building Code *</label>
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Building Code *</label>
               <input name="buildingCode" value={form.buildingCode} onChange={handle} required
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="e.g. MAB01" />
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain" placeholder="e.g. MAB01" />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Location *</label>
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Location *</label>
             <input name="location" value={form.location} onChange={handle} required
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" placeholder="e.g. Central Campus, Block A" />
+              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain" placeholder="e.g. Central Campus, Block A" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Description</label>
             <textarea name="description" value={form.description} onChange={handle} rows={2}
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none" placeholder="Brief description of the building..." />
+              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain resize-none" placeholder="Brief description of the building..." />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Number of Floors *</label>
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Number of Floors *</label>
               <input name="numberOfFloors" type="number" min="1" value={form.numberOfFloors} onChange={handle} required
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status *</label>
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Status *</label>
               <select name="status" value={form.status} onChange={handle}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain">
                 <option value="ACTIVE">Active</option>
                 <option value="UNDER_MAINTENANCE">Under Maintenance</option>
                 <option value="INACTIVE">Inactive</option>
               </select>
             </div>
           </div>
-          <div className="flex justify-end gap-3 pt-2">
-            <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">Cancel</button>
-            <button type="submit" disabled={loading} className="px-5 py-2 text-sm font-medium bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50">
+          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6">
+            <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">Cancel</button>
+            <button type="submit" disabled={loading} className="px-6 py-2.5 text-sm font-bold bg-primary text-white rounded-xl shadow-md hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:hover:translate-y-0">
               {loading ? 'Saving...' : 'Add Building'}
             </button>
           </div>
