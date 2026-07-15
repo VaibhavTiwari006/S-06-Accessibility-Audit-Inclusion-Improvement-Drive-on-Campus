@@ -109,17 +109,17 @@
 
 /* React Toastify Custom Overrides */
 .Toastify__toast {
-  @apply bg-white/90 backdrop-blur-xl border border-white/50 shadow-soft-lg rounded-2xl font-sans text-textMain !important;
+  @apply !bg-white/90 !backdrop-blur-xl !border !border-white/50 !shadow-soft-lg !rounded-2xl !font-sans !text-textMain;
 }
 .Toastify__toast-theme--light.Toastify__toast--success {
-  @apply border-l-4 border-l-success !important;
+  @apply !border-l-4 !border-l-success;
 }
 .Toastify__toast-theme--light.Toastify__toast--error {
-  @apply border-l-4 border-l-danger !important;
+  @apply !border-l-4 !border-l-danger;
 }
 .Toastify__toast-theme--light.Toastify__toast--warning {
-  @apply border-l-4 border-l-secondary !important;
+  @apply !border-l-4 !border-l-secondary;
 }
 .Toastify__toast-theme--light.Toastify__toast--info {
-  @apply border-l-4 border-l-primary !important;
+  @apply !border-l-4 !border-l-primary;
 }
