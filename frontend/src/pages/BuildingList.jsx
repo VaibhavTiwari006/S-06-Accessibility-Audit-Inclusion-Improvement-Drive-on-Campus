@@ -18,14 +18,7 @@ const BuildingList = () => {
       }
     };
     
-    // For now we mock the data since backend might not be running yet, but we use the service above.
-    // If we want real data, just call fetchBuildings(). Let's mock fallback just in case:
-    fetchBuildings().catch(() => {
-      setBuildings([
-        { id: 1, name: 'Academic Block A', type: 'ACADEMIC', address: 'North Campus', status: 'AUDIT_PENDING' },
-        { id: 2, name: 'Hostel 1', type: 'RESIDENTIAL', address: 'South Campus', status: 'AUDIT_COMPLETED' },
-      ]);
-    });
+    fetchBuildings();
   }, []);
 
   return (

@@ -18,12 +18,7 @@ const IssueList = () => {
       }
     };
 
-    fetchIssues().catch(() => {
-      setIssues([
-        { id: 1, title: 'No ramp at library entrance', location: 'Central Library', status: 'PENDING', reportedBy: 'Student' },
-        { id: 2, title: 'Broken elevator', location: 'Block C', status: 'RESOLVED', reportedBy: 'Student' },
-      ]);
-    });
+    fetchIssues();
   }, []);
 
   return (

@@ -18,13 +18,7 @@ const AuditList = () => {
       }
     };
 
-    fetchAudits().catch(() => {
-      // Mock data if backend is offline
-      setAudits([
-        { id: 1, buildingName: 'Academic Block A', auditor: 'John Doe', date: '2026-07-15', score: null, status: 'IN_PROGRESS' },
-        { id: 2, buildingName: 'Hostel 1', auditor: 'Jane Smith', date: '2026-07-10', score: '82%', status: 'COMPLETED' },
-      ]);
-    });
+    fetchAudits();
   }, []);
 
   return (
