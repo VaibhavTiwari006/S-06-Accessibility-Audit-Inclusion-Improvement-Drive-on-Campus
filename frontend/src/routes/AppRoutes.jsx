@@ -2,10 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 
+import MainLayout from '../layout/MainLayout';
+
 // Placeholder Pages
 const Login = () => <div className="p-10">Login Page</div>;
-const Dashboard = () => <div className="p-10">Dashboard</div>;
-const NotFound = () => <div className="p-10 text-danger">404 - Page Not Found</div>;
+const Dashboard = () => <div className="p-10 text-xl font-semibold">Welcome to Dashboard</div>;
+const NotFound = () => <div className="p-10 text-danger font-semibold">404 - Page Not Found</div>;
 
 const AppRoutes = () => {
   return (
@@ -15,7 +17,8 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         
         {/* Protected Routes */}
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>} />
+
         
         {/* Catch All */}
         <Route path="*" element={<NotFound />} />
