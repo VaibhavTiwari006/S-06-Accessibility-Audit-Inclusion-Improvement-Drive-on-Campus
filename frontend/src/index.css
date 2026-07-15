@@ -4,6 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-textMain;
+    background-color: #F8FAFC;
+    color: #1F2937;
   }
 }
