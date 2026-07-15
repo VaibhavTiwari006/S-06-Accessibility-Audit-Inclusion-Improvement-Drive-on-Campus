@@ -1,8 +1,6 @@
-import axios from 'react'; // wait, it's import axios from 'axios'
+import axios from 'axios';
 
-import axiosInstance from 'axios';
-
-const api = axiosInstance.create({
+const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api',
   headers: {
     'Content-Type': 'application/json',
