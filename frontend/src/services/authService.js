@@ -3,15 +3,16 @@ import api from './api';
 const authService = {
   login: async (email, password) => {
     const response = await api.post('/auth/login', { email, password });
-    return response.data;
+    // Backend wraps everything in ApiResponse: { success, message, data: { token, role, ... } }
+    // We unwrap and return just the inner AuthResponse object
+    return response.data.data;
   },
 
   getCurrentUser: async () => {
-    // Assuming backend has a /auth/me endpoint or similar, 
-    // or we just decode JWT locally if needed. 
-    // For now we will return role from localStorage.
     return {
-      role: localStorage.getItem('userRole')
+      role: localStorage.getItem('userRole'),
+      fullName: localStorage.getItem('userFullName'),
+      email: localStorage.getItem('userEmail'),
     };
   }
 };

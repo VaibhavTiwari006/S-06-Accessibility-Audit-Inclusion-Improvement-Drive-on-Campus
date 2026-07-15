@@ -30,9 +30,12 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const data = await authService.login(email, password);
+      // data is now the unwrapped AuthResponse: { token, role, fullName, email, userId }
       localStorage.setItem('accessToken', data.token);
-      localStorage.setItem('userRole', data.role); // Assuming response contains role
-      setUser({ role: data.role });
+      localStorage.setItem('userRole', data.role);
+      localStorage.setItem('userFullName', data.fullName);
+      localStorage.setItem('userEmail', data.email);
+      setUser({ role: data.role, fullName: data.fullName, email: data.email });
       return { success: true };
     } catch (error) {
       return { success: false, message: error.response?.data?.message || 'Login failed' };
@@ -42,6 +45,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('userFullName');
+    localStorage.removeItem('userEmail');
     setUser(null);
   };
 
