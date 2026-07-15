@@ -1,26 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
-import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users } from 'lucide-react';
+import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info } from 'lucide-react';
 import dashboardService from '../services/dashboardService';
-import { toast } from 'react-toastify';
+
+const DashboardHero = ({ title, subtitle }) => (
+  <div className="relative w-full h-48 md:h-56 rounded-3xl overflow-hidden mb-8 shadow-md animate-fade-in">
+    <div 
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: "url('/campus_bg.jpg')" }}
+    ></div>
+    <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-primary/40 backdrop-blur-[1px]"></div>
+    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+      <h1 className="text-3xl md:text-4xl font-heading font-extrabold text-white mb-2">{title}</h1>
+      <p className="text-primary-50 font-medium max-w-xl">{subtitle}</p>
+    </div>
+  </div>
+);
 
 // ─────────────────────────── Admin ────────────────────────────
 const AdminDashboard = ({ stats }) => (
   <div className="space-y-6">
-    <div>
-      <h2 className="text-2xl font-bold text-textMain">Admin Overview</h2>
-      <p className="text-textLight mt-1">Real-time campus accessibility health summary.</p>
-    </div>
+    <DashboardHero 
+      title="Admin Overview" 
+      subtitle="Real-time campus accessibility health summary for Chandigarh University." 
+    />
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-blue-50" />
-      <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-yellow-50" />
-      <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-green-50" />
-      <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-red-50" />
+      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-primary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-secondary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-success-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
+        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-danger-50" />
+      </div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
-      <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-primary bg-blue-50" />
-      <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} />} colorClass="text-secondary bg-yellow-50" />
+      <div className="animate-slide-up" style={{ animationDelay: '0.5s' }}>
+        <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-primary bg-primary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
+        <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} />} colorClass="text-secondary bg-secondary-50" />
+      </div>
     </div>
   </div>
 );
@@ -28,14 +53,20 @@ const AdminDashboard = ({ stats }) => (
 // ─────────────────────────── Auditor ──────────────────────────
 const AuditorDashboard = ({ stats }) => (
   <div className="space-y-6">
-    <div>
-      <h2 className="text-2xl font-bold text-textMain">Auditor Dashboard</h2>
-      <p className="text-textLight mt-1">Your assigned buildings and audit progress.</p>
-    </div>
+    <DashboardHero 
+      title="Auditor Dashboard" 
+      subtitle="Manage your assigned buildings and accessibility audit progress at Chandigarh University." 
+    />
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-blue-50" />
-      <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-yellow-50" />
-      <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-green-50" />
+      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-primary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-secondary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
+        <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-success-50" />
+      </div>
     </div>
   </div>
 );
@@ -43,13 +74,17 @@ const AuditorDashboard = ({ stats }) => (
 // ─────────────────────────── Maintenance ──────────────────────
 const MaintenanceDashboard = ({ stats }) => (
   <div className="space-y-6">
-    <div>
-      <h2 className="text-2xl font-bold text-textMain">Maintenance Dashboard</h2>
-      <p className="text-textLight mt-1">Assigned repair tasks and completion status.</p>
-    </div>
+    <DashboardHero 
+      title="Maintenance Dashboard" 
+      subtitle="Track assigned repair tasks and facility improvements across the CU campus." 
+    />
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <ScoreCard title="Total Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-primary bg-blue-50" />
-      <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-red-50" />
+      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <ScoreCard title="Total Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-primary bg-primary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-danger-50" />
+      </div>
     </div>
   </div>
 );
@@ -57,13 +92,17 @@ const MaintenanceDashboard = ({ stats }) => (
 // ─────────────────────────── Student ──────────────────────────
 const StudentDashboard = ({ stats }) => (
   <div className="space-y-6">
-    <div>
-      <h2 className="text-2xl font-bold text-textMain">Student Portal</h2>
-      <p className="text-textLight mt-1">Report accessibility barriers and track your submissions.</p>
-    </div>
+    <DashboardHero 
+      title="CU Student Portal" 
+      subtitle="Report accessibility barriers and track your submissions to improve campus accessibility." 
+    />
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <ScoreCard title="Campus Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-secondary bg-yellow-50" />
-      <ScoreCard title="Avg. Compliance" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-green-50" />
+      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+        <ScoreCard title="Campus Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-secondary bg-secondary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <ScoreCard title="Avg. Compliance" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-success-50" />
+      </div>
     </div>
   </div>
 );
@@ -81,7 +120,6 @@ const Dashboard = () => {
       } catch (error) {
         const status = error?.response?.status;
         if (status === 401) throw error; // Let interceptor handle redirect to login
-        // 403 means role doesn't have access to admin stats — that's fine, show dashes
         console.warn('Could not load dashboard stats', error);
       }
     };
@@ -98,7 +136,7 @@ const Dashboard = () => {
     case 'AUDITOR':     return <AuditorDashboard {...props} />;
     case 'MAINTENANCE': return <MaintenanceDashboard {...props} />;
     case 'STUDENT':     return <StudentDashboard {...props} />;
-    default:            return <div className="text-red-500 p-8">Unknown Role: {user.role}</div>;
+    default:            return <div className="text-danger p-8">Unknown Role: {user.role}</div>;
   }
 };
 

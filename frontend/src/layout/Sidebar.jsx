@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       {/* Mobile Backdrop */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-10 md:hidden"
+          className="fixed inset-0 bg-textMain/20 backdrop-blur-sm z-10 md:hidden transition-opacity"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         ></div>
@@ -33,10 +33,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
       {/* Sidebar Navigation */}
       <aside 
-        className={`w-64 bg-cards border-r border-gray-200 h-[calc(100vh-64px)] fixed md:static top-16 left-0 z-20 transform transition-transform duration-200 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 overflow-y-auto shadow-lg md:shadow-none`}
+        className={`w-64 glass shadow-glass h-[calc(100vh-73px)] fixed md:static top-[73px] left-0 z-20 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 overflow-y-auto`}
         aria-label="Sidebar Navigation"
       >
-        <div className="py-4 flex flex-col gap-1">
+        <div className="py-6 px-4 flex flex-col gap-2">
           {filteredMenu.map(item => {
             const isActive = location.pathname.startsWith(item.path);
             return (
@@ -44,7 +44,11 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 key={item.name} 
                 to={item.path}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-6 py-3 transition-colors focus:outline-none focus:bg-blue-50 focus:ring-2 focus:ring-inset focus:ring-primary ${isActive ? 'bg-blue-50 text-primary border-r-4 border-primary font-semibold' : 'text-gray-600 hover:bg-gray-50 hover:text-primary border-r-4 border-transparent'}`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50 ${
+                  isActive 
+                    ? 'bg-primary text-white shadow-md shadow-primary/20 font-medium translate-x-1' 
+                    : 'text-textLight hover:bg-primary/5 hover:text-primary hover:translate-x-1 font-medium'
+                }`}
                 aria-current={isActive ? "page" : undefined}
               >
                 {item.icon}

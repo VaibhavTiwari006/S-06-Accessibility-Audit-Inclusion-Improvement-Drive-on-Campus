@@ -25,11 +25,11 @@ const BuildingList = () => {
 
   const statusBadge = (status) => {
     const map = {
-      ACTIVE: 'bg-green-100 text-green-800',
-      UNDER_MAINTENANCE: 'bg-yellow-100 text-yellow-800',
+      ACTIVE: 'bg-success-50 text-success-dark',
+      UNDER_MAINTENANCE: 'bg-secondary-50 text-secondary-dark',
       INACTIVE: 'bg-gray-100 text-gray-500',
     };
-    return map[status] || 'bg-blue-100 text-blue-800';
+    return map[status] || 'bg-primary-50 text-primary-dark';
   };
 
   return (
@@ -47,34 +47,34 @@ const BuildingList = () => {
         </button>
       </div>
 
-      <div className="bg-cards rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="glass-panel rounded-2xl overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-100">
+          <thead className="bg-gray-50/50 backdrop-blur-sm">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Building</th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Code</th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Location</th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Floors</th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Action</th>
+              <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Building</th>
+              <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Code</th>
+              <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Location</th>
+              <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Floors</th>
+              <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Action</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-100 bg-transparent">
             {loading && (
               <tr>
-                <td colSpan="6" className="px-6 py-12 text-center text-gray-400">Loading buildings...</td>
+                <td colSpan="6" className="px-6 py-12 text-center text-textLight font-medium">Loading buildings...</td>
               </tr>
             )}
             {buildings.map((building) => (
-              <tr key={building.id} className="hover:bg-gray-50 transition-colors">
+              <tr key={building.id} className="hover:bg-white/60 transition-all duration-200 group">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-blue-50 flex items-center justify-center">
-                      <Building2 size={18} className="text-primary" />
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-sm border border-primary/10">
+                      <Building2 size={20} className="text-primary" />
                     </div>
                     <div>
-                      <div className="text-sm font-semibold text-gray-900">{building.buildingName}</div>
-                      <div className="text-xs text-gray-400">{building.description || 'No description'}</div>
+                      <div className="text-sm font-bold text-textMain font-heading">{building.buildingName}</div>
+                      <div className="text-xs text-textLight font-medium">{building.description || 'No description'}</div>
                     </div>
                   </div>
                 </td>

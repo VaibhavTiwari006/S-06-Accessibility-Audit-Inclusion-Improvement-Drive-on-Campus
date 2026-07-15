@@ -1,10 +1,93 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #FDE8E7;
+  --color-primary-light: #E84D47;
+  --color-primary: #DA251D;
+  --color-primary-dark: #B31912;
+  
+  --color-secondary-50: #FFFBEB;
+  --color-secondary-light: #FBBF24;
+  --color-secondary: #F59E0B;
+  --color-secondary-dark: #D97706;
+
+  --color-success-50: #ECFDF5;
+  --color-success-light: #34D399;
+  --color-success: #10B981;
+  --color-success-dark: #059669;
+
+  --color-danger-50: #FEF2F2;
+  --color-danger-light: #F87171;
+  --color-danger: #EF4444;
+  --color-danger-dark: #DC2626;
+
+  --color-background: #F8FAFC;
+  --color-cards: #FFFFFF;
+  --color-textMain: #0F172A;
+  --color-textLight: #475569;
+
+  --font-sans: "Inter", sans-serif;
+  --font-heading: "Outfit", sans-serif;
+
+  --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.05);
+  --shadow-soft-lg: 0 20px 40px -10px rgba(0,0,0,0.12);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+  
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-slide-up: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-slow: pulseSlow 3s infinite;
+}
 
 @layer base {
   body {
-    background-color: #F8FAFC;
-    color: #1F2937;
+    @apply bg-background text-textMain font-sans antialiased selection:bg-primary/20 selection:text-primary;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,7%,0.02) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(225,39%,30%,0.03) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(339,49%,30%,0.02) 0, transparent 50%);
+    background-attachment: fixed;
   }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-glass;
+  }
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-xl border border-white/50 shadow-soft;
+  }
+  .glass-dark {
+    @apply bg-textMain/90 backdrop-blur-lg border border-white/10;
+  }
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
 }

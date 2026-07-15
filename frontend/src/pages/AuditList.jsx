@@ -25,9 +25,9 @@ const AuditList = () => {
 
   const statusColor = (status) => {
     const map = {
-      APPROVED: 'bg-green-100 text-green-800',
-      IN_PROGRESS: 'bg-blue-100 text-blue-800',
-      PENDING: 'bg-yellow-100 text-yellow-800',
+      APPROVED: 'bg-success-50 text-success-dark',
+      IN_PROGRESS: 'bg-primary-50 text-primary-dark',
+      PENDING: 'bg-secondary-50 text-secondary-dark',
       REJECTED: 'bg-red-100 text-red-800',
     };
     return map[status] || 'bg-gray-100 text-gray-600';
@@ -64,7 +64,7 @@ const AuditList = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {audits.map((audit) => (
-          <div key={audit.id} className="bg-cards p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-4 relative overflow-hidden">
+          <div key={audit.id} className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-4 relative overflow-hidden">
             <div className={`absolute top-0 left-0 w-full h-1 ${topBarColor(audit.status)}`}></div>
 
             <div className="flex justify-between items-start">
@@ -89,7 +89,7 @@ const AuditList = () => {
                   {audit.overallAccessibilityScore ? `${audit.overallAccessibilityScore.toFixed(1)}%` : '—'}
                 </p>
               </div>
-              <button className="flex items-center gap-2 text-primary hover:text-blue-800 font-medium bg-blue-50 hover:bg-blue-100 px-3 py-2 rounded-lg transition-colors">
+              <button className="flex items-center gap-2 text-primary hover:text-primary-dark font-medium bg-primary-50 hover:bg-primary-50 px-3 py-2 rounded-lg transition-colors">
                 <FileText size={16} /> {audit.status === 'APPROVED' ? 'View Report' : 'Continue'}
               </button>
             </div>

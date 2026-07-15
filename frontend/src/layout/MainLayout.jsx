@@ -7,7 +7,7 @@ const MainLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-textMain font-sans">
+    <div className="flex flex-col min-h-screen bg-transparent text-textMain font-sans">
       <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
       <div className="flex flex-1 overflow-hidden relative">
         <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />

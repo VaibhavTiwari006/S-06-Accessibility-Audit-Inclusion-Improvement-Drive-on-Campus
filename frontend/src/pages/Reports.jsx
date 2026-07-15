@@ -96,32 +96,32 @@ const Reports = () => {
         <ScoreCard 
           title="Overall Compliance" 
           value={`${stats.averageAccessibilityScore.toFixed(1)}%`} 
-          colorClass={stats.averageAccessibilityScore >= 80 ? 'text-success bg-green-50' : 'text-primary bg-blue-50'}
+          colorClass={stats.averageAccessibilityScore >= 80 ? 'text-success bg-success-50' : 'text-primary bg-primary-50'}
           icon={<BarChart3 size={24} />} 
         />
         <ScoreCard 
           title="Total Buildings" 
           value={stats.totalBuildings} 
-          colorClass="text-secondary bg-yellow-50" 
+          colorClass="text-secondary bg-secondary-50" 
           icon={<Building2 size={24} />} 
         />
         <ScoreCard 
           title="Total Audits" 
           value={stats.totalAudits} 
-          colorClass="text-primary bg-blue-50" 
+          colorClass="text-primary bg-primary-50" 
           icon={<ClipboardCheck size={24} />} 
         />
         <ScoreCard 
           title="Student Reports" 
           value={stats.totalStudentReports} 
-          colorClass="text-danger bg-red-50" 
+          colorClass="text-danger bg-danger-50" 
           icon={<AlertTriangle size={24} />} 
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Audits Pie Chart */}
-        <div className="bg-cards p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px]">
+        <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px]">
           <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
             <ClipboardCheck size={20} className="text-primary" /> Audits by Status
           </h3>
@@ -154,7 +154,7 @@ const Reports = () => {
         </div>
 
         {/* Maintenance Tasks Bar Chart */}
-        <div className="bg-cards p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px]">
+        <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px]">
           <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
             <PenTool size={20} className="text-secondary" /> Maintenance Tasks Progress
           </h3>

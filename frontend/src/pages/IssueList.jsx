@@ -25,9 +25,9 @@ const IssueList = () => {
 
   const statusBadge = (status) => {
     const map = {
-      RESOLVED: 'bg-green-100 text-green-800',
-      IN_PROGRESS: 'bg-blue-100 text-blue-800',
-      PENDING: 'bg-yellow-100 text-yellow-800',
+      RESOLVED: 'bg-success-50 text-success-dark',
+      IN_PROGRESS: 'bg-primary-50 text-primary-dark',
+      PENDING: 'bg-secondary-50 text-secondary-dark',
     };
     return map[status] || 'bg-gray-100 text-gray-600';
   };
@@ -59,7 +59,7 @@ const IssueList = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {issues.map((issue) => (
-          <div key={issue.id} className="bg-cards p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-3 hover:shadow-md transition-shadow">
+          <div key={issue.id} className="glass-panel p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-3 hover:shadow-md transition-shadow">
             <div className="flex justify-between items-start gap-2">
               <h3 className="font-semibold text-base text-textMain leading-tight">{issue.buildingName}</h3>
               <span className={`px-2 py-1 flex-shrink-0 flex items-center gap-1 text-[10px] font-bold uppercase rounded-full ${statusBadge(issue.status)}`}>
@@ -74,7 +74,7 @@ const IssueList = () => {
             </div>
 
             {issue.adminNotes && (
-              <div className="bg-blue-50 text-blue-700 text-xs p-2 rounded-lg">
+              <div className="bg-primary-50 text-blue-700 text-xs p-2 rounded-lg">
                 <span className="font-semibold">Admin Notes:</span> {issue.adminNotes}
               </div>
             )}
