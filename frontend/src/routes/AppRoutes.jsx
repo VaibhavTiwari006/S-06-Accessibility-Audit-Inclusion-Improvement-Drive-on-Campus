@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
-
 import MainLayout from '../layout/MainLayout';
+import Login from '../pages/Login';
 
 // Placeholder Pages
-const Login = () => <div className="p-10">Login Page</div>;
 const Dashboard = () => <div className="p-10 text-xl font-semibold">Welcome to Dashboard</div>;
 const NotFound = () => <div className="p-10 text-danger font-semibold">404 - Page Not Found</div>;
 
