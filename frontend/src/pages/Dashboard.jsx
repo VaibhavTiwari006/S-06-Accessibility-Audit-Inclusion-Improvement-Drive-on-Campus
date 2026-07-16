@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
-import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info } from 'lucide-react';
+import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, IndianRupee } from 'lucide-react';
 import dashboardService from '../services/dashboardService';
 
 const DashboardHero = ({ title, subtitle }) => (
@@ -45,6 +45,12 @@ const AdminDashboard = ({ stats }) => (
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
         <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} />} colorClass="text-secondary bg-secondary-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.7s' }}>
+        <ScoreCard title="Est. Remediation Cost" value={stats?.totalEstimatedCost ? `₹${stats.totalEstimatedCost.toLocaleString()}` : '—'} icon={<IndianRupee size={24} />} colorClass="text-danger bg-danger-50" />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '0.8s' }}>
+        <ScoreCard title="Community Campaigns" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} />} colorClass="text-success bg-success-50" />
       </div>
     </div>
   </div>

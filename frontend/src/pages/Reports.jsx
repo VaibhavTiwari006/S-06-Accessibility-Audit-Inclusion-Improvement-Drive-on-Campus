@@ -13,6 +13,7 @@ const Reports = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
+  const [downloadingAdvocacy, setDownloadingAdvocacy] = useState(false);
 
   useEffect(() => {
     fetchStats();
@@ -54,6 +55,28 @@ const Reports = () => {
     }
   };
 
+  const handleDownloadAdvocacy = async () => {
+    try {
+      setDownloadingAdvocacy(true);
+      toast.info('Generating Advocacy Letter, please wait...', { autoClose: 2000 });
+      
+      const blob = await reportService.downloadAdvocacyLetter();
+      const url = window.URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'advocacy-letter-roadmap.pdf');
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      
+      toast.success('Advocacy Letter downloaded successfully!');
+    } catch (error) {
+      toast.error('Failed to generate Advocacy Letter.');
+    } finally {
+      setDownloadingAdvocacy(false);
+    }
+  };
+
   if (loading) {
     return <div className="p-8 text-center text-textLight">Loading analytics...</div>;
   }
@@ -83,13 +106,22 @@ const Reports = () => {
           </h2>
           <p className="text-textLight mt-1">Campus-wide accessibility metrics and issue tracking.</p>
         </div>
-        <button 
-          onClick={handleDownloadPDF}
-          disabled={downloading}
-          className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-50"
-        >
-          <Download size={18} /> {downloading ? 'Generating...' : 'Export PDF Report'}
-        </button>
+        <div className="flex gap-3">
+          <button 
+            onClick={handleDownloadAdvocacy}
+            disabled={downloadingAdvocacy}
+            className="bg-white hover:bg-gray-50 text-primary border border-primary px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-sm hover:shadow-md disabled:opacity-50"
+          >
+            <Download size={18} /> {downloadingAdvocacy ? 'Generating...' : 'Advocacy Letter'}
+          </button>
+          <button 
+            onClick={handleDownloadPDF}
+            disabled={downloading}
+            className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+          >
+            <Download size={18} /> {downloading ? 'Generating...' : 'Export PDF Report'}
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

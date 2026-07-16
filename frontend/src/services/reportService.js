@@ -14,6 +14,13 @@ const reportService = {
       responseType: 'blob'
     });
     return response.data;
+  },
+  
+  downloadAdvocacyLetter: async () => {
+    const response = await api.get('/reports/advocacy', {
+      responseType: 'blob'
+    });
+    return response.data;
   }
 };
 
