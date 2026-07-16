@@ -63,6 +63,7 @@ public class MaintenanceTaskServiceImpl implements MaintenanceTaskService {
                 .severity(request.getSeverity() != null ? request.getSeverity() : "MEDIUM")
                 .priority(request.getPriority() != null ? request.getPriority() : "MEDIUM")
                 .dueDate(request.getDueDate())
+                .estimatedCost(request.getEstimatedCost())
                 .status("OPEN")
                 .build();
 
@@ -130,6 +131,9 @@ public class MaintenanceTaskServiceImpl implements MaintenanceTaskService {
             }
             if (request.getAssigneeId() != null) {
                 task.setAssignee(resolveAssignee(request.getAssigneeId()));
+            }
+            if (request.getEstimatedCost() != null) {
+                task.setEstimatedCost(request.getEstimatedCost());
             }
         }
 

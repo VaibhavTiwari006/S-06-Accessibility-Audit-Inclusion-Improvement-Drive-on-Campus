@@ -60,6 +60,9 @@ public class MaintenanceTask {
     @Column(name = "completion_photo_url", length = 1000)
     private String completionPhotoUrl;
 
+    @Column(name = "estimated_cost")
+    private Double estimatedCost;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id")
     private Building building;

@@ -30,6 +30,7 @@ public class MaintenanceTaskMapper {
                 .sourceReportId(task.getSourceReport() != null ? task.getSourceReport().getId() : null)
                 .createdAt(task.getCreatedAt())
                 .updatedAt(task.getUpdatedAt())
+                .estimatedCost(task.getEstimatedCost())
                 .build();
     }
 }

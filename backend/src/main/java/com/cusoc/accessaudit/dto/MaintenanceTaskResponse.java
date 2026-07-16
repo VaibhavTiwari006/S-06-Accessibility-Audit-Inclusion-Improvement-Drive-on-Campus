@@ -30,4 +30,5 @@ public class MaintenanceTaskResponse {
     private Long sourceReportId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Double estimatedCost;
 }

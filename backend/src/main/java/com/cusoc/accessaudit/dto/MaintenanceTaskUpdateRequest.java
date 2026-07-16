@@ -32,4 +32,5 @@ public class MaintenanceTaskUpdateRequest {
 
     @Size(max = 1000, message = "Completion photo URL cannot exceed 1000 characters")
     private String completionPhotoUrl;
+    private Double estimatedCost;
 }

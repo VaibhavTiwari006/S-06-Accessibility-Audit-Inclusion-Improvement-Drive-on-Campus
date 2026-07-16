@@ -36,4 +36,5 @@ public class MaintenanceTaskRequest {
     private String priority;
 
     private LocalDate dueDate;
+    private Double estimatedCost;
 }
