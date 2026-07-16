@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
 import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, IndianRupee } from 'lucide-react';
@@ -19,7 +20,7 @@ const DashboardHero = ({ title, subtitle }) => (
 );
 
 // ─────────────────────────── Admin ────────────────────────────
-const AdminDashboard = ({ stats }) => (
+const AdminDashboard = ({ stats, navigate }) => (
   <div className="space-y-6">
     <DashboardHero 
       title="Admin Overview" 
@@ -27,37 +28,37 @@ const AdminDashboard = ({ stats }) => (
     />
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-primary-50" />
+        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-primary-50" onClick={() => navigate('/buildings')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-secondary-50" />
+        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-secondary-50" onClick={() => navigate('/audits')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
-        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-success-50" />
+        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-success-50" onClick={() => navigate('/reports')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
-        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-danger-50" />
+        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-danger-50" onClick={() => navigate('/issues')} />
       </div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
       <div className="animate-slide-up" style={{ animationDelay: '0.5s' }}>
-        <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-primary bg-primary-50" />
+        <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-primary bg-primary-50" onClick={() => navigate('/reports')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
         <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} />} colorClass="text-secondary bg-secondary-50" />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.7s' }}>
-        <ScoreCard title="Est. Remediation Cost" value={stats?.totalEstimatedCost ? `₹${stats.totalEstimatedCost.toLocaleString()}` : '—'} icon={<IndianRupee size={24} />} colorClass="text-danger bg-danger-50" />
+        <ScoreCard title="Est. Remediation Cost" value={stats?.totalEstimatedCost ? `₹${stats.totalEstimatedCost.toLocaleString()}` : '—'} icon={<IndianRupee size={24} />} colorClass="text-danger bg-danger-50" onClick={() => navigate('/reports')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.8s' }}>
-        <ScoreCard title="Community Campaigns" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} />} colorClass="text-success bg-success-50" />
+        <ScoreCard title="Community Campaigns" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} />} colorClass="text-success bg-success-50" onClick={() => navigate('/community')} />
       </div>
     </div>
   </div>
 );
 
 // ─────────────────────────── Auditor ──────────────────────────
-const AuditorDashboard = ({ stats }) => (
+const AuditorDashboard = ({ stats, navigate }) => (
   <div className="space-y-6">
     <DashboardHero 
       title="Auditor Dashboard" 
@@ -65,10 +66,10 @@ const AuditorDashboard = ({ stats }) => (
     />
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-primary-50" />
+        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-primary bg-primary-50" onClick={() => navigate('/buildings')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-secondary-50" />
+        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-secondary bg-secondary-50" onClick={() => navigate('/audits')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
         <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-success-50" />
@@ -78,7 +79,7 @@ const AuditorDashboard = ({ stats }) => (
 );
 
 // ─────────────────────────── Maintenance ──────────────────────
-const MaintenanceDashboard = ({ stats }) => (
+const MaintenanceDashboard = ({ stats, navigate }) => (
   <div className="space-y-6">
     <DashboardHero 
       title="Maintenance Dashboard" 
@@ -89,14 +90,14 @@ const MaintenanceDashboard = ({ stats }) => (
         <ScoreCard title="Total Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-primary bg-primary-50" />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-danger-50" />
+        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-danger bg-danger-50" onClick={() => navigate('/issues')} />
       </div>
     </div>
   </div>
 );
 
 // ─────────────────────────── Student ──────────────────────────
-const StudentDashboard = ({ stats }) => (
+const StudentDashboard = ({ stats, navigate }) => (
   <div className="space-y-6">
     <DashboardHero 
       title="CU Student Portal" 
@@ -104,7 +105,7 @@ const StudentDashboard = ({ stats }) => (
     />
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <ScoreCard title="Campus Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-secondary bg-secondary-50" />
+        <ScoreCard title="Campus Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-secondary bg-secondary-50" onClick={() => navigate('/issues')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <ScoreCard title="Avg. Compliance" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-success bg-success-50" />
@@ -117,6 +118,7 @@ const StudentDashboard = ({ stats }) => (
 const Dashboard = () => {
   const { user } = useAuth();
   const [stats, setStats] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -135,7 +137,7 @@ const Dashboard = () => {
   if (!user) return <div className="p-10 text-textLight">Loading...</div>;
 
   const role = user.role?.toUpperCase();
-  const props = { stats };
+  const props = { stats, navigate };
 
   switch (role) {
     case 'ADMIN':       return <AdminDashboard {...props} />;
