@@ -12,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -25,14 +24,16 @@ public class PilotImprovementController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<PilotImprovementResponse>>> getAll() {
         List<PilotImprovementResponse> pilots = pilotImprovementService.getAll();
-        return ResponseEntity.ok(ApiResponse.success("Pilot improvements fetched", pilots));
+        return ResponseEntity.ok(ApiResponse.<List<PilotImprovementResponse>>builder()
+                .success(true).message("Pilot improvements fetched").data(pilots).build());
     }
 
     @GetMapping("/mine")
     public ResponseEntity<ApiResponse<List<PilotImprovementResponse>>> getMyProposals(Authentication authentication) {
         String email = authentication.getName();
         List<PilotImprovementResponse> pilots = pilotImprovementService.getMyProposals(email);
-        return ResponseEntity.ok(ApiResponse.success("My proposals fetched", pilots));
+        return ResponseEntity.ok(ApiResponse.<List<PilotImprovementResponse>>builder()
+                .success(true).message("My proposals fetched").data(pilots).build());
     }
 
     @PostMapping
@@ -40,10 +41,10 @@ public class PilotImprovementController {
             @Valid @RequestBody PilotImprovementRequest request,
             Authentication authentication) {
         String email = authentication.getName();
-        // Use email as name fallback
         String name = email.contains("@") ? email.split("@")[0] : email;
         PilotImprovementResponse response = pilotImprovementService.create(request, email, name);
-        return ResponseEntity.ok(ApiResponse.success("Pilot improvement proposed successfully", response));
+        return ResponseEntity.ok(ApiResponse.<PilotImprovementResponse>builder()
+                .success(true).message("Pilot improvement proposed successfully").data(response).build());
     }
 
     @PatchMapping("/{id}/status")
@@ -52,6 +53,7 @@ public class PilotImprovementController {
             @PathVariable Long id,
             @RequestBody PilotStatusUpdateRequest request) {
         PilotImprovementResponse response = pilotImprovementService.updateStatus(id, request);
-        return ResponseEntity.ok(ApiResponse.success("Status updated successfully", response));
+        return ResponseEntity.ok(ApiResponse.<PilotImprovementResponse>builder()
+                .success(true).message("Status updated successfully").data(response).build());
     }
 }
