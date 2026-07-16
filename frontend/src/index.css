@@ -138,7 +138,7 @@
     @apply space-y-6 animate-fade-in;
   }
   .section-card {
-    @apply glass-panel rounded-2xl p-6 border border-white/60;
+    @apply bg-white/90 backdrop-blur-xl border border-white/70 shadow-soft rounded-2xl p-6;
   }
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent;
