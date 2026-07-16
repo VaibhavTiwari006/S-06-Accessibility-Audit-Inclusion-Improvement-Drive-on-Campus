@@ -64,6 +64,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     clearSession();
     setUser(null);
+    window.location.href = '/login';
   };
 
   return (

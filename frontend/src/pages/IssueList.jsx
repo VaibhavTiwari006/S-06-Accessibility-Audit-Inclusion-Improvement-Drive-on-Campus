@@ -10,6 +10,7 @@ const IssueList = () => {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [selectedIssue, setSelectedIssue] = useState(null);
 
   const fetchIssues = async () => {
     try {
@@ -104,7 +105,12 @@ const IssueList = () => {
               <span className="text-xs text-gray-400 flex items-center gap-1">
                 <User size={12} /> {issue.reporterName}
               </span>
-              <button className="text-sm text-primary hover:underline font-medium">View Details</button>
+              <button 
+                onClick={() => setSelectedIssue(issue)}
+                className="text-sm text-primary hover:underline font-medium"
+              >
+                View Details
+              </button>
             </div>
           </div>
         ))}
@@ -116,6 +122,36 @@ const IssueList = () => {
           </div>
         )}
       </div>
+
+      {selectedIssue && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden animate-fade-in">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSelectedIssue(null)}></div>
+          <div className="relative glass-panel rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden animate-slide-up border border-white/60 p-6">
+            <h3 className="text-lg font-bold text-textMain mb-2">{selectedIssue.buildingName}</h3>
+            <p className="text-sm text-gray-700 mb-4">{selectedIssue.description}</p>
+            <div className="text-sm text-gray-500 mb-4 flex items-center gap-2">
+              <MapPin size={14} /> {selectedIssue.locationDetails || 'Location not specified'}
+            </div>
+            {selectedIssue.photoUrl && (
+              <div className="mb-4">
+                <p className="text-xs font-bold text-gray-500 uppercase mb-2">Attached Photo</p>
+                <img src={selectedIssue.photoUrl} alt="Evidence" className="w-full h-48 object-cover rounded-lg shadow-sm" />
+              </div>
+            )}
+            {selectedIssue.adminNotes && (
+              <div className="bg-blue-50 text-blue-800 p-3 rounded-lg text-sm mb-4 border border-blue-100">
+                <span className="font-bold block mb-1">Admin Notes:</span>
+                {selectedIssue.adminNotes}
+              </div>
+            )}
+            <div className="flex justify-end pt-4 border-t border-gray-100 mt-4">
+              <button onClick={() => setSelectedIssue(null)} className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

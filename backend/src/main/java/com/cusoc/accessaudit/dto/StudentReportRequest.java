@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StudentReportRequest {
 
+    @jakarta.validation.constraints.NotNull(message = "Building is required")
     private Long buildingId;
 
     @NotBlank(message = "Description is required")
