@@ -402,9 +402,11 @@ const Community = () => {
                 <Download size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
               </div>
             </a>
-            <div
-              className="p-4 border border-gray-100 rounded-lg bg-white/50 hover:border-primary/30 transition-colors group cursor-pointer mt-3"
-              onClick={() => toast.info('WCAG 2.1 Checklist download initiated...')}
+            <a
+              href="/wcag_checklist.md"
+              download="WCAG_2.1_Checklist.md"
+              className="p-4 border border-gray-100 rounded-lg bg-white/50 hover:border-primary/30 transition-colors group cursor-pointer mt-3 block"
+              onClick={() => toast.success('WCAG 2.1 Checklist downloaded!')}
             >
               <div className="flex justify-between items-start">
                 <div>
@@ -413,7 +415,7 @@ const Community = () => {
                 </div>
                 <Download size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
