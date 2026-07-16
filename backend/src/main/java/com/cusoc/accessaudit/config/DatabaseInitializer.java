@@ -21,6 +21,8 @@ public class DatabaseInitializer implements CommandLineRunner {
     private final AuditRepository auditRepository;
     private final StudentReportRepository studentReportRepository;
     private final MaintenanceTaskRepository maintenanceTaskRepository;
+    private final FeedbackSessionRepository feedbackSessionRepository;
+    private final AwarenessCampaignRepository awarenessCampaignRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -32,6 +34,8 @@ public class DatabaseInitializer implements CommandLineRunner {
             initializeAudits(users, buildings, checklists);
             initializeStudentReports(users, buildings);
             initializeMaintenanceTasks(users, buildings);
+            initializeFeedbackSessions();
+            initializeAwarenessCampaigns();
         }
     }
 
@@ -268,21 +272,25 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .category(physicalCat)
                 .question("Is there a step-free entrance or ramp with a handrail to the building?")
                 .maximumScore(10)
+                .standardReference("RPWD Act 2016, Sec 40; WCAG 2.1 1.4")
                 .build());
         AuditChecklist c2 = auditChecklistRepository.save(AuditChecklist.builder()
                 .category(physicalCat)
                 .question("Are there accessible restrooms with grab bars on each floor?")
                 .maximumScore(10)
+                .standardReference("RPWD Act 2016, Sec 42")
                 .build());
         AuditChecklist c3 = auditChecklistRepository.save(AuditChecklist.builder()
                 .category(physicalCat)
                 .question("Is there a lift/elevator with braille buttons and audio announcement?")
                 .maximumScore(10)
+                .standardReference("RPWD Act 2016, Sec 41")
                 .build());
         AuditChecklist c4 = auditChecklistRepository.save(AuditChecklist.builder()
                 .category(physicalCat)
                 .question("Are there tactile paths leading to classrooms, offices, and library?")
                 .maximumScore(10)
+                .standardReference("RPWD Act 2016, Sec 40")
                 .build());
 
         // Category 2: Digital Accessibility
@@ -294,11 +302,13 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .category(digitalCat)
                 .question("Does the building's digital kiosks/touchscreens support keyboard and voice commands?")
                 .maximumScore(10)
+                .standardReference("WCAG 2.1 2.1 (Keyboard Accessible)")
                 .build());
         AuditChecklist c6 = auditChecklistRepository.save(AuditChecklist.builder()
                 .category(digitalCat)
                 .question("Does the local building LMS portal maintain WCAG AA contrast ratios?")
                 .maximumScore(10)
+                .standardReference("WCAG 2.1 1.4.3 (Contrast Minimum)")
                 .build());
         AuditChecklist c7 = auditChecklistRepository.save(AuditChecklist.builder()
                 .category(digitalCat)
@@ -633,6 +643,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("HIGH")
                 .priority("HIGH")
                 .dueDate(LocalDate.of(2026, 8, 1))
+                .estimatedCost(450.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -644,6 +655,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("CRITICAL")
                 .priority("HIGH")
                 .dueDate(LocalDate.of(2026, 7, 25))
+                .estimatedCost(12000.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -655,6 +667,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("MEDIUM")
                 .priority("MEDIUM")
                 .dueDate(LocalDate.of(2026, 9, 1))
+                .estimatedCost(320.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -666,6 +679,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("MEDIUM")
                 .priority("MEDIUM")
                 .dueDate(LocalDate.of(2026, 8, 15))
+                .estimatedCost(1800.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -677,6 +691,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("HIGH")
                 .priority("HIGH")
                 .dueDate(LocalDate.of(2026, 7, 30))
+                .estimatedCost(4500.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -688,6 +703,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("HIGH")
                 .priority("HIGH")
                 .dueDate(LocalDate.of(2026, 8, 30))
+                .estimatedCost(8500.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -699,6 +715,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("MEDIUM")
                 .priority("MEDIUM")
                 .dueDate(LocalDate.of(2026, 8, 10))
+                .estimatedCost(1200.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -710,6 +727,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("MEDIUM")
                 .priority("MEDIUM")
                 .dueDate(LocalDate.of(2026, 9, 15))
+                .estimatedCost(2500.0)
                 .build());
 
         maintenanceTaskRepository.save(MaintenanceTask.builder()
@@ -721,6 +739,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("MEDIUM")
                 .priority("MEDIUM")
                 .dueDate(LocalDate.of(2026, 5, 10))
+                .estimatedCost(450.0)
                 .completionNotes("Installed 24 stainless-steel tactile indicators covering the full lobby path. Verified by accessibility team.")
                 .build());
 
@@ -733,7 +752,39 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .severity("LOW")
                 .priority("LOW")
                 .dueDate(LocalDate.of(2026, 3, 20))
+                .estimatedCost(150.0)
                 .completionNotes("Dual-height water cooler installed. Both taps functional and tested.")
+                .build());
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // FEEDBACK SESSIONS — Participatory sessions with students
+    // ═══════════════════════════════════════════════════════════
+    private void initializeFeedbackSessions() {
+        feedbackSessionRepository.save(FeedbackSession.builder()
+                .title("Campus Accessibility Feedback Workshop")
+                .sessionDate(LocalDate.of(2026, 4, 15))
+                .participantsCount(25)
+                .feedbackSummary("Students highlighted the need for more tactile paths in the library and better digital accessibility for the LMS.")
+                .build());
+
+        feedbackSessionRepository.save(FeedbackSession.builder()
+                .title("Hostel Infrastructure Review with Students")
+                .sessionDate(LocalDate.of(2026, 5, 20))
+                .participantsCount(18)
+                .feedbackSummary("Major concerns raised regarding the lack of elevator in Boys Hostel H1 and need for visual alarms in Girls Hostel H3.")
+                .build());
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // AWARENESS CAMPAIGNS — Campus wide awareness
+    // ═══════════════════════════════════════════════════════════
+    private void initializeAwarenessCampaigns() {
+        awarenessCampaignRepository.save(AwarenessCampaign.builder()
+                .campaignName("Disability Awareness Week 2026")
+                .campaignDate(LocalDate.of(2026, 2, 10))
+                .reachCount(450)
+                .description("A week-long campaign across the campus to promote inclusive culture, ending with a student pledge.")
                 .build());
     }
 }
