@@ -20,4 +20,8 @@ public class PilotImprovementResponse {
     private String category;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    
+    // Engagement features
+    private long upvotes;
+    private boolean hasUpvoted;
 }

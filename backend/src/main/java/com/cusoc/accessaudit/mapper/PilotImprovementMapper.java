@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PilotImprovementMapper {
 
-    public PilotImprovementResponse toResponse(PilotImprovement pilot) {
+    public PilotImprovementResponse toResponse(PilotImprovement pilot, long upvotes, boolean hasUpvoted) {
         if (pilot == null) return null;
         PilotImprovementResponse dto = new PilotImprovementResponse();
         dto.setId(pilot.getId());
@@ -23,6 +23,8 @@ public class PilotImprovementMapper {
         dto.setCategory(pilot.getCategory());
         dto.setCreatedAt(pilot.getCreatedAt());
         dto.setUpdatedAt(pilot.getUpdatedAt());
+        dto.setUpvotes(upvotes);
+        dto.setHasUpvoted(hasUpvoted);
         return dto;
     }
 }

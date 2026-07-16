@@ -22,8 +22,9 @@ public class PilotImprovementController {
     private final PilotImprovementService pilotImprovementService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<PilotImprovementResponse>>> getAll() {
-        List<PilotImprovementResponse> pilots = pilotImprovementService.getAll();
+    public ResponseEntity<ApiResponse<List<PilotImprovementResponse>>> getAll(Authentication authentication) {
+        String email = authentication != null ? authentication.getName() : null;
+        List<PilotImprovementResponse> pilots = pilotImprovementService.getAll(email);
         return ResponseEntity.ok(ApiResponse.<List<PilotImprovementResponse>>builder()
                 .success(true).message("Pilot improvements fetched").data(pilots).build());
     }
@@ -51,9 +52,21 @@ public class PilotImprovementController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<PilotImprovementResponse>> updateStatus(
             @PathVariable Long id,
-            @RequestBody PilotStatusUpdateRequest request) {
-        PilotImprovementResponse response = pilotImprovementService.updateStatus(id, request);
+            @RequestBody PilotStatusUpdateRequest request,
+            Authentication authentication) {
+        String email = authentication != null ? authentication.getName() : null;
+        PilotImprovementResponse response = pilotImprovementService.updateStatus(id, request, email);
         return ResponseEntity.ok(ApiResponse.<PilotImprovementResponse>builder()
                 .success(true).message("Status updated successfully").data(response).build());
+    }
+
+    @PostMapping("/{id}/upvote")
+    public ResponseEntity<ApiResponse<PilotImprovementResponse>> toggleUpvote(
+            @PathVariable Long id,
+            Authentication authentication) {
+        String email = authentication.getName();
+        PilotImprovementResponse response = pilotImprovementService.toggleUpvote(id, email);
+        return ResponseEntity.ok(ApiResponse.<PilotImprovementResponse>builder()
+                .success(true).message("Upvote toggled successfully").data(response).build());
     }
 }
