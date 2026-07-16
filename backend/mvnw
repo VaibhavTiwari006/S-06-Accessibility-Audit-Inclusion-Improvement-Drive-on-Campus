@@ -1,0 +1,14 @@
+#!/bin/sh
+# Maven Wrapper shell script for Linux/Docker
+# This script downloads and runs Maven using the wrapper JAR
+
+MAVEN_PROJECTBASEDIR="${MAVEN_BASEDIR:-$(cd "$(dirname "$0")" && pwd)}"
+export MAVEN_PROJECTBASEDIR
+
+MAVEN_OPTS="${MAVEN_OPTS:--Xmx512m}"
+export MAVEN_OPTS
+
+exec java \
+  $MAVEN_OPTS \
+  -classpath "$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar" \
+  org.apache.maven.wrapper.MavenWrapperMain "$@"
