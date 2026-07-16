@@ -23,6 +23,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     private final MaintenanceTaskRepository maintenanceTaskRepository;
     private final FeedbackSessionRepository feedbackSessionRepository;
     private final AwarenessCampaignRepository awarenessCampaignRepository;
+    private final PilotImprovementRepository pilotImprovementRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -36,6 +37,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             initializeMaintenanceTasks(users, buildings);
             initializeFeedbackSessions();
             initializeAwarenessCampaigns();
+            initializePilotImprovements();
         }
     }
 
@@ -787,4 +789,101 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .description("A week-long campaign across the campus to promote inclusive culture, ending with a student pledge.")
                 .build());
     }
+
+    // ============================================================
+    // PILOT IMPROVEMENTS — Low-cost accessibility improvement proposals
+    // ============================================================
+    private void initializePilotImprovements() {
+        pilotImprovementRepository.save(PilotImprovement.builder()
+                .title("Tactile Floor Strips in Library Main Aisle")
+                .description("Install bright yellow tactile floor strips along the main aisle of the Central Library to assist visually impaired students in navigating between sections independently.")
+                .location("Central Library, Ground Floor")
+                .estimatedCost(new java.math.BigDecimal("2500.00"))
+                .impactLevel("HIGH")
+                .category("SIGNAGE")
+                .status("APPROVED")
+                .proposerName("Arjun Sharma")
+                .proposerEmail("student1@cu.edu.in")
+                .adminNotes("Approved by facilities management. Installation scheduled for Week 5.")
+                .build());
+
+        pilotImprovementRepository.save(PilotImprovement.builder()
+                .title("Accessible Parking Bay near Main Auditorium")
+                .description("Designate and mark two parking bays nearest to the Main Auditorium entrance exclusively for people with mobility impairments, with appropriate signage and ramp access.")
+                .location("Main Auditorium Parking, Block A")
+                .estimatedCost(new java.math.BigDecimal("800.00"))
+                .impactLevel("HIGH")
+                .category("RAMP")
+                .status("IN_PROGRESS")
+                .proposerName("Priya Nair")
+                .proposerEmail("student2@cu.edu.in")
+                .adminNotes("Work order raised. Paint and signage procurement under way.")
+                .build());
+
+        pilotImprovementRepository.save(PilotImprovement.builder()
+                .title("Braille Signage on Lab Doors")
+                .description("Add Braille labels to all laboratory doors in Block A and Block B so visually impaired students can identify rooms independently without assistance.")
+                .location("Block A & Block B Labs")
+                .estimatedCost(new java.math.BigDecimal("1200.00"))
+                .impactLevel("MEDIUM")
+                .category("SIGNAGE")
+                .status("PROPOSED")
+                .proposerName("Rahul Verma")
+                .proposerEmail("student3@cu.edu.in")
+                .adminNotes(null)
+                .build());
+
+        pilotImprovementRepository.save(PilotImprovement.builder()
+                .title("Adjustable-Height Study Desks in LT-1")
+                .description("Install 5 height-adjustable desks in Lecture Theatre 1 to accommodate wheelchair users and students with varying height requirements for comfortable learning.")
+                .location("Lecture Theatre 1 (LT-1)")
+                .estimatedCost(new java.math.BigDecimal("15000.00"))
+                .impactLevel("HIGH")
+                .category("OTHER")
+                .status("PROPOSED")
+                .proposerName("Meera Iyer")
+                .proposerEmail("student1@cu.edu.in")
+                .adminNotes(null)
+                .build());
+
+        pilotImprovementRepository.save(PilotImprovement.builder()
+                .title("Visual Fire Alarm Strobes in Washrooms")
+                .description("Install visual strobe light fire alarms inside all accessible washrooms so hearing-impaired students are immediately alerted during emergencies.")
+                .location("All Campus Washrooms")
+                .estimatedCost(new java.math.BigDecimal("6000.00"))
+                .impactLevel("HIGH")
+                .category("WASHROOM")
+                .status("APPROVED")
+                .proposerName("Kiran Das")
+                .proposerEmail("student2@cu.edu.in")
+                .adminNotes("Critical safety improvement. Cleared by safety committee. Procurement started.")
+                .build());
+
+        pilotImprovementRepository.save(PilotImprovement.builder()
+                .title("LMS Screen Reader Compatibility Audit")
+                .description("Conduct a thorough WCAG 2.1 AA audit of the university LMS to identify and fix elements incompatible with screen readers (NVDA/JAWS), benefiting visually impaired students.")
+                .location("Digital - University LMS")
+                .estimatedCost(new java.math.BigDecimal("0.00"))
+                .impactLevel("HIGH")
+                .category("DIGITAL")
+                .status("COMPLETED")
+                .proposerName("Ananya Singh")
+                .proposerEmail("student3@cu.edu.in")
+                .adminNotes("Completed by the IT team. 12 WCAG AA violations fixed. Report attached.")
+                .build());
+
+        pilotImprovementRepository.save(PilotImprovement.builder()
+                .title("Improved Lighting at Admin Block Ramp")
+                .description("The ramp leading to the Admin Block is poorly lit at night, creating a hazard for wheelchair users and students with low vision. Install motion-sensor LED lighting along the ramp handrail.")
+                .location("Admin Block, Main Entrance Ramp")
+                .estimatedCost(new java.math.BigDecimal("3500.00"))
+                .impactLevel("MEDIUM")
+                .category("LIGHTING")
+                .status("PROPOSED")
+                .proposerName("Rohan Mehta")
+                .proposerEmail("student1@cu.edu.in")
+                .adminNotes(null)
+                .build());
+    }
 }
+
