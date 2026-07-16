@@ -23,4 +23,7 @@ public class AuditChecklistRequest {
 
     @NotNull(message = "Category ID is required")
     private Long categoryId;
+
+    @Size(max = 500, message = "Standard reference must not exceed 500 characters")
+    private String standardReference;
 }

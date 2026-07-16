@@ -25,4 +25,7 @@ public class AuditChecklist {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private AuditCategory category;
+
+    @Column(name = "standard_reference", length = 500)
+    private String standardReference;
 }

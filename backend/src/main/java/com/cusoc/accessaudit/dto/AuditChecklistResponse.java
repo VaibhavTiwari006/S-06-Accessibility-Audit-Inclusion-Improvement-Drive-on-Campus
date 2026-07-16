@@ -13,4 +13,5 @@ public class AuditChecklistResponse {
     private int maximumScore;
     private Long categoryId;
     private String categoryName;
+    private String standardReference;
 }

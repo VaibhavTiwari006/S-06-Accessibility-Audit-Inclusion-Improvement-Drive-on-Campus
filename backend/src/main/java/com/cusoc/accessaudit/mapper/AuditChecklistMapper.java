@@ -17,6 +17,7 @@ public class AuditChecklistMapper {
                 .maximumScore(checklist.getMaximumScore())
                 .categoryId(checklist.getCategory() != null ? checklist.getCategory().getId() : null)
                 .categoryName(checklist.getCategory() != null ? checklist.getCategory().getCategoryName() : null)
+                .standardReference(checklist.getStandardReference())
                 .build();
     }
 
@@ -26,6 +27,7 @@ public class AuditChecklistMapper {
                 .question(request.getQuestion())
                 .maximumScore(request.getMaximumScore())
                 .category(category)
+                .standardReference(request.getStandardReference())
                 .build();
     }
 
@@ -34,5 +36,6 @@ public class AuditChecklistMapper {
         checklist.setQuestion(request.getQuestion());
         checklist.setMaximumScore(request.getMaximumScore());
         checklist.setCategory(category);
+        checklist.setStandardReference(request.getStandardReference());
     }
 }
