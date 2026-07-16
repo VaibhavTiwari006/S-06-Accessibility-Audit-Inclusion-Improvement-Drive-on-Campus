@@ -757,6 +757,33 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .estimatedCost(150.0)
                 .completionNotes("Dual-height water cooler installed. Both taps functional and tested.")
                 .build());
+        // Generate 40 additional tasks to reach exactly 50 total remediation items
+        String[] titles = {
+            "Install grab bars in restrooms", "Widen doorway access", "Fix uneven pavement", "Add braille signage to rooms", "Install anti-slip floor mats",
+            "Adjust desk heights in labs", "Install automatic door openers", "Repair elevator audio system", "Add visual alarm strobes", "Relocate light switches",
+            "Install handrails on ramps", "Provide adjustable podiums", "Fix contrast on digital displays", "Add tactile warning strips", "Replace heavy doors",
+            "Install accessible water coolers", "Lower fire alarm pulls", "Clear obstruction from hallways", "Provide accessible parking signs", "Fix ramp gradient",
+            "Install stair nosing", "Add wheelchair seating in auditorium", "Provide portable ramps", "Install sensory friendly lighting", "Fix cracked sidewalk",
+            "Add audio description headsets", "Provide sign language interpreter screen", "Lower lab sink height", "Install accessible toilet seats", "Add emergency call buttons",
+            "Repair curb cuts", "Add braille library directories", "Provide large print materials", "Install screen reader software", "Add captioning to video displays",
+            "Repair accessible shower stall", "Widen cafeteria aisles", "Install lower service counter", "Provide accessible gym equipment", "Fix uneven threshold"
+        };
+        String[] statuses = {"OPEN", "IN_PROGRESS", "OPEN", "OPEN", "OPEN"};
+        String[] priorities = {"HIGH", "MEDIUM", "LOW", "MEDIUM", "HIGH"};
+        
+        for (int i = 0; i < 40; i++) {
+            maintenanceTaskRepository.save(MaintenanceTask.builder()
+                    .title(titles[i] + " - Area " + (i + 1))
+                    .description("Accessibility remediation: " + titles[i] + " required to meet RPWD Act 2016 standards.")
+                    .building(buildings.get(i % buildings.size()))
+                    .assignee(i % 3 == 0 ? m1 : (i % 3 == 1 ? m2 : m3))
+                    .status(statuses[i % statuses.length])
+                    .severity(priorities[i % priorities.length])
+                    .priority(priorities[i % priorities.length])
+                    .dueDate(LocalDate.of(2026, 9 + (i % 4), (i % 28) + 1))
+                    .estimatedCost(200.0 + (i * 50))
+                    .build());
+        }
     }
 
     // ═══════════════════════════════════════════════════════════

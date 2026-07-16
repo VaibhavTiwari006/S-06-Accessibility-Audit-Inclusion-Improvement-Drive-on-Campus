@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake } from 'lucide-react';
+import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map } from 'lucide-react';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { user } = useAuth();
@@ -11,6 +11,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { name: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard size={20} />, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'Roadmap', path: '/roadmap', icon: <Map size={20} />, roles: ['ADMIN', 'MAINTENANCE'] },
     { name: 'Buildings', path: '/buildings', icon: <Building2 size={20} />, roles: ['ADMIN', 'AUDITOR'] },
     { name: 'Audits', path: '/audits', icon: <ClipboardList size={20} />, roles: ['ADMIN', 'AUDITOR'] },
     { name: 'Issues', path: '/issues', icon: <AlertCircle size={20} />, roles: ['ADMIN', 'STUDENT', 'MAINTENANCE'] },

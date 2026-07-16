@@ -10,6 +10,8 @@ import IssueList from '../pages/IssueList';
 import Reports from '../pages/Reports';
 import Community from '../pages/Community';
 
+import Roadmap from '../pages/Roadmap';
+
 // Placeholder Pages
 const NotFound = () => <div className="p-10 text-danger font-semibold">404 - Page Not Found</div>;
 
@@ -22,6 +24,7 @@ const AppRoutes = () => {
         
         {/* Protected Routes */}
         <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>} />
+        <Route path="/roadmap" element={<ProtectedRoute allowedRoles={['ADMIN', 'MAINTENANCE']}><MainLayout><Roadmap /></MainLayout></ProtectedRoute>} />
         <Route path="/buildings" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><BuildingList /></MainLayout></ProtectedRoute>} />
         <Route path="/audits" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><AuditList /></MainLayout></ProtectedRoute>} />
         <Route path="/issues" element={<ProtectedRoute><MainLayout><IssueList /></MainLayout></ProtectedRoute>} />
