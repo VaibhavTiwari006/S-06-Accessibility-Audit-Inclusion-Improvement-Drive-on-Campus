@@ -388,18 +388,20 @@ const Community = () => {
             <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
               <Map className="text-secondary" /> Resources
             </h3>
-            <div
-              className="p-4 border border-gray-100 rounded-lg bg-white/50 hover:border-primary/30 transition-colors group cursor-pointer"
-              onClick={() => toast.info('Tactile Campus Map download initiated...')}
+            <a
+              href="/tactile-map.jpg"
+              download="Tactile_Campus_Map.jpg"
+              className="p-4 border border-gray-100 rounded-lg bg-white/50 hover:border-primary/30 transition-colors group cursor-pointer block"
+              onClick={() => toast.success('Tactile Campus Map downloaded!')}
             >
               <div className="flex justify-between items-start">
                 <div>
                   <h4 className="font-medium text-textMain text-sm">Tactile Campus Map</h4>
-                  <p className="text-xs text-textLight mt-1">High-contrast, screen-reader friendly PDF map of CU.</p>
+                  <p className="text-xs text-textLight mt-1">High-contrast, screen-reader friendly map of CU.</p>
                 </div>
                 <Download size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
               </div>
-            </div>
+            </a>
             <div
               className="p-4 border border-gray-100 rounded-lg bg-white/50 hover:border-primary/30 transition-colors group cursor-pointer mt-3"
               onClick={() => toast.info('WCAG 2.1 Checklist download initiated...')}
