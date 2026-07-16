@@ -21,6 +21,13 @@ const reportService = {
       responseType: 'blob'
     });
     return response.data;
+  },
+
+  downloadFinalReport: async () => {
+    const response = await api.get('/reports/final', {
+      responseType: 'blob'
+    });
+    return response.data;
   }
 };
 

@@ -6,6 +6,11 @@ const issueService = {
     return response.data.data ?? [];
   },
 
+  getMyIssues: async () => {
+    const response = await api.get('/student-reports/mine');
+    return response.data.data ?? [];
+  },
+
   reportIssue: async (data) => {
     const response = await api.post('/student-reports', data);
     return response.data.data;

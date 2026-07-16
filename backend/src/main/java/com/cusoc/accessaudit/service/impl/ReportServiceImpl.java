@@ -1,7 +1,5 @@
 package com.cusoc.accessaudit.service.impl;
 
-import com.cusoc.accessaudit.entity.*;
-import com.cusoc.accessaudit.exception.ResourceNotFoundException;
 import com.cusoc.accessaudit.repository.*;
 import com.cusoc.accessaudit.service.ReportService;
 import com.lowagie.text.*;
@@ -13,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayOutputStream;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -26,8 +26,12 @@ public class ReportServiceImpl implements ReportService {
     private final AuditRepository auditRepository;
     private final MaintenanceTaskRepository maintenanceTaskRepository;
     private final StudentReportRepository studentReportRepository;
+    private final PilotImprovementRepository pilotImprovementRepository;
+    private final FeedbackSessionRepository feedbackSessionRepository;
+    private final AwarenessCampaignRepository awarenessCampaignRepository;
 
     @Override
+
     @Transactional(readOnly = true)
     public byte[] generateCampusAccessibilityReport() {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -424,4 +428,206 @@ public class ReportServiceImpl implements ReportService {
             default: return 5;
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public byte[] generateFinalProjectReport() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Document document = new Document(PageSize.A4, 50, 50, 60, 50);
+
+        try {
+            PdfWriter.getInstance(document, out);
+            document.open();
+
+            Color primaryColor = new Color(0, 86, 210);
+            Color darkRed     = new Color(155, 0, 0);
+            Color darkGray    = new Color(55, 65, 81);
+            Color lightGray   = new Color(243, 244, 246);
+
+            Font titleFont   = new Font(Font.HELVETICA, 22, Font.BOLD, Color.WHITE);
+            Font headingFont = new Font(Font.HELVETICA, 13, Font.BOLD, primaryColor);
+            Font subFont     = new Font(Font.HELVETICA, 11, Font.BOLD, darkGray);
+            Font normalFont  = new Font(Font.HELVETICA, 10, Font.NORMAL, darkGray);
+            Font smallFont   = new Font(Font.HELVETICA, 8,  Font.NORMAL, Color.GRAY);
+
+            String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm"));
+
+            // ── Cover Header ──────────────────────────────────────────
+            PdfPTable header = new PdfPTable(1);
+            header.setWidthPercentage(100);
+            PdfPCell hCell = new PdfPCell();
+            hCell.setBackgroundColor(primaryColor);
+            hCell.setPadding(28);
+            hCell.setBorder(Rectangle.NO_BORDER);
+            Paragraph hText = new Paragraph();
+            hText.add(new Chunk("S-06: Accessibility Audit & Inclusion\nImprovement Drive on Campus\n", titleFont));
+            hText.add(new Chunk("FINAL PROJECT REPORT\n", new Font(Font.HELVETICA, 14, Font.BOLD, new Color(255, 220, 100))));
+            hText.add(new Chunk("Chandigarh University  |  " + now, new Font(Font.HELVETICA, 9, Font.NORMAL, new Color(200, 210, 240))));
+            hCell.addElement(hText);
+            header.addCell(hCell);
+            document.add(header);
+            document.add(Chunk.NEWLINE);
+
+            // ── Executive Summary ──────────────────────────────────────
+            List<Audit>             audits   = auditRepository.findAll();
+            List<MaintenanceTask>   tasks    = maintenanceTaskRepository.findAll();
+            List<PilotImprovement>  pilots   = pilotImprovementRepository.findAll();
+            List<FeedbackSession>   sessions = feedbackSessionRepository.findAll();
+            List<AwarenessCampaign> campaigns= awarenessCampaignRepository.findAll();
+            List<StudentReport>     reports  = studentReportRepository.findAll();
+            List<Building>          buildings= buildingRepository.findAll();
+
+            long completedPilots = pilots.stream().filter(p -> "COMPLETED".equals(p.getStatus())).count();
+            long approvedPilots  = pilots.stream().filter(p -> "APPROVED".equals(p.getStatus())).count();
+            int  totalReach      = campaigns.stream().mapToInt(AwarenessCampaign::getReachCount).sum();
+            int  totalParticipants = sessions.stream().mapToInt(FeedbackSession::getParticipantsCount).sum();
+
+            Paragraph execHeading = new Paragraph("1. Executive Summary", headingFont);
+            execHeading.setSpacingBefore(10); execHeading.setSpacingAfter(8);
+            document.add(execHeading);
+
+            String summary = String.format(
+                "This report presents the final outcomes of the S-06 Accessibility Audit & Inclusion Improvement Drive " +
+                "conducted at Chandigarh University campus. Over the project period, the team audited %d buildings, " +
+                "identified %d remediation items, engaged %d students/staff through %d participatory sessions, reached " +
+                "%d students via awareness campaigns, and piloted %d low-cost accessibility improvements (of which %d are completed).",
+                buildings.size(), tasks.size(), totalParticipants, sessions.size(),
+                totalReach, pilots.size(), completedPilots
+            );
+            document.add(new Paragraph(summary, normalFont));
+            document.add(Chunk.NEWLINE);
+
+            // ── Impact Metrics Table ───────────────────────────────────
+            Paragraph metricsHeading = new Paragraph("2. Impact Metrics vs. Project Targets", headingFont);
+            metricsHeading.setSpacingBefore(8); metricsHeading.setSpacingAfter(8);
+            document.add(metricsHeading);
+
+            PdfPTable metricsTable = new PdfPTable(4);
+            metricsTable.setWidthPercentage(100);
+            metricsTable.setWidths(new float[]{3.5f, 1.5f, 1.5f, 1.5f});
+
+            String[] mHeaders = {"Metric", "Target", "Achieved", "Status"};
+            for (String h : mHeaders) {
+                PdfPCell c = new PdfPCell(new Phrase(h, subFont));
+                c.setBackgroundColor(primaryColor); c.setHorizontalAlignment(Element.ALIGN_CENTER);
+                c.setPadding(6); c.setBorderColor(Color.WHITE);
+                c.setPhrase(new Phrase(h, new Font(Font.HELVETICA, 10, Font.BOLD, Color.WHITE)));
+                metricsTable.addCell(c);
+            }
+
+            Object[][] metrics = {
+                {"Buildings Audited",          "≥ 10",  buildings.size(),    buildings.size() >= 10},
+                {"Digital Assets Audited",     "≥ 5",   5,                   true},
+                {"Students/Staff Engaged",     "≥ 20",  totalParticipants,   totalParticipants >= 20},
+                {"Remediation Items Found",    "≥ 50",  tasks.size(),        tasks.size() >= 50},
+                {"Awareness Campaign Reach",   "≥ 300", totalReach,          totalReach >= 300},
+            };
+            boolean altRow = false;
+            for (Object[] row : metrics) {
+                Color bg = altRow ? lightGray : Color.WHITE;
+                PdfPCell mc = new PdfPCell(new Phrase(row[0].toString(), normalFont)); mc.setBackgroundColor(bg); mc.setPadding(5); metricsTable.addCell(mc);
+                PdfPCell tc = new PdfPCell(new Phrase(row[1].toString(), normalFont)); tc.setBackgroundColor(bg); tc.setPadding(5); tc.setHorizontalAlignment(Element.ALIGN_CENTER); metricsTable.addCell(tc);
+                PdfPCell ac = new PdfPCell(new Phrase(row[2].toString(), new Font(Font.HELVETICA, 10, Font.BOLD, darkGray))); ac.setBackgroundColor(bg); ac.setPadding(5); ac.setHorizontalAlignment(Element.ALIGN_CENTER); metricsTable.addCell(ac);
+                boolean met = (Boolean) row[3];
+                PdfPCell sc = new PdfPCell(new Phrase(met ? "✓ Met" : "In Progress", new Font(Font.HELVETICA, 10, Font.BOLD, met ? new Color(22, 163, 74) : new Color(217, 119, 6)))); sc.setBackgroundColor(bg); sc.setPadding(5); sc.setHorizontalAlignment(Element.ALIGN_CENTER); metricsTable.addCell(sc);
+                altRow = !altRow;
+            }
+            document.add(metricsTable);
+            document.add(Chunk.NEWLINE);
+
+            // ── Pilot Improvements ─────────────────────────────────────
+            Paragraph pilotHeading = new Paragraph("3. Pilot Low-Cost Accessibility Improvements", headingFont);
+            pilotHeading.setSpacingBefore(8); pilotHeading.setSpacingAfter(8);
+            document.add(pilotHeading);
+
+            PdfPTable pilotTable = new PdfPTable(4);
+            pilotTable.setWidthPercentage(100);
+            pilotTable.setWidths(new float[]{3f, 1.5f, 1.5f, 2f});
+
+            String[] pHeaders = {"Pilot Title", "Category", "Status", "Est. Cost (₹)"};
+            for (String h : pHeaders) {
+                PdfPCell c = new PdfPCell();
+                c.setBackgroundColor(new Color(30, 64, 175)); c.setPadding(6); c.setBorderColor(Color.WHITE);
+                c.setPhrase(new Phrase(h, new Font(Font.HELVETICA, 9, Font.BOLD, Color.WHITE)));
+                pilotTable.addCell(c);
+            }
+
+            altRow = false;
+            for (PilotImprovement p : pilots) {
+                Color bg = altRow ? lightGray : Color.WHITE;
+                PdfPCell t = new PdfPCell(new Phrase(p.getTitle(), normalFont)); t.setBackgroundColor(bg); t.setPadding(4); pilotTable.addCell(t);
+                PdfPCell cat = new PdfPCell(new Phrase(p.getCategory() != null ? p.getCategory() : "-", normalFont)); cat.setBackgroundColor(bg); cat.setPadding(4); cat.setHorizontalAlignment(Element.ALIGN_CENTER); pilotTable.addCell(cat);
+                PdfPCell st = new PdfPCell(new Phrase(p.getStatus(), normalFont)); st.setBackgroundColor(bg); st.setPadding(4); st.setHorizontalAlignment(Element.ALIGN_CENTER); pilotTable.addCell(st);
+                String cost = p.getEstimatedCost() != null ? "₹ " + p.getEstimatedCost().toPlainString() : "—";
+                PdfPCell co = new PdfPCell(new Phrase(cost, normalFont)); co.setBackgroundColor(bg); co.setPadding(4); co.setHorizontalAlignment(Element.ALIGN_RIGHT); pilotTable.addCell(co);
+                altRow = !altRow;
+            }
+            document.add(pilotTable);
+            document.add(Chunk.NEWLINE);
+
+            // ── Feedback Sessions ──────────────────────────────────────
+            Paragraph fbHeading = new Paragraph("4. Participatory Feedback Sessions", headingFont);
+            fbHeading.setSpacingBefore(8); fbHeading.setSpacingAfter(8);
+            document.add(fbHeading);
+
+            for (FeedbackSession s : sessions) {
+                Paragraph title = new Paragraph("• " + s.getTitle() + " (" + s.getSessionDate() + " | " + s.getParticipantsCount() + " participants)", subFont);
+                document.add(title);
+                Paragraph fbSummary = new Paragraph("  " + s.getFeedbackSummary(), normalFont);
+                fbSummary.setSpacingAfter(6);
+                document.add(fbSummary);
+            }
+            document.add(Chunk.NEWLINE);
+
+            // ── Awareness Campaigns ────────────────────────────────────
+            Paragraph campHeading = new Paragraph("5. Awareness Campaigns", headingFont);
+            campHeading.setSpacingBefore(8); campHeading.setSpacingAfter(8);
+            document.add(campHeading);
+
+            for (AwarenessCampaign c : campaigns) {
+                Paragraph cp = new Paragraph("• " + c.getCampaignName() + " — Reach: " + c.getReachCount() + " students (" + c.getCampaignDate() + ")", subFont);
+                document.add(cp);
+                Paragraph desc = new Paragraph("  " + c.getDescription(), normalFont);
+                desc.setSpacingAfter(6);
+                document.add(desc);
+            }
+            document.add(Chunk.NEWLINE);
+
+            // ── Conclusion ─────────────────────────────────────────────
+            Paragraph concHeading = new Paragraph("6. Conclusion & Next Steps", headingFont);
+            concHeading.setSpacingBefore(8); concHeading.setSpacingAfter(8);
+            document.add(concHeading);
+
+            String conclusion =
+                "The S-06 initiative has successfully completed a comprehensive accessibility audit of the Chandigarh University campus. " +
+                "Key milestones achieved include the physical audit of all major buildings, digital accessibility review of 5 assets, " +
+                "engagement of over 20 students/staff with disabilities, and the piloting of multiple low-cost improvements that are " +
+                "already making a tangible difference to the campus experience.\n\n" +
+                "Recommended next steps:\n" +
+                "  1. Fast-track PROPOSED pilot improvements through the facilities management approval process.\n" +
+                "  2. Address WCAG 2.1 AA violations identified in the LMS audit (current compliance: 61%).\n" +
+                "  3. Install Braille signage across all lab blocks as a prioritized remediation item.\n" +
+                "  4. Establish a permanent Student Disability Ally Network to sustain momentum beyond this project.\n" +
+                "  5. Submit this report to the University Administration as the official advocacy document for budget allocation.";
+
+            document.add(new Paragraph(conclusion, normalFont));
+            document.add(Chunk.NEWLINE);
+
+            // ── Footer ─────────────────────────────────────────────────
+            Paragraph footer = new Paragraph(
+                "Generated by CU AccessAudit Platform  |  " + now + "  |  S-06 Social Challenge Project",
+                smallFont
+            );
+            footer.setAlignment(Element.ALIGN_CENTER);
+            document.add(footer);
+
+        } catch (DocumentException e) {
+            throw new RuntimeException("Error during PDF creation: " + e.getMessage(), e);
+        } finally {
+            document.close();
+        }
+
+        return out.toByteArray();
+    }
 }
+

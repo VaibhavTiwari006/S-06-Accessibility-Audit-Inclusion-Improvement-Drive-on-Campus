@@ -66,4 +66,20 @@ public class ReportController {
                 .headers(headers)
                 .body(pdfBytes);
     }
+
+    @GetMapping("/final")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Operation(summary = "Export Final Project Report", description = "Generates and downloads the comprehensive S-06 Final Project Report covering audits, pilots, campaigns, and remediation roadmap.")
+    public ResponseEntity<byte[]> exportFinalProjectReport() {
+        byte[] pdfBytes = reportService.generateFinalProjectReport();
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "S06-final-project-report.pdf");
+        
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(pdfBytes);
+    }
 }
+
