@@ -20,6 +20,11 @@ const pilotService = {
     const response = await api.patch(`/pilot-improvements/${id}/status`, { status, adminNotes });
     return response.data.data;
   },
+
+  toggleUpvote: async (id) => {
+    const response = await api.post(`/pilot-improvements/${id}/upvote`);
+    return response.data.data;
+  },
 };
 
 export default pilotService;

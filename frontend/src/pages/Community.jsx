@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   HeartHandshake, Users, Map, Download, CheckCircle,
   Calendar, MessageSquare, Lightbulb, Plus, MapPin,
-  DollarSign, ArrowUpCircle, CheckCircle2, Clock, XCircle
+  DollarSign, ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp
 } from 'lucide-react';
 import api from '../services/api';
 import pilotService from '../services/pilotService';
@@ -76,6 +76,34 @@ const Community = () => {
     }
   };
 
+  const handleUpvote = async (id) => {
+    if (!user) {
+      toast.info('Please log in to upvote.');
+      return;
+    }
+    
+    // Optimistic UI update
+    setPilots(prev => prev.map(p => {
+      if (p.id === id) {
+        const isUpvoting = !p.hasUpvoted;
+        return {
+          ...p,
+          hasUpvoted: isUpvoting,
+          upvotes: isUpvoting ? p.upvotes + 1 : p.upvotes - 1
+        };
+      }
+      return p;
+    }));
+
+    try {
+      await pilotService.toggleUpvote(id);
+    } catch (error) {
+      toast.error('Failed to register upvote');
+      // Revert on error
+      fetchData();
+    }
+  };
+
   const isAdmin = user?.role === 'ADMIN';
   const isStudent = user?.role === 'STUDENT';
 
@@ -135,20 +163,37 @@ const Community = () => {
             {pilots.map(pilot => {
               const sc = statusConfig[pilot.status] || statusConfig.PROPOSED;
               return (
-                <div key={pilot.id} className="border border-gray-100 rounded-xl p-4 bg-white/60 hover:shadow-md transition-shadow flex flex-col gap-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                      <span className="text-xl flex-shrink-0">{categoryIcon[pilot.category] || '🔧'}</span>
-                      <h4 className="font-semibold text-sm text-textMain leading-tight truncate">{pilot.title}</h4>
+                <div key={pilot.id} className="p-4 border border-gray-100 rounded-lg hover:shadow-md transition-all bg-white relative group">
+                  <div className="flex justify-between items-start mb-2 gap-3">
+                    <div className="flex gap-3 w-full">
+                      <div className="flex flex-col items-center gap-1 pt-1">
+                        <button 
+                          onClick={() => handleUpvote(pilot.id)}
+                          className={`flex flex-col items-center p-1.5 rounded-lg transition-all ${
+                            pilot.hasUpvoted 
+                              ? 'text-primary bg-primary-50 scale-110' 
+                              : 'text-gray-400 hover:bg-gray-50 hover:text-gray-600'
+                          }`}
+                          title="Upvote this proposal"
+                        >
+                          <ThumbsUp size={18} className={pilot.hasUpvoted ? 'fill-primary' : ''} />
+                          <span className={`text-[10px] font-bold ${pilot.hasUpvoted ? 'text-primary' : 'text-gray-500'}`}>
+                            {pilot.upvotes || 0}
+                          </span>
+                        </button>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-textMain leading-tight">{categoryIcon[pilot.category] || '📌'} {pilot.title}</h4>
+                        <p className="text-sm text-gray-600 mt-1 line-clamp-2" title={pilot.description}>{pilot.description}</p>
+                      </div>
                     </div>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border flex items-center gap-1 flex-shrink-0 ${sc.color}`}>
-                      {sc.icon}{sc.label}
-                    </span>
+                    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full border ${sc.color} flex-shrink-0`}>
+                      {sc.icon}
+                      <span className="text-[10px] font-bold tracking-wide uppercase">{sc.label}</span>
+                    </div>
                   </div>
 
-                  <p className="text-xs text-gray-600 line-clamp-2">{pilot.description}</p>
-
-                  <div className="flex items-center justify-between text-xs text-gray-500 flex-wrap gap-2">
+                  <div className="flex items-center justify-between text-xs text-gray-500 flex-wrap gap-2 mt-3 pt-3 border-t border-gray-100">
                     <div className="flex items-center gap-3">
                       {pilot.location && (
                         <span className="flex items-center gap-1"><MapPin size={11} />{pilot.location}</span>
