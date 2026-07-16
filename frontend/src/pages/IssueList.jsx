@@ -3,8 +3,10 @@ import issueService from '../services/issueService';
 import { AlertCircle, Plus, MapPin, User, Clock, CheckCircle } from 'lucide-react';
 import { toast } from 'react-toastify';
 import ReportIssueModal from '../components/ReportIssueModal';
+import { useAuth } from '../context/AuthContext';
 
 const IssueList = () => {
+  const { user } = useAuth();
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -12,7 +14,9 @@ const IssueList = () => {
   const fetchIssues = async () => {
     try {
       setLoading(true);
-      const data = await issueService.getAllIssues();
+      const data = user?.role === 'STUDENT' 
+        ? await issueService.getMyIssues() 
+        : await issueService.getAllIssues();
       setIssues(data);
     } catch (error) {
       toast.error('Failed to fetch issues.');
@@ -48,9 +52,11 @@ const IssueList = () => {
           </h2>
           <p className="text-textLight mt-1">Student-reported accessibility barriers and their resolution status.</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
-          <Plus size={18} /> Report Issue
-        </button>
+        {user?.role === 'STUDENT' && (
+          <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
+            <Plus size={18} /> Report Issue
+          </button>
+        )}
       </div>
 
       {loading && (
