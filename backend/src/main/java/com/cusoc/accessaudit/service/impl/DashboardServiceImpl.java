@@ -10,6 +10,8 @@ import com.cusoc.accessaudit.repository.EvidenceRepository;
 import com.cusoc.accessaudit.repository.MaintenanceTaskRepository;
 import com.cusoc.accessaudit.repository.StudentReportRepository;
 import com.cusoc.accessaudit.repository.UserRepository;
+import com.cusoc.accessaudit.repository.FeedbackSessionRepository;
+import com.cusoc.accessaudit.repository.AwarenessCampaignRepository;
 import com.cusoc.accessaudit.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,8 @@ public class DashboardServiceImpl implements DashboardService {
     private final EvidenceRepository evidenceRepository;
     private final StudentReportRepository studentReportRepository;
     private final MaintenanceTaskRepository maintenanceTaskRepository;
+    private final FeedbackSessionRepository feedbackSessionRepository;
+    private final AwarenessCampaignRepository awarenessCampaignRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -42,6 +46,11 @@ public class DashboardServiceImpl implements DashboardService {
                 .average()
                 .orElse(0.0);
 
+        double totalEstimatedCost = maintenanceTasks.stream()
+                .filter(t -> t.getEstimatedCost() != null)
+                .mapToDouble(MaintenanceTask::getEstimatedCost)
+                .sum();
+
         return DashboardStatsResponse.builder()
                 .totalUsers(userRepository.count())
                 .totalBuildings(buildingRepository.count())
@@ -53,6 +62,9 @@ public class DashboardServiceImpl implements DashboardService {
                 .auditsByStatus(countAuditsByStatus(audits))
                 .studentReportsByStatus(countReportsByStatus(studentReports))
                 .maintenanceTasksByStatus(countTasksByStatus(maintenanceTasks))
+                .totalFeedbackSessions(feedbackSessionRepository.count())
+                .totalAwarenessCampaigns(awarenessCampaignRepository.count())
+                .totalEstimatedCost(totalEstimatedCost)
                 .build();
     }
 

@@ -319,4 +319,109 @@ public class ReportServiceImpl implements ReportService {
             return new Color(198, 40, 40); // Danger Red
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public byte[] generateAdvocacyLetter() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        Document document = new Document(PageSize.A4, 36, 36, 54, 36);
+        
+        try {
+            PdfWriter.getInstance(document, out);
+            document.open();
+            
+            // Header / Title
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 22, new Color(27, 54, 93));
+            Paragraph title = new Paragraph("Prioritized Remediation Roadmap & Advocacy Letter", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingAfter(20);
+            document.add(title);
+            
+            // Intro
+            Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 11, new Color(74, 74, 74));
+            Paragraph intro = new Paragraph(
+                "Dear University Administration,\n\n" +
+                "In accordance with the RPWD Act 2016 and WCAG 2.1 standards, we present the prioritized " +
+                "remediation roadmap for campus infrastructure and digital accessibility. Below are the open tasks " +
+                "that require immediate funding and action to ensure an equitable environment for all students.",
+                normalFont
+            );
+            intro.setSpacingAfter(20);
+            document.add(intro);
+            
+            // Tasks Table
+            PdfPTable table = new PdfPTable(new float[]{3, 2, 2, 2, 2});
+            table.setWidthPercentage(100);
+            
+            String[] headers = {"Task", "Building", "Severity", "Cost (INR)", "Due Date"};
+            for (String header : headers) {
+                PdfPCell cell = new PdfPCell(new Phrase(header, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, Color.WHITE)));
+                cell.setBackgroundColor(new Color(27, 54, 93));
+                cell.setPadding(8);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+            }
+            
+            List<MaintenanceTask> openTasks = maintenanceTaskRepository.findAll().stream()
+                    .filter(t -> !"COMPLETED".equals(t.getStatus()))
+                    .sorted((t1, t2) -> {
+                        // Sort by Severity: CRITICAL > HIGH > MEDIUM > LOW
+                        int s1 = getSeverityRank(t1.getSeverity());
+                        int s2 = getSeverityRank(t2.getSeverity());
+                        return Integer.compare(s1, s2);
+                    })
+                    .toList();
+            
+            double totalCost = 0;
+            
+            for (MaintenanceTask task : openTasks) {
+                table.addCell(createTableCell(task.getTitle(), Element.ALIGN_LEFT));
+                table.addCell(createTableCell(task.getBuilding().getBuildingName(), Element.ALIGN_CENTER));
+                
+                PdfPCell sevCell = createTableCell(task.getSeverity(), Element.ALIGN_CENTER);
+                if ("CRITICAL".equals(task.getSeverity())) {
+                    sevCell.setBackgroundColor(new Color(255, 235, 238)); // Light Red
+                }
+                table.addCell(sevCell);
+                
+                double cost = task.getEstimatedCost() != null ? task.getEstimatedCost() : 0.0;
+                totalCost += cost;
+                table.addCell(createTableCell(String.format("%.2f", cost), Element.ALIGN_RIGHT));
+                table.addCell(createTableCell(task.getDueDate().toString(), Element.ALIGN_CENTER));
+            }
+            document.add(table);
+            
+            // Total Cost Summary
+            Font boldFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, new Color(27, 54, 93));
+            Paragraph summary = new Paragraph("\nTotal Estimated Remediation Cost: INR " + String.format("%.2f", totalCost), boldFont);
+            summary.setAlignment(Element.ALIGN_RIGHT);
+            summary.setSpacingAfter(30);
+            document.add(summary);
+            
+            // Sign off
+            Paragraph signoff = new Paragraph(
+                "Sincerely,\nAccessAudit Coordination Team\nGenerated on: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                normalFont
+            );
+            document.add(signoff);
+            
+        } catch (DocumentException e) {
+            throw new RuntimeException("Error during PDF creation: " + e.getMessage(), e);
+        } finally {
+            document.close();
+        }
+        
+        return out.toByteArray();
+    }
+    
+    private int getSeverityRank(String severity) {
+        if (severity == null) return 4;
+        switch (severity.toUpperCase()) {
+            case "CRITICAL": return 1;
+            case "HIGH": return 2;
+            case "MEDIUM": return 3;
+            case "LOW": return 4;
+            default: return 5;
+        }
+    }
 }

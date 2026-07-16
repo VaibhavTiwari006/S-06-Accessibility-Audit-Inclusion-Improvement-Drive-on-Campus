@@ -52,4 +52,18 @@ public class ReportController {
                 .headers(headers)
                 .body(pdfBytes);
     }
+    @GetMapping("/advocacy")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Operation(summary = "Export Advocacy Letter", description = "Generates and downloads the Prioritized Remediation Roadmap & Advocacy Letter.")
+    public ResponseEntity<byte[]> exportAdvocacyLetter() {
+        byte[] pdfBytes = reportService.generateAdvocacyLetter();
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "advocacy-letter-roadmap.pdf");
+        
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(pdfBytes);
+    }
 }

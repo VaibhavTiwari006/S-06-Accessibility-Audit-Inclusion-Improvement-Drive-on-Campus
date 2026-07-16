@@ -22,4 +22,7 @@ public class DashboardStatsResponse {
     private Map<String, Long> auditsByStatus;
     private Map<String, Long> studentReportsByStatus;
     private Map<String, Long> maintenanceTasksByStatus;
+    private long totalFeedbackSessions;
+    private long totalAwarenessCampaigns;
+    private double totalEstimatedCost;
 }
