@@ -7,10 +7,7 @@ const issueService = {
   },
 
   reportIssue: async (data) => {
-    // Requires multipart/form-data for image uploads
-    const response = await api.post('/student-reports', data, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    });
+    const response = await api.post('/student-reports', data);
     return response.data.data;
   },
 

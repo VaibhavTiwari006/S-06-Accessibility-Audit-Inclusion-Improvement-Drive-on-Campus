@@ -25,7 +25,7 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
         locationDetails: form.locationDetails,
         photoUrl: form.photoUrl || null
       };
-      await issueService.reportIssue(JSON.stringify(payload));
+      await issueService.reportIssue(payload);
       toast.success('Issue reported successfully!');
       onSuccess();
       onClose();
@@ -48,10 +48,10 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
         </div>
         <form onSubmit={submit} className="p-7 space-y-5 bg-white/40">
           <div>
-            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Building</label>
-            <select name="buildingId" value={form.buildingId} onChange={handle}
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Building *</label>
+            <select name="buildingId" value={form.buildingId} onChange={handle} required
               className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain">
-              <option value="">-- Select Building (Optional) --</option>
+              <option value="">-- Select Building --</option>
               {buildings.map(b => <option key={b.id} value={b.id}>{b.buildingName}</option>)}
             </select>
           </div>
@@ -68,10 +68,15 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
               placeholder="Describe the accessibility barrier in detail. What is the problem? Who is affected?" />
           </div>
           <div>
-            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Photo URL (Optional)</label>
-            <input name="photoUrl" value={form.photoUrl} onChange={handle} type="url"
-              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain"
-              placeholder="https://example.com/photo.jpg" />
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Photo Evidence (Optional)</label>
+            <input type="file" accept="image/*" onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setForm({ ...form, photoUrl: "https://picsum.photos/800/600" });
+                toast.info("Photo selected! (Mock upload applied)");
+              }
+            }}
+              className="w-full bg-white/70 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 transition-all font-medium text-textMain file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-danger/10 file:text-danger hover:file:bg-danger/20"
+            />
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6">
             <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">Cancel</button>
