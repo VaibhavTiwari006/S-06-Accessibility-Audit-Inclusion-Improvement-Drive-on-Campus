@@ -25,6 +25,10 @@ export const AccessibilityProvider = ({ children }) => {
     return localStorage.getItem('access_colorBlindTheme') || 'default';
   });
 
+  const [distractionFree, setDistractionFree] = useState(() => {
+    return localStorage.getItem('access_distractionFree') === 'true';
+  });
+
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);
     if (highContrast) {
@@ -62,11 +66,16 @@ export const AccessibilityProvider = ({ children }) => {
     document.body.setAttribute('data-color-blind', colorBlindTheme);
   }, [colorBlindTheme]);
 
+  useEffect(() => {
+    localStorage.setItem('access_distractionFree', distractionFree);
+  }, [distractionFree]);
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
   const changeFontSize = (size) => setFontSize(size);
   const toggleDyslexiaFont = () => setDyslexiaFont(!dyslexiaFont);
   const toggleReduceMotion = () => setReduceMotion(!reduceMotion);
   const changeColorBlindTheme = (theme) => setColorBlindTheme(theme);
+  const toggleDistractionFree = () => setDistractionFree(!distractionFree);
 
   return (
     <AccessibilityContext.Provider value={{ 
@@ -74,7 +83,8 @@ export const AccessibilityProvider = ({ children }) => {
       fontSize, changeFontSize, 
       dyslexiaFont, toggleDyslexiaFont,
       reduceMotion, toggleReduceMotion,
-      colorBlindTheme, changeColorBlindTheme
+      colorBlindTheme, changeColorBlindTheme,
+      distractionFree, toggleDistractionFree
     }}>
       {children}
     </AccessibilityContext.Provider>
