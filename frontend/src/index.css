@@ -251,3 +251,14 @@
     --color-danger: #D55E00;
   }
 }
+
+@layer base {
+  body.magnify-mode img, body.magnify-mode svg {
+    transition: transform 0.3s ease-in-out !important;
+  }
+  body.magnify-mode img:hover, body.magnify-mode svg:hover {
+    transform: scale(1.5) !important;
+    z-index: 50 !important;
+    position: relative !important;
+  }
+}

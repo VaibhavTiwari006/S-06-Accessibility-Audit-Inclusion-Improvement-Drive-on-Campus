@@ -3,7 +3,7 @@ import { useAccessibility } from '../context/AccessibilityContext';
 import { Moon, Sun } from 'lucide-react';
 
 const AccessibilityPreferences = () => {
-  const { highContrast, toggleHighContrast, fontSize, changeFontSize, dyslexiaFont, toggleDyslexiaFont, reduceMotion, toggleReduceMotion, colorBlindTheme, changeColorBlindTheme, distractionFree, toggleDistractionFree } = useAccessibility();
+  const { highContrast, toggleHighContrast, fontSize, changeFontSize, dyslexiaFont, toggleDyslexiaFont, reduceMotion, toggleReduceMotion, colorBlindTheme, changeColorBlindTheme, distractionFree, toggleDistractionFree, magnifyMode, toggleMagnifyMode } = useAccessibility();
 
   return (
     <div className="max-w-4xl mx-auto page-container">
@@ -118,6 +118,23 @@ const AccessibilityPreferences = () => {
               aria-label="Toggle Distraction-Free Mode"
             >
               <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${distractionFree ? 'translate-x-8' : 'translate-x-1'}`} />
+            </button>
+          </div>
+
+          {/* Image Magnification Mode */}
+          <div className="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-100 mt-4">
+            <div>
+              <h3 className="font-semibold text-textMain">Image Magnification</h3>
+              <p className="text-sm text-textLight mt-1">Hover over images or icons to magnify them</p>
+            </div>
+            <button 
+              onClick={toggleMagnifyMode}
+              className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${magnifyMode ? 'bg-primary' : 'bg-gray-300'}`}
+              role="switch"
+              aria-checked={magnifyMode}
+              aria-label="Toggle Image Magnification Mode"
+            >
+              <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${magnifyMode ? 'translate-x-8' : 'translate-x-1'}`} />
             </button>
           </div>
         </div>

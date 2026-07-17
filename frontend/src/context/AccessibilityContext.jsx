@@ -29,6 +29,10 @@ export const AccessibilityProvider = ({ children }) => {
     return localStorage.getItem('access_distractionFree') === 'true';
   });
 
+  const [magnifyMode, setMagnifyMode] = useState(() => {
+    return localStorage.getItem('access_magnifyMode') === 'true';
+  });
+
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);
     if (highContrast) {
@@ -70,12 +74,22 @@ export const AccessibilityProvider = ({ children }) => {
     localStorage.setItem('access_distractionFree', distractionFree);
   }, [distractionFree]);
 
+  useEffect(() => {
+    localStorage.setItem('access_magnifyMode', magnifyMode);
+    if (magnifyMode) {
+      document.body.classList.add('magnify-mode');
+    } else {
+      document.body.classList.remove('magnify-mode');
+    }
+  }, [magnifyMode]);
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
   const changeFontSize = (size) => setFontSize(size);
   const toggleDyslexiaFont = () => setDyslexiaFont(!dyslexiaFont);
   const toggleReduceMotion = () => setReduceMotion(!reduceMotion);
   const changeColorBlindTheme = (theme) => setColorBlindTheme(theme);
   const toggleDistractionFree = () => setDistractionFree(!distractionFree);
+  const toggleMagnifyMode = () => setMagnifyMode(!magnifyMode);
 
   return (
     <AccessibilityContext.Provider value={{ 
@@ -84,7 +98,8 @@ export const AccessibilityProvider = ({ children }) => {
       dyslexiaFont, toggleDyslexiaFont,
       reduceMotion, toggleReduceMotion,
       colorBlindTheme, changeColorBlindTheme,
-      distractionFree, toggleDistractionFree
+      distractionFree, toggleDistractionFree,
+      magnifyMode, toggleMagnifyMode
     }}>
       {children}
     </AccessibilityContext.Provider>
