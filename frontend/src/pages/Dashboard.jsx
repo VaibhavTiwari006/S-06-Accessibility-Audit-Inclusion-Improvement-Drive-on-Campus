@@ -21,40 +21,40 @@ const DashboardHero = ({ title, subtitle, bgClass = 'from-primary-dark/90 to-pri
 
 // ─────────────────────────── Admin ────────────────────────────
 const AdminDashboard = ({ stats, navigate }) => (
-  <div className="page-container">
+  <div className="page-container" role="region" aria-label="Admin Dashboard">
     <DashboardHero 
       title="Admin Overview" 
       subtitle="Real-time campus accessibility health summary for Chandigarh University." 
       bgClass="from-slate-900/90 to-primary/80"
     />
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-label="Key Performance Indicators">
       <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
-        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-indigo-600 bg-indigo-50" onClick={() => navigate('/buildings')} />
+        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} aria-hidden="true" />} colorClass="text-indigo-600 bg-indigo-50" onClick={() => navigate('/buildings')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
-        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/audits')} />
+        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} aria-hidden="true" />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/audits')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
-        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" onClick={() => navigate('/reports')} trend={2.4} trendLabel="vs last month" />
+        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} aria-hidden="true" />} colorClass="text-emerald-600 bg-emerald-50" onClick={() => navigate('/reports')} trend={2.4} trendLabel="vs last month" />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
-        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-rose-600 bg-rose-50" onClick={() => navigate('/issues')} trend={-5} trendLabel="fewer issues" />
+        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} aria-hidden="true" />} colorClass="text-rose-600 bg-rose-50" onClick={() => navigate('/issues')} trend={-5} trendLabel="fewer issues" />
       </div>
     </div>
     
-    <h3 className="text-xl font-heading font-bold text-textMain mt-8 mb-4">Operations & Community</h3>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <h3 className="text-xl font-heading font-bold text-textMain mt-8 mb-4" id="ops-community-heading">Operations & Community</h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-labelledby="ops-community-heading">
       <div className="animate-slide-up" style={{ animationDelay: '0.5s' }}>
-        <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-blue-600 bg-blue-50" onClick={() => navigate('/roadmap')} />
+        <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} aria-hidden="true" />} colorClass="text-blue-600 bg-blue-50" onClick={() => navigate('/roadmap')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
-        <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} />} colorClass="text-purple-600 bg-purple-50" />
+        <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} aria-hidden="true" />} colorClass="text-purple-600 bg-purple-50" />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.7s' }}>
-        <ScoreCard title="Est. Remediation" value={stats?.totalEstimatedCost ? `₹${(stats.totalEstimatedCost/1000).toFixed(1)}k` : '—'} icon={<IndianRupee size={24} />} colorClass="text-orange-600 bg-orange-50" onClick={() => navigate('/reports')} />
+        <ScoreCard title="Est. Remediation" value={stats?.totalEstimatedCost ? `₹${(stats.totalEstimatedCost/1000).toFixed(1)}k` : '—'} icon={<IndianRupee size={24} aria-hidden="true" />} colorClass="text-orange-600 bg-orange-50" onClick={() => navigate('/reports')} />
       </div>
       <div className="animate-slide-up" style={{ animationDelay: '0.8s' }}>
-        <ScoreCard title="Community Events" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} />} colorClass="text-teal-600 bg-teal-50" onClick={() => navigate('/community')} />
+        <ScoreCard title="Community Events" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} aria-hidden="true" />} colorClass="text-teal-600 bg-teal-50" onClick={() => navigate('/community')} />
       </div>
     </div>
   </div>
