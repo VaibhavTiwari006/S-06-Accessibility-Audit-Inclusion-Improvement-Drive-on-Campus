@@ -17,6 +17,10 @@ export const AccessibilityProvider = ({ children }) => {
     return localStorage.getItem('access_dyslexiaFont') === 'true';
   });
 
+  const [reduceMotion, setReduceMotion] = useState(() => {
+    return localStorage.getItem('access_reduceMotion') === 'true';
+  });
+
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);
     if (highContrast) {
@@ -40,12 +44,27 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [dyslexiaFont]);
 
+  useEffect(() => {
+    localStorage.setItem('access_reduceMotion', reduceMotion);
+    if (reduceMotion) {
+      document.body.classList.add('reduce-motion');
+    } else {
+      document.body.classList.remove('reduce-motion');
+    }
+  }, [reduceMotion]);
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
   const changeFontSize = (size) => setFontSize(size);
   const toggleDyslexiaFont = () => setDyslexiaFont(!dyslexiaFont);
+  const toggleReduceMotion = () => setReduceMotion(!reduceMotion);
 
   return (
-    <AccessibilityContext.Provider value={{ highContrast, toggleHighContrast, fontSize, changeFontSize, dyslexiaFont, toggleDyslexiaFont }}>
+    <AccessibilityContext.Provider value={{ 
+      highContrast, toggleHighContrast, 
+      fontSize, changeFontSize, 
+      dyslexiaFont, toggleDyslexiaFont,
+      reduceMotion, toggleReduceMotion 
+    }}>
       {children}
     </AccessibilityContext.Provider>
   );
