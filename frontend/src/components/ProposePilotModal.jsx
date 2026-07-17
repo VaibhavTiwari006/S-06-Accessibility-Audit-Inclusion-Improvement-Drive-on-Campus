@@ -42,28 +42,29 @@ const ProposePilotModal = ({ onClose, onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-in">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden animate-fade-in">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="relative glass-panel rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden animate-slide-up border border-white/60">
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-primary-light p-6 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-primary to-primary-dark px-6 py-5 flex items-center justify-between shadow-inner">
           <div className="flex items-center gap-3">
-            <div className="bg-white/20 p-2 rounded-xl">
+            <div className="bg-white/20 p-2.5 rounded-xl shadow-sm">
               <Lightbulb size={22} className="text-white" />
             </div>
             <div>
-              <h2 className="text-white font-bold text-lg">Propose a Pilot Improvement</h2>
-              <p className="text-white/70 text-sm">Submit a low-cost accessibility idea</p>
+              <h2 className="text-white font-heading font-bold text-lg leading-tight">Propose a Pilot</h2>
+              <p className="text-white/80 text-xs font-medium mt-0.5">Submit a low-cost accessibility idea</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-white/70 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-all">
+          <button onClick={onClose} className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-all">
             <X size={20} />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="p-7 space-y-5 bg-white/40">
           <div>
-            <label className="block text-sm font-semibold text-textMain mb-1">Title <span className="text-danger">*</span></label>
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Title <span className="text-danger">*</span></label>
             <input
               name="title"
               value={form.title}
@@ -71,12 +72,12 @@ const ProposePilotModal = ({ onClose, onSuccess }) => {
               required
               maxLength={200}
               placeholder="e.g., Braille signage on Lab doors"
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"
+              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-textMain mb-1">Description <span className="text-danger">*</span></label>
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Description <span className="text-danger">*</span></label>
             <textarea
               name="description"
               value={form.description}
@@ -85,26 +86,26 @@ const ProposePilotModal = ({ onClose, onSuccess }) => {
               rows={3}
               maxLength={2000}
               placeholder="Describe the problem and your proposed low-cost solution..."
-              className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary resize-none"
+              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain resize-none"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-semibold text-textMain mb-1">
-                <MapPin size={13} className="inline mr-1" />Location
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">
+                <MapPin size={13} className="inline mr-1 text-primary" />Location
               </label>
               <input
                 name="location"
                 value={form.location}
                 onChange={handleChange}
-                placeholder="e.g., Block A, Ground Floor"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"
+                placeholder="e.g., Block A, Ground"
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-textMain mb-1">
-                <DollarSign size={13} className="inline mr-1" />Est. Cost (₹)
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">
+                <DollarSign size={13} className="inline mr-1 text-success" />Est. Cost (₹)
               </label>
               <input
                 name="estimatedCost"
@@ -114,50 +115,50 @@ const ProposePilotModal = ({ onClose, onSuccess }) => {
                 min="0"
                 step="100"
                 placeholder="e.g., 2500"
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-semibold text-textMain mb-1">
-                <Tag size={13} className="inline mr-1" />Category
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">
+                <Tag size={13} className="inline mr-1 text-secondary" />Category
               </label>
               <select
                 name="category"
                 value={form.category}
                 onChange={handleChange}
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary bg-white"
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
               >
                 {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-semibold text-textMain mb-1">
-                <BarChart2 size={13} className="inline mr-1" />Impact Level
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">
+                <BarChart2 size={13} className="inline mr-1 text-purple-500" />Impact Level
               </label>
               <select
                 name="impactLevel"
                 value={form.impactLevel}
                 onChange={handleChange}
-                className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary bg-white"
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
               >
                 {IMPACTS.map((i) => <option key={i}>{i}</option>)}
               </select>
             </div>
           </div>
 
-          <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} className="flex-1 border border-gray-200 text-textLight hover:bg-gray-50 py-2.5 rounded-xl font-medium text-sm transition-all">
+          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6">
+            <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 bg-primary hover:bg-primary-dark text-white py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md disabled:opacity-50 flex items-center justify-center gap-2"
+              className="px-6 py-2.5 text-sm font-bold bg-primary text-white rounded-xl shadow-md hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:hover:translate-y-0 flex items-center gap-2"
             >
-              {submitting ? 'Submitting...' : <><Lightbulb size={15} /> Submit Proposal</>}
+              {submitting ? 'Submitting...' : <><Lightbulb size={16} /> Submit Proposal</>}
             </button>
           </div>
         </form>
