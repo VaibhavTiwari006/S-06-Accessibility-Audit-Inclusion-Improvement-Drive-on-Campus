@@ -3,7 +3,7 @@ import { useAccessibility } from '../context/AccessibilityContext';
 import { Moon, Sun } from 'lucide-react';
 
 const AccessibilityPreferences = () => {
-  const { highContrast, toggleHighContrast } = useAccessibility();
+  const { highContrast, toggleHighContrast, fontSize, changeFontSize } = useAccessibility();
 
   return (
     <div className="max-w-4xl mx-auto page-container">
@@ -30,6 +30,25 @@ const AccessibilityPreferences = () => {
             >
               <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${highContrast ? 'translate-x-8' : 'translate-x-1'}`} />
             </button>
+          </div>
+          
+          {/* Font Size Scaling */}
+          <div className="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-100 mt-4">
+            <div>
+              <h3 className="font-semibold text-textMain">Font Size</h3>
+              <p className="text-sm text-textLight mt-1">Adjust text scale globally</p>
+            </div>
+            <select
+              value={fontSize}
+              onChange={(e) => changeFontSize(e.target.value)}
+              className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              aria-label="Select Font Size"
+            >
+              <option value="Small">Small</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+              <option value="Extra Large">Extra Large</option>
+            </select>
           </div>
         </div>
       </div>

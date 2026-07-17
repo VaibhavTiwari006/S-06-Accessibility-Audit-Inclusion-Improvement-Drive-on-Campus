@@ -6,8 +6,11 @@ export const useAccessibility = () => useContext(AccessibilityContext);
 
 export const AccessibilityProvider = ({ children }) => {
   const [highContrast, setHighContrast] = useState(() => {
-    const saved = localStorage.getItem('access_highContrast');
-    return saved === 'true';
+    return localStorage.getItem('access_highContrast') === 'true';
+  });
+  
+  const [fontSize, setFontSize] = useState(() => {
+    return localStorage.getItem('access_fontSize') || 'Medium';
   });
 
   useEffect(() => {
@@ -19,10 +22,16 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [highContrast]);
 
+  useEffect(() => {
+    localStorage.setItem('access_fontSize', fontSize);
+    document.documentElement.setAttribute('data-font-size', fontSize.toLowerCase());
+  }, [fontSize]);
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
+  const changeFontSize = (size) => setFontSize(size);
 
   return (
-    <AccessibilityContext.Provider value={{ highContrast, toggleHighContrast }}>
+    <AccessibilityContext.Provider value={{ highContrast, toggleHighContrast, fontSize, changeFontSize }}>
       {children}
     </AccessibilityContext.Provider>
   );
