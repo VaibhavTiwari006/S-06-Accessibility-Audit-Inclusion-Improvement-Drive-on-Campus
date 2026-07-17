@@ -3,11 +3,13 @@ import { X, ClipboardList } from 'lucide-react';
 import auditService from '../services/auditService';
 import buildingService from '../services/buildingService';
 import { toast } from 'react-toastify';
+import RampCalculator from './RampCalculator';
 
 const StartAuditModal = ({ onClose, onSuccess }) => {
   const [buildings, setBuildings] = useState([]);
   const [form, setForm] = useState({ buildingId: '', auditorId: '', auditDate: new Date().toISOString().split('T')[0], remarks: '' });
   const [loading, setLoading] = useState(false);
+  const [showCalculator, setShowCalculator] = useState(false);
 
   // Get current user's ID from localStorage (stored as part of session)
   const userEmail = localStorage.getItem('userEmail');
@@ -66,11 +68,22 @@ const StartAuditModal = ({ onClose, onSuccess }) => {
               className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain" />
           </div>
           <div>
-            <label htmlFor="remarks" className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Remarks / Observations</label>
+            <div className="flex justify-between items-center mb-1.5">
+              <label htmlFor="remarks" className="block text-xs font-bold text-textMain uppercase tracking-wider">Remarks / Observations</label>
+              <button 
+                type="button" 
+                onClick={() => setShowCalculator(!showCalculator)}
+                className="text-xs text-primary hover:text-primary-dark font-medium"
+              >
+                {showCalculator ? 'Hide Ramp Calculator' : 'Show Ramp Calculator'}
+              </button>
+            </div>
             <textarea id="remarks" name="remarks" value={form.remarks} onChange={handle} rows={3}
               className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain resize-none"
               placeholder="Initial observations, scope of audit, methodology used..." 
               aria-label="Initial observations and remarks" />
+            
+            {showCalculator && <RampCalculator />}
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6" role="group" aria-label="Form Actions">
             <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">Cancel</button>
