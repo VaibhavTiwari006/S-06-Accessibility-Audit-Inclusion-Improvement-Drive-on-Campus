@@ -53,25 +53,26 @@ const StartAuditModal = ({ onClose, onSuccess }) => {
         </div>
         <form onSubmit={submit} className="p-7 space-y-5 bg-white/40">
           <div>
-            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Building *</label>
-            <select name="buildingId" value={form.buildingId} onChange={handle} required
+            <label htmlFor="buildingId" className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Building *</label>
+            <select id="buildingId" name="buildingId" value={form.buildingId} onChange={handle} required aria-required="true"
               className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain">
               <option value="">-- Select Building --</option>
               {buildings.map(b => <option key={b.id} value={b.id}>{b.buildingName} ({b.buildingCode})</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Audit Date *</label>
-            <input name="auditDate" type="date" value={form.auditDate} onChange={handle} required
+            <label htmlFor="auditDate" className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Audit Date *</label>
+            <input id="auditDate" name="auditDate" type="date" value={form.auditDate} onChange={handle} required aria-required="true"
               className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain" />
           </div>
           <div>
-            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Remarks / Observations</label>
-            <textarea name="remarks" value={form.remarks} onChange={handle} rows={3}
+            <label htmlFor="remarks" className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Remarks / Observations</label>
+            <textarea id="remarks" name="remarks" value={form.remarks} onChange={handle} rows={3}
               className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain resize-none"
-              placeholder="Initial observations, scope of audit, methodology used..." />
+              placeholder="Initial observations, scope of audit, methodology used..." 
+              aria-label="Initial observations and remarks" />
           </div>
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6">
+          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6" role="group" aria-label="Form Actions">
             <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">Cancel</button>
             <button type="submit" disabled={loading} className="px-6 py-2.5 text-sm font-bold bg-primary text-white rounded-xl shadow-md hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:hover:translate-y-0">
               {loading ? 'Creating...' : 'Start Audit'}
