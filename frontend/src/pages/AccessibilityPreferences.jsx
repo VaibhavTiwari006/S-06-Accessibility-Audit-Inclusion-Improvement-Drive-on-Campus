@@ -3,7 +3,7 @@ import { useAccessibility } from '../context/AccessibilityContext';
 import { Moon, Sun } from 'lucide-react';
 
 const AccessibilityPreferences = () => {
-  const { highContrast, toggleHighContrast, fontSize, changeFontSize } = useAccessibility();
+  const { highContrast, toggleHighContrast, fontSize, changeFontSize, dyslexiaFont, toggleDyslexiaFont } = useAccessibility();
 
   return (
     <div className="max-w-4xl mx-auto page-container">
@@ -49,6 +49,23 @@ const AccessibilityPreferences = () => {
               <option value="Large">Large</option>
               <option value="Extra Large">Extra Large</option>
             </select>
+          </div>
+          
+          {/* Dyslexia-Friendly Font Toggle */}
+          <div className="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-100 mt-4">
+            <div>
+              <h3 className="font-semibold text-textMain">Dyslexia-Friendly Font</h3>
+              <p className="text-sm text-textLight mt-1">Use Atkinson Hyperlegible for improved readability</p>
+            </div>
+            <button 
+              onClick={toggleDyslexiaFont}
+              className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${dyslexiaFont ? 'bg-primary' : 'bg-gray-300'}`}
+              role="switch"
+              aria-checked={dyslexiaFont}
+              aria-label="Toggle Dyslexia-Friendly Font"
+            >
+              <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${dyslexiaFont ? 'translate-x-8' : 'translate-x-1'}`} />
+            </button>
           </div>
         </div>
       </div>

@@ -202,3 +202,12 @@
   html[data-font-size="large"] { font-size: 18px; }
   html[data-font-size="extra large"] { font-size: 20px; }
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@layer base {
+  body.dyslexia-font {
+    --font-sans: "Atkinson Hyperlegible", sans-serif;
+    --font-heading: "Atkinson Hyperlegible", sans-serif;
+  }
+}
