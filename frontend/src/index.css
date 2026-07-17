@@ -181,18 +181,26 @@
 }
 
 @layer base {
-  body.high-contrast {
-    --color-primary-50: #000000;
-    --color-primary-light: #FF3333;
-    --color-primary: #FF0000;
-    --color-primary-dark: #CC0000;
-    --color-background: #000000;
-    --color-cards: #1A1A1A;
-    --color-textMain: #FFFFFF;
-    --color-textLight: #CCCCCC;
-    --shadow-soft: none;
-    --shadow-soft-lg: none;
-    --shadow-glass: none;
+  body.high-contrast,
+  body.high-contrast * {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body.high-contrast a,
+  body.high-contrast button,
+  body.high-contrast .text-primary,
+  body.high-contrast .bg-primary {
+    color: #FFFF00 !important;
+    border-color: #FFFF00 !important;
+    background-color: transparent !important;
+  }
+
+  body.high-contrast svg {
+    color: #FFFF00 !important;
   }
 }
 
