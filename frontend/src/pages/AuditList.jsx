@@ -3,6 +3,7 @@ import auditService from '../services/auditService';
 import { ClipboardList, Play, FileText, Calendar, User } from 'lucide-react';
 import { toast } from 'react-toastify';
 import StartAuditModal from '../components/StartAuditModal';
+import TextToSpeech from '../components/TextToSpeech';
 
 const AuditList = () => {
   const [audits, setAudits] = useState([]);
@@ -113,7 +114,10 @@ const AuditList = () => {
             </div>
 
             {audit.remarks && (
-              <p className="text-xs text-gray-400 border-t border-gray-100 pt-3 italic">"{audit.remarks}"</p>
+              <div className="flex items-start justify-between gap-2 border-t border-gray-100 pt-3">
+                <p className="text-xs text-gray-400 italic">"{audit.remarks}"</p>
+                <TextToSpeech text={`Audit remarks for ${audit.buildingName}: ${audit.remarks}`} ariaLabel={`Read remarks for ${audit.buildingName}`} />
+              </div>
             )}
           </div>
         ))}
