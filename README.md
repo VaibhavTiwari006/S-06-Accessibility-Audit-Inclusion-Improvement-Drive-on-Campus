@@ -29,6 +29,16 @@ Inclusion requires proactive evaluation. An audit of physical and digital campus
 - **Execution**: Physical audit (ramps, signage, washrooms, labs, library); digital audit (university website, LMS); participatory sessions; advocacy document.
 - **Documentation**: Audit checklists, photo evidence, survey data, remediation roadmap, advocacy report.
 
+## Comprehensive Documentation
+To meet the evaluation guidelines, detailed project documentation has been organized below:
+- 📖 [Installation Guide](docs/INSTALLATION.md)
+- 🖥️ [User Guide](docs/USER_GUIDE.md)
+- ⚙️ [API Documentation](docs/API_DOCUMENTATION.md)
+- 🏗️ [Architecture Diagram](docs/architecture/ARCHITECTURE_DIAGRAM.md)
+- 🗄️ [Database Schema](docs/architecture/DATABASE_SCHEMA.md)
+- 🧪 [Testing Report](docs/TESTING_REPORT.md)
+- 📝 [Change Log](CHANGELOG.md)
+
 ## Implementation Plan
 | Week | Activity |
 | :--- | :--- |
