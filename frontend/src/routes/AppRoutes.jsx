@@ -13,6 +13,7 @@ const Reports = lazy(() => import('../pages/Reports'));
 const Community = lazy(() => import('../pages/Community'));
 const Settings = lazy(() => import('../pages/Settings'));
 const Roadmap = lazy(() => import('../pages/Roadmap'));
+const AccessibilityPreferences = lazy(() => import('../pages/AccessibilityPreferences'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -44,6 +45,7 @@ const AppRoutes = () => {
           <Route path="/reports" element={<ProtectedRoute allowedRoles={['ADMIN']}><MainLayout><Reports /></MainLayout></ProtectedRoute>} />
           <Route path="/community" element={<ProtectedRoute><MainLayout><Community /></MainLayout></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute allowedRoles={['ADMIN']}><MainLayout><Settings /></MainLayout></ProtectedRoute>} />
+          <Route path="/accessibility" element={<ProtectedRoute><MainLayout><AccessibilityPreferences /></MainLayout></ProtectedRoute>} />
 
           {/* Catch All */}
           <Route path="*" element={<NotFound />} />

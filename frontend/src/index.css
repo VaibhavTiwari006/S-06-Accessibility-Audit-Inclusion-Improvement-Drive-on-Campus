@@ -179,3 +179,19 @@
 .Toastify__toast-theme--light.Toastify__toast--info {
   @apply !border-l-4 !border-l-primary;
 }
+
+@layer base {
+  body.high-contrast {
+    --color-primary-50: #000000;
+    --color-primary-light: #FF3333;
+    --color-primary: #FF0000;
+    --color-primary-dark: #CC0000;
+    --color-background: #000000;
+    --color-cards: #1A1A1A;
+    --color-textMain: #FFFFFF;
+    --color-textLight: #CCCCCC;
+    --shadow-soft: none;
+    --shadow-soft-lg: none;
+    --shadow-glass: none;
+  }
+}

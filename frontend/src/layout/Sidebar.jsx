@@ -12,6 +12,7 @@ const menuItems = [
   { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
   { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN'] },
   { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN'] },
+  { name: 'Accessibility', path: '/accessibility', icon: Settings, roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
 ];
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -21,8 +22,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   if (!user) return null;
 
   const filtered = menuItems.filter(item => item.roles.includes(user.role?.toUpperCase()));
-  const mainItems = filtered.filter(i => i.name !== 'Settings');
-  const bottomItems = filtered.filter(i => i.name === 'Settings');
+  const mainItems = filtered.filter(i => i.name !== 'Settings' && i.name !== 'Accessibility');
+  const bottomItems = filtered.filter(i => i.name === 'Settings' || i.name === 'Accessibility');
 
   return (
     <>
