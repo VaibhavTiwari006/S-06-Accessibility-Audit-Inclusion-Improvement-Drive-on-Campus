@@ -5,6 +5,7 @@ import ScoreCard from '../components/ScoreCard';
 import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, IndianRupee } from 'lucide-react';
 import dashboardService from '../services/dashboardService';
 import InclusionLeaderboard from '../components/InclusionLeaderboard';
+import AccessibilityTrendsChart from '../components/AccessibilityTrendsChart';
 
 const DashboardHero = ({ title, subtitle, bgClass = 'from-primary-dark/90 to-primary/60' }) => (
   <div className="relative w-full h-48 md:h-56 rounded-[2rem] overflow-hidden mb-8 shadow-soft-lg animate-fade-in group">
@@ -59,8 +60,13 @@ const AdminDashboard = ({ stats, navigate }) => (
       </div>
     </div>
 
-    <div className="animate-slide-up" style={{ animationDelay: '0.9s' }}>
-      <InclusionLeaderboard />
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      <div className="animate-slide-up" style={{ animationDelay: '0.9s' }}>
+        <AccessibilityTrendsChart />
+      </div>
+      <div className="animate-slide-up" style={{ animationDelay: '1.0s' }}>
+        <InclusionLeaderboard />
+      </div>
     </div>
   </div>
 );
