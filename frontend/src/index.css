@@ -199,6 +199,15 @@
     background-color: transparent !important;
   }
 
+  body.high-contrast button[role="switch"] {
+    border: 2px solid #FFFF00 !important;
+  }
+
+  body.high-contrast button[role="switch"] span {
+    background-color: #FFFF00 !important;
+    border: none !important;
+  }
+
   body.high-contrast svg {
     color: #FFFF00 !important;
   }
