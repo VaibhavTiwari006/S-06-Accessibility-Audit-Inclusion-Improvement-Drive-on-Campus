@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
+import QuickReportFAB from '../components/QuickReportFAB';
 
 import { useAccessibility } from '../context/AccessibilityContext';
 
@@ -27,6 +28,9 @@ const MainLayout = ({ children }) => {
         </main>
       </div>
       {!distractionFree && <Footer />}
+      
+      {/* Universal Floating Action Button */}
+      {!distractionFree && <QuickReportFAB />}
     </div>
   );
 };
