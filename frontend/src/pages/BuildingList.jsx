@@ -3,11 +3,13 @@ import buildingService from '../services/buildingService';
 import { Building2, Plus, MapPin, Layers } from 'lucide-react';
 import { toast } from 'react-toastify';
 import AddBuildingModal from '../components/AddBuildingModal';
+import CampusMap from '../components/CampusMap';
 
 const BuildingList = () => {
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [viewMode, setViewMode] = useState('list'); // 'list' or 'map'
 
   const fetchBuildings = async () => {
     try {
@@ -33,19 +35,42 @@ const BuildingList = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       {showModal && <AddBuildingModal onClose={() => setShowModal(false)} onSuccess={fetchBuildings} />}
-      <div className="flex justify-between items-center">
+      
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-textMain flex items-center gap-2">
-            <Building2 className="text-primary" /> Buildings Management
+          <h2 className="text-3xl font-heading font-extrabold text-textMain flex items-center gap-3">
+            <Building2 className="text-primary" size={32} /> Campus Buildings
           </h2>
-          <p className="text-textLight mt-1">All campus buildings and their accessibility status.</p>
+          <p className="text-textLight mt-1.5 font-medium">Manage and audit physical accessibility infrastructure.</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
-          <Plus size={18} /> Add Building
-        </button>
+        <div className="flex items-center gap-3">
+          <div className="flex bg-white rounded-xl border border-gray-200 p-1 shadow-sm">
+            <button 
+              onClick={() => setViewMode('list')}
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${viewMode === 'list' ? 'bg-primary text-white shadow' : 'text-gray-500 hover:text-gray-700'}`}
+            >
+              List View
+            </button>
+            <button 
+              onClick={() => setViewMode('map')}
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5 ${viewMode === 'map' ? 'bg-primary text-white shadow' : 'text-gray-500 hover:text-gray-700'}`}
+            >
+              <MapPin size={14} /> Map
+            </button>
+          </div>
+          <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-2">
+            <Plus size={18} /> Add Building
+          </button>
+        </div>
       </div>
+
+      {viewMode === 'map' ? (
+        <div className="animate-slide-up">
+          <CampusMap buildings={buildings} />
+        </div>
+      ) : (
 
       <div className="glass-panel rounded-2xl overflow-hidden">
         <table className="min-w-full divide-y divide-gray-100">
@@ -116,6 +141,7 @@ const BuildingList = () => {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 };
