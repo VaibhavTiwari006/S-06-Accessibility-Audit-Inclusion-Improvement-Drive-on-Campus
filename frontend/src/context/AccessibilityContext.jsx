@@ -21,6 +21,10 @@ export const AccessibilityProvider = ({ children }) => {
     return localStorage.getItem('access_reduceMotion') === 'true';
   });
 
+  const [colorBlindTheme, setColorBlindTheme] = useState(() => {
+    return localStorage.getItem('access_colorBlindTheme') || 'default';
+  });
+
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);
     if (highContrast) {
@@ -53,17 +57,24 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [reduceMotion]);
 
+  useEffect(() => {
+    localStorage.setItem('access_colorBlindTheme', colorBlindTheme);
+    document.body.setAttribute('data-color-blind', colorBlindTheme);
+  }, [colorBlindTheme]);
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
   const changeFontSize = (size) => setFontSize(size);
   const toggleDyslexiaFont = () => setDyslexiaFont(!dyslexiaFont);
   const toggleReduceMotion = () => setReduceMotion(!reduceMotion);
+  const changeColorBlindTheme = (theme) => setColorBlindTheme(theme);
 
   return (
     <AccessibilityContext.Provider value={{ 
       highContrast, toggleHighContrast, 
       fontSize, changeFontSize, 
       dyslexiaFont, toggleDyslexiaFont,
-      reduceMotion, toggleReduceMotion 
+      reduceMotion, toggleReduceMotion,
+      colorBlindTheme, changeColorBlindTheme
     }}>
       {children}
     </AccessibilityContext.Provider>

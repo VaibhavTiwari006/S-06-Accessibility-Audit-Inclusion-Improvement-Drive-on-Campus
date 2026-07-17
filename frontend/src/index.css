@@ -227,3 +227,27 @@
     scroll-behavior: auto !important;
   }
 }
+
+@layer base {
+  body[data-color-blind="protanopia"] {
+    --color-primary: #0072B2;
+    --color-primary-light: #56B4E9;
+    --color-primary-dark: #005A8C;
+    --color-success: #F0E442;
+    --color-danger: #D55E00;
+  }
+  body[data-color-blind="deuteranopia"] {
+    --color-primary: #0072B2;
+    --color-primary-light: #56B4E9;
+    --color-primary-dark: #005A8C;
+    --color-success: #F0E442;
+    --color-danger: #D55E00;
+  }
+  body[data-color-blind="tritanopia"] {
+    --color-primary: #CC79A7;
+    --color-primary-light: #F0E442;
+    --color-primary-dark: #99557C;
+    --color-success: #009E73;
+    --color-danger: #D55E00;
+  }
+}

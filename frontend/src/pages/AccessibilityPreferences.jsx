@@ -3,7 +3,7 @@ import { useAccessibility } from '../context/AccessibilityContext';
 import { Moon, Sun } from 'lucide-react';
 
 const AccessibilityPreferences = () => {
-  const { highContrast, toggleHighContrast, fontSize, changeFontSize, dyslexiaFont, toggleDyslexiaFont, reduceMotion, toggleReduceMotion } = useAccessibility();
+  const { highContrast, toggleHighContrast, fontSize, changeFontSize, dyslexiaFont, toggleDyslexiaFont, reduceMotion, toggleReduceMotion, colorBlindTheme, changeColorBlindTheme } = useAccessibility();
 
   return (
     <div className="max-w-4xl mx-auto page-container">
@@ -83,6 +83,25 @@ const AccessibilityPreferences = () => {
             >
               <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${reduceMotion ? 'translate-x-8' : 'translate-x-1'}`} />
             </button>
+          </div>
+
+          {/* Color Blind Theme Selector */}
+          <div className="flex items-center justify-between p-4 bg-gray-50/50 rounded-xl border border-gray-100 mt-4">
+            <div>
+              <h3 className="font-semibold text-textMain">Color Blind Theme</h3>
+              <p className="text-sm text-textLight mt-1">Alternate palettes for color vision deficiencies</p>
+            </div>
+            <select
+              value={colorBlindTheme}
+              onChange={(e) => changeColorBlindTheme(e.target.value)}
+              className="bg-white border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              aria-label="Select Color Blind Theme"
+            >
+              <option value="default">Default</option>
+              <option value="protanopia">Protanopia (Red-blind)</option>
+              <option value="deuteranopia">Deuteranopia (Green-blind)</option>
+              <option value="tritanopia">Tritanopia (Blue-blind)</option>
+            </select>
           </div>
         </div>
       </div>
