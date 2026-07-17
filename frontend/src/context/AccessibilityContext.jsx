@@ -33,6 +33,10 @@ export const AccessibilityProvider = ({ children }) => {
     return localStorage.getItem('access_magnifyMode') === 'true';
   });
 
+  const [visualAlerts, setVisualAlerts] = useState(() => {
+    return localStorage.getItem('access_visualAlerts') === 'true';
+  });
+
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);
     if (highContrast) {
@@ -83,6 +87,10 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [magnifyMode]);
 
+  useEffect(() => {
+    localStorage.setItem('access_visualAlerts', visualAlerts);
+  }, [visualAlerts]);
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
   const changeFontSize = (size) => setFontSize(size);
   const toggleDyslexiaFont = () => setDyslexiaFont(!dyslexiaFont);
@@ -90,6 +98,7 @@ export const AccessibilityProvider = ({ children }) => {
   const changeColorBlindTheme = (theme) => setColorBlindTheme(theme);
   const toggleDistractionFree = () => setDistractionFree(!distractionFree);
   const toggleMagnifyMode = () => setMagnifyMode(!magnifyMode);
+  const toggleVisualAlerts = () => setVisualAlerts(!visualAlerts);
 
   return (
     <AccessibilityContext.Provider value={{ 
@@ -99,7 +108,8 @@ export const AccessibilityProvider = ({ children }) => {
       reduceMotion, toggleReduceMotion,
       colorBlindTheme, changeColorBlindTheme,
       distractionFree, toggleDistractionFree,
-      magnifyMode, toggleMagnifyMode
+      magnifyMode, toggleMagnifyMode,
+      visualAlerts, toggleVisualAlerts
     }}>
       {children}
     </AccessibilityContext.Provider>

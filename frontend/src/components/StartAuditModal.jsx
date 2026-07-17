@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, ClipboardList } from 'lucide-react';
 import auditService from '../services/auditService';
 import buildingService from '../services/buildingService';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import RampCalculator from './RampCalculator';
 
 const StartAuditModal = ({ onClose, onSuccess }) => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import auditService from '../services/auditService';
 import { ClipboardList, Play, FileText, Calendar, User } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import StartAuditModal from '../components/StartAuditModal';
 import TextToSpeech from '../components/TextToSpeech';
 
