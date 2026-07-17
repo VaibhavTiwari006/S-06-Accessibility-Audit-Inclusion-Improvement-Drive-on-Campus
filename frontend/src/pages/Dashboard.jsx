@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
 import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, IndianRupee } from 'lucide-react';
 import dashboardService from '../services/dashboardService';
+import InclusionLeaderboard from '../components/InclusionLeaderboard';
 
 const DashboardHero = ({ title, subtitle, bgClass = 'from-primary-dark/90 to-primary/60' }) => (
   <div className="relative w-full h-48 md:h-56 rounded-[2rem] overflow-hidden mb-8 shadow-soft-lg animate-fade-in group">
@@ -56,6 +57,10 @@ const AdminDashboard = ({ stats, navigate }) => (
       <div className="animate-slide-up" style={{ animationDelay: '0.8s' }}>
         <ScoreCard title="Community Events" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} aria-hidden="true" />} colorClass="text-teal-600 bg-teal-50" onClick={() => navigate('/community')} />
       </div>
+    </div>
+
+    <div className="animate-slide-up" style={{ animationDelay: '0.9s' }}>
+      <InclusionLeaderboard />
     </div>
   </div>
 );
