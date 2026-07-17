@@ -35,13 +35,13 @@ const InclusionLeaderboard = () => {
       <div className="flex justify-between items-center mb-6 relative">
         <div>
           <h3 className="text-xl font-heading font-bold text-textMain flex items-center gap-2">
-            <Trophy className="text-amber-500" size={24} /> Inclusion Leaderboard
+            <Trophy className="text-amber-500 animate-pulse-slow" size={24} /> Inclusion Leaderboard
           </h3>
           <p className="text-sm text-textLight mt-1">Top accessible campus buildings</p>
         </div>
         <button 
           onClick={() => navigate('/buildings')}
-          className="text-sm font-semibold text-primary hover:text-primary-dark flex items-center gap-1 bg-primary/5 hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors"
+          className="text-sm font-semibold text-primary hover:text-primary-dark flex items-center gap-1 bg-primary/5 hover:bg-primary/10 px-3 py-1.5 rounded-lg transition-colors hover:scale-105 active:scale-95"
         >
           View All <ChevronRight size={16} />
         </button>
