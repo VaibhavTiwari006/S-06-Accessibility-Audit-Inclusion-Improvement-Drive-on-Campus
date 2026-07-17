@@ -211,3 +211,10 @@
     --font-heading: "Atkinson Hyperlegible", sans-serif;
   }
 }
+
+@layer base {
+  *:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
