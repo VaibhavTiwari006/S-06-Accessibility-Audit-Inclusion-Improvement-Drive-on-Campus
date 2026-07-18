@@ -15,6 +15,9 @@ const MainLayout = ({ children }) => {
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] bg-primary text-white px-4 py-2 rounded-lg font-bold shadow-lg focus:outline-none focus:ring-4 focus:ring-primary/50">
         Skip to main content
       </a>
+      <a href="#sidebar-nav" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-48 z-[100] bg-secondary text-white px-4 py-2 rounded-lg font-bold shadow-lg focus:outline-none focus:ring-4 focus:ring-secondary/50">
+        Skip to navigation
+      </a>
       {!distractionFree && <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />}
       <div className={`flex flex-1 overflow-hidden relative ${distractionFree ? 'justify-center items-center py-10' : ''}`}>
         {!distractionFree && <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />}

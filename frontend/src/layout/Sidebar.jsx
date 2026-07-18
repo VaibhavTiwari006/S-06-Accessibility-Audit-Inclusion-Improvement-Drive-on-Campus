@@ -37,6 +37,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       )}
 
       <aside
+        id="sidebar-nav"
         className={`w-60 flex flex-col glass border-r border-white/50 h-[calc(100vh-64px)] fixed md:static top-16 left-0 z-40 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
         aria-label="Sidebar Navigation"
       >
