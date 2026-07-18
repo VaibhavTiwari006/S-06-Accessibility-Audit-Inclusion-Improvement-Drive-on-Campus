@@ -19,7 +19,7 @@ const Navbar = ({ toggleSidebar }) => {
   const initial = user?.fullName?.charAt(0)?.toUpperCase() || '?';
 
   return (
-    <nav className="glass sticky top-0 z-50 border-b border-white/60 shadow-sm">
+    <nav className="glass-premium sticky top-0 z-50 shadow-sm border-b-0">
       <div className="flex items-center justify-between h-16 px-4 md:px-6">
         {/* Left: Hamburger + Brand */}
         <div className="flex items-center gap-3">

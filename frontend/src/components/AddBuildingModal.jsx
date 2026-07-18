@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Building2 } from 'lucide-react';
 import buildingService from '../services/buildingService';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
 
 const AddBuildingModal = ({ onClose, onSuccess }) => {
   const [form, setForm] = useState({
@@ -28,9 +29,9 @@ const AddBuildingModal = ({ onClose, onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden animate-fade-in">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose}></div>
-      <div className="relative glass-panel rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden animate-slide-up border border-white/60">
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose}></div>
+      <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} transition={{ type: 'spring', damping: 25, stiffness: 300 }} className="relative glass-premium rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] w-full max-w-lg mx-4 overflow-hidden border border-white/60">
         <div className="bg-gradient-to-r from-primary to-primary-dark px-6 py-5 flex justify-between items-center shadow-inner">
           <h3 className="text-white font-heading font-bold text-lg flex items-center gap-2">
             <Building2 size={22} className="text-primary-50" /> Add New Building
@@ -85,8 +86,8 @@ const AddBuildingModal = ({ onClose, onSuccess }) => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

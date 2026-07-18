@@ -7,8 +7,23 @@ import dashboardService from '../services/dashboardService';
 import InclusionLeaderboard from '../components/InclusionLeaderboard';
 import AccessibilityTrendsChart from '../components/AccessibilityTrendsChart';
 
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
+};
+
 const DashboardHero = ({ title, subtitle, bgClass = 'from-primary-dark/90 to-primary/60' }) => (
-  <div className="relative w-full h-48 md:h-56 rounded-[2rem] overflow-hidden mb-8 shadow-soft-lg animate-fade-in group">
+  <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="relative w-full h-48 md:h-56 rounded-[2rem] overflow-hidden mb-8 shadow-soft-lg group">
     <div 
       className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105"
       style={{ backgroundImage: "url('/campus_bg.jpg')" }}
@@ -18,117 +33,117 @@ const DashboardHero = ({ title, subtitle, bgClass = 'from-primary-dark/90 to-pri
       <h1 className="text-3xl md:text-4xl font-heading font-extrabold text-white mb-2 drop-shadow-md">{title}</h1>
       <p className="text-white/90 font-medium max-w-xl text-sm md:text-base">{subtitle}</p>
     </div>
-  </div>
+  </motion.div>
 );
 
 // ─────────────────────────── Admin ────────────────────────────
 const AdminDashboard = ({ stats, navigate }) => (
-  <div className="page-container" role="region" aria-label="Admin Dashboard">
+  <motion.div variants={containerVariants} initial="hidden" animate="show" className="page-container glass-premium p-6 rounded-3xl" role="region" aria-label="Admin Dashboard">
     <DashboardHero 
       title="Admin Overview" 
       subtitle="Real-time campus accessibility health summary for Chandigarh University." 
       bgClass="from-slate-900/90 to-primary/80"
     />
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-label="Key Performance Indicators">
-      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+    <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-label="Key Performance Indicators">
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} aria-hidden="true" />} colorClass="text-indigo-600 bg-indigo-50" onClick={() => navigate('/buildings')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} aria-hidden="true" />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/audits')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} aria-hidden="true" />} colorClass="text-emerald-600 bg-emerald-50" onClick={() => navigate('/reports')} trend={2.4} trendLabel="vs last month" />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.4s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} aria-hidden="true" />} colorClass="text-rose-600 bg-rose-50" onClick={() => navigate('/issues')} trend={-5} trendLabel="fewer issues" />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
     
-    <h3 className="text-xl font-heading font-bold text-textMain mt-8 mb-4" id="ops-community-heading">Operations & Community</h3>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-labelledby="ops-community-heading">
-      <div className="animate-slide-up" style={{ animationDelay: '0.5s' }}>
+    <motion.h3 variants={itemVariants} className="text-xl font-heading font-bold text-textMain mt-8 mb-4" id="ops-community-heading">Operations & Community</motion.h3>
+    <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-labelledby="ops-community-heading">
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} aria-hidden="true" />} colorClass="text-blue-600 bg-blue-50" onClick={() => navigate('/roadmap')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.6s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} aria-hidden="true" />} colorClass="text-purple-600 bg-purple-50" />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.7s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Est. Remediation" value={stats?.totalEstimatedCost ? `₹${(stats.totalEstimatedCost/1000).toFixed(1)}k` : '—'} icon={<IndianRupee size={24} aria-hidden="true" />} colorClass="text-orange-600 bg-orange-50" onClick={() => navigate('/reports')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.8s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Community Events" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} aria-hidden="true" />} colorClass="text-teal-600 bg-teal-50" onClick={() => navigate('/community')} />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
 
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-      <div className="animate-slide-up" style={{ animationDelay: '0.9s' }}>
+    <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      <motion.div variants={itemVariants} className="h-full">
         <AccessibilityTrendsChart />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '1.0s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <InclusionLeaderboard />
-      </div>
-    </div>
-  </div>
+      </motion.div>
+    </motion.div>
+  </motion.div>
 );
 
 // ─────────────────────────── Auditor ──────────────────────────
 const AuditorDashboard = ({ stats, navigate }) => (
-  <div className="page-container">
+  <motion.div variants={containerVariants} initial="hidden" animate="show" className="page-container glass-premium p-6 rounded-3xl">
     <DashboardHero 
       title="Auditor Dashboard" 
       subtitle="Manage your assigned buildings and accessibility audit progress at Chandigarh University." 
       bgClass="from-blue-900/90 to-blue-600/60"
     />
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+    <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} />} colorClass="text-blue-600 bg-blue-50" onClick={() => navigate('/buildings')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/audits')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.3s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" />
-      </div>
-    </div>
-  </div>
+      </motion.div>
+    </motion.div>
+  </motion.div>
 );
 
 // ─────────────────────────── Maintenance ──────────────────────
 const MaintenanceDashboard = ({ stats, navigate }) => (
-  <div className="page-container">
+  <motion.div variants={containerVariants} initial="hidden" animate="show" className="page-container glass-premium p-6 rounded-3xl">
     <DashboardHero 
       title="Maintenance Dashboard" 
       subtitle="Track assigned repair tasks and facility improvements across the CU campus." 
       bgClass="from-orange-900/90 to-orange-500/60"
     />
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+    <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Total Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} />} colorClass="text-orange-600 bg-orange-50" onClick={() => navigate('/roadmap')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-rose-600 bg-rose-50" onClick={() => navigate('/issues')} />
-      </div>
-    </div>
-  </div>
+      </motion.div>
+    </motion.div>
+  </motion.div>
 );
 
 // ─────────────────────────── Student ──────────────────────────
 const StudentDashboard = ({ stats, navigate }) => (
-  <div className="page-container">
+  <motion.div variants={containerVariants} initial="hidden" animate="show" className="page-container glass-premium p-6 rounded-3xl">
     <DashboardHero 
       title="CU Student Portal" 
       subtitle="Report accessibility barriers and track your submissions to improve campus accessibility." 
       bgClass="from-emerald-900/90 to-emerald-500/60"
     />
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div className="animate-slide-up" style={{ animationDelay: '0.1s' }}>
+    <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Campus Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/issues')} />
-      </div>
-      <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Avg. Compliance" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" />
-      </div>
-    </div>
-  </div>
+      </motion.div>
+    </motion.div>
+  </motion.div>
 );
 
 // ─────────────────────────── Main ─────────────────────────────
