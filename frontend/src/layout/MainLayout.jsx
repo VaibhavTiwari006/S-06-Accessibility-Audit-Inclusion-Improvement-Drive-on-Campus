@@ -22,7 +22,7 @@ const MainLayout = ({ children }) => {
       <div className={`flex flex-1 overflow-hidden relative ${distractionFree ? 'justify-center items-center py-10' : ''}`}>
         {!distractionFree && <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />}
         <main 
-          className={`overflow-auto p-4 md:p-6 lg:p-8 w-full ${distractionFree ? 'max-w-3xl flex-none border border-gray-100 shadow-sm rounded-2xl bg-white' : 'flex-1'}`}
+          className={`overflow-auto min-w-0 p-4 md:p-6 lg:p-8 w-full ${distractionFree ? 'max-w-3xl flex-none border border-gray-100 shadow-sm rounded-2xl bg-white' : 'flex-1'}`}
           id="main-content"
           role="main"
           tabIndex="-1"
