@@ -24,11 +24,9 @@ jobs:
           cache: maven
           cache-dependency-path: backend/pom.xml
           
-      - name: Grant execute permission for mvnw
-        run: chmod +x mvnw
-        
+
       - name: Build and Test with Maven
-        run: ./mvnw clean test --batch-mode
+        run: mvn clean test --batch-mode
 
   frontend-test:
     name: Frontend Lint & Build (React/Vite)
