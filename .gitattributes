@@ -1,0 +1,4 @@
+* text=auto
+mvnw text eol=lf
+backend/mvnw text eol=lf
+frontend/mvnw text eol=lf
