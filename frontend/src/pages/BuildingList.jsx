@@ -72,7 +72,7 @@ const BuildingList = () => {
         </div>
       ) : (
 
-      <div className="glass-panel rounded-2xl overflow-hidden">
+      <div className="glass-panel rounded-2xl overflow-x-auto overflow-y-hidden">
         <table className="min-w-full divide-y divide-gray-100">
           <thead className="bg-gray-50/50 backdrop-blur-sm">
             <tr>
