@@ -213,10 +213,10 @@ const BuildingList = () => {
                         {building.buildingCode}
                       </span>
                     </td>
-                    <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-5 whitespace-nowrap text-xs text-gray-500">
                       <span className="flex items-center gap-1.5 font-medium"><MapPin size={14} className="text-gray-400" /> {building.location}</span>
                     </td>
-                    <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-5 whitespace-nowrap text-xs text-gray-500">
                       <span className="flex items-center gap-1.5 font-medium"><Layers size={14} className="text-gray-400" /> {building.numberOfFloors} floors</span>
                     </td>
                     <td className="px-6 py-5 whitespace-nowrap">
