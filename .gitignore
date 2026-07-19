@@ -24,3 +24,5 @@ Thumbs.db
 # Environment / secrets
 *.env
 application-local.properties
+
+!**/.mvn/wrapper/*.jar
