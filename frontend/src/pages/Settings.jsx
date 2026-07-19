@@ -4,8 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import { useAccessibility } from '../context/AccessibilityContext';
+
 const Settings = () => {
   const { user, logout } = useAuth();
+  const { darkMode, setDarkMode } = useAccessibility();
   const [activeTab, setActiveTab] = useState('profile');
   const [notifications, setNotifications] = useState({
     email: true,
@@ -197,20 +200,30 @@ const Settings = () => {
                 <div>
                   <label className="text-sm font-bold text-gray-700 block mb-4 ml-1">Theme Preference</label>
                   <div className="flex gap-6">
-                    <div className="border-2 border-primary rounded-2xl p-1.5 cursor-pointer shadow-soft-sm bg-primary/5">
+                    <div 
+                      onClick={() => setDarkMode(false)}
+                      className={`border-2 rounded-2xl p-1.5 cursor-pointer shadow-soft-sm transition-all ${!darkMode ? 'border-primary bg-primary/5' : 'border-transparent bg-white/50 hover:bg-white/80'}`}
+                    >
                       <div className="bg-white border border-gray-200 rounded-xl w-32 h-20 flex flex-col items-center justify-center gap-1.5 shadow-sm">
                         <div className="w-16 h-2.5 bg-gray-200 rounded-full"></div>
                         <div className="w-10 h-2 bg-gray-100 rounded-full"></div>
                       </div>
-                      <p className="text-sm text-center mt-2 font-bold text-primary flex items-center justify-center gap-1"><CheckCircle size={14} /> Light Mode</p>
+                      <p className={`text-sm text-center mt-2 font-bold flex items-center justify-center gap-1 ${!darkMode ? 'text-primary' : 'text-gray-500'}`}>
+                        {!darkMode && <CheckCircle size={14} />} Light Mode
+                      </p>
                     </div>
                     
-                    <div className="border-2 border-transparent rounded-2xl p-1.5 cursor-not-allowed opacity-50 relative group" title="Dark mode coming soon">
-                      <div className="bg-gray-900 border border-gray-700 rounded-xl w-32 h-20 flex flex-col items-center justify-center gap-1.5 shadow-sm group-hover:bg-gray-800 transition-colors">
+                    <div 
+                      onClick={() => setDarkMode(true)}
+                      className={`border-2 rounded-2xl p-1.5 cursor-pointer shadow-soft-sm transition-all ${darkMode ? 'border-primary bg-primary/5' : 'border-transparent bg-white/50 hover:bg-white/80'}`}
+                    >
+                      <div className="bg-gray-900 border border-gray-700 rounded-xl w-32 h-20 flex flex-col items-center justify-center gap-1.5 shadow-sm">
                         <div className="w-16 h-2.5 bg-gray-700 rounded-full"></div>
                         <div className="w-10 h-2 bg-gray-800 rounded-full"></div>
                       </div>
-                      <p className="text-sm text-center mt-2 font-semibold text-gray-500">Dark Mode</p>
+                      <p className={`text-sm text-center mt-2 font-bold flex items-center justify-center gap-1 ${darkMode ? 'text-primary' : 'text-gray-500'}`}>
+                        {darkMode && <CheckCircle size={14} />} Dark Mode
+                      </p>
                     </div>
                   </div>
                 </div>

@@ -37,6 +37,10 @@ export const AccessibilityProvider = ({ children }) => {
     return localStorage.getItem('access_visualAlerts') === 'true';
   });
 
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('access_darkMode') === 'true';
+  });
+
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);
     if (highContrast) {
@@ -91,6 +95,15 @@ export const AccessibilityProvider = ({ children }) => {
     localStorage.setItem('access_visualAlerts', visualAlerts);
   }, [visualAlerts]);
 
+  useEffect(() => {
+    localStorage.setItem('access_darkMode', darkMode);
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
   const changeFontSize = (size) => setFontSize(size);
   const toggleDyslexiaFont = () => setDyslexiaFont(!dyslexiaFont);
@@ -109,7 +122,8 @@ export const AccessibilityProvider = ({ children }) => {
       colorBlindTheme, changeColorBlindTheme,
       distractionFree, toggleDistractionFree,
       magnifyMode, toggleMagnifyMode,
-      visualAlerts, toggleVisualAlerts
+      visualAlerts, toggleVisualAlerts,
+      darkMode, setDarkMode
     }}>
       {children}
     </AccessibilityContext.Provider>
