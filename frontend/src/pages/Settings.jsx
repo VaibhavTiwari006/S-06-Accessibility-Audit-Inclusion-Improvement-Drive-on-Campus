@@ -36,7 +36,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
+    <div className="max-w-5xl mx-auto space-y-8">
       <div className="flex flex-col mb-4">
         <h2 className="text-3xl font-heading font-extrabold text-textMain flex items-center gap-3">
           <SettingsIcon className="text-primary" size={32} /> System Settings
@@ -79,7 +79,7 @@ const Settings = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 glass-panel p-8 rounded-3xl shadow-soft-md border border-white/60 min-h-[500px]">
+        <div className="flex-1 glass-panel p-8 rounded-3xl shadow-soft-md border border-white/60 min-h-[400px]">
           <AnimatePresence mode="wait">
             {activeTab === 'profile' && (
               <motion.div key="profile" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-8">
