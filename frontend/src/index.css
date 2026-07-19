@@ -345,10 +345,10 @@
   }
   body.dark-mode .bg-white\/50,
   body.dark-mode .bg-white\/90 {
-    @apply bg-slate-800\/50;
+    @apply bg-slate-800/50;
   }
   body.dark-mode .hover\:bg-white\/80:hover {
-    @apply hover:bg-slate-700\/50;
+    @apply hover:bg-slate-700/50;
   }
   body.dark-mode .hover\:bg-gray-50:hover {
     @apply hover:bg-slate-700;
