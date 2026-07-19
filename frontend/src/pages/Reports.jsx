@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { BarChart3, Download, Building2, ClipboardCheck, AlertTriangle, PenTool, Lightbulb, FileText, ShieldCheck, Globe } from 'lucide-react';
 import { 
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend, 
@@ -181,7 +182,13 @@ const Reports = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Audits Pie Chart */}
-        <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px]">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+          className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px] transition-all duration-300"
+        >
           <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
             <ClipboardCheck size={20} className="text-primary" /> Audits by Status
           </h3>
@@ -193,10 +200,14 @@ const Reports = () => {
                     data={auditsData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={100}
+                    innerRadius={65}
+                    outerRadius={105}
                     paddingAngle={5}
                     dataKey="value"
+                    isAnimationActive={true}
+                    animationBegin={200}
+                    animationDuration={1500}
+                    animationEasing="ease-out"
                     label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
                   >
                     {auditsData.map((entry, index) => (
@@ -211,10 +222,16 @@ const Reports = () => {
               <div className="h-full flex items-center justify-center text-textLight">No audit data available</div>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Maintenance Tasks Bar Chart */}
-        <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px]">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+          whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+          className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px] transition-all duration-300"
+        >
           <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
             <PenTool size={20} className="text-secondary" /> Maintenance Tasks Progress
           </h3>
@@ -229,7 +246,15 @@ const Reports = () => {
                     cursor={{fill: '#f8fafc'}}
                     contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
                   />
-                  <Bar dataKey="value" name="Tasks" radius={[4, 4, 0, 0]}>
+                  <Bar 
+                    dataKey="value" 
+                    name="Tasks" 
+                    radius={[4, 4, 0, 0]}
+                    isAnimationActive={true}
+                    animationBegin={300}
+                    animationDuration={1500}
+                    animationEasing="ease-out"
+                  >
                     {tasksData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[(index + 1) % COLORS.length]} />
                     ))}
@@ -240,7 +265,7 @@ const Reports = () => {
               <div className="h-full flex items-center justify-center text-textLight">No task data available</div>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Standards Compliance & Impact Metrics */}
