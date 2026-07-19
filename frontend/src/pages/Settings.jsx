@@ -44,7 +44,7 @@ const Settings = () => {
         <p className="text-textLight mt-2 font-medium">Manage your account preferences, security, and notification settings.</p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col md:flex-row gap-6">
         {/* Sidebar Menu */}
         <div className="w-full md:w-64 flex-shrink-0">
           <div className="glass-panel p-3 rounded-2xl shadow-soft-sm border border-white/60 flex flex-col gap-1 sticky top-24">
@@ -79,11 +79,11 @@ const Settings = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 glass-panel p-8 rounded-3xl shadow-soft-md border border-white/60 h-fit max-w-2xl">
+        <div className="flex-1 glass-panel py-6 px-8 rounded-3xl shadow-soft-md border border-white/60 h-fit max-w-2xl">
           <AnimatePresence mode="wait">
             {activeTab === 'profile' && (
-              <motion.div key="profile" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-8">
-                <div className="border-b border-gray-100 pb-4">
+              <motion.div key="profile" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
+                <div className="border-b border-gray-100 pb-3">
                   <h3 className="text-2xl font-bold text-textMain">Profile Information</h3>
                   <p className="text-sm text-textLight mt-1">Update your account details and public profile.</p>
                 </div>
@@ -130,8 +130,8 @@ const Settings = () => {
             )}
 
             {activeTab === 'notifications' && (
-              <motion.div key="notifications" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-8">
-                <div className="border-b border-gray-100 pb-4">
+              <motion.div key="notifications" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
+                <div className="border-b border-gray-100 pb-3">
                   <h3 className="text-2xl font-bold text-textMain">Notification Preferences</h3>
                   <p className="text-sm text-textLight mt-1">Control how and when you receive system alerts.</p>
                 </div>
@@ -163,8 +163,8 @@ const Settings = () => {
             )}
 
             {activeTab === 'security' && (
-              <motion.div key="security" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-8">
-                <div className="border-b border-gray-100 pb-4">
+              <motion.div key="security" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
+                <div className="border-b border-gray-100 pb-3">
                   <h3 className="text-2xl font-bold text-textMain">Security Settings</h3>
                   <p className="text-sm text-textLight mt-1">Update your password and secure your account.</p>
                 </div>
@@ -188,8 +188,8 @@ const Settings = () => {
             )}
 
             {activeTab === 'appearance' && (
-              <motion.div key="appearance" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-8">
-                <div className="border-b border-gray-100 pb-4">
+              <motion.div key="appearance" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
+                <div className="border-b border-gray-100 pb-3">
                   <h3 className="text-2xl font-bold text-textMain">Appearance</h3>
                   <p className="text-sm text-textLight mt-1">Customize the visual theme of your dashboard.</p>
                 </div>
