@@ -363,5 +363,29 @@
   body.dark-mode .hover\:text-gray-900:hover {
     @apply hover:text-white;
   }
+
+  /* Inclusion Leaderboard Overrides */
+  body.dark-mode .from-amber-50 { @apply from-amber-900/40; }
+  body.dark-mode .to-orange-50 { @apply to-orange-900/40; }
+  body.dark-mode .border-amber-200 { @apply border-amber-900/60; }
+  
+  body.dark-mode .from-slate-50 { @apply from-slate-800; }
+  body.dark-mode .to-gray-50 { @apply to-slate-800; }
+  
+  body.dark-mode .from-orange-50\/50 { @apply from-orange-900/30; }
+  body.dark-mode .to-amber-50\/50 { @apply to-amber-900/30; }
+  body.dark-mode .border-orange-200\/50 { @apply border-orange-900/40; }
+  
+  body.dark-mode .bg-amber-100 { @apply bg-amber-900/50; }
+  body.dark-mode .text-amber-600 { @apply text-amber-400; }
+  
+  body.dark-mode .bg-slate-200 { @apply bg-slate-700/50; }
+  body.dark-mode .text-slate-600 { @apply text-slate-400; }
+  
+  body.dark-mode .bg-orange-100 { @apply bg-orange-900/50; }
+  body.dark-mode .text-orange-600 { @apply text-orange-400; }
+  
+  body.dark-mode .text-emerald-600 { @apply text-emerald-400; }
+  body.dark-mode .text-red-600 { @apply text-red-400; }
 }
 
