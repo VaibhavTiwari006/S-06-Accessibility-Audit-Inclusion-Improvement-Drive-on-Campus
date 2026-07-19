@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import auditService from '../services/auditService';
 import { ClipboardList, Play, FileText, Calendar, User } from 'lucide-react';
 import { accessibleToast as toast } from '../utils/accessibleToast';
@@ -9,6 +10,7 @@ const AuditList = () => {
   const [audits, setAudits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   const fetchAudits = async () => {
     try {
@@ -108,7 +110,9 @@ const AuditList = () => {
                   {audit.overallAccessibilityScore ? `${audit.overallAccessibilityScore.toFixed(1)}%` : '—'}
                 </p>
               </div>
-              <button className="flex items-center gap-2 text-primary hover:text-primary-dark font-medium bg-primary-50 hover:bg-primary-50 px-3 py-2 rounded-lg transition-colors">
+              <button 
+                onClick={() => audit.status === 'APPROVED' ? navigate('/reports') : toast.info('Audit continuation feature coming soon.')}
+                className="flex items-center gap-2 text-primary hover:text-primary-dark font-medium bg-primary-50 hover:bg-primary-50 px-3 py-2 rounded-lg transition-colors">
                 <FileText size={16} /> {audit.status === 'APPROVED' ? 'View Report' : 'Continue'}
               </button>
             </div>
