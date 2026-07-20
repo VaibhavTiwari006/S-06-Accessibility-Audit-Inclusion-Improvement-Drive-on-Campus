@@ -302,6 +302,11 @@
     --color-textLight: #94a3b8;
     background-color: #0f172a;
   }
+
+  body.dark-mode *::selection {
+    background-color: rgba(218, 37, 29, 0.5);
+    color: #ffffff;
+  }
   
   body.dark-mode .glass {
     @apply bg-slate-900/75 border-slate-700/60;
