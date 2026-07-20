@@ -4,6 +4,8 @@ import auditService from '../services/auditService';
 import buildingService from '../services/buildingService';
 import { accessibleToast as toast } from '../utils/accessibleToast';
 import RampCalculator from './RampCalculator';
+import Button from './ui/Button';
+import Input from './ui/Input';
 
 const StartAuditModal = ({ onClose, onSuccess }) => {
   const [buildings, setBuildings] = useState([]);
@@ -64,8 +66,7 @@ const StartAuditModal = ({ onClose, onSuccess }) => {
           </div>
           <div>
             <label htmlFor="auditDate" className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Audit Date *</label>
-            <input id="auditDate" name="auditDate" type="date" value={form.auditDate} onChange={handle} required aria-required="true"
-              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain" />
+            <Input id="auditDate" name="auditDate" type="date" value={form.auditDate} onChange={handle} required aria-required="true" />
           </div>
           <div>
             <div className="flex justify-between items-center mb-1.5">
@@ -86,10 +87,10 @@ const StartAuditModal = ({ onClose, onSuccess }) => {
             {showCalculator && <RampCalculator />}
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6" role="group" aria-label="Form Actions">
-            <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">Cancel</button>
-            <button type="submit" disabled={loading} className="px-6 py-2.5 text-sm font-bold bg-primary text-white rounded-xl shadow-md hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:hover:translate-y-0">
-              {loading ? 'Creating...' : 'Start Audit'}
-            </button>
+            <Button type="button" variant="ghost" onClick={onClose}>Cancel</Button>
+            <Button type="submit" isLoading={loading}>
+              Start Audit
+            </Button>
           </div>
         </form>
       </div>

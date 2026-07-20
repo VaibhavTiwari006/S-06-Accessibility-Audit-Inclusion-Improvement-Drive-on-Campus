@@ -5,6 +5,10 @@ import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReportIssueModal from '../components/ReportIssueModal';
 import { useAuth } from '../context/AuthContext';
+import { Card, CardContent } from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import Badge from '../components/ui/Badge';
+import Input from '../components/ui/Input';
 
 const IssueList = () => {
   const { user } = useAuth();
@@ -33,13 +37,13 @@ const IssueList = () => {
 
   useEffect(() => { fetchIssues(); }, [user?.role]);
 
-  const statusBadge = (status) => {
-    const map = {
-      RESOLVED: 'bg-success-50 text-success-dark border border-success-100',
-      IN_PROGRESS: 'bg-primary-50 text-primary-dark border border-primary-100',
-      PENDING: 'bg-secondary-50 text-secondary-dark border border-secondary-100',
-    };
-    return map[status] || 'bg-gray-100 text-gray-600 border border-gray-200';
+  const getStatusVariant = (status) => {
+    switch (status) {
+      case 'RESOLVED': return 'success';
+      case 'IN_PROGRESS': return 'primary';
+      case 'PENDING': return 'warning';
+      default: return 'secondary';
+    }
   };
 
   const StatusIcon = ({ status }) => {
@@ -87,36 +91,24 @@ const IssueList = () => {
         
         <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
           {/* Search Bar */}
-          <div className="relative flex-grow xl:flex-grow-0 xl:w-64">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search size={16} className="text-gray-400" />
-            </div>
-            <input
-              type="text"
+          <div className="w-full xl:w-64">
+            <Input
+              icon={Search}
               placeholder="Search issues..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white/70 backdrop-blur-md border border-white/40 shadow-soft-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-sm font-medium placeholder-gray-400"
             />
-            {searchTerm && (
-              <button 
-                onClick={() => setSearchTerm('')}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
-              >
-                <X size={14} />
-              </button>
-            )}
           </div>
 
           {/* Filter Dropdown */}
           <div className="relative">
-            <button 
+            <Button 
+              variant="outline"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className={"flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-md border border-white/40 shadow-soft-sm rounded-xl text-sm font-semibold transition-all hover:bg-white " + (statusFilter !== 'ALL' ? 'text-primary' : 'text-gray-600')}
+              icon={Filter}
             >
-              <Filter size={16} />
-              <span className="hidden sm:inline">{statusFilter === 'ALL' ? 'All Status' : statusFilter.replace(/_/g, ' ')}</span>
-            </button>
+              {statusFilter === 'ALL' ? 'All Status' : statusFilter.replace(/_/g, ' ')}
+            </Button>
             
             <AnimatePresence>
               {isFilterOpen && (
@@ -125,7 +117,7 @@ const IssueList = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.95 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl border border-white/60 rounded-xl shadow-xl z-20 py-2"
+                  className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-xl z-20 py-2"
                 >
                   {['ALL', 'PENDING', 'IN_PROGRESS', 'RESOLVED'].map(status => (
                     <button
@@ -142,9 +134,9 @@ const IssueList = () => {
           </div>
 
           {user?.role === 'STUDENT' && (
-            <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-2 shadow-soft-md shadow-primary/30">
-              <Plus size={18} /> Report Issue
-            </button>
+            <Button icon={Plus} onClick={() => setShowModal(true)}>
+              Report Issue
+            </Button>
           )}
         </div>
       </div>
@@ -177,46 +169,48 @@ const IssueList = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {filteredIssues.map((issue) => (
-            <motion.div 
-              variants={itemVariants}
+            <Card 
               key={issue.id} 
-              className="glass-premium p-6 flex flex-col justify-between rounded-2xl group hover:shadow-soft-lg hover:-translate-y-1 transition-all duration-300"
+              className="flex flex-col justify-between group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
-              <div>
-                <div className="flex justify-between items-start gap-3 mb-3">
-                  <h3 className="font-heading font-extrabold text-lg text-textMain leading-tight group-hover:text-primary transition-colors">{issue.buildingName}</h3>
-                  <span className={`px-2.5 py-1 flex-shrink-0 flex items-center gap-1.5 text-[10px] font-extrabold uppercase rounded-full ${statusBadge(issue.status)}`}>
-                    <StatusIcon status={issue.status} /> {issue.status?.replace(/_/g, ' ')}
-                  </span>
-                </div>
-
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed">{issue.description}</p>
-
-                <div className="text-sm font-medium text-gray-500 flex items-center gap-2 bg-white/50 p-2.5 rounded-xl border border-white/40 shadow-sm">
-                  <div className="bg-gray-100 p-1.5 rounded-lg text-gray-500"><MapPin size={14} /></div> 
-                  {issue.locationDetails || 'Location not specified'}
-                </div>
-
-                {issue.adminNotes && (
-                  <div className="mt-4 bg-primary/5 border border-primary/20 text-primary-dark text-xs p-3 rounded-xl shadow-inner">
-                    <span className="font-extrabold flex items-center gap-1 mb-1"><AlertCircle size={12}/> Admin Notes:</span> 
-                    {issue.adminNotes}
+              <CardContent className="pt-6 h-full flex flex-col justify-between">
+                <div>
+                  <div className="flex justify-between items-start gap-3 mb-3">
+                    <h3 className="font-heading font-extrabold text-lg text-textMain leading-tight group-hover:text-primary transition-colors">{issue.buildingName}</h3>
+                    <Badge variant={getStatusVariant(issue.status)}>
+                      <StatusIcon status={issue.status} /> {issue.status?.replace(/_/g, ' ')}
+                    </Badge>
                   </div>
-                )}
-              </div>
 
-              <div className="mt-5 pt-4 border-t border-gray-100/80 flex justify-between items-center">
-                <span className="text-xs font-bold text-gray-400 flex items-center gap-1.5 uppercase tracking-wider bg-gray-50 px-2 py-1 rounded-lg">
-                  <User size={12} className="text-gray-400" /> {issue.reporterName}
-                </span>
-                <button 
-                  onClick={() => setSelectedIssue(issue)}
-                  className="text-sm text-primary font-bold hover:text-blue-800 transition-colors flex items-center gap-1 bg-primary/5 hover:bg-primary/10 px-3 py-1.5 rounded-lg"
-                >
-                  View Details
-                </button>
-              </div>
-            </motion.div>
+                  <p className="text-sm text-textLight mb-4 leading-relaxed">{issue.description}</p>
+
+                  <div className="text-sm font-medium text-textLight flex items-center gap-2 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
+                    <div className="bg-white p-1.5 rounded-lg shadow-sm text-gray-400"><MapPin size={14} /></div> 
+                    {issue.locationDetails || 'Location not specified'}
+                  </div>
+
+                  {issue.adminNotes && (
+                    <div className="mt-4 bg-primary/5 border border-primary/20 text-primary-dark text-xs p-3 rounded-xl shadow-inner">
+                      <span className="font-extrabold flex items-center gap-1 mb-1"><AlertCircle size={12}/> Admin Notes:</span> 
+                      {issue.adminNotes}
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-gray-100 flex justify-between items-center">
+                  <span className="text-xs font-bold text-gray-400 flex items-center gap-1.5 uppercase tracking-wider bg-gray-50 px-2 py-1 rounded-lg">
+                    <User size={12} className="text-gray-400" /> {issue.reporterName}
+                  </span>
+                  <Button 
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setSelectedIssue(issue)}
+                  >
+                    View Details
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           ))}
           
           {filteredIssues.length === 0 && (
@@ -231,20 +225,21 @@ const IssueList = () => {
                   : "No issues match your current search and filter criteria."}
               </p>
               {issues.length > 0 ? (
-                <button 
+                <Button 
                   onClick={() => { setSearchTerm(''); setStatusFilter('ALL'); }}
-                  className="mt-6 btn-primary"
+                  className="mt-6"
                 >
                   Clear all filters
-                </button>
+                </Button>
               ) : (
                 user?.role === 'STUDENT' && (
-                  <button 
+                  <Button 
                     onClick={() => setShowModal(true)}
-                    className="mt-6 btn-primary inline-flex items-center gap-2"
+                    className="mt-6"
+                    icon={Plus}
                   >
-                    <Plus size={16} /> Report an Issue
-                  </button>
+                    Report an Issue
+                  </Button>
                 )
               )}
             </motion.div>
@@ -270,9 +265,9 @@ const IssueList = () => {
             >
               <div className="flex justify-between items-start mb-4">
                 <h3 className="text-2xl font-heading font-extrabold text-textMain pr-4">{selectedIssue.buildingName}</h3>
-                <span className={`px-2.5 py-1 flex-shrink-0 flex items-center gap-1.5 text-[10px] font-extrabold uppercase rounded-full ${statusBadge(selectedIssue.status)}`}>
+                <Badge variant={getStatusVariant(selectedIssue.status)}>
                   <StatusIcon status={selectedIssue.status} /> {selectedIssue.status?.replace(/_/g, ' ')}
-                </span>
+                </Badge>
               </div>
               
               <p className="text-sm text-gray-700 mb-5 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selectedIssue.description}</p>
@@ -300,9 +295,9 @@ const IssueList = () => {
                 <span className="text-xs font-bold text-gray-400 flex items-center gap-1.5 uppercase tracking-wider bg-gray-50 px-3 py-1.5 rounded-lg">
                   <User size={12} className="text-gray-400" /> {selectedIssue.reporterName}
                 </span>
-                <button onClick={() => setSelectedIssue(null)} className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-bold transition-colors shadow-sm">
+                <Button variant="secondary" onClick={() => setSelectedIssue(null)}>
                   Close Details
-                </button>
+                </Button>
               </div>
             </motion.div>
           </motion.div>
