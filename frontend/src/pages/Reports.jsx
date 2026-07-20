@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import dashboardService from '../services/dashboardService';
 import reportService from '../services/reportService';
 import ScoreCard from '../components/ScoreCard';
+import { Card, CardHeader, CardContent } from '../components/ui/Card';
+import Button from '../components/ui/Button';
 
 const Reports = () => {
   const [stats, setStats] = useState(null);
@@ -129,27 +131,29 @@ const Reports = () => {
           <p className="text-textLight mt-1">Campus-wide accessibility metrics and issue tracking.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <button
+          <Button
             onClick={handleDownloadFinalReport}
-            disabled={downloadingFinal}
-            className="bg-gradient-to-r from-primary to-primary-light text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+            isLoading={downloadingFinal}
+            icon={FileText}
           >
-            <FileText size={18} /> {downloadingFinal ? 'Generating...' : 'Final Project Report'}
-          </button>
-          <button 
+            Final Project Report
+          </Button>
+          <Button 
+            variant="outline"
             onClick={handleDownloadAdvocacy}
-            disabled={downloadingAdvocacy}
-            className="bg-white hover:bg-gray-50 text-primary border border-primary px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-sm hover:shadow-md disabled:opacity-50"
+            isLoading={downloadingAdvocacy}
+            icon={Download}
           >
-            <Download size={18} /> {downloadingAdvocacy ? 'Generating...' : 'Advocacy Letter'}
-          </button>
-          <button 
+            Advocacy Letter
+          </Button>
+          <Button 
+            variant="secondary"
             onClick={handleDownloadPDF}
-            disabled={downloading}
-            className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+            isLoading={downloading}
+            icon={Download}
           >
-            <Download size={18} /> {downloading ? 'Generating...' : 'Export PDF Report'}
-          </button>
+            Export PDF Report
+          </Button>
         </div>
       </div>
 
@@ -183,162 +187,176 @@ const Reports = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* Audits Pie Chart */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
-          className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px] transition-all duration-300"
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="h-full"
         >
-          <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
-            <ClipboardCheck size={20} className="text-primary" /> Audits by Status
-          </h3>
-          <div className="flex-1 w-full">
-            {auditsData.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={auditsData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={65}
-                    outerRadius={105}
-                    paddingAngle={5}
-                    dataKey="value"
-                    isAnimationActive={true}
-                    animationBegin={200}
-                    animationDuration={1500}
-                    animationEasing="ease-out"
-                    label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
-                  >
-                    {auditsData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(value) => [value, 'Count']} />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
-            ) : (
-              <div className="h-full flex items-center justify-center text-textLight">No audit data available</div>
-            )}
-          </div>
+          <Card className="h-full flex flex-col">
+            <CardHeader>
+              <h3 className="text-lg font-heading font-bold text-textMain flex items-center gap-2">
+                <ClipboardCheck size={20} className="text-primary" /> Audits by Status
+              </h3>
+            </CardHeader>
+            <CardContent className="flex-1 min-h-[300px]">
+              {auditsData.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={auditsData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={70}
+                      outerRadius={110}
+                      paddingAngle={5}
+                      dataKey="value"
+                      isAnimationActive={true}
+                      animationBegin={200}
+                      animationDuration={1500}
+                      animationEasing="ease-out"
+                      label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    >
+                      {auditsData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [value, 'Count']} contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Legend />
+                  </PieChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-textLight">No audit data available</div>
+              )}
+            </CardContent>
+          </Card>
         </motion.div>
 
         {/* Maintenance Tasks Bar Chart */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-          whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
-          className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[400px] transition-all duration-300"
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          className="h-full"
         >
-          <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
-            <PenTool size={20} className="text-secondary" /> Maintenance Tasks Progress
-          </h3>
-          <div className="flex-1 w-full">
-            {tasksData.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={tasksData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b'}} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b'}} allowDecimals={false} />
-                  <Tooltip 
-                    cursor={{fill: '#f8fafc'}}
-                    contentStyle={{borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
-                  />
-                  <Bar 
-                    dataKey="value" 
-                    name="Tasks" 
-                    radius={[4, 4, 0, 0]}
-                    isAnimationActive={true}
-                    animationBegin={300}
-                    animationDuration={1500}
-                    animationEasing="ease-out"
-                  >
-                    {tasksData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[(index + 1) % COLORS.length]} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            ) : (
-              <div className="h-full flex items-center justify-center text-textLight">No task data available</div>
-            )}
-          </div>
+          <Card className="h-full flex flex-col">
+            <CardHeader>
+              <h3 className="text-lg font-heading font-bold text-textMain flex items-center gap-2">
+                <PenTool size={20} className="text-secondary" /> Maintenance Tasks Progress
+              </h3>
+            </CardHeader>
+            <CardContent className="flex-1 min-h-[300px]">
+              {tasksData.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={tasksData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontWeight: 500}} />
+                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#9ca3af', fontWeight: 500}} allowDecimals={false} />
+                    <Tooltip 
+                      cursor={{fill: '#f8fafc'}}
+                      contentStyle={{borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'}}
+                    />
+                    <Bar 
+                      dataKey="value" 
+                      name="Tasks" 
+                      radius={[6, 6, 0, 0]}
+                      isAnimationActive={true}
+                      animationBegin={300}
+                      animationDuration={1500}
+                      animationEasing="ease-out"
+                    >
+                      {tasksData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[(index + 1) % COLORS.length]} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              ) : (
+                <div className="h-full flex items-center justify-center text-textLight">No task data available</div>
+              )}
+            </CardContent>
+          </Card>
         </motion.div>
       </div>
 
       {/* Standards Compliance & Impact Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         {/* RPWD / WCAG Compliance Table */}
-        <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
-            <ShieldCheck size={20} className="text-primary" /> Standards Compliance
-          </h3>
-          <div className="space-y-3">
-            {[
-              { standard: 'RPWD Act 2016 – Physical Infrastructure', compliance: 68, color: 'bg-orange-400' },
-              { standard: 'WCAG 2.1 AA – Website Accessibility',     compliance: 74, color: 'bg-blue-500' },
-              { standard: 'WCAG 2.1 AA – LMS Accessibility',          compliance: 61, color: 'bg-purple-500' },
-              { standard: 'RPWD Act 2016 – Washroom Access',          compliance: 55, color: 'bg-red-400' },
-              { standard: 'RPWD Act 2016 – Emergency Signage',        compliance: 80, color: 'bg-green-500' },
-            ].map(item => (
-              <div key={item.standard}>
-                <div className="flex justify-between text-xs mb-1">
-                  <span className="text-gray-600 font-medium">{item.standard}</span>
-                  <span className="font-bold text-textMain">{item.compliance}%</span>
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-heading font-bold text-textMain flex items-center gap-2">
+              <ShieldCheck size={20} className="text-primary" /> Standards Compliance
+            </h3>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {[
+                { standard: 'RPWD Act 2016 – Physical Infrastructure', compliance: 68, color: 'bg-orange-500' },
+                { standard: 'WCAG 2.1 AA – Website Accessibility',     compliance: 74, color: 'bg-primary' },
+                { standard: 'WCAG 2.1 AA – LMS Accessibility',          compliance: 61, color: 'bg-secondary' },
+                { standard: 'RPWD Act 2016 – Washroom Access',          compliance: 55, color: 'bg-danger' },
+                { standard: 'RPWD Act 2016 – Emergency Signage',        compliance: 80, color: 'bg-success' },
+              ].map(item => (
+                <div key={item.standard}>
+                  <div className="flex justify-between text-sm mb-1.5">
+                    <span className="text-textLight font-medium">{item.standard}</span>
+                    <span className="font-bold text-textMain">{item.compliance}%</span>
+                  </div>
+                  <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${item.color} transition-all duration-700`}
+                      style={{ width: `${item.compliance}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${item.color} transition-all duration-700`}
-                    style={{ width: `${item.compliance}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-textLight mt-4">Benchmarked against RPWD Act 2016 mandates and WCAG 2.1 AA standards.</p>
-        </div>
+              ))}
+            </div>
+            <p className="text-xs text-textLight mt-6 font-medium">Benchmarked against RPWD Act 2016 mandates and WCAG 2.1 AA standards.</p>
+          </CardContent>
+        </Card>
 
         {/* Impact Metrics vs Targets */}
-        <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100">
-          <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
-            <Globe size={20} className="text-secondary" /> Impact Metrics vs. Targets
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left py-2 text-textLight font-medium">Metric</th>
-                  <th className="text-center py-2 text-textLight font-medium">Target</th>
-                  <th className="text-center py-2 text-textLight font-medium">Achieved</th>
-                  <th className="text-center py-2 text-textLight font-medium">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-50">
-                {[
-                  { metric: 'Buildings Audited', target: '≥10', achieved: stats.totalBuildings ?? '-', met: (stats.totalBuildings ?? 0) >= 10 },
-                  { metric: 'Digital Assets Audited', target: '≥5', achieved: 5, met: true },
-                  { metric: 'Students/Staff Engaged', target: '≥20', achieved: 43, met: true },
-                  { metric: 'Remediation Items', target: '≥50', achieved: stats.totalMaintenanceTasks ?? '-', met: (stats.totalMaintenanceTasks ?? 0) >= 50 },
-                  { metric: 'Awareness Campaign Reach', target: '≥300', achieved: 450, met: true },
-                ].map(row => (
-                  <tr key={row.metric} className="hover:bg-gray-50/50">
-                    <td className="py-2.5 text-textMain font-medium">{row.metric}</td>
-                    <td className="py-2.5 text-center text-textLight">{row.target}</td>
-                    <td className="py-2.5 text-center font-bold text-textMain">{row.achieved}</td>
-                    <td className="py-2.5 text-center">
-                      {row.met
-                        ? <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-medium">✓ Met</span>
-                        : <span className="text-xs bg-orange-50 text-orange-700 px-2 py-0.5 rounded-full font-medium">In Progress</span>
-                      }
-                    </td>
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-heading font-bold text-textMain flex items-center gap-2">
+              <Globe size={20} className="text-secondary" /> Impact Metrics vs. Targets
+            </h3>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-left">
+                <thead>
+                  <tr className="border-b border-gray-100 uppercase tracking-wider text-xs">
+                    <th className="pb-3 text-textLight font-semibold">Metric</th>
+                    <th className="pb-3 text-center text-textLight font-semibold">Target</th>
+                    <th className="pb-3 text-center text-textLight font-semibold">Achieved</th>
+                    <th className="pb-3 text-center text-textLight font-semibold">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {[
+                    { metric: 'Buildings Audited', target: '≥10', achieved: stats.totalBuildings ?? '-', met: (stats.totalBuildings ?? 0) >= 10 },
+                    { metric: 'Digital Assets Audited', target: '≥5', achieved: 5, met: true },
+                    { metric: 'Students/Staff Engaged', target: '≥20', achieved: 43, met: true },
+                    { metric: 'Remediation Items', target: '≥50', achieved: stats.totalMaintenanceTasks ?? '-', met: (stats.totalMaintenanceTasks ?? 0) >= 50 },
+                    { metric: 'Awareness Campaign Reach', target: '≥300', achieved: 450, met: true },
+                  ].map(row => (
+                    <tr key={row.metric} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="py-3 text-textMain font-medium">{row.metric}</td>
+                      <td className="py-3 text-center text-textLight">{row.target}</td>
+                      <td className="py-3 text-center font-bold text-textMain">{row.achieved}</td>
+                      <td className="py-3 text-center">
+                        {row.met
+                          ? <span className="text-xs bg-success/10 text-success-dark px-2.5 py-1 rounded-md font-semibold">✓ Met</span>
+                          : <span className="text-xs bg-warning/10 text-warning-dark px-2.5 py-1 rounded-md font-semibold">In Progress</span>
+                        }
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
