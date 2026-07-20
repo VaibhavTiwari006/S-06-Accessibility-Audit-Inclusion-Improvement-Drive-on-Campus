@@ -1,6 +1,7 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import { TrendingUp } from 'lucide-react';
+import { Card, CardHeader, CardContent } from './ui/Card';
 
 const data = [
   { month: 'Jan', score: 45, reports: 12 },
@@ -14,29 +15,31 @@ const data = [
 
 const AccessibilityTrendsChart = () => {
   return (
-    <div className="glass-panel p-6 rounded-2xl shadow-sm border border-gray-100 mt-6 h-96 flex flex-col">
-      <div className="mb-4">
-        <h3 className="text-xl font-heading font-bold text-textMain flex items-center gap-2">
-          <TrendingUp className="text-primary" size={24} /> Campus Accessibility Trend
-        </h3>
-        <p className="text-sm text-textLight mt-1">Average compliance score over the last 7 months</p>
-      </div>
+    <Card className="h-full mt-6">
+      <CardHeader className="pb-2">
+        <div>
+          <h3 className="text-xl font-heading font-bold text-textMain flex items-center gap-2">
+            <TrendingUp className="text-primary" size={24} /> Campus Accessibility Trend
+          </h3>
+          <p className="text-sm text-textLight mt-1">Average compliance score over the last 7 months</p>
+        </div>
+      </CardHeader>
       
-      <div className="flex-1 w-full min-h-0">
+      <CardContent className="pt-2 h-72">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3}/>
+                <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.2}/>
                 <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#6b7280', fontSize: 12 }} dy={10} />
-            <YAxis axisLine={false} tickLine={false} tick={{ fill: '#6b7280', fontSize: 12 }} />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
+            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#9ca3af', fontSize: 12, fontWeight: 500 }} dy={10} />
+            <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9ca3af', fontSize: 12, fontWeight: 500 }} />
             <Tooltip 
-              contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
-              itemStyle={{ fontWeight: 'bold' }}
+              contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+              itemStyle={{ fontWeight: '600' }}
             />
             <Area 
               type="monotone" 
@@ -46,12 +49,12 @@ const AccessibilityTrendsChart = () => {
               strokeWidth={3}
               fillOpacity={1} 
               fill="url(#colorScore)" 
-              activeDot={{ r: 6, strokeWidth: 0 }}
+              activeDot={{ r: 6, strokeWidth: 0, fill: '#0ea5e9' }}
             />
           </AreaChart>
         </ResponsiveContainer>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
