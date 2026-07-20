@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Menu, Bell, Settings } from 'lucide-react';
+import { LogOut, User, Menu, Bell, Settings, Search } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import Button from '../components/ui/Button';
+import Badge from '../components/ui/Badge';
+import Avatar from '../components/ui/Avatar';
+import CommandPalette from './CommandPalette';
 
 const roleColors = {
   ADMIN: 'bg-red-50 text-red-700 border-red-100',
@@ -14,6 +18,7 @@ const Navbar = ({ toggleSidebar }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [isCmdOpen, setIsCmdOpen] = useState(false);
 
   const roleColor = roleColors[user?.role?.toUpperCase()] || 'bg-gray-50 text-gray-700 border-gray-100';
   const initial = user?.fullName?.charAt(0)?.toUpperCase() || '?';
@@ -55,22 +60,54 @@ const Navbar = ({ toggleSidebar }) => {
           </div>
         </div>
 
+        {/* Center: Command Palette Trigger */}
+        {user && (
+          <div className="hidden md:flex flex-1 justify-center max-w-md mx-8">
+            <button
+              onClick={() => setIsCmdOpen(true)}
+              className="w-full flex items-center justify-between px-4 py-2 bg-gray-50 border border-gray-200 hover:border-primary/50 hover:bg-white rounded-xl text-sm text-gray-500 transition-all focus:outline-none focus:ring-2 focus:ring-primary/30"
+            >
+              <div className="flex items-center gap-2">
+                <Search size={16} />
+                <span>Search buildings, audits...</span>
+              </div>
+              <div className="flex items-center gap-1 opacity-70 font-semibold">
+                <kbd className="bg-gray-100 border border-gray-200 rounded px-1.5 py-0.5 text-[10px]">Ctrl</kbd>
+                <span>+</span>
+                <kbd className="bg-gray-100 border border-gray-200 rounded px-1.5 py-0.5 text-[10px]">K</kbd>
+              </div>
+            </button>
+          </div>
+        )}
+
         {/* Right: actions */}
         {user && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
+            {/* Search icon (mobile) */}
+            <button 
+              className="md:hidden p-2 text-gray-500 hover:text-primary transition-colors"
+              onClick={() => setIsCmdOpen(true)}
+            >
+              <Search size={20} />
+            </button>
+
             {/* Role badge */}
-            <span className={`hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold ${roleColor}`}>
-              {user.role}
-            </span>
+            <div className="hidden lg:block">
+              <Badge variant={user.role?.toUpperCase() === 'ADMIN' ? 'danger' : 'primary'} rounded="full">
+                {user.role}
+              </Badge>
+            </div>
 
             {/* Settings shortcut - admin only */}
             {user.role?.toUpperCase() === 'ADMIN' && (
               <button
                 onClick={() => navigate('/settings')}
-                className="p-2 rounded-xl text-gray-500 hover:text-primary hover:bg-primary/5 transition-all"
+                className="group p-2 rounded-xl text-gray-500 hover:text-primary hover:bg-primary/5 transition-all"
                 title="Settings"
               >
-                <Settings size={18} />
+                <div className="transition-all duration-700 ease-in-out group-hover:rotate-[360deg] group-hover:scale-125">
+                  <Settings size={18} />
+                </div>
               </button>
             )}
 
@@ -78,27 +115,25 @@ const Navbar = ({ toggleSidebar }) => {
             <div className="relative">
               <button
                 onClick={() => setShowUserMenu(!showUserMenu)}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all"
+                className="flex items-center gap-2 p-1 rounded-full hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all focus:outline-none focus:ring-2 focus:ring-primary/30"
               >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-bold shadow-sm">
-                  {initial}
-                </div>
-                <span className="hidden md:block text-sm font-medium text-textMain max-w-[120px] truncate">
+                <Avatar name={user.fullName} size="sm" />
+                <span className="hidden md:block text-sm font-medium text-textMain px-2 max-w-[120px] truncate">
                   {user.fullName?.split(' ')[0]}
                 </span>
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 top-full mt-2 w-52 glass-panel rounded-2xl shadow-soft-lg p-1.5 border border-white/70 animate-scale-in z-50">
-                  <div className="px-3 py-2 border-b border-gray-100 mb-1">
+                <div className="absolute right-0 top-full mt-2 w-56 bg-cards rounded-2xl shadow-xl p-2 border border-gray-100 animate-scale-in z-50">
+                  <div className="px-3 py-3 border-b border-gray-50 mb-2">
                     <p className="text-sm font-semibold text-textMain truncate">{user.fullName}</p>
                     <p className="text-xs text-textLight truncate">{user.email}</p>
                   </div>
                   <button
                     onClick={() => { setShowUserMenu(false); logout(); }}
-                    className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-red-600 hover:bg-red-50 font-medium transition-all"
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-danger hover:bg-danger-50 font-medium transition-all group"
                   >
-                    <LogOut size={15} /> Sign Out
+                    <LogOut size={16} className="group-hover:-translate-x-1 transition-transform" /> Sign Out
                   </button>
                 </div>
               )}
@@ -111,6 +146,9 @@ const Navbar = ({ toggleSidebar }) => {
       {showUserMenu && (
         <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)} />
       )}
+      
+      {/* Command Palette */}
+      <CommandPalette isOpen={isCmdOpen} onClose={() => setIsCmdOpen(false)} />
     </nav>
   );
 };
