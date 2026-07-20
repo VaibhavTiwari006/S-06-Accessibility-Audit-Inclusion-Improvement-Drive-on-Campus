@@ -42,20 +42,61 @@ const CampusMap = ({ buildings }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        {buildings.map((building) => (
-          building.lat && building.lng ? (
-            <Marker key={building.id} position={[building.lat, building.lng]}>
-              <Popup className="custom-popup">
-                <div className="p-1">
-                  <h3 className="font-bold font-heading text-lg">{building.buildingName}</h3>
-                  <p className="text-xs text-gray-500 mb-2">Code: {building.buildingCode}</p>
+        {buildings.map((building, index) => {
+          // Generate deterministic mock coordinates and score based on building ID if not provided
+          const lat = building.lat || defaultCenter[0] + (Math.sin(building.id || index) * 0.005);
+          const lng = building.lng || defaultCenter[1] + (Math.cos(building.id || index) * 0.005);
+          const mockScore = building.overallAccessibilityScore || (50 + ((building.id || index) * 17) % 50);
+          
+          let markerColor = 'bg-gray-400';
+          let ringColor = 'ring-gray-400/50';
+          
+          if (mockScore >= 80) {
+            markerColor = 'bg-success';
+            ringColor = 'ring-success/50';
+          } else if (mockScore >= 50) {
+            markerColor = 'bg-warning';
+            ringColor = 'ring-warning/50';
+          } else {
+            markerColor = 'bg-danger';
+            ringColor = 'ring-danger/50';
+          }
+
+          const customIcon = L.divIcon({
+            className: 'custom-marker',
+            html: `<div class="w-8 h-8 rounded-full ${markerColor} border-2 border-white shadow-lg ring-4 ${ringColor} flex items-center justify-center text-white font-bold text-xs">${Math.round(mockScore)}</div>`,
+            iconSize: [32, 32],
+            iconAnchor: [16, 16],
+          });
+
+          return (
+            <Marker key={building.id} position={[lat, lng]} icon={customIcon}>
+              <Popup className="custom-popup rounded-xl overflow-hidden border-0 shadow-xl">
+                <div className="p-1 min-w-[200px]">
+                  <h3 className="font-bold font-heading text-lg text-textMain">{building.buildingName}</h3>
+                  <p className="text-xs text-textLight mb-3 font-medium">Code: {building.buildingCode}</p>
                   
-                  <div className="flex items-center justify-between text-sm mt-3 border-t pt-2 border-gray-100">
-                    <span className="text-gray-600">Status:</span>
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                      building.status === 'ACTIVE' ? 'bg-emerald-100 text-emerald-700' :
-                      building.status === 'UNDER_MAINTENANCE' ? 'bg-amber-100 text-amber-700' :
-                      'bg-gray-100 text-gray-700'
+                  <div className="bg-gray-50 rounded-lg p-3 mb-3 border border-gray-100">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Access Score</span>
+                      <span className={`text-sm font-bold ${mockScore >= 80 ? 'text-success-dark' : mockScore >= 50 ? 'text-warning-dark' : 'text-danger-dark'}`}>
+                        {Math.round(mockScore)}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div 
+                        className={`h-1.5 rounded-full ${mockScore >= 80 ? 'bg-success' : mockScore >= 50 ? 'bg-warning' : 'bg-danger'}`} 
+                        style={{ width: `${mockScore}%` }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-sm mt-3 pt-3 border-t border-gray-100">
+                    <span className="text-gray-500 font-medium text-xs">Status:</span>
+                    <span className={`px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider ${
+                      building.status === 'ACTIVE' ? 'bg-success/10 text-success-dark' :
+                      building.status === 'UNDER_MAINTENANCE' ? 'bg-warning/10 text-warning-dark' :
+                      'bg-gray-100 text-gray-600'
                     }`}>
                       {building.status?.replace('_', ' ')}
                     </span>
@@ -63,8 +104,8 @@ const CampusMap = ({ buildings }) => {
                 </div>
               </Popup>
             </Marker>
-          ) : null
-        ))}
+          );
+        })}
         
         <MapBounds buildings={buildings.filter(b => b.lat && b.lng)} />
       </MapContainer>
