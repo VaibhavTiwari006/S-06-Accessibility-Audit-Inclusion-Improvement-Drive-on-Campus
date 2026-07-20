@@ -5,6 +5,7 @@ import ProtectedRoute from './ProtectedRoute';
 import MainLayout from '../layout/MainLayout';
 
 // Lazy loaded pages for performance optimization (Quarter II/III requirement)
+const Landing = lazy(() => import('../pages/Landing'));
 const Login = lazy(() => import('../pages/Login'));
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const BuildingList = lazy(() => import('../pages/BuildingList'));
@@ -34,7 +35,7 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         
         {/* Protected Routes */}
