@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import QuickReportFAB from '../components/QuickReportFAB';
+import PageTransition from '../components/PageTransition';
 
 import { useAccessibility } from '../context/AccessibilityContext';
 
@@ -27,7 +28,9 @@ const MainLayout = ({ children }) => {
           role="main"
           tabIndex="-1"
         >
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
       </div>
       {!distractionFree && <Footer />}
