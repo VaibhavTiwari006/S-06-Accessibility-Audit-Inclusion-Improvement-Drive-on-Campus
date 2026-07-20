@@ -5,6 +5,10 @@ import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 import AddBuildingModal from '../components/AddBuildingModal';
 import CampusMap from '../components/CampusMap';
+import { Card, CardContent } from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import Badge from '../components/ui/Badge';
+import Input from '../components/ui/Input';
 
 const BuildingList = () => {
   const [buildings, setBuildings] = useState([]);
@@ -29,13 +33,13 @@ const BuildingList = () => {
 
   useEffect(() => { fetchBuildings(); }, []);
 
-  const statusBadge = (status) => {
-    const map = {
-      ACTIVE: 'bg-success-50 text-success-dark border border-success-100',
-      UNDER_MAINTENANCE: 'bg-secondary-50 text-secondary-dark border border-secondary-100',
-      INACTIVE: 'bg-gray-100 text-gray-500 border border-gray-200',
-    };
-    return map[status] || 'bg-primary-50 text-primary-dark border border-primary-100';
+  const getStatusVariant = (status) => {
+    switch (status) {
+      case 'ACTIVE': return 'success';
+      case 'UNDER_MAINTENANCE': return 'warning';
+      case 'INACTIVE': return 'secondary';
+      default: return 'primary';
+    }
   };
 
   const filteredBuildings = useMemo(() => {
@@ -76,36 +80,24 @@ const BuildingList = () => {
         
         <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
           {/* Search Bar */}
-          <div className="relative flex-grow xl:flex-grow-0 xl:w-64">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search size={16} className="text-gray-400" />
-            </div>
-            <input
-              type="text"
+          <div className="w-full xl:w-64">
+            <Input
+              icon={Search}
               placeholder="Search buildings..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-white/70 backdrop-blur-md border border-white/40 shadow-soft-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-white transition-all text-sm font-medium placeholder-gray-400"
             />
-            {searchTerm && (
-              <button 
-                onClick={() => setSearchTerm('')}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
-              >
-                <X size={14} />
-              </button>
-            )}
           </div>
 
           {/* Filter Dropdown */}
           <div className="relative">
-            <button 
+            <Button 
+              variant="outline"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className={"flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-md border border-white/40 shadow-soft-sm rounded-xl text-sm font-semibold transition-all hover:bg-white " + (statusFilter !== 'ALL' ? 'text-primary' : 'text-gray-600')}
+              icon={Filter}
             >
-              <Filter size={16} />
-              <span className="hidden sm:inline">{statusFilter === 'ALL' ? 'All Status' : statusFilter.replace(/_/g, ' ')}</span>
-            </button>
+              {statusFilter === 'ALL' ? 'All Status' : statusFilter.replace(/_/g, ' ')}
+            </Button>
             
             <AnimatePresence>
               {isFilterOpen && (
@@ -131,23 +123,23 @@ const BuildingList = () => {
           </div>
 
           {/* View Toggles */}
-          <div className="flex bg-white/70 backdrop-blur-md rounded-xl border border-white/40 p-1 shadow-soft-sm">
+          <div className="flex bg-white rounded-lg border border-gray-200 p-1 shadow-sm">
             <button 
               onClick={() => setViewMode('list')}
-              className={"px-3 py-1.5 rounded-lg text-sm font-semibold transition-all " + (viewMode === 'list' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:text-gray-700 hover:bg-white/50')}
+              className={`px-3 py-1.5 rounded-md text-sm font-semibold transition-colors ${viewMode === 'list' ? 'bg-primary text-white' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'}`}
             >
               List View
             </button>
             <button 
               onClick={() => setViewMode('map')}
-              className={"px-3 py-1.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-1.5 " + (viewMode === 'map' ? 'bg-primary text-white shadow-md' : 'text-gray-500 hover:text-gray-700 hover:bg-white/50')}
+              className={`px-3 py-1.5 rounded-md text-sm font-semibold transition-colors flex items-center gap-1.5 ${viewMode === 'map' ? 'bg-primary text-white' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'}`}
             >
               <MapPin size={14} /> Map
             </button>
           </div>
-          <button onClick={() => setShowModal(true)} className="btn-primary flex items-center gap-2 shadow-soft-md shadow-primary/30">
-            <Plus size={18} /> Add Building
-          </button>
+          <Button icon={Plus} onClick={() => setShowModal(true)}>
+            Add Building
+          </Button>
         </div>
       </div>
 
@@ -157,10 +149,10 @@ const BuildingList = () => {
         </motion.div>
       ) : (
 
-      <div className="glass-panel rounded-2xl overflow-hidden shadow-soft-xl border border-white/60">
+      <Card className="overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-100">
-            <thead className="bg-gray-50/80 backdrop-blur-md">
+            <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Building</th>
                 <th className="px-6 py-4 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Code</th>
@@ -220,13 +212,14 @@ const BuildingList = () => {
                       <span className="flex items-center gap-1.5 font-medium"><Layers size={14} className="text-gray-400" /> {building.numberOfFloors} floors</span>
                     </td>
                     <td className="px-6 py-5 whitespace-nowrap">
-                      <span className={`px-2.5 py-1 flex items-center w-max text-xs font-bold rounded-full ${statusBadge(building.status)}`}>
-                        <span className={"w-1.5 h-1.5 rounded-full mr-1.5 " + (building.status === 'ACTIVE' ? 'bg-success' : building.status === 'UNDER_MAINTENANCE' ? 'bg-secondary' : 'bg-gray-400')}></span>
+                      <Badge variant={getStatusVariant(building.status)}>
                         {building.status?.replace(/_/g, ' ')}
-                      </span>
+                      </Badge>
                     </td>
-                    <td className="px-6 py-5 whitespace-nowrap text-right text-sm font-medium">
-                      <button className="px-4 py-1.5 rounded-lg text-primary bg-primary/5 hover:bg-primary/10 transition-colors font-semibold border border-primary/10">View Details</button>
+                    <td className="px-6 py-5 whitespace-nowrap text-right">
+                      <Button variant="ghost" size="sm">
+                        View Details
+                      </Button>
                     </td>
                   </motion.tr>
                 ))}
@@ -258,7 +251,7 @@ const BuildingList = () => {
             )}
           </table>
         </div>
-      </div>
+      </Card>
       )}
     </div>
   );

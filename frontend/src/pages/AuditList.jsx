@@ -5,6 +5,9 @@ import { ClipboardList, Play, FileText, Calendar, User } from 'lucide-react';
 import { accessibleToast as toast } from '../utils/accessibleToast';
 import StartAuditModal from '../components/StartAuditModal';
 import TextToSpeech from '../components/TextToSpeech';
+import { Card, CardContent } from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import Badge from '../components/ui/Badge';
 
 const AuditList = () => {
   const [audits, setAudits] = useState([]);
@@ -26,14 +29,14 @@ const AuditList = () => {
 
   useEffect(() => { fetchAudits(); }, []);
 
-  const statusColor = (status) => {
-    const map = {
-      APPROVED: 'bg-success-50 text-success-dark',
-      IN_PROGRESS: 'bg-primary-50 text-primary-dark',
-      PENDING: 'bg-secondary-50 text-secondary-dark',
-      REJECTED: 'bg-red-100 text-red-800',
-    };
-    return map[status] || 'bg-gray-100 text-gray-600';
+  const getStatusVariant = (status) => {
+    switch (status) {
+      case 'APPROVED': return 'success';
+      case 'IN_PROGRESS': return 'primary';
+      case 'PENDING': return 'warning';
+      case 'REJECTED': return 'danger';
+      default: return 'secondary';
+    }
   };
 
   const topBarColor = (status) => {
@@ -51,14 +54,14 @@ const AuditList = () => {
       {showModal && <StartAuditModal onClose={() => setShowModal(false)} onSuccess={fetchAudits} />}
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold text-textMain flex items-center gap-2">
+          <h2 className="text-2xl font-heading font-extrabold text-textMain flex items-center gap-2">
             <ClipboardList className="text-primary" /> Accessibility Audits
           </h2>
-          <p className="text-textLight mt-1">All campus building audits and compliance scores.</p>
+          <p className="text-textLight mt-1 font-medium">All campus building audits and compliance scores.</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-md hover:shadow-lg">
-          <Play size={18} /> Start New Audit
-        </button>
+        <Button onClick={() => setShowModal(true)} icon={Play}>
+          Start New Audit
+        </Button>
       </div>
 
       {loading && (
@@ -85,45 +88,50 @@ const AuditList = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {audits.map((audit) => (
-          <div key={audit.id} className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col gap-4 relative overflow-hidden">
+          <Card key={audit.id} className="relative overflow-hidden group">
             <div className={`absolute top-0 left-0 w-full h-1 ${topBarColor(audit.status)}`}></div>
-
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="text-lg font-bold text-textMain">{audit.buildingName}</h3>
-                <p className="text-sm text-gray-400 flex items-center gap-1 mt-1">
-                  <User size={13} /> {audit.auditorName}
-                </p>
-                <p className="text-sm text-gray-400 flex items-center gap-1 mt-0.5">
-                  <Calendar size={13} /> {audit.auditDate}
-                </p>
+            <CardContent className="flex flex-col gap-4">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-lg font-heading font-bold text-textMain group-hover:text-primary transition-colors">{audit.buildingName}</h3>
+                  <p className="text-sm text-textLight flex items-center gap-1.5 mt-1 font-medium">
+                    <User size={14} className="text-gray-400" /> {audit.auditorName}
+                  </p>
+                  <p className="text-sm text-textLight flex items-center gap-1.5 mt-0.5 font-medium">
+                    <Calendar size={14} className="text-gray-400" /> {audit.auditDate}
+                  </p>
+                </div>
+                <Badge variant={getStatusVariant(audit.status)}>
+                  {audit.status?.replace(/_/g, ' ')}
+                </Badge>
               </div>
-              <span className={`px-3 py-1 text-xs font-semibold rounded-full ${statusColor(audit.status)}`}>
-                {audit.status?.replace(/_/g, ' ')}
-              </span>
-            </div>
 
-            <div className="mt-2 flex justify-between items-center">
-              <div>
-                <span className="text-xs text-gray-400">Compliance Score</span>
-                <p className={`text-2xl font-bold ${audit.overallAccessibilityScore >= 80 ? 'text-success' : audit.overallAccessibilityScore >= 50 ? 'text-secondary' : 'text-danger'}`}>
-                  {audit.overallAccessibilityScore ? `${audit.overallAccessibilityScore.toFixed(1)}%` : '—'}
-                </p>
+              <div className="mt-2 flex justify-between items-center">
+                <div>
+                  <span className="text-xs text-textLight font-semibold uppercase tracking-wider">Compliance Score</span>
+                  <p className={`text-2xl font-bold ${audit.overallAccessibilityScore >= 80 ? 'text-success-dark' : audit.overallAccessibilityScore >= 50 ? 'text-warning-dark' : 'text-danger-dark'}`}>
+                    {audit.overallAccessibilityScore ? `${audit.overallAccessibilityScore.toFixed(1)}%` : '—'}
+                  </p>
+                </div>
+                <Button 
+                  variant="outline"
+                  onClick={() => audit.status === 'APPROVED' ? navigate('/reports') : toast.info('Audit continuation feature coming soon.')}
+                  icon={FileText}
+                >
+                  {audit.status === 'APPROVED' ? 'View Report' : 'Continue'}
+                </Button>
               </div>
-              <button 
-                onClick={() => audit.status === 'APPROVED' ? navigate('/reports') : toast.info('Audit continuation feature coming soon.')}
-                className="flex items-center gap-2 text-primary hover:text-primary-dark font-medium bg-primary-50 hover:bg-primary-50 px-3 py-2 rounded-lg transition-colors">
-                <FileText size={16} /> {audit.status === 'APPROVED' ? 'View Report' : 'Continue'}
-              </button>
-            </div>
 
-            {audit.remarks && (
-              <div className="flex items-start justify-between gap-2 border-t border-gray-100 pt-3">
-                <p className="text-xs text-gray-400 italic">"{audit.remarks}"</p>
-                <TextToSpeech text={`Audit remarks for ${audit.buildingName}: ${audit.remarks}`} ariaLabel={`Read remarks for ${audit.buildingName}`} />
-              </div>
-            )}
-          </div>
+              {audit.remarks && (
+                <div className="flex items-start justify-between gap-2 border-t border-gray-100 pt-4 mt-2">
+                  <p className="text-sm text-textLight italic font-medium bg-gray-50 p-3 rounded-lg border border-gray-100 w-full">"{audit.remarks}"</p>
+                  <div className="flex-shrink-0 mt-1">
+                    <TextToSpeech text={`Audit remarks for ${audit.buildingName}: ${audit.remarks}`} ariaLabel={`Read remarks for ${audit.buildingName}`} />
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         ))}
         {audits.length === 0 && !loading && (
           <div className="col-span-2 text-center py-16">
