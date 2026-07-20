@@ -6,6 +6,8 @@ import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info
 import dashboardService from '../services/dashboardService';
 import InclusionLeaderboard from '../components/InclusionLeaderboard';
 import AccessibilityTrendsChart from '../components/AccessibilityTrendsChart';
+import QuickActions from '../components/QuickActions';
+import RecentAuditsTable from '../components/RecentAuditsTable';
 
 import { motion } from 'framer-motion';
 
@@ -81,6 +83,15 @@ const AdminDashboard = ({ stats, navigate }) => (
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
         <InclusionLeaderboard />
+      </motion.div>
+    </motion.div>
+
+    <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+      <motion.div variants={itemVariants} className="lg:col-span-1 h-full">
+        <QuickActions />
+      </motion.div>
+      <motion.div variants={itemVariants} className="lg:col-span-2 h-full">
+        <RecentAuditsTable />
       </motion.div>
     </motion.div>
   </motion.div>
