@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight } from 'lucide-react';
+import Avatar from '../components/ui/Avatar';
 
 const menuItems = [
   { name: 'Dashboard',  path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
@@ -38,12 +39,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
       <aside
         id="sidebar-nav"
-        className={`w-60 flex flex-col glass border-r border-white/50 h-[calc(100vh-64px)] fixed md:static top-16 left-0 z-40 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
+        className={`w-64 flex flex-col bg-cards border-r border-gray-100 h-[calc(100vh-64px)] fixed md:static top-16 left-0 z-40 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
         aria-label="Sidebar Navigation"
       >
         {/* Main nav items */}
-        <nav className="flex-1 py-5 px-3 space-y-0.5 overflow-y-auto">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 pb-2">Navigation</p>
+        <nav className="flex-1 py-6 px-4 space-y-1 overflow-y-auto">
+          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-2 pb-3">Navigation</p>
           {mainItems.map(item => {
             const Icon = item.icon;
             const isActive = location.pathname.startsWith(item.path);
@@ -52,16 +53,16 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 key={item.name}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group relative ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 group relative ${
                   isActive
-                    ? 'bg-primary text-white shadow-md shadow-primary/25'
-                    : 'text-gray-600 hover:bg-gray-100/80 hover:text-gray-900'
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
                 }`}
                 aria-current={isActive ? 'page' : undefined}
               >
-                <Icon size={18} className={isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'} />
+                <Icon size={18} className={isActive ? 'text-primary' : 'text-gray-400 group-hover:text-gray-600'} />
                 <span className="flex-1">{item.name}</span>
-                {isActive && <ChevronRight size={14} className="text-white/70" />}
+                {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full" />}
               </Link>
             );
           })}
@@ -78,14 +79,15 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                   key={item.name}
                   to={item.path}
                   onClick={() => setIsOpen(false)}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 group relative ${
                     isActive
-                      ? 'bg-primary text-white shadow-md shadow-primary/25'
-                      : 'text-gray-600 hover:bg-gray-100/80 hover:text-gray-900'
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
                   }`}
                 >
-                  <Icon size={18} className={isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-700'} />
+                  <Icon size={18} className={isActive ? 'text-primary' : 'text-gray-400 group-hover:text-gray-600'} />
                   <span>{item.name}</span>
+                  {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-primary rounded-r-full" />}
                 </Link>
               );
             })}
@@ -93,15 +95,11 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         )}
 
         {/* User info strip */}
-        <div className="mx-3 mb-4 p-3 rounded-xl bg-gray-50 border border-gray-100">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-              {user.fullName?.charAt(0)}
-            </div>
-            <div className="overflow-hidden">
-              <p className="text-xs font-semibold text-gray-800 truncate">{user.fullName?.split(' ')[0]}</p>
-              <p className="text-[10px] text-gray-500 truncate">{user.role}</p>
-            </div>
+        <div className="mx-4 mb-6 p-3 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm flex items-center gap-3">
+          <Avatar name={user.fullName} size="md" />
+          <div className="overflow-hidden">
+            <p className="text-sm font-bold text-gray-900 truncate leading-tight">{user.fullName?.split(' ')[0]}</p>
+            <p className="text-xs font-semibold text-primary truncate mt-0.5">{user.role}</p>
           </div>
         </div>
       </aside>
