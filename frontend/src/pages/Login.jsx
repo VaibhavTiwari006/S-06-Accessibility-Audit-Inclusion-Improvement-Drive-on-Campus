@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogIn, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { LogIn, Eye, EyeOff } from 'lucide-react';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Alert from '../components/ui/Alert';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -55,68 +58,56 @@ const Login = () => {
           </div>
           
           {error && (
-            <div className="mb-6 bg-red-50/80 backdrop-blur-sm border border-red-100 p-4 flex items-start gap-3 rounded-xl animate-scale-in">
-              <AlertCircle className="text-red-500 flex-shrink-0 mt-0.5" size={18} />
-              <p className="text-sm text-red-700 font-medium leading-relaxed" role="alert">{error}</p>
+            <div className="mb-6 animate-scale-in">
+              <Alert variant="danger">{error}</Alert>
             </div>
           )}
 
           <form className="space-y-5" onSubmit={handleSubmit}>
-            <div className="space-y-1.5">
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-700 ml-1">Email Address</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
+            <Input
+              label="Email Address"
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@campus.edu"
+            />
+
+            <div className="space-y-1.5 relative">
+              <Input
+                label="Password"
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input-field shadow-sm bg-white/60 focus:bg-white"
-                placeholder="admin@campus.edu"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="pr-10"
               />
-            </div>
-
-            <div className="space-y-1.5">
-              <label htmlFor="password" className="block text-sm font-semibold text-gray-700 ml-1">Password</label>
-              <div className="relative">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="input-field shadow-sm bg-white/60 focus:bg-white pr-10"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors focus:outline-none"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-            </div>
-
-            <div className="pt-2">
               <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full flex justify-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg shadow-primary/20 text-sm font-bold text-white tracking-wide bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-8 text-gray-400 hover:text-gray-600 transition-colors focus:outline-none"
               >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Signing In...
-                  </span>
-                ) : 'Sign In to Portal'}
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
+            </div>
+
+            <div className="pt-4">
+              <Button
+                type="submit"
+                fullWidth
+                size="lg"
+                isLoading={isSubmitting}
+                className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary"
+              >
+                Sign In to Portal
+              </Button>
             </div>
           </form>
 
