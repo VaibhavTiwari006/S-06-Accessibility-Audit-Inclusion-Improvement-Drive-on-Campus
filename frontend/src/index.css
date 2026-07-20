@@ -3,30 +3,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @theme {
-  --color-primary-50: #FDE8E7;
-  --color-primary-light: #E84D47;
-  --color-primary: #DA251D;
-  --color-primary-dark: #B31912;
+  --color-primary-50: #fef2f2;
+  --color-primary-light: #ef4444;
+  --color-primary: #C8102E;
+  --color-primary-dark: #991b1b;
   
-  --color-secondary-50: #FFFBEB;
-  --color-secondary-light: #FBBF24;
-  --color-secondary: #F59E0B;
-  --color-secondary-dark: #D97706;
+  --color-secondary-50: #f8fafc;
+  --color-secondary-light: #334155;
+  --color-secondary: #1E293B;
+  --color-secondary-dark: #0f172a;
 
-  --color-success-50: #ECFDF5;
-  --color-success-light: #34D399;
-  --color-success: #10B981;
-  --color-success-dark: #059669;
+  --color-accent: #2563EB;
 
-  --color-danger-50: #FEF2F2;
-  --color-danger-light: #F87171;
-  --color-danger: #EF4444;
-  --color-danger-dark: #DC2626;
+  --color-success-50: #f0fdf4;
+  --color-success-light: #22c55e;
+  --color-success: #16A34A;
+  --color-success-dark: #15803d;
 
-  --color-background: #F1F5F9;
+  --color-warning-50: #fffbeb;
+  --color-warning-light: #fbbf24;
+  --color-warning: #F59E0B;
+  --color-warning-dark: #b45309;
+
+  --color-danger-50: #fef2f2;
+  --color-danger-light: #f87171;
+  --color-danger: #DC2626;
+  --color-danger-dark: #991b1b;
+
+  --color-background: #F8FAFC;
   --color-cards: #FFFFFF;
   --color-textMain: #0F172A;
-  --color-textLight: #64748B;
+  --color-textLight: #475569;
 
   --font-sans: "Inter", sans-serif;
   --font-heading: "Outfit", sans-serif;
