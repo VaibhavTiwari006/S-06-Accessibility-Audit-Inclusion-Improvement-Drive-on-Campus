@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera } from 'lucide-react';
+import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera, Accessibility, Volume2, Eye, Monitor } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,7 +8,13 @@ import { useAccessibility } from '../context/AccessibilityContext';
 
 const Settings = () => {
   const { user, logout } = useAuth();
-  const { darkMode, setDarkMode } = useAccessibility();
+  const { 
+    darkMode, setDarkMode, 
+    textToSpeech, toggleTextToSpeech, ttsVoice, changeTtsVoice,
+    highContrast, toggleHighContrast,
+    dyslexiaFont, toggleDyslexiaFont,
+    fontSize, changeFontSize
+  } = useAccessibility();
   const [activeTab, setActiveTab] = useState('profile');
   const [notifications, setNotifications] = useState({
     email: true,
@@ -55,7 +61,8 @@ const Settings = () => {
               { id: 'profile', icon: <User size={18} />, label: 'Profile Information' },
               { id: 'notifications', icon: <Bell size={18} />, label: 'Notifications' },
               { id: 'security', icon: <Shield size={18} />, label: 'Security' },
-              { id: 'appearance', icon: <Paintbrush size={18} />, label: 'Appearance' }
+              { id: 'appearance', icon: <Paintbrush size={18} />, label: 'Appearance' },
+              { id: 'accessibility', icon: <Accessibility size={18} />, label: 'Accessibility' }
             ].map(tab => (
               <button 
                 key={tab.id}
@@ -227,6 +234,95 @@ const Settings = () => {
                     </div>
                   </div>
                 </div>
+              </motion.div>
+            )}
+
+            {activeTab === 'accessibility' && (
+              <motion.div key="accessibility" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-6">
+                <div className="border-b border-gray-100 pb-3">
+                  <h3 className="text-2xl font-bold text-textMain">Deep Accessibility</h3>
+                  <p className="text-sm text-textLight mt-1">Configure advanced accessibility options like Screen Reader and Dyslexia support.</p>
+                </div>
+                
+                {/* Screen Reader Settings */}
+                <div className="bg-cards border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-soft transition-all">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2.5 bg-primary/10 text-primary rounded-xl"><Volume2 size={22} /></div>
+                      <div>
+                        <h4 className="font-bold text-textMain text-lg">Screen Reader (TTS)</h4>
+                        <p className="text-sm text-textLight">Read out text when hovering over key elements.</p>
+                      </div>
+                    </div>
+                    <ToggleSwitch checked={textToSpeech} onChange={toggleTextToSpeech} label="Toggle Screen Reader" />
+                  </div>
+                  
+                  {textToSpeech && (
+                    <div className="mt-4 pt-4 border-t border-gray-100 pl-2 pr-2">
+                      <label className="block text-sm font-bold text-textMain mb-2">Voice Preference</label>
+                      <select 
+                        value={ttsVoice} 
+                        onChange={(e) => changeTtsVoice(e.target.value)}
+                        className="w-full bg-cards border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-medium text-textMain focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-sm"
+                      >
+                        <option value="default">System Default Voice</option>
+                        <option value="Google US English">Google US English</option>
+                        <option value="Google UK English Female">Google UK English Female</option>
+                        <option value="Microsoft David - English (United States)">Microsoft David (US Male)</option>
+                        <option value="Microsoft Zira - English (United States)">Microsoft Zira (US Female)</option>
+                      </select>
+                    </div>
+                  )}
+                </div>
+
+                {/* Visual Settings */}
+                <div className="bg-cards border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-soft transition-all">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2.5 bg-primary/10 text-primary rounded-xl"><Eye size={22} /></div>
+                    <div>
+                      <h4 className="font-bold text-textMain text-lg">Visual Adaptations</h4>
+                      <p className="text-sm text-textLight">Adjust fonts and contrast for readability.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h5 className="font-bold text-textMain">High Contrast Mode</h5>
+                        <p className="text-xs text-textLight mt-0.5">Increase border thickness and color contrast.</p>
+                      </div>
+                      <ToggleSwitch checked={highContrast} onChange={toggleHighContrast} label="Toggle High Contrast" />
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h5 className="font-bold text-textMain">Dyslexia-Friendly Font</h5>
+                        <p className="text-xs text-textLight mt-0.5">Use OpenDyslexic font for easier reading.</p>
+                      </div>
+                      <ToggleSwitch checked={dyslexiaFont} onChange={toggleDyslexiaFont} label="Toggle Dyslexia Font" />
+                    </div>
+
+                    <div className="pt-2">
+                      <label className="block text-sm font-bold text-textMain mb-2">Interface Font Size</label>
+                      <div className="flex gap-3">
+                        {['Small', 'Medium', 'Large'].map((size) => (
+                          <button
+                            key={size}
+                            onClick={() => changeFontSize(size)}
+                            className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-all ${
+                              fontSize === size 
+                                ? 'bg-primary text-white shadow-soft-md' 
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
               </motion.div>
             )}
           </AnimatePresence>

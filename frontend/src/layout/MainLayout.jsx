@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -9,7 +9,40 @@ import { useAccessibility } from '../context/AccessibilityContext';
 
 const MainLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { distractionFree } = useAccessibility();
+  const { distractionFree, speak, textToSpeech } = useAccessibility();
+
+  // Screen Reader (TTS) Hover Logic
+  useEffect(() => {
+    if (!textToSpeech) return;
+    
+    let debounceTimer;
+
+    const handleMouseOver = (e) => {
+      const target = e.target.closest('button, a, h1, h2, h3, h4, h5, h6, label, [aria-label], [title], .tts-readable');
+      if (target) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          const text = target.getAttribute('aria-label') || target.getAttribute('title') || target.innerText;
+          if (text && text.trim().length > 0) {
+            speak(text.trim());
+          }
+        }, 600); // 600ms hover delay
+      }
+    };
+
+    const handleMouseOut = () => {
+      clearTimeout(debounceTimer);
+    };
+
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
+
+    return () => {
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
+      clearTimeout(debounceTimer);
+    };
+  }, [textToSpeech, speak]);
 
   return (
     <div className={`flex flex-col min-h-screen bg-transparent text-textMain font-sans relative ${distractionFree ? 'bg-white' : ''}`}>

@@ -116,6 +116,15 @@ const AuditorDashboard = ({ stats, navigate }) => (
         <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" />
       </motion.div>
     </motion.div>
+    
+    <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+      <motion.div variants={itemVariants} className="lg:col-span-1 h-full">
+        <QuickActions />
+      </motion.div>
+      <motion.div variants={itemVariants} className="lg:col-span-2 h-full">
+        <RecentAuditsTable />
+      </motion.div>
+    </motion.div>
   </motion.div>
 );
 
@@ -135,6 +144,15 @@ const MaintenanceDashboard = ({ stats, navigate }) => (
         <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-rose-600 bg-rose-50" onClick={() => navigate('/issues')} />
       </motion.div>
     </motion.div>
+    
+    <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+      <motion.div variants={itemVariants} className="lg:col-span-1 h-full">
+        <QuickActions />
+      </motion.div>
+      <motion.div variants={itemVariants} className="lg:col-span-2 h-full">
+        <RecentAuditsTable />
+      </motion.div>
+    </motion.div>
   </motion.div>
 );
 
@@ -152,6 +170,15 @@ const StudentDashboard = ({ stats, navigate }) => (
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Avg. Compliance" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" />
+      </motion.div>
+    </motion.div>
+
+    <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+      <motion.div variants={itemVariants} className="lg:col-span-1 h-full">
+        <QuickActions />
+      </motion.div>
+      <motion.div variants={itemVariants} className="lg:col-span-2 h-full">
+        <RecentAuditsTable />
       </motion.div>
     </motion.div>
   </motion.div>

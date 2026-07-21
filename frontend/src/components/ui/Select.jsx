@@ -8,7 +8,7 @@ const Select = React.forwardRef(({ label, error, options, className = '', id, ..
       <select
         ref={ref}
         id={selectId}
-        className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-textMain focus:outline-none focus:ring-2 focus:border-primary transition-all shadow-sm appearance-none ${error ? 'border-danger focus:border-danger ring-danger/20' : ''}`}
+        className={`w-full px-4 py-2.5 bg-cards border border-gray-200 rounded-xl text-sm font-medium text-textMain focus:outline-none focus:ring-2 focus:border-primary transition-all shadow-sm appearance-none ${error ? 'border-danger focus:border-danger ring-danger/20' : ''}`}
         {...props}
       >
         {options.map((opt) => (

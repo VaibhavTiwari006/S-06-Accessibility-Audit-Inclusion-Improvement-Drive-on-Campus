@@ -14,7 +14,7 @@ const Input = React.forwardRef(({ label, error, className = '', id, icon: Icon, 
         <input
           ref={ref}
           id={inputId}
-          className={`w-full ${Icon ? 'pl-10' : 'px-4'} pr-4 py-2.5 bg-white border rounded-xl text-sm font-medium text-textMain placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-primary transition-all shadow-sm ${error ? 'border-danger focus:border-danger ring-danger/20' : 'border-gray-200'}`}
+          className={`w-full ${Icon ? 'pl-10' : 'px-4'} pr-4 py-2.5 bg-cards border rounded-xl text-sm font-medium text-textMain placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:border-primary transition-all shadow-sm ${error ? 'border-danger focus:border-danger ring-danger/20' : 'border-gray-200'}`}
           {...props}
         />
       </div>

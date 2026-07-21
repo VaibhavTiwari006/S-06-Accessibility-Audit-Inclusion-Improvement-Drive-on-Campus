@@ -41,6 +41,14 @@ export const AccessibilityProvider = ({ children }) => {
     return localStorage.getItem('access_darkMode') === 'true';
   });
 
+  const [textToSpeech, setTextToSpeech] = useState(() => {
+    return localStorage.getItem('access_textToSpeech') === 'true';
+  });
+
+  const [ttsVoice, setTtsVoice] = useState(() => {
+    return localStorage.getItem('access_ttsVoice') || 'default';
+  });
+
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);
     if (highContrast) {
@@ -104,6 +112,42 @@ export const AccessibilityProvider = ({ children }) => {
     }
   }, [darkMode]);
 
+  useEffect(() => {
+    localStorage.setItem('access_textToSpeech', textToSpeech);
+    if (!textToSpeech) {
+      window.speechSynthesis?.cancel();
+    }
+  }, [textToSpeech]);
+
+  useEffect(() => {
+    localStorage.setItem('access_ttsVoice', ttsVoice);
+  }, [ttsVoice]);
+
+  const speak = (text) => {
+    if (!textToSpeech || !window.speechSynthesis) return;
+    
+    // Cancel any ongoing speech
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Attempt to set voice if not default
+    if (ttsVoice !== 'default') {
+      const voices = window.speechSynthesis.getVoices();
+      // Try to find a match, either by name or just using a different index as fallback
+      const selectedVoice = voices.find(v => v.name === ttsVoice) || voices[0];
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+    }
+    
+    // Slight adjustments for better screen reader experience
+    utterance.rate = 1.0; 
+    utterance.pitch = 1.0;
+    
+    window.speechSynthesis.speak(utterance);
+  };
+
   const toggleHighContrast = () => setHighContrast(!highContrast);
   const changeFontSize = (size) => setFontSize(size);
   const toggleDyslexiaFont = () => setDyslexiaFont(!dyslexiaFont);
@@ -112,6 +156,8 @@ export const AccessibilityProvider = ({ children }) => {
   const toggleDistractionFree = () => setDistractionFree(!distractionFree);
   const toggleMagnifyMode = () => setMagnifyMode(!magnifyMode);
   const toggleVisualAlerts = () => setVisualAlerts(!visualAlerts);
+  const toggleTextToSpeech = () => setTextToSpeech(!textToSpeech);
+  const changeTtsVoice = (voice) => setTtsVoice(voice);
 
   return (
     <AccessibilityContext.Provider value={{ 
@@ -123,7 +169,10 @@ export const AccessibilityProvider = ({ children }) => {
       distractionFree, toggleDistractionFree,
       magnifyMode, toggleMagnifyMode,
       visualAlerts, toggleVisualAlerts,
-      darkMode, setDarkMode
+      darkMode, setDarkMode,
+      textToSpeech, toggleTextToSpeech,
+      ttsVoice, changeTtsVoice,
+      speak
     }}>
       {children}
     </AccessibilityContext.Provider>

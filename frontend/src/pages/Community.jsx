@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   HeartHandshake, Users, Map, Download, CheckCircle,
-  Calendar, MessageSquare, Lightbulb, Plus, MapPin,
+  Calendar, MessageSquare, Lightbulb, Plus, MapPin, Megaphone,
   DollarSign, ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp
 } from 'lucide-react';
 import api from '../services/api';
@@ -257,10 +257,19 @@ const Community = () => {
               );
             })}
             {pilots.length === 0 && (
-              <div className="col-span-2 text-center py-10 text-gray-400">
-                <Lightbulb size={32} className="mx-auto mb-2 text-gray-300" />
-                <p className="font-medium">No pilot proposals yet.</p>
-                {isStudent && <p className="text-sm mt-1">Be the first to propose an improvement!</p>}
+              <div className="col-span-1 md:col-span-2 text-center py-16 px-4 glass-panel rounded-3xl border border-white/60">
+                <div className="bg-white/50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 border border-white shadow-soft-sm">
+                  <Lightbulb size={36} className="text-amber-500/60" />
+                </div>
+                <p className="text-gray-700 font-extrabold text-xl font-heading mb-2">No pilot proposals yet</p>
+                <p className="text-gray-500 text-sm max-w-sm mx-auto mb-6">
+                  {isStudent ? "Be the first to propose an accessibility improvement on campus!" : "There are currently no community pilots waiting for approval."}
+                </p>
+                {isStudent && (
+                  <button onClick={() => setShowProposalModal(true)} className="btn-premium inline-flex items-center gap-2">
+                    <Plus size={16} /> Propose First Pilot
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -295,7 +304,13 @@ const Community = () => {
                     </div>
                   </div>
                 ))}
-                {campaigns.length === 0 && <p className="text-textLight text-sm">No campaigns found.</p>}
+                {campaigns.length === 0 && (
+                  <div className="text-center py-10 px-4 bg-white/40 rounded-2xl border border-gray-100 border-dashed">
+                    <Megaphone size={28} className="mx-auto text-gray-300 mb-2" />
+                    <p className="font-semibold text-textMain">No active campaigns</p>
+                    <p className="text-xs text-textLight mt-1">Check back later for new awareness drives.</p>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -325,7 +340,13 @@ const Community = () => {
                     </div>
                   </div>
                 ))}
-                {feedbackSessions.length === 0 && <p className="text-textLight text-sm">No feedback sessions found.</p>}
+                {feedbackSessions.length === 0 && (
+                  <div className="text-center py-10 px-4 bg-white/40 rounded-2xl border border-gray-100 border-dashed">
+                    <Users size={28} className="mx-auto text-gray-300 mb-2" />
+                    <p className="font-semibold text-textMain">No sessions scheduled</p>
+                    <p className="text-xs text-textLight mt-1">Upcoming feedback sessions will appear here.</p>
+                  </div>
+                )}
               </div>
             )}
           </div>
