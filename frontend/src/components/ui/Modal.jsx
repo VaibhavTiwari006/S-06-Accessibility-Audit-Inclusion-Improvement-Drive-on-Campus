@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-lg' }) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className={elative w-full  bg-cards rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]}
+            className={`relative w-full ${maxWidth} bg-cards rounded-3xl shadow-xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]`}
           >
             {title && (
               <div className="flex items-center justify-between p-6 border-b border-gray-100">

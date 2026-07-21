@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { AlertCircle, CheckCircle, Info, AlertTriangle } from 'lucide-react';
 
 const icons = {
@@ -18,7 +18,7 @@ const styles = {
 const Alert = ({ variant = 'info', title, children, className = '' }) => {
   const Icon = icons[variant];
   return (
-    <div className={p-4 rounded-xl border flex gap-3  } role="alert">
+    <div className={`p-4 rounded-xl border flex gap-3 ${styles[variant]} ${className}`} role="alert">
       {Icon && <Icon className="shrink-0 mt-0.5" size={20} />}
       <div>
         {title && <h5 className="font-bold mb-1">{title}</h5>}

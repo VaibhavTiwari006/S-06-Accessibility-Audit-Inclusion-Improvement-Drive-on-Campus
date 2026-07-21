@@ -1,15 +1,15 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 export const ProgressBar = ({ value, max = 100, className = '', color = 'bg-primary' }) => {
   const percentage = Math.min(100, Math.max(0, (value / max) * 100));
   return (
-    <div className={w-full bg-gray-100 rounded-full h-2 overflow-hidden } role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax={max}>
+    <div className={`w-full bg-gray-100 rounded-full h-2 overflow-hidden ${className}`} role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax={max}>
       <motion.div
         initial={{ width: 0 }}
-        animate={{ width: ${percentage}% }}
+        animate={{ width: `${percentage}%` }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className={h-full rounded-full }
+        className={`h-full rounded-full ${color}`}
       />
     </div>
   );

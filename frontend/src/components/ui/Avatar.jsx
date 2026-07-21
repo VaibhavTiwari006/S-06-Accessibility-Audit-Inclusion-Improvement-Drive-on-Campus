@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 const Avatar = ({ name, src, size = 'md', className = '' }) => {
   const sizes = {
@@ -14,7 +14,7 @@ const Avatar = ({ name, src, size = 'md', className = '' }) => {
   };
 
   return (
-    <div className={elative inline-flex items-center justify-center rounded-full bg-gradient-to-br from-primary/80 to-primary text-white font-bold shadow-sm  }>
+    <div className={`relative inline-flex items-center justify-center rounded-full bg-gradient-to-br from-primary/80 to-primary text-white font-bold shadow-sm ${sizes[size]} ${className}`}>
       {src ? (
         <img src={src} alt={name} className="w-full h-full rounded-full object-cover" />
       ) : (

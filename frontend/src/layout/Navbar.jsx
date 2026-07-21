@@ -20,6 +20,17 @@ const Navbar = ({ toggleSidebar }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isCmdOpen, setIsCmdOpen] = useState(false);
 
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsCmdOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const roleColor = roleColors[user?.role?.toUpperCase()] || 'bg-gray-50 text-gray-700 border-gray-100';
   const initial = user?.fullName?.charAt(0)?.toUpperCase() || '?';
 

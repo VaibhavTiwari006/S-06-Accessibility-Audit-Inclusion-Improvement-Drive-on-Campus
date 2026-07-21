@@ -1,14 +1,14 @@
-﻿import React from 'react';
+import React from 'react';
 
 const Select = React.forwardRef(({ label, error, options, className = '', id, ...props }, ref) => {
   const selectId = id || label?.toLowerCase().replace(/\s+/g, '-');
   return (
-    <div className={space-y-1.5 }>
+    <div className={`space-y-1.5 ${className}`}>
       {label && <label htmlFor={selectId} className="block text-sm font-semibold text-textMain">{label}</label>}
       <select
         ref={ref}
         id={selectId}
-        className={w-full px-4 py-2.5 bg-white border rounded-xl text-sm font-medium text-textMain focus:outline-none focus:ring-2 focus:border-primary transition-all shadow-sm appearance-none }
+        className={`w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-textMain focus:outline-none focus:ring-2 focus:border-primary transition-all shadow-sm appearance-none ${error ? 'border-danger focus:border-danger ring-danger/20' : ''}`}
         {...props}
       >
         {options.map((opt) => (

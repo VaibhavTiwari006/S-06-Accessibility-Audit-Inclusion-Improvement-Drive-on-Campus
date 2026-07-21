@@ -1,7 +1,7 @@
-﻿import React from 'react';
+import React from 'react';
 
 export const Skeleton = ({ className = '' }) => (
-  <div className={skeleton }></div>
+  <div className={`skeleton ${className}`}></div>
 );
 
 export const SkeletonCard = () => (

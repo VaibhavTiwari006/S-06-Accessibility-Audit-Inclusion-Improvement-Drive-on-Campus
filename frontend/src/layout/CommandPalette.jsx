@@ -6,6 +6,7 @@ import Modal from '../components/ui/Modal';
 
 const CommandPalette = ({ isOpen, onClose }) => {
   const [search, setSearch] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
 
   const commands = [
@@ -19,6 +20,11 @@ const CommandPalette = ({ isOpen, onClose }) => {
 
   const filteredCommands = commands.filter(cmd => cmd.title.toLowerCase().includes(search.toLowerCase()));
 
+  // Reset selection when search changes
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [search]);
+
   const handleSelect = (path) => {
     navigate(path);
     onClose();
@@ -27,14 +33,49 @@ const CommandPalette = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      // Toggle palette (Ctrl + K)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        isOpen ? onClose() : onClose(false); // Let parent handle opening if possible, but we don't have access to setIsOpen here. 
+        isOpen ? onClose() : onClose(false); // Navbar handles state, but we can call onClose if open. If closed, we can't open it from here easily without a callback to open. Wait, we can't open it if we don't have setIsOpen. We'll fix Navbar to handle Ctrl+K if needed, but for now we intercept it to at least close.
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      // Handle shortcuts (Ctrl + Key)
+      if (e.ctrlKey || e.metaKey) {
+        const key = e.key.toUpperCase();
+        const cmd = commands.find(c => c.shortcut === key);
+        if (cmd) {
+          e.preventDefault();
+          handleSelect(cmd.path);
+          return;
+        }
+      }
+
+      // Handle arrow keys when open
+      if (isOpen) {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev < filteredCommands.length - 1 ? prev + 1 : 0));
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : filteredCommands.length - 1));
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (filteredCommands[selectedIndex]) {
+            handleSelect(filteredCommands[selectedIndex].path);
+          }
+        }
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, navigate, search, filteredCommands, selectedIndex]);
 
   return (
     <AnimatePresence>
@@ -70,14 +111,17 @@ const CommandPalette = ({ isOpen, onClose }) => {
             <div className="max-h-80 overflow-y-auto p-2">
               {filteredCommands.length > 0 ? (
                 <ul className="space-y-1">
-                  {filteredCommands.map((cmd) => (
+                  {filteredCommands.map((cmd, index) => (
                     <li key={cmd.id}>
                       <button
                         onClick={() => handleSelect(cmd.path)}
-                        className="w-full flex items-center justify-between px-4 py-3 text-sm text-textMain hover:bg-primary/5 hover:text-primary rounded-xl transition-colors group"
+                        onMouseEnter={() => setSelectedIndex(index)}
+                        className={`w-full flex items-center justify-between px-4 py-3 text-sm rounded-xl transition-colors group ${
+                          selectedIndex === index ? 'bg-primary/10 text-primary' : 'text-textMain hover:bg-primary/5 hover:text-primary'
+                        }`}
                       >
                         <div className="flex items-center gap-3">
-                          <cmd.icon size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
+                          <cmd.icon size={18} className={`${selectedIndex === index ? 'text-primary' : 'text-gray-400 group-hover:text-primary'} transition-colors`} />
                           <span className="font-medium">{cmd.title}</span>
                         </div>
                         {cmd.shortcut && (
