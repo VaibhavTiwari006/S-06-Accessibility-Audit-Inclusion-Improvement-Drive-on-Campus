@@ -25,12 +25,12 @@ const MapBounds = ({ buildings }) => {
   return null;
 };
 
-const CampusMap = ({ buildings }) => {
+const CampusMap = ({ buildings, className = "" }) => {
   // Chandigarh University approximate coordinates
   const defaultCenter = [30.7699, 76.5754];
 
   return (
-    <div className="w-full h-[400px] rounded-2xl overflow-hidden border border-white/60 shadow-soft relative z-0">
+    <div className={`w-full h-[400px] rounded-2xl overflow-hidden border border-white/60 shadow-soft relative z-0 ${className}`}>
       <MapContainer 
         center={defaultCenter} 
         zoom={16} 

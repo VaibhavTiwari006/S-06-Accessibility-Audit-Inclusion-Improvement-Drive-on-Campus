@@ -60,8 +60,8 @@ const CampusMap = () => {
                <p className="mt-4 text-gray-500 font-medium">Loading Map Data...</p>
              </div>
           ) : (
-             <div className="absolute inset-0 [&>div]:h-full [&>div]:border-none [&>div]:rounded-none">
-                <LeafletMap buildings={buildings} />
+             <div className="absolute inset-0">
+                <LeafletMap buildings={buildings} className="!h-full !border-none !rounded-none" />
              </div>
           )}
         </div>
