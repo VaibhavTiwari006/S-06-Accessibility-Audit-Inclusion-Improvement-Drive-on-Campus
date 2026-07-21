@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Tabs = ({ tabs, defaultTab, onChange }) => {
@@ -16,7 +16,7 @@ const Tabs = ({ tabs, defaultTab, onChange }) => {
           <button
             key={tab.id}
             onClick={() => handleTabClick(tab.id)}
-            className={elative px-4 py-3 text-sm font-semibold transition-colors whitespace-nowrap focus:outline-none }
+            className={`relative px-4 py-3 text-sm font-semibold transition-colors whitespace-nowrap focus:outline-none ${activeTab === tab.id ? 'text-primary' : 'text-gray-500 hover:text-gray-700'}`}
           >
             <div className="flex items-center gap-2">
               {tab.icon && <tab.icon size={16} />}

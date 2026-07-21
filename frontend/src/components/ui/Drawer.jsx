@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -28,7 +28,7 @@ const Drawer = ({ isOpen, onClose, title, children, position = 'right' }) => {
             initial="hidden" animate="visible" exit="hidden"
             variants={variants[position]}
             transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-            className={bsolute top-0 bottom-0 w-full max-w-md bg-cards shadow-2xl border-gray-100 flex flex-col }
+            className={`absolute top-0 bottom-0 w-full max-w-md bg-cards shadow-2xl border-gray-100 flex flex-col ${styleClasses}`}
           >
             <div className="flex items-center justify-between p-6 border-b border-gray-100">
               <h2 className="text-xl font-heading font-bold text-textMain">{title}</h2>

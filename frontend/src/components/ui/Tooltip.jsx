@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Tooltip = ({ content, children, position = 'top' }) => {
@@ -27,7 +27,7 @@ const Tooltip = ({ content, children, position = 'top' }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className={bsolute z-50 px-3 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap pointer-events-none }
+            className={`absolute z-50 px-3 py-1.5 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap pointer-events-none ${positionStyles[position]}`}
             role="tooltip"
           >
             {content}
