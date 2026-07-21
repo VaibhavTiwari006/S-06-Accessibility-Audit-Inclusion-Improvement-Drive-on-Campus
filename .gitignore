@@ -26,3 +26,5 @@ Thumbs.db
 application-local.properties
 
 !**/.mvn/wrapper/*.jar
+
+runs.json
