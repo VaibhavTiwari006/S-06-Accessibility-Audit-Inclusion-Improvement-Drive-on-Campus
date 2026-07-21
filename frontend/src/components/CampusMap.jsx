@@ -16,6 +16,14 @@ const MapBounds = ({ buildings }) => {
   const map = useMap();
   
   useEffect(() => {
+    // Invalidate size after a short delay to fix grey map issues in dynamic containers
+    const timer = setTimeout(() => {
+      map.invalidateSize();
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [map]);
+
+  useEffect(() => {
     if (buildings.length > 0) {
       const bounds = L.latLngBounds(buildings.map(b => [b.lat || 30.7699, b.lng || 76.5754]));
       map.fitBounds(bounds, { padding: [50, 50] });
