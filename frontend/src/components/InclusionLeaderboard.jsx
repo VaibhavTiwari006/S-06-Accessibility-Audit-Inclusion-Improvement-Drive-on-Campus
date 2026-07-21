@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Trophy, Medal, Building2, ChevronRight } from 'lucide-react';
 import buildingService from '../services/buildingService';
+import auditService from '../services/auditService';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardContent } from './ui/Card';
 import Button from './ui/Button';
@@ -13,11 +14,28 @@ const InclusionLeaderboard = () => {
   useEffect(() => {
     const fetchLeaders = async () => {
       try {
-        const buildings = await buildingService.getAllBuildings();
-        // Sort by accessibility score descending and take top 5
-        const topBuildings = buildings
-          .sort((a, b) => (b.accessibilityScore || 0) - (a.accessibilityScore || 0))
+        const audits = await auditService.getAllAudits();
+        
+        // Group by building and find latest audit score
+        const buildingScores = {};
+        audits.forEach(audit => {
+          if (!audit.buildingId || typeof audit.overallAccessibilityScore !== 'number') return;
+          
+          if (!buildingScores[audit.buildingId] || new Date(audit.auditDate) > new Date(buildingScores[audit.buildingId].date)) {
+            buildingScores[audit.buildingId] = {
+              id: audit.buildingId,
+              buildingName: audit.buildingName || `Building #${audit.buildingId}`,
+              buildingCode: `BLDG-${audit.buildingId}`,
+              accessibilityScore: audit.overallAccessibilityScore,
+              date: audit.auditDate
+            };
+          }
+        });
+        
+        const topBuildings = Object.values(buildingScores)
+          .sort((a, b) => b.accessibilityScore - a.accessibilityScore)
           .slice(0, 5);
+          
         setLeaders(topBuildings);
       } catch (err) {
         console.error('Failed to fetch leaderboard', err);

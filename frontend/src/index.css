@@ -315,6 +315,11 @@
     --bg-cards: #1e293b;
     --text-main: #f8fafc;
     --text-light: #94a3b8;
+    
+    --color-background: var(--bg-main);
+    --color-cards: var(--bg-cards);
+    --color-textMain: var(--text-main);
+    --color-textLight: var(--text-light);
   }
 
   body.dark-mode *::selection {

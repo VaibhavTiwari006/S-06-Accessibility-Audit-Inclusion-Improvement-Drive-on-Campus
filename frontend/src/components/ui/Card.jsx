@@ -12,13 +12,17 @@ export const Card = ({ children, className = '', hover = false, ...props }) => {
   );
 };
 
-export const CardHeader = ({ title, subtitle, action, className = '' }) => (
+export const CardHeader = ({ title, subtitle, action, children, className = '' }) => (
   <div className={`p-6 border-b border-gray-50 flex justify-between items-start ${className}`}>
-    <div>
-      {title && <h3 className="text-lg font-heading font-bold text-textMain">{title}</h3>}
-      {subtitle && <p className="text-sm text-textLight mt-1">{subtitle}</p>}
-    </div>
-    {action && <div>{action}</div>}
+    {children ? children : (
+      <>
+        <div>
+          {title && <h3 className="text-lg font-heading font-bold text-textMain">{title}</h3>}
+          {subtitle && <p className="text-sm text-textLight mt-1">{subtitle}</p>}
+        </div>
+        {action && <div>{action}</div>}
+      </>
+    )}
   </div>
 );
 

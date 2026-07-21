@@ -296,6 +296,14 @@ const Settings = () => {
                     
                     <div className="flex items-center justify-between">
                       <div>
+                        <h5 className="font-bold text-textMain">Dark Mode</h5>
+                        <p className="text-xs text-textLight mt-0.5">Switch to a dark color palette to reduce eye strain.</p>
+                      </div>
+                      <ToggleSwitch checked={darkMode} onChange={() => setDarkMode(!darkMode)} label="Toggle Dark Mode" />
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div>
                         <h5 className="font-bold text-textMain">Dyslexia-Friendly Font</h5>
                         <p className="text-xs text-textLight mt-0.5">Use OpenDyslexic font for easier reading.</p>
                       </div>

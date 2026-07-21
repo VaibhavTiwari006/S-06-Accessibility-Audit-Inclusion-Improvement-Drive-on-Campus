@@ -74,26 +74,26 @@ const RecentAuditsTable = () => {
                   >
                     <td className="py-4 pr-4">
                       <p className="font-semibold text-textMain group-hover:text-primary transition-colors">
-                        {audit.building?.buildingName || 'Unknown Building'}
+                        {audit.buildingName || 'Unknown Building'}
                       </p>
                     </td>
                     <td className="py-4 pr-4 text-sm text-textLight">
-                      {audit.auditor?.name || 'Unknown'}
+                      {audit.auditorName || 'Unknown'}
                     </td>
                     <td className="py-4 pr-4 text-sm text-textLight flex items-center gap-1.5">
                       <Clock size={14} className="text-gray-400" />
                       {new Date(audit.auditDate).toLocaleDateString()}
                     </td>
                     <td className="py-4 text-right">
-                      {audit.complianceScore ? (
+                      {audit.overallAccessibilityScore !== null && audit.overallAccessibilityScore !== undefined ? (
                         <Badge 
                           variant={
-                            audit.complianceScore >= 80 ? 'success' : 
-                            audit.complianceScore >= 50 ? 'warning' : 
+                            audit.overallAccessibilityScore >= 80 ? 'success' : 
+                            audit.overallAccessibilityScore >= 50 ? 'warning' : 
                             'danger'
                           }
                         >
-                          {audit.complianceScore}%
+                          {audit.overallAccessibilityScore.toFixed(1)}%
                         </Badge>
                       ) : (
                         <Badge variant="secondary">N/A</Badge>
