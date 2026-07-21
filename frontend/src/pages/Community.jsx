@@ -41,16 +41,22 @@ const Community = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
+      // Use individual catches so that missing endpoints don't crash the whole page
+      const fetchFeedback = api.get('/feedback-sessions').catch(() => ({ data: { data: [] } }));
+      const fetchCampaigns = api.get('/awareness-campaigns').catch(() => ({ data: { data: [] } }));
+      const fetchPilots = pilotService.getAll().catch(() => []);
+
       const [feedbackRes, campaignRes, pilotRes] = await Promise.all([
-        api.get('/feedback-sessions'),
-        api.get('/awareness-campaigns'),
-        pilotService.getAll(),
+        fetchFeedback,
+        fetchCampaigns,
+        fetchPilots,
       ]);
-      setFeedbackSessions(feedbackRes.data.data || []);
-      setCampaigns(campaignRes.data.data || []);
-      setPilots(pilotRes);
+      
+      setFeedbackSessions(feedbackRes.data?.data || []);
+      setCampaigns(campaignRes.data?.data || []);
+      setPilots(pilotRes || []);
     } catch (error) {
-      toast.error('Failed to load community data');
+      console.error('Failed to load community data', error);
     } finally {
       setLoading(false);
     }
