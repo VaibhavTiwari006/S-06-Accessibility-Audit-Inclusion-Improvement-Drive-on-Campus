@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, Sparkles } from 'lucide-react';
+import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, Sparkles, QrCode } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 
 const menuItems = [
   { name: 'Dashboard',  path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
   { name: 'AI Scanner', path: '/scanner',   icon: Sparkles,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+  { name: 'QR Feedback', path: '/qr-code',  icon: QrCode,          roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
   { name: 'Roadmap',    path: '/roadmap',   icon: Map,             roles: ['ADMIN', 'MAINTENANCE'] },
   { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR'] },
   { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR'] },
