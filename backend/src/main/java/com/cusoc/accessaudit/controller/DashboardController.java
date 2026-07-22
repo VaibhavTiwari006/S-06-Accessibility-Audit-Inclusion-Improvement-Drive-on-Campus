@@ -23,7 +23,7 @@ public class DashboardController {
     private final DashboardService dashboardService;
 
     @GetMapping("/stats")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STUDENT')")
     @Operation(summary = "Get dashboard statistics", description = "Returns core counts, status breakdowns, and average accessibility score.")
     public ResponseEntity<ApiResponse<DashboardStatsResponse>> getStats() {
         DashboardStatsResponse stats = dashboardService.getStats();
