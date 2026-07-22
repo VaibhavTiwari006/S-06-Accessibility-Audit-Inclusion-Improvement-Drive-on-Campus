@@ -21,41 +21,54 @@ const CampusMap = lazy(() => import('../pages/CampusMap'));
 
 // Loading Fallback Component
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-[60vh]">
-    <div className="flex flex-col items-center gap-8">
-      <div className="relative flex items-center justify-center">
-        {/* Outer glowing dashed ring */}
+  <div className="flex flex-col items-center justify-center min-h-[60vh] bg-transparent">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="flex flex-col items-center gap-6"
+    >
+      <div className="relative flex items-center justify-center w-16 h-16 bg-white rounded-2xl shadow-lg shadow-primary/5 border border-gray-100/80 backdrop-blur-sm">
+        <motion.div 
+          animate={{ scale: [1, 1.05, 1], opacity: [0.9, 1, 0.9] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-md shadow-primary/20"
+        >
+          <span className="text-white font-bold text-lg font-heading tracking-tight">CU</span>
+        </motion.div>
+        
+        {/* Subtle spinning ring around the logo */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          className="absolute w-20 h-20 rounded-full border-[3px] border-dashed border-primary/30"
-        />
-        {/* Inner solid spinning arc */}
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute w-14 h-14 rounded-full border-t-[3px] border-r-[3px] border-primary"
-        />
-        {/* Center pulsing core */}
-        <motion.div
-          animate={{ scale: [0.7, 1.1, 0.7], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-4 h-4 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]"
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 rounded-2xl border border-transparent border-t-primary/30 border-r-primary/10"
         />
       </div>
-      <motion.div 
-        animate={{ opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="flex items-center gap-1.5"
-      >
-        <span className="text-xs font-black text-primary tracking-[0.3em] uppercase">Loading</span>
-        <span className="flex gap-0.5">
-          <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0 }} className="w-1 h-1 bg-primary rounded-full"></motion.span>
-          <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} className="w-1 h-1 bg-primary rounded-full"></motion.span>
-          <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} className="w-1 h-1 bg-primary rounded-full"></motion.span>
-        </span>
-      </motion.div>
-    </div>
+      
+      <div className="flex flex-col items-center gap-3">
+        <motion.p 
+          animate={{ opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="text-sm font-semibold text-textLight tracking-wide"
+        >
+          Loading Workspace
+        </motion.p>
+        
+        {/* Sleek sleek premium loading bar */}
+        <div className="w-32 h-1 bg-gray-100 rounded-full overflow-hidden">
+          <motion.div
+            animate={{ 
+              x: ['-100%', '100%'],
+            }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity, 
+              ease: "easeInOut"
+            }}
+            className="w-1/2 h-full bg-primary rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+          />
+        </div>
+      </div>
+    </motion.div>
   </div>
 );
 
