@@ -8,6 +8,7 @@ import InclusionLeaderboard from '../components/InclusionLeaderboard';
 import AccessibilityTrendsChart from '../components/AccessibilityTrendsChart';
 import QuickActions from '../components/QuickActions';
 import RecentAuditsTable from '../components/RecentAuditsTable';
+import DepartmentComparison from '../components/DepartmentComparison';
 
 import { motion } from 'framer-motion';
 
@@ -84,6 +85,10 @@ const AdminDashboard = ({ stats, navigate }) => (
       <motion.div variants={itemVariants} className="h-full">
         <InclusionLeaderboard />
       </motion.div>
+    </motion.div>
+
+    <motion.div className="mt-6">
+      <DepartmentComparison />
     </motion.div>
 
     <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
