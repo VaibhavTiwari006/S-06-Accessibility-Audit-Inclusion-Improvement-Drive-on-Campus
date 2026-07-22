@@ -70,16 +70,18 @@ const BuildingList = () => {
         {showModal && <AddBuildingModal onClose={() => setShowModal(false)} onSuccess={fetchBuildings} />}
       </AnimatePresence>
       
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full">
+        <div className="flex-1">
           <h2 className="text-3xl font-heading font-extrabold text-textMain flex items-center gap-3">
             <Building2 className="text-primary" size={32} /> Campus Buildings
           </h2>
           <p className="text-textLight mt-1.5 font-medium">Manage and audit physical accessibility infrastructure.</p>
         </div>
-        <Button icon={Plus} onClick={() => setShowModal(true)} className="w-full sm:w-auto">
-          Add Building
-        </Button>
+        <div className="w-full sm:w-auto sm:ml-auto flex-shrink-0">
+          <Button icon={Plus} onClick={() => setShowModal(true)} className="w-full sm:w-auto shadow-md">
+            Add Building
+          </Button>
+        </div>
       </div>
       
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 w-full">
