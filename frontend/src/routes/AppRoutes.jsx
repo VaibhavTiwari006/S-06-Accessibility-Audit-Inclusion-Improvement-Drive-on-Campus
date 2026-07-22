@@ -21,6 +21,7 @@ const CampusMap = lazy(() => import('../pages/CampusMap'));
 const AIScanner = lazy(() => import('../pages/AIScanner'));
 const QRCodeManager = lazy(() => import('../pages/QRCodeManager'));
 const InstantQRReport = lazy(() => import('../pages/InstantQRReport'));
+const AwarenessPage = lazy(() => import('../pages/AwarenessPage'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -101,6 +102,7 @@ const AnimatedRoutes = () => {
         <Route path="/scanner" element={<ProtectedRoute><MainLayout><AIScanner /></MainLayout></ProtectedRoute>} />
         <Route path="/qr-code" element={<ProtectedRoute><MainLayout><QRCodeManager /></MainLayout></ProtectedRoute>} />
         <Route path="/qr-report/:buildingId" element={<ProtectedRoute><MainLayout><InstantQRReport /></MainLayout></ProtectedRoute>} />
+        <Route path="/awareness" element={<ProtectedRoute><MainLayout><AwarenessPage /></MainLayout></ProtectedRoute>} />
 
         {/* Catch All */}
         <Route path="*" element={<NotFound />} />
