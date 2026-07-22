@@ -121,7 +121,7 @@ const Community = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
           <h2 className="text-2xl font-bold text-textMain flex items-center gap-2">
@@ -282,9 +282,9 @@ const Community = () => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
         {/* Main Content Area */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-8 lg:space-y-10">
           {/* Awareness Campaigns */}
           <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100">
             <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
@@ -359,7 +359,7 @@ const Community = () => {
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
+        <div className="space-y-8 lg:space-y-10">
           {/* Disability Ally Pledge */}
           <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 bg-gradient-to-br from-primary/5 to-transparent">
             <h3 className="text-lg font-semibold text-textMain mb-2 flex items-center gap-2">
