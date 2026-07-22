@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import ProtectedRoute from './ProtectedRoute';
 import MainLayout from '../layout/MainLayout';
 
@@ -21,10 +21,40 @@ const CampusMap = lazy(() => import('../pages/CampusMap'));
 
 // Loading Fallback Component
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-[50vh]">
-    <div className="flex flex-col items-center gap-3">
-      <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-      <p className="text-sm font-medium text-textLight">Loading module...</p>
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="flex flex-col items-center gap-8">
+      <div className="relative flex items-center justify-center">
+        {/* Outer glowing dashed ring */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          className="absolute w-20 h-20 rounded-full border-[3px] border-dashed border-primary/30"
+        />
+        {/* Inner solid spinning arc */}
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute w-14 h-14 rounded-full border-t-[3px] border-r-[3px] border-primary"
+        />
+        {/* Center pulsing core */}
+        <motion.div
+          animate={{ scale: [0.7, 1.1, 0.7], opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-4 h-4 bg-primary rounded-full shadow-[0_0_15px_rgba(16,185,129,0.8)]"
+        />
+      </div>
+      <motion.div 
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="flex items-center gap-1.5"
+      >
+        <span className="text-xs font-black text-primary tracking-[0.3em] uppercase">Loading</span>
+        <span className="flex gap-0.5">
+          <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0 }} className="w-1 h-1 bg-primary rounded-full"></motion.span>
+          <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.3 }} className="w-1 h-1 bg-primary rounded-full"></motion.span>
+          <motion.span animate={{ opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }} className="w-1 h-1 bg-primary rounded-full"></motion.span>
+        </span>
+      </motion.div>
     </div>
   </div>
 );
