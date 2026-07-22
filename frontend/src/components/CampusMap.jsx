@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import React, { useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { ACCESSIBILITY_FEATURE_TYPES } from '../services/mapService';
 
 // Fix for default leaflet marker icons in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -11,12 +12,11 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// A component to automatically fit bounds when buildings change
-const MapBounds = ({ buildings }) => {
+// Auto-fit bounds component
+const MapBounds = ({ buildings, activeRoute }) => {
   const map = useMap();
-  
+
   useEffect(() => {
-    // Invalidate size after a short delay to fix grey map issues in dynamic containers
     const timer = setTimeout(() => {
       map.invalidateSize();
     }, 250);
@@ -24,18 +24,28 @@ const MapBounds = ({ buildings }) => {
   }, [map]);
 
   useEffect(() => {
-    if (buildings.length > 0) {
+    if (activeRoute?.pathCoordinates?.length > 0) {
+      const bounds = L.latLngBounds(activeRoute.pathCoordinates);
+      map.fitBounds(bounds, { padding: [60, 60] });
+    } else if (buildings.length > 0) {
       const bounds = L.latLngBounds(buildings.map(b => [b.lat || 30.7699, b.lng || 76.5754]));
       map.fitBounds(bounds, { padding: [50, 50] });
     }
-  }, [buildings, map]);
+  }, [buildings, activeRoute, map]);
 
   return null;
 };
 
-const CampusMap = ({ buildings, className = "" }) => {
-  // Chandigarh University approximate coordinates
+const CampusMap = ({ 
+  buildings = [], 
+  features = [], 
+  activeRoute = null, 
+  visibleFeatureTypes = [],
+  className = "" 
+}) => {
   const defaultCenter = [30.7699, 76.5754];
+
+  const filteredFeatures = features.filter((f) => visibleFeatureTypes.includes(f.type));
 
   return (
     <div className={`w-full h-[400px] rounded-2xl overflow-hidden border border-white/60 shadow-soft relative z-0 ${className}`}>
@@ -49,16 +59,29 @@ const CampusMap = ({ buildings, className = "" }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        
+
+        {/* Wheelchair Navigation Route Polyline */}
+        {activeRoute?.pathCoordinates && (
+          <Polyline
+            positions={activeRoute.pathCoordinates}
+            pathOptions={{
+              color: '#10B981',
+              weight: 6,
+              opacity: 0.85,
+              dashArray: '8, 8',
+            }}
+          />
+        )}
+
+        {/* Building Markers */}
         {buildings.map((building, index) => {
-          // Generate deterministic mock coordinates and score based on building ID if not provided
           const lat = building.lat || defaultCenter[0] + (Math.sin(building.id || index) * 0.005);
           const lng = building.lng || defaultCenter[1] + (Math.cos(building.id || index) * 0.005);
           const mockScore = building.overallAccessibilityScore || (50 + ((building.id || index) * 17) % 50);
-          
+
           let markerColor = 'bg-gray-400';
           let ringColor = 'ring-gray-400/50';
-          
+
           if (mockScore >= 80) {
             markerColor = 'bg-success';
             ringColor = 'ring-success/50';
@@ -78,12 +101,12 @@ const CampusMap = ({ buildings, className = "" }) => {
           });
 
           return (
-            <Marker key={building.id} position={[lat, lng]} icon={customIcon}>
+            <Marker key={`building-${building.id || index}`} position={[lat, lng]} icon={customIcon}>
               <Popup className="custom-popup rounded-xl overflow-hidden border-0 shadow-xl">
                 <div className="p-1 min-w-[200px]">
                   <h3 className="font-bold font-heading text-lg text-textMain">{building.buildingName}</h3>
                   <p className="text-xs text-textLight mb-3 font-medium">Code: {building.buildingCode}</p>
-                  
+
                   <div className="bg-gray-50 rounded-lg p-3 mb-3 border border-gray-100">
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Access Score</span>
@@ -114,8 +137,34 @@ const CampusMap = ({ buildings, className = "" }) => {
             </Marker>
           );
         })}
-        
-        <MapBounds buildings={buildings.filter(b => b.lat && b.lng)} />
+
+        {/* Feature Markers (Ramps, Elevators, Washrooms, etc.) */}
+        {filteredFeatures.map((feat) => {
+          const typeConfig = ACCESSIBILITY_FEATURE_TYPES[feat.type] || ACCESSIBILITY_FEATURE_TYPES.RAMP;
+
+          const featureIcon = L.divIcon({
+            className: 'feature-marker',
+            html: `<div class="w-7 h-7 rounded-full bg-white border-2 border-[${typeConfig.color}] shadow-md flex items-center justify-center text-xs">${typeConfig.icon}</div>`,
+            iconSize: [28, 28],
+            iconAnchor: [14, 14],
+          });
+
+          return (
+            <Marker key={feat.id} position={[feat.lat, feat.lng]} icon={featureIcon}>
+              <Popup>
+                <div className="p-1 max-w-xs">
+                  <div className="flex items-center gap-1.5 font-bold text-textMain text-sm mb-1">
+                    <span>{typeConfig.icon}</span>
+                    <span>{feat.name}</span>
+                  </div>
+                  <p className="text-xs text-gray-600 font-medium">{feat.description}</p>
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
+
+        <MapBounds buildings={buildings.filter(b => b.lat && b.lng)} activeRoute={activeRoute} />
       </MapContainer>
     </div>
   );
