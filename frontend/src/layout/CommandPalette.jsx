@@ -45,8 +45,8 @@ const CommandPalette = ({ isOpen, onClose }) => {
         return;
       }
 
-      // Handle shortcuts (Ctrl + Key)
-      if (e.ctrlKey || e.metaKey) {
+      // Handle shortcuts (Alt + Key)
+      if (e.altKey && !e.ctrlKey && !e.metaKey) {
         const key = e.key.toUpperCase();
         const cmd = commands.find(c => c.shortcut === key);
         if (cmd) {
@@ -126,7 +126,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
                         </div>
                         {cmd.shortcut && (
                           <div className="text-xs text-gray-400 font-semibold">
-                            <span className="mr-1 opacity-60">Ctrl +</span>{cmd.shortcut}
+                            <span className="mr-1 opacity-60">Alt +</span>{cmd.shortcut}
                           </div>
                         )}
                       </button>
