@@ -6,6 +6,7 @@ import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import Avatar from '../components/ui/Avatar';
 import CommandPalette from './CommandPalette';
+import { motion } from 'framer-motion';
 
 const roleColors = {
   ADMIN: 'bg-red-50 text-red-700 border-red-100',
@@ -62,13 +63,20 @@ const Navbar = ({ toggleSidebar }) => {
           </Link>
 
           {/* Live badge */}
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 border border-emerald-100 rounded-full">
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            animate={{ 
+              boxShadow: ['0px 0px 0px rgba(16, 185, 129, 0)', '0px 0px 12px rgba(16, 185, 129, 0.4)', '0px 0px 0px rgba(16, 185, 129, 0)'] 
+            }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-emerald-50/80 backdrop-blur-sm border border-emerald-200/60 rounded-full cursor-default"
+          >
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
             </span>
             <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Live</span>
-          </div>
+          </motion.div>
         </div>
 
         {/* Center: Command Palette Trigger */}
