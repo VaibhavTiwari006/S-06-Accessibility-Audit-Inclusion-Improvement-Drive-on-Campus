@@ -141,16 +141,6 @@ const AccessibilityPreferences = () => {
             <ToggleSwitch checked={reduceMotion} onChange={toggleReduceMotion} label="Toggle Reduce Motion" />
           </div>
 
-          <div className="flex items-center justify-between p-4 bg-white/50 hover:bg-white/80 transition-colors rounded-xl border border-gray-100/50 shadow-sm group">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-secondary/10 rounded-lg text-secondary group-hover:scale-110 transition-transform"><Focus size={20} /></div>
-              <div>
-                <h3 className="font-bold text-textMain">Distraction-Free Mode</h3>
-                <p className="text-sm text-textLight mt-0.5">Center content and hide sidebars</p>
-              </div>
-            </div>
-            <ToggleSwitch checked={distractionFree} onChange={toggleDistractionFree} label="Toggle Distraction-Free Mode" />
-          </div>
 
           <div className="flex items-center justify-between p-4 bg-white/50 hover:bg-white/80 transition-colors rounded-xl border border-gray-100/50 shadow-sm group">
             <div className="flex items-start gap-3">
