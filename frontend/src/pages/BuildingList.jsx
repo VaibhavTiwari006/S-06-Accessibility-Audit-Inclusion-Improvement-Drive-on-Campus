@@ -70,17 +70,22 @@ const BuildingList = () => {
         {showModal && <AddBuildingModal onClose={() => setShowModal(false)} onSuccess={fetchBuildings} />}
       </AnimatePresence>
       
-      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 className="text-3xl font-heading font-extrabold text-textMain flex items-center gap-3">
             <Building2 className="text-primary" size={32} /> Campus Buildings
           </h2>
           <p className="text-textLight mt-1.5 font-medium">Manage and audit physical accessibility infrastructure.</p>
         </div>
-        
-        <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto">
+        <Button icon={Plus} onClick={() => setShowModal(true)} className="w-full sm:w-auto">
+          Add Building
+        </Button>
+      </div>
+      
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 w-full">
+        <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 w-full lg:w-auto">
           {/* Search Bar */}
-          <div className="w-full xl:w-64">
+          <div className="w-full sm:w-64">
             <Input
               icon={Search}
               placeholder="Search buildings..."
@@ -123,7 +128,7 @@ const BuildingList = () => {
           </div>
 
           {/* View Toggles */}
-          <div className="flex bg-white rounded-lg border border-gray-200 p-1 shadow-sm">
+          <div className="flex bg-white rounded-lg border border-gray-200 p-1 shadow-sm self-end lg:self-auto">
             <button 
               onClick={() => setViewMode('list')}
               className={`px-3 py-1.5 rounded-md text-sm font-semibold transition-colors ${viewMode === 'list' ? 'bg-primary text-white' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'}`}
@@ -137,9 +142,6 @@ const BuildingList = () => {
               <MapPin size={14} /> Map
             </button>
           </div>
-          <Button icon={Plus} onClick={() => setShowModal(true)}>
-            Add Building
-          </Button>
         </div>
       </div>
 
