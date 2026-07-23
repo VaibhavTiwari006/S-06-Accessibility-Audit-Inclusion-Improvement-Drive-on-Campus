@@ -62,7 +62,7 @@ const MainLayout = ({ children }) => {
           tabIndex="-1"
         >
           <PageTransition>
-            <div className="max-w-7xl mx-auto w-full">
+            <div className="w-full">
               {children}
             </div>
           </PageTransition>

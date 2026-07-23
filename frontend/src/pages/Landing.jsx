@@ -213,7 +213,7 @@ const Landing = () => {
 
         {/* Live Platform Stats */}
         <section className="py-12 bg-white border-b border-gray-100 shadow-xs">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="w-full px-6 md:px-12 lg:px-16">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100">
               <div className="text-center px-4">
                 <p className="text-4xl font-heading font-extrabold text-primary mb-1">45+</p>
@@ -236,8 +236,8 @@ const Landing = () => {
         </section>
 
         {/* Impactful Features Showcase Section */}
-        <section id="impact-features-section" className="py-20 px-6 bg-background">
-          <div className="max-w-7xl mx-auto space-y-12">
+        <section id="impact-features-section" className="py-20 px-6 md:px-12 lg:px-16 bg-background">
+          <div className="w-full space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
                 Platform Demonstrations
@@ -317,8 +317,8 @@ const Landing = () => {
         </section>
 
         {/* Role Selector & Credential Authentication Section */}
-        <section id="role-selector-section" className="py-20 px-6 bg-white border-t border-gray-100">
-          <div className="max-w-6xl mx-auto space-y-12">
+        <section id="role-selector-section" className="py-20 px-6 md:px-12 lg:px-16 bg-white border-t border-gray-100">
+          <div className="w-full space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
                 Authentication Required
