@@ -7,13 +7,17 @@ import StartAuditModal from '../components/StartAuditModal';
 import TextToSpeech from '../components/TextToSpeech';
 import { Card, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import { useAuth } from '../context/AuthContext';
 import Badge from '../components/ui/Badge';
 
 const AuditList = () => {
+  const { user } = useAuth();
   const [audits, setAudits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+
+  const canCreateAudit = user?.role === 'ADMIN' || user?.role === 'AUDITOR';
 
   const fetchAudits = async () => {
     try {
@@ -51,7 +55,7 @@ const AuditList = () => {
 
   return (
     <div className="space-y-6">
-      {showModal && <StartAuditModal onClose={() => setShowModal(false)} onSuccess={fetchAudits} />}
+      {canCreateAudit && showModal && <StartAuditModal onClose={() => setShowModal(false)} onSuccess={fetchAudits} />}
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-heading font-extrabold text-textMain flex items-center gap-2">
@@ -59,9 +63,11 @@ const AuditList = () => {
           </h2>
           <p className="text-textLight mt-1 font-medium">All campus building audits and compliance scores.</p>
         </div>
-        <Button onClick={() => setShowModal(true)} icon={Play}>
-          Start New Audit
-        </Button>
+        {canCreateAudit && (
+          <Button onClick={() => setShowModal(true)} icon={Play}>
+            Start New Audit
+          </Button>
+        )}
       </div>
 
       {loading && (

@@ -2,23 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, LayoutDashboard, Building2, ClipboardList, Map, HeartHandshake, Settings as SettingsIcon } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import Modal from '../components/ui/Modal';
 
 const CommandPalette = ({ isOpen, onClose }) => {
   const [search, setSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const role = user?.role?.toUpperCase();
 
-  const commands = [
-    { id: 'dashboard', title: 'Go to Dashboard', icon: LayoutDashboard, path: '/dashboard', shortcut: 'D' },
-    { id: 'buildings', title: 'Manage Buildings', icon: Building2, path: '/buildings', shortcut: 'B' },
-    { id: 'audits', title: 'View Audits', icon: ClipboardList, path: '/audits', shortcut: 'A' },
-    { id: 'map', title: 'Campus Map', icon: Map, path: '/map', shortcut: 'M' },
-    { id: 'community', title: 'Community Forum', icon: HeartHandshake, path: '/community', shortcut: 'C' },
-    { id: 'settings', title: 'System Settings', icon: SettingsIcon, path: '/settings', shortcut: 'S' },
+  const allCommands = [
+    { id: 'dashboard', title: 'Go to Dashboard', icon: LayoutDashboard, path: '/dashboard', shortcut: 'D', roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { id: 'buildings', title: 'Manage Buildings', icon: Building2, path: '/buildings', shortcut: 'B', roles: ['ADMIN', 'AUDITOR'] },
+    { id: 'audits', title: 'View Audits', icon: ClipboardList, path: '/audits', shortcut: 'A', roles: ['ADMIN', 'AUDITOR'] },
+    { id: 'map', title: 'Campus Map', icon: Map, path: '/map', shortcut: 'M', roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { id: 'community', title: 'Community Forum', icon: HeartHandshake, path: '/community', shortcut: 'C', roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
+    { id: 'settings', title: 'System Settings', icon: SettingsIcon, path: '/settings', shortcut: 'S', roles: ['ADMIN'] },
   ];
 
-  const filteredCommands = commands.filter(cmd => cmd.title.toLowerCase().includes(search.toLowerCase()));
+  const roleAllowedCommands = allCommands.filter(cmd => !role || cmd.roles.includes(role));
+  const filteredCommands = roleAllowedCommands.filter(cmd => cmd.title.toLowerCase().includes(search.toLowerCase()));
 
   // Reset selection when search changes
   useEffect(() => {

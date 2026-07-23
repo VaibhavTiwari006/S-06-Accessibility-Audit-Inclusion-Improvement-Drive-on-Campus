@@ -4,12 +4,16 @@ import { Card, CardHeader, CardContent } from './ui/Card';
 import { ClipboardList, ChevronRight, CheckCircle, Clock } from 'lucide-react';
 import Button from './ui/Button';
 import Badge from './ui/Badge';
+import { useAuth } from '../context/AuthContext';
 import auditService from '../services/auditService';
 
 const RecentAuditsTable = () => {
+  const { user } = useAuth();
   const [audits, setAudits] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const canViewAudits = user?.role === 'ADMIN' || user?.role === 'AUDITOR';
 
   useEffect(() => {
     const fetchAudits = async () => {
@@ -41,14 +45,16 @@ const RecentAuditsTable = () => {
               <ClipboardList className="text-primary" size={24} /> Recent Audits
             </h3>
           </div>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={() => navigate('/audits')} 
-            className="text-primary hover:text-primary-dark"
-          >
-            View All <ChevronRight size={16} />
-          </Button>
+          {canViewAudits && (
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => navigate('/audits')} 
+              className="text-primary hover:text-primary-dark"
+            >
+              View All <ChevronRight size={16} />
+            </Button>
+          )}
         </div>
       </CardHeader>
       <CardContent>
@@ -69,8 +75,8 @@ const RecentAuditsTable = () => {
                 {audits.map((audit) => (
                   <tr 
                     key={audit.id} 
-                    onClick={() => navigate(`/audits/${audit.id}`)}
-                    className="hover:bg-gray-50/50 cursor-pointer transition-colors group"
+                    onClick={() => canViewAudits && navigate(`/audits/${audit.id}`)}
+                    className={canViewAudits ? "hover:bg-gray-50/50 cursor-pointer transition-colors group" : "transition-colors"}
                   >
                     <td className="py-4 pr-4">
                       <p className="font-semibold text-textMain group-hover:text-primary transition-colors">

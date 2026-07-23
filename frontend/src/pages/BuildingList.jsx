@@ -9,11 +9,15 @@ import { Card, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import Input from '../components/ui/Input';
+import { useAuth } from '../context/AuthContext';
 
 const BuildingList = () => {
+  const { user } = useAuth();
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+
+  const canAddBuilding = user?.role === 'ADMIN' || user?.role === 'AUDITOR';
   const [viewMode, setViewMode] = useState('list'); // 'list' or 'map'
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
@@ -77,11 +81,13 @@ const BuildingList = () => {
           </h2>
           <p className="text-textLight mt-1.5 font-medium">Manage and audit physical accessibility infrastructure.</p>
         </div>
-        <div className="w-full sm:w-auto sm:ml-auto flex-shrink-0">
-          <Button icon={Plus} onClick={() => setShowModal(true)} className="w-full sm:w-auto shadow-md">
-            Add Building
-          </Button>
-        </div>
+        {canAddBuilding && (
+          <div className="w-full sm:w-auto sm:ml-auto flex-shrink-0">
+            <Button icon={Plus} onClick={() => setShowModal(true)} className="w-full sm:w-auto shadow-md">
+              Add Building
+            </Button>
+          </div>
+        )}
       </div>
       
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 w-full">
