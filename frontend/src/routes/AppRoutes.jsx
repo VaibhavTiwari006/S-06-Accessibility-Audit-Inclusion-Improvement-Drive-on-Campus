@@ -104,7 +104,7 @@ const AnimatedRoutes = () => {
         <Route path="/qr-code" element={<ProtectedRoute><MainLayout><QRCodeManager /></MainLayout></ProtectedRoute>} />
         <Route path="/qr-report/:buildingId" element={<ProtectedRoute><MainLayout><InstantQRReport /></MainLayout></ProtectedRoute>} />
         <Route path="/awareness" element={<ProtectedRoute><MainLayout><AwarenessPage /></MainLayout></ProtectedRoute>} />
-        <Route path="/calculator" element={<ProtectedRoute><MainLayout><CalculatorPage /></MainLayout></ProtectedRoute>} />
+        <Route path="/calculator" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR', 'MAINTENANCE']}><MainLayout><CalculatorPage /></MainLayout></ProtectedRoute>} />
 
         {/* Catch All */}
         <Route path="*" element={<NotFound />} />

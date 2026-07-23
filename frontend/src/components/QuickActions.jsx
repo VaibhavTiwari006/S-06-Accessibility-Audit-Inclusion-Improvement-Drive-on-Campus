@@ -41,7 +41,7 @@ const QuickActions = () => {
           { label: 'Report Barrier', icon: ShieldAlert, path: '/issues', color: 'text-rose-600 bg-rose-500/10 hover:bg-rose-500/20' },
           { label: 'Campus Map', icon: Map, path: '/map', color: 'text-emerald-600 bg-emerald-500/10 hover:bg-emerald-500/20' },
           { label: 'Awareness Quiz', icon: BookOpen, path: '/awareness', color: 'text-[#3B82F6] bg-blue-500/10 hover:bg-blue-500/20' },
-          { label: 'Cost Calculator', icon: Calculator, path: '/calculator', color: 'text-teal-600 bg-teal-500/10 hover:bg-teal-500/20' },
+          { label: 'Community Forum', icon: BookOpen, path: '/community', color: 'text-purple-600 bg-purple-500/10 hover:bg-purple-500/20' },
         ];
     }
   };
