@@ -284,6 +284,42 @@ const IssueList = () => {
                 </div>
               )}
 
+              {/* Real-time Resolution Stepper */}
+              <div className="mb-5 p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block">Live Resolution Progress:</span>
+                <div className="flex items-center justify-between relative">
+                  <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0" />
+                  <div 
+                    className="absolute top-1/2 left-0 h-1 bg-emerald-500 -translate-y-1/2 z-0 transition-all duration-500" 
+                    style={{
+                      width: selectedIssue.status === 'RESOLVED' ? '100%' : selectedIssue.status === 'IN_PROGRESS' ? '60%' : '20%'
+                    }}
+                  />
+
+                  {/* Stage 1: Reported */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    <div className="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shadow-md">✓</div>
+                    <span className="text-[10px] font-bold text-gray-600 mt-1">Reported</span>
+                  </div>
+
+                  {/* Stage 2: In Progress */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-md ${selectedIssue.status === 'IN_PROGRESS' || selectedIssue.status === 'RESOLVED' ? 'bg-emerald-500 text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                      {selectedIssue.status === 'IN_PROGRESS' || selectedIssue.status === 'RESOLVED' ? '✓' : '2'}
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-600 mt-1">In Repair</span>
+                  </div>
+
+                  {/* Stage 3: Resolved */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-md ${selectedIssue.status === 'RESOLVED' ? 'bg-emerald-500 text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                      {selectedIssue.status === 'RESOLVED' ? '✓' : '3'}
+                    </div>
+                    <span className="text-[10px] font-bold text-gray-600 mt-1">Fixed</span>
+                  </div>
+                </div>
+              </div>
+
               {selectedIssue.adminNotes && (
                 <div className="bg-primary/5 text-primary-dark p-4 rounded-xl text-sm mb-5 border border-primary/20">
                   <span className="font-extrabold flex items-center gap-1.5 mb-1.5 uppercase text-[10px] tracking-wider"><AlertCircle size={14}/> Admin Response</span>

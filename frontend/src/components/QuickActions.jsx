@@ -38,10 +38,10 @@ const QuickActions = () => {
       case 'STUDENT':
       default:
         return [
-          { label: 'Report Barrier', icon: ShieldAlert, path: '/issues', color: 'text-rose-600 bg-rose-500/10 hover:bg-rose-500/20' },
+          { label: 'Track My Issues', icon: ShieldAlert, path: '/issues', color: 'text-amber-600 bg-amber-500/10 hover:bg-amber-500/20 font-extrabold' },
+          { label: 'Report Barrier', icon: PlusCircle, path: '/issues', color: 'text-rose-600 bg-rose-500/10 hover:bg-rose-500/20' },
           { label: 'Campus Map', icon: Map, path: '/map', color: 'text-emerald-600 bg-emerald-500/10 hover:bg-emerald-500/20' },
           { label: 'Awareness Quiz', icon: BookOpen, path: '/awareness', color: 'text-[#3B82F6] bg-blue-500/10 hover:bg-blue-500/20' },
-          { label: 'Community Forum', icon: BookOpen, path: '/community', color: 'text-purple-600 bg-purple-500/10 hover:bg-purple-500/20' },
         ];
     }
   };

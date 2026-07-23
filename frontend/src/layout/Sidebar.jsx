@@ -13,7 +13,7 @@ const menuItems = [
   { name: 'Roadmap',    path: '/roadmap',   icon: Map,             roles: ['ADMIN', 'MAINTENANCE'] },
   { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR'] },
   { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR'] },
-  { name: 'Issues',     path: '/issues',    icon: AlertCircle,     roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+  { name: user?.role === 'STUDENT' ? 'Track My Issues' : 'Issues', path: '/issues', icon: AlertCircle, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
   { name: 'Evidence',   path: '/evidence',  icon: Map,             roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
   { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
   { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN'] },

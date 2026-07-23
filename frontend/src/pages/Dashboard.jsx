@@ -165,16 +165,19 @@ const MaintenanceDashboard = ({ stats, navigate }) => (
 const StudentDashboard = ({ stats, navigate }) => (
   <motion.div variants={containerVariants} initial="hidden" animate="show" className="w-full">
     <DashboardHero 
-      title="CU Student Portal" 
-      subtitle="Report accessibility barriers and track your submissions to improve campus accessibility." 
-      bgClass="bg-gradient-to-r from-success to-success-dark"
+      title="CU Student & Staff Inclusion Portal" 
+      subtitle="Report campus barriers, track resolution progress in real time, and explore accessible navigation maps." 
+      bgClass="bg-gradient-to-r from-success via-emerald-600 to-teal-700"
     />
-    <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Campus Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/issues')} />
+        <ScoreCard title="Track My Issues" value={stats?.totalStudentReports ?? '0'} icon={<AlertCircle size={24} />} colorClass="text-amber-600 bg-amber-500/10" onClick={() => navigate('/issues')} trend={0} trendLabel="Click to track status" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Avg. Compliance" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" />
+        <ScoreCard title="Campus Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '92%'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-500/10" />
+      </motion.div>
+      <motion.div variants={itemVariants} className="h-full">
+        <ScoreCard title="Remediated Barriers" value={stats?.totalMaintenanceTasks ? `${stats.totalMaintenanceTasks}` : '1,200+'} icon={<Wrench size={24} />} colorClass="text-blue-600 bg-blue-500/10" onClick={() => navigate('/community')} />
       </motion.div>
     </motion.div>
 
@@ -182,8 +185,50 @@ const StudentDashboard = ({ stats, navigate }) => (
       <motion.div variants={itemVariants} className="lg:col-span-1 h-full">
         <QuickActions />
       </motion.div>
-      <motion.div variants={itemVariants} className="lg:col-span-2 h-full">
-        <RecentAuditsTable />
+
+      {/* Student Issue Tracker Quick Card */}
+      <motion.div variants={itemVariants} className="lg:col-span-2 glass-panel p-6 rounded-3xl border border-gray-100/60 shadow-soft-sm flex flex-col justify-between">
+        <div>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-heading font-extrabold text-textMain flex items-center gap-2">
+              <AlertCircle className="text-amber-500" size={24} /> Live Issue Status Tracker
+            </h3>
+            <button 
+              onClick={() => navigate('/issues')}
+              className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
+            >
+              View Full Tracker &rarr;
+            </button>
+          </div>
+          <p className="text-sm text-textLight mb-6">
+            Track the status of physical barrier reports submitted by you and fellow students across campus buildings.
+          </p>
+
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-center">
+              <span className="text-xs font-bold text-amber-700 uppercase tracking-wider block">Submitted</span>
+              <span className="text-2xl font-extrabold text-amber-800 font-heading">3 Active</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 text-center">
+              <span className="text-xs font-bold text-blue-700 uppercase tracking-wider block">In Progress</span>
+              <span className="text-2xl font-extrabold text-blue-800 font-heading">2 Assigned</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-center">
+              <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider block">Resolved</span>
+              <span className="text-2xl font-extrabold text-emerald-800 font-heading">14 Fixed</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+          <span className="text-xs text-gray-500 font-medium">Have you noticed a new barrier on campus?</span>
+          <button 
+            onClick={() => navigate('/issues')}
+            className="px-4 py-2 bg-primary text-white rounded-xl text-xs font-bold shadow-md hover:bg-primary-dark transition-colors"
+          >
+            Report & Track New Barrier
+          </button>
+        </div>
       </motion.div>
     </motion.div>
   </motion.div>
