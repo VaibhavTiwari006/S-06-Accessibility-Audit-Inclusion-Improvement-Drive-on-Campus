@@ -68,7 +68,6 @@ To meet the evaluation guidelines, detailed project documentation has been organ
 
 ## Evaluation Criteria
 | Criterion | Marks |
-| :--- | :--- |
 | Audit Thoroughness & Standard Compliance | 30 |
 | Participatory Approach Quality | 25 |
 | Remediation Roadmap Practicality | 20 |
