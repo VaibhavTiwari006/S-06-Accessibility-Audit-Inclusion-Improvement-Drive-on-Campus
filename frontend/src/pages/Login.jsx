@@ -122,7 +122,7 @@ const Login = () => {
             CU <span className="text-rose-400">Access</span> Audit
           </span>
         </Link>
-        <Link to="/" className="text-xs font-bold text-white/80 hover:text-white flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-xl transition-all backdrop-blur-sm">
+        <Link to="/" className="text-xs font-bold text-white flex items-center gap-1.5 bg-rose-600 hover:bg-rose-700 border border-transparent px-4 py-2 rounded-xl transition-all shadow-md">
           <ArrowLeft size={13} /> Back to Home
         </Link>
       </header>
