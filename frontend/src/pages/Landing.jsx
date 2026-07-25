@@ -254,17 +254,12 @@ const Landing = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {IMPACTFUL_FEATURES.map((feat) => {
                 const Icon = feat.icon;
-                const isSelected = selectedFeature.id === feat.id;
                 return (
                   <motion.div
                     key={feat.id}
                     whileHover={{ y: -4 }}
                     onClick={() => navigate('/login')}
-                    className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
-                      isSelected 
-                        ? 'bg-white border-primary shadow-soft-lg ring-2 ring-primary/20' 
-                        : 'bg-white/80 border-gray-200/80 hover:border-gray-300 hover:bg-white shadow-xs'
-                    }`}
+                    className="group p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between bg-white/80 border-gray-200/80 hover:border-gray-300 hover:bg-white shadow-xs hover:shadow-soft-lg"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -279,9 +274,9 @@ const Landing = () => {
                       <p className="text-xs text-textLight leading-relaxed">{feat.desc}</p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-primary">
-                      <span>{isSelected ? 'Currently Selected' : 'View Demo'}</span>
-                      <ChevronRight size={14} className={isSelected ? 'translate-x-1' : ''} />
+                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-primary group-hover:text-primary-dark transition-colors">
+                      <span>View Demo</span>
+                      <ChevronRight size={14} className="transition-transform group-hover:translate-x-1" />
                     </div>
                   </motion.div>
                 );
