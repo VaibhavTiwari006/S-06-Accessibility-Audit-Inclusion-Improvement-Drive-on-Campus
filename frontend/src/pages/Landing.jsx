@@ -279,8 +279,10 @@ const Landing = () => {
                 return (
                   <motion.div
                     key={r.role}
-                    whileHover={{ y: -6, scale: 1.02 }}
-                    className={`group relative p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${r.hoverRing} hover:ring-4`}
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: ROLES.indexOf(r) * 0.3 }}
+                    whileHover={{ scale: 0.98 }}
+                    className={`group relative p-6 rounded-3xl border-2 border-slate-200 transition-all duration-300 cursor-pointer flex flex-col justify-between bg-white shadow-[8px_8px_0_0_#cbd5e1] hover:shadow-[2px_2px_0_0_#cbd5e1] hover:translate-y-[6px] hover:translate-x-[6px]`}
                     onClick={() => handleSelectRole(r)}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50/50 rounded-3xl -z-10" />
