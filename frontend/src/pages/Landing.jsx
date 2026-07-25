@@ -19,6 +19,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Scans web components against WCAG 2.1 AA standards, identifies color contrast and alt-text issues, and provides 1-click copyable AI code fixes.',
     color: 'from-amber-500 to-orange-600',
     bgColor: 'bg-amber-50 text-amber-700 border-amber-200',
+    hoverRing: 'hover:ring-amber-200',
     demo: 'Scans 15+ WCAG rules & generates instant JSX/HTML code patches.'
   },
   {
@@ -29,6 +30,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Interactive campus map with color-coded building scores, feature layers (Ramps ♿, Elevators 🛗, Washrooms 🚻), and barrier-free wheelchair routing.',
     color: 'from-blue-500 to-indigo-600',
     bgColor: 'bg-blue-50 text-blue-700 border-blue-200',
+    hoverRing: 'hover:ring-blue-200',
     demo: 'Calculates shortest barrier-free path with step-by-step turn directions.'
   },
   {
@@ -39,6 +41,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Upload physical barrier photos, place interactive annotation pins, and view AI visual before/after transformation concepts with RPWD cost specs.',
     color: 'from-emerald-500 to-teal-600',
     bgColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    hoverRing: 'hover:ring-emerald-200',
     demo: 'Interactive slider comparing barrier photo vs. AI remediated ramp design.'
   },
   {
@@ -49,6 +52,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Compare accessibility scores across CSE, UIC, CBS, and UIPS departments with growth rate trends and executive report generation.',
     color: 'from-purple-500 to-indigo-600',
     bgColor: 'bg-purple-50 text-purple-700 border-purple-200',
+    hoverRing: 'hover:ring-purple-200',
     demo: 'Cross-departmental compliance radar & quarterly progress tracking.'
   },
   {
@@ -59,6 +63,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Printable QR posters for campus buildings enabling students and visitors to report barriers instantly via mobile scan without logging in.',
     color: 'from-rose-500 to-red-600',
     bgColor: 'bg-rose-50 text-rose-700 border-rose-200',
+    hoverRing: 'hover:ring-rose-200',
     demo: 'Generates building-specific poster QR codes with instant mobile form sync.'
   },
   {
@@ -69,6 +74,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Track physical repair tasks from initial report to assignment, work in progress, fix completion, and auditor verification.',
     color: 'from-orange-500 to-amber-600',
     bgColor: 'bg-orange-50 text-orange-700 border-orange-200',
+    hoverRing: 'hover:ring-orange-200',
     demo: '5-Column Kanban board: Reported → Assigned → In Progress → Fixed → Verified.'
   },
   {
@@ -79,6 +85,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Disability etiquette guidelines, WCAG 2.1 educational video modules, and an interactive compliance quiz to foster campus inclusion.',
     color: 'from-sky-500 to-blue-600',
     bgColor: 'bg-sky-50 text-sky-700 border-sky-200',
+    hoverRing: 'hover:ring-sky-200',
     demo: 'Interactive quiz with instant answer feedback and etiquette cards.'
   },
   {
@@ -89,6 +96,7 @@ const IMPACTFUL_FEATURES = [
     desc: 'Itemize costs for ramps, tactile paving, signage, and grab bars while ranking fixes by maximum accessibility impact per rupee spent.',
     color: 'from-teal-500 to-emerald-600',
     bgColor: 'bg-teal-50 text-teal-700 border-teal-200',
+    hoverRing: 'hover:ring-teal-200',
     demo: 'Impact vs. Cost matrix maximizing score improvement per budget.'
   }
 ];
@@ -318,26 +326,29 @@ const Landing = () => {
                 return (
                   <motion.div
                     key={feat.id}
-                    whileHover={{ y: -4 }}
+                    whileHover={{ y: -6, scale: 1.02 }}
                     onClick={() => navigate('/login')}
-                    className="group p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between bg-white/80 border-gray-200/80 hover:border-gray-300 hover:bg-white shadow-xs hover:shadow-soft-lg"
+                    className={`group relative p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${feat.hoverRing} hover:ring-4`}
                   >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50/50 rounded-3xl -z-10" />
+
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-xs bg-gradient-to-br ${feat.color} text-white`}>
-                          <Icon size={22} />
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br ${feat.color} text-white transform group-hover:scale-110 transition-transform duration-300`}>
+                          <Icon size={26} />
                         </div>
                         <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-md border ${feat.bgColor}`}>
                           {feat.badge}
                         </span>
                       </div>
-                      <h3 className="font-bold text-textMain text-base font-heading mb-2">{feat.title}</h3>
-                      <p className="text-xs text-textLight leading-relaxed">{feat.desc}</p>
+                      <h3 className="font-bold text-gray-900 group-hover:text-primary transition-colors text-xl font-heading mb-2">{feat.title}</h3>
+                      <p className="text-xs text-gray-500 font-medium leading-relaxed">{feat.desc}</p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-primary group-hover:text-primary-dark transition-colors">
-                      <span>View Demo</span>
-                      <ChevronRight size={14} className="transition-transform group-hover:translate-x-1" />
+                    <div className="mt-8">
+                      <div className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 ${feat.bgColor} group-hover:shadow-md`}>
+                        View Demo <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
                   </motion.div>
                 );
