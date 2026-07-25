@@ -288,8 +288,7 @@ const Landing = () => {
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     whileHover={{ y: -8, scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="group relative cursor-pointer"
-                    onClick={() => handleSelectRole(r)}
+                    className="group relative"
                   >
                     {/* Card */}
                     <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500">
@@ -331,9 +330,12 @@ const Landing = () => {
                       </div>
 
                       {/* Sign In footer bar */}
-                      <div className={`mx-4 mb-4 py-2.5 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 bg-gradient-to-r ${r.gradient} text-white opacity-80 group-hover:opacity-100 group-hover:shadow-lg`}>
+                      <button 
+                        onClick={() => handleSelectRole(r)}
+                        className={`w-[calc(100%-2rem)] mx-4 mb-4 py-2.5 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 bg-gradient-to-r ${r.gradient} text-white opacity-80 group-hover:opacity-100 hover:shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                      >
                         Sign In <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                      </div>
+                      </button>
                     </div>
 
                   </motion.div>
