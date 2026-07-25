@@ -160,13 +160,7 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Quick Demo Logins Note */}
-            <div className="p-5 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-xs text-emerald-300 font-medium flex items-start gap-3">
-              <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0 mt-0.5" />
-              <span>
-                Demo mode active! Selecting any role card automatically populates valid credentials so you can explore full features immediately.
-              </span>
-            </div>
+
           </div>
 
           {/* Right Column: Full Page Width Role Selector & Credential Form */}
@@ -214,52 +208,6 @@ const Login = () => {
 
             {/* Credential Form */}
             <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="space-y-1">
-                <label className="block text-xs font-extrabold text-slate-500 uppercase tracking-widest">
-                  2. Verify Credentials for {currentRoleObj.title}:
-                </label>
-                <div className="p-3 bg-slate-100 border border-slate-200 rounded-2xl text-xs text-slate-600 font-semibold flex items-center justify-between">
-                  <span>Pre-filled Account: <strong>{email}</strong></span>
-                  <span className="font-mono text-[11px] bg-white px-2 py-0.5 rounded border">Password: {password}</span>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <Input
-                  label="Email Address"
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@campus.edu"
-                />
-
-                <div className="space-y-1.5 relative">
-                  <Input
-                    label="Password"
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    autoComplete="current-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="pr-10"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-8 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none"
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
-
               <div className="pt-2">
                 <Button
                   type="submit"
@@ -269,7 +217,7 @@ const Login = () => {
                   icon={ArrowRight}
                   className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary shadow-lg text-base py-4"
                 >
-                  Verify Credentials & Enter Dashboard
+                  Proceed to Dashboard as {currentRoleObj.title}
                 </Button>
               </div>
             </form>

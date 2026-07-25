@@ -23,17 +23,15 @@ window.addEventListener('unhandledrejection', (event) => {
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
   }
 
-  componentDidCatch(error) {
-    if (error?.message?.includes('Failed to fetch') || error?.name === 'ChunkLoadError') {
-      window.location.reload();
-    }
+  componentDidCatch(error, errorInfo) {
+    console.error("Uncaught runtime error:", error, errorInfo);
   }
 
   render() {
@@ -41,13 +39,15 @@ class ErrorBoundary extends Component {
       return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-slate-900 text-white p-6 text-center">
           <div className="glass-panel p-8 rounded-3xl max-w-md border border-white/10 space-y-4">
-            <h2 className="text-2xl font-bold font-heading">Updating Application...</h2>
-            <p className="text-sm text-slate-300">A new version of AccessAudit was deployed. Refreshing your workspace...</p>
+            <h2 className="text-2xl font-bold font-heading">Application Recovering...</h2>
+            <p className="text-sm text-slate-300">
+              {this.state.error?.message || 'An unexpected issue occurred while rendering the workspace.'}
+            </p>
             <button 
-              onClick={() => { sessionStorage.clear(); window.location.reload(); }}
+              onClick={() => { sessionStorage.clear(); localStorage.clear(); window.location.href = '/'; }}
               className="px-6 py-2.5 bg-primary hover:bg-primary-dark text-white rounded-xl text-xs font-bold transition-all"
             >
-              Refresh Workspace
+              Reset Workspace & Reload
             </button>
           </div>
         </div>

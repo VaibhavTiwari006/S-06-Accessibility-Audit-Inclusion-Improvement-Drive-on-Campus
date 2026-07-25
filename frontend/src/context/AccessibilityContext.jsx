@@ -5,49 +5,34 @@ const AccessibilityContext = createContext();
 export const useAccessibility = () => useContext(AccessibilityContext);
 
 export const AccessibilityProvider = ({ children }) => {
-  const [highContrast, setHighContrast] = useState(() => {
-    return localStorage.getItem('access_highContrast') === 'true';
-  });
-  
-  const [fontSize, setFontSize] = useState(() => {
-    return localStorage.getItem('access_fontSize') || 'Medium';
-  });
+  const getStoredBool = (key, fallback = false) => {
+    try {
+      const val = localStorage.getItem(key);
+      return val === 'true' ? true : val === 'false' ? false : fallback;
+    } catch {
+      return fallback;
+    }
+  };
 
-  const [dyslexiaFont, setDyslexiaFont] = useState(() => {
-    return localStorage.getItem('access_dyslexiaFont') === 'true';
-  });
+  const getStoredStr = (key, fallback = '') => {
+    try {
+      return localStorage.getItem(key) || fallback;
+    } catch {
+      return fallback;
+    }
+  };
 
-  const [reduceMotion, setReduceMotion] = useState(() => {
-    return localStorage.getItem('access_reduceMotion') === 'true';
-  });
-
-  const [colorBlindTheme, setColorBlindTheme] = useState(() => {
-    return localStorage.getItem('access_colorBlindTheme') || 'default';
-  });
-
-  const [distractionFree, setDistractionFree] = useState(() => {
-    return localStorage.getItem('access_distractionFree') === 'true';
-  });
-
-  const [magnifyMode, setMagnifyMode] = useState(() => {
-    return localStorage.getItem('access_magnifyMode') === 'true';
-  });
-
-  const [visualAlerts, setVisualAlerts] = useState(() => {
-    return localStorage.getItem('access_visualAlerts') === 'true';
-  });
-
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('access_darkMode') === 'true';
-  });
-
-  const [textToSpeech, setTextToSpeech] = useState(() => {
-    return localStorage.getItem('access_textToSpeech') === 'true';
-  });
-
-  const [ttsVoice, setTtsVoice] = useState(() => {
-    return localStorage.getItem('access_ttsVoice') || 'default';
-  });
+  const [highContrast, setHighContrast] = useState(() => getStoredBool('access_highContrast', false));
+  const [fontSize, setFontSize] = useState(() => getStoredStr('access_fontSize', 'Medium'));
+  const [dyslexiaFont, setDyslexiaFont] = useState(() => getStoredBool('access_dyslexiaFont', false));
+  const [reduceMotion, setReduceMotion] = useState(() => getStoredBool('access_reduceMotion', false));
+  const [colorBlindTheme, setColorBlindTheme] = useState(() => getStoredStr('access_colorBlindTheme', 'default'));
+  const [distractionFree, setDistractionFree] = useState(() => getStoredBool('access_distractionFree', false));
+  const [magnifyMode, setMagnifyMode] = useState(() => getStoredBool('access_magnifyMode', false));
+  const [visualAlerts, setVisualAlerts] = useState(() => getStoredBool('access_visualAlerts', false));
+  const [darkMode, setDarkMode] = useState(() => getStoredBool('access_darkMode', false));
+  const [textToSpeech, setTextToSpeech] = useState(() => getStoredBool('access_textToSpeech', false));
+  const [ttsVoice, setTtsVoice] = useState(() => getStoredStr('access_ttsVoice', 'default'));
 
   useEffect(() => {
     localStorage.setItem('access_highContrast', highContrast);

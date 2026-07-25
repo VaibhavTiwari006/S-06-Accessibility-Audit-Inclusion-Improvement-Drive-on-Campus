@@ -4,26 +4,28 @@ import { useAuth } from '../context/AuthContext';
 import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, Sparkles, QrCode, BookOpen, Calculator } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 
-const menuItems = [
-  { name: 'Dashboard',  path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-  { name: 'AI Scanner', path: '/scanner',   icon: Sparkles,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-  { name: 'QR Feedback', path: '/qr-code',  icon: QrCode,          roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-  { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-  { name: 'Calculator', path: '/calculator', icon: Calculator,     roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
-  { name: 'Roadmap',    path: '/roadmap',   icon: Map,             roles: ['ADMIN', 'MAINTENANCE'] },
-  { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR'] },
-  { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR'] },
-  { name: user?.role === 'STUDENT' ? 'Track My Issues' : 'Issues', path: '/issues', icon: AlertCircle, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-  { name: 'Evidence',   path: '/evidence',  icon: Map,             roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
-  { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
-  { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN'] },
-  { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN'] },
-  { name: 'Accessibility', path: '/accessibility', icon: Settings, roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
-];
-
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { user } = useAuth();
   const location = useLocation();
+
+  if (!user) return null;
+
+  const menuItems = [
+    { name: 'Dashboard',  path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'AI Scanner', path: '/scanner',   icon: Sparkles,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'QR Feedback', path: '/qr-code',  icon: QrCode,          roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'Calculator', path: '/calculator', icon: Calculator,     roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
+    { name: 'Roadmap',    path: '/roadmap',   icon: Map,             roles: ['ADMIN', 'MAINTENANCE'] },
+    { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR'] },
+    { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR'] },
+    { name: user?.role === 'STUDENT' ? 'Track My Issues' : 'Issues', path: '/issues', icon: AlertCircle, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'Evidence',   path: '/evidence',  icon: Map,             roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
+    { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
+    { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN'] },
+    { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN'] },
+    { name: 'Accessibility', path: '/accessibility', icon: Settings, roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
+  ];
 
   if (!user) return null;
 

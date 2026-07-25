@@ -22,22 +22,28 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const initAuth = () => {
-      const token = localStorage.getItem('accessToken');
-      const role = localStorage.getItem('userRole');
-      const fullName = localStorage.getItem('userFullName');
-      const email = localStorage.getItem('userEmail');
+      try {
+        const token = localStorage.getItem('accessToken');
+        const role = localStorage.getItem('userRole');
+        const fullName = localStorage.getItem('userFullName');
+        const email = localStorage.getItem('userEmail');
 
-      // Validate JWT structure — 3 parts separated by dots
-      if (!isValidJwt(token)) {
-        // Corrupt or missing token — wipe everything
+        // Validate JWT structure — 3 parts separated by dots
+        if (!isValidJwt(token)) {
+          // Corrupt or missing token — wipe everything
+          clearSession();
+          setLoading(false);
+          return;
+        }
+
+        // Token looks valid — restore the session from localStorage
+        setUser({ role, fullName, email });
+        setLoading(false);
+      } catch (err) {
+        console.error('Failed to initialize auth state:', err);
         clearSession();
         setLoading(false);
-        return;
       }
-
-      // Token looks valid — restore the session from localStorage
-      setUser({ role, fullName, email });
-      setLoading(false);
     };
 
     initAuth();

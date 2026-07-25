@@ -259,7 +259,7 @@ const Landing = () => {
                   <motion.div
                     key={feat.id}
                     whileHover={{ y: -4 }}
-                    onClick={() => setSelectedFeature(feat)}
+                    onClick={() => navigate('/login')}
                     className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
                       isSelected 
                         ? 'bg-white border-primary shadow-soft-lg ring-2 ring-primary/20' 
@@ -354,10 +354,7 @@ const Landing = () => {
                     </div>
 
                     <div className="mt-6 pt-4 border-t border-current/10 space-y-3">
-                      <div className="text-[11px] font-mono opacity-80 space-y-0.5">
-                        <p>Login: <strong>{r.email}</strong></p>
-                        <p>Pass: <strong>{r.password}</strong></p>
-                      </div>
+
                       <Button size="sm" fullWidth className="bg-white text-textMain hover:bg-gray-100 font-bold shadow-xs">
                         Sign In as {r.title}
                       </Button>
