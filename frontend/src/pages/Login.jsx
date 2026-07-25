@@ -204,12 +204,14 @@ const Login = () => {
                 </>
               ) : (
                 <div className="space-y-6">
-                  <button 
-                    onClick={() => { setSelectedRole(null); setError(''); }} 
-                    className="text-sm font-bold text-gray-500 hover:text-gray-900 flex items-center gap-2 transition-colors focus:outline-none"
-                  >
-                    <ArrowLeft size={16} /> Choose a different role
-                  </button>
+                  <div className="flex justify-center mb-2">
+                    <button 
+                      onClick={() => { setSelectedRole(null); setError(''); }} 
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/90 hover:bg-white border border-gray-200 shadow-sm hover:shadow-md text-sm font-bold text-gray-700 hover:text-gray-900 transition-all focus:outline-none focus:ring-2 focus:ring-rose-500/20"
+                    >
+                      <ArrowLeft size={16} className="text-gray-400" /> Choose a different role
+                    </button>
+                  </div>
 
                   {/* Error */}
                   {error && <Alert variant="danger">{error}</Alert>}
