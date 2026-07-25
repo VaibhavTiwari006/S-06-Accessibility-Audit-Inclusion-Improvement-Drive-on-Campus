@@ -288,17 +288,17 @@ const Landing = () => {
                     transition={{ duration: 0.4, delay: index * 0.1 }}
                     whileHover={{ y: -8, scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="group relative"
+                    className="group relative h-full"
                   >
                     {/* Card */}
-                    <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500">
+                    <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-between">
                       {/* Gradient top strip */}
                       <div className={`h-1.5 w-full bg-gradient-to-r ${r.gradient}`} />
 
                       {/* Animated gradient glow on hover */}
                       <div className={`absolute inset-0 bg-gradient-to-br ${r.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl pointer-events-none`} />
 
-                      <div className="p-6 space-y-5">
+                      <div className="p-6 space-y-5 flex-grow">
                         {/* Icon with gradient background */}
                         <div className="flex items-start justify-between">
                           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
