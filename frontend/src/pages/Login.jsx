@@ -146,7 +146,7 @@ const Login = () => {
           <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.6)' }}>
 
             {/* Top banner strip */}
-            <div className={`h-1.5 w-full bg-gradient-to-r ${currentRole.gradient} transition-all duration-500`} />
+            <div className={`h-1.5 w-full bg-gradient-to-r ${currentRole ? currentRole.gradient : 'from-gray-300 to-gray-400'} transition-all duration-500`} />
 
             <div className="p-8 md:p-10 space-y-8">
 
