@@ -180,9 +180,11 @@ const Landing = () => {
               <Button variant="primary" icon={ArrowRight}>Enter Dashboard ({user.role})</Button>
             </Link>
           ) : (
-            <Button variant="primary" icon={LogIn} onClick={scrollToRoles}>
-              Select Role & Sign In
-            </Button>
+            <Link to="/login">
+              <Button variant="primary" icon={LogIn}>
+                Select Role & Sign In
+              </Button>
+            </Link>
           )}
         </div>
       </nav>
@@ -215,9 +217,11 @@ const Landing = () => {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Button size="lg" className="px-8 shadow-lg" icon={ArrowRight} onClick={scrollToRoles}>
-                Select Campus Role & Sign In
-              </Button>
+              <Link to="/login">
+                <Button size="lg" className="px-8 shadow-lg" icon={ArrowRight}>
+                  Select Campus Role & Sign In
+                </Button>
+              </Link>
               <Button variant="secondary" size="lg" className="px-8" icon={Sparkles} onClick={() => document.getElementById('impact-features-section')?.scrollIntoView({ behavior: 'smooth' })}>
                 Explore 8 Impactful Features
               </Button>
