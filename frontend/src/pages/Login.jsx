@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   ShieldCheck, UserCheck, Users, Wrench,
-  ArrowRight, CheckCircle2, ArrowLeft, Zap
+  ArrowRight, CheckCircle2, ArrowLeft, Zap,
+  Mail, Lock
 } from 'lucide-react';
 import Alert from '../components/ui/Alert';
 
@@ -72,11 +73,19 @@ const Login = () => {
 
   const currentRole = ROLE_OPTIONS.find(r => r.role === selectedRole) || ROLE_OPTIONS[0];
 
+  const [email, setEmail] = useState(currentRole.email);
+  const [password, setPassword] = useState(currentRole.password);
+
+  useEffect(() => {
+    setEmail(currentRole.email);
+    setPassword(currentRole.password);
+  }, [currentRole.role]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
-    const result = await login(currentRole.email, currentRole.password);
+    const result = await login(email, password);
     if (result.success) {
       navigate('/dashboard');
     } else {
@@ -211,8 +220,40 @@ const Login = () => {
               {/* Error */}
               {error && <Alert variant="danger">{error}</Alert>}
 
-              {/* CTA */}
-              <form onSubmit={handleSubmit}>
+              {/* CTA & Form */}
+              <form onSubmit={handleSubmit} className="space-y-5 bg-white/60 p-6 rounded-2xl border border-gray-100">
+                <div className="space-y-4">
+                  {/* Email Field */}
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                      <Mail size={18} />
+                    </div>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                      placeholder="Email address"
+                    />
+                  </div>
+
+                  {/* Password Field */}
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                      <Lock size={18} />
+                    </div>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                      placeholder="Password"
+                    />
+                  </div>
+                </div>
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -226,7 +267,7 @@ const Login = () => {
                   ) : (
                     <>
                       <ArrowRight size={18} />
-                      Proceed to Dashboard as {currentRole.title}
+                      Sign In as {currentRole.title}
                     </>
                   )}
                 </button>
