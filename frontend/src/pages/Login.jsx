@@ -167,15 +167,18 @@ const Login = () => {
 
           </div>
 
-          {/* Right Column: Full Page Width Role Selector & Credential Form */}
-          <div className="lg:col-span-7 bg-white text-slate-900 p-8 md:p-10 rounded-[2.5rem] shadow-2xl border border-slate-200 flex flex-col justify-between space-y-8">
-            
-            {/* Role Cards Full Grid */}
-            <div className="space-y-3">
-              <label className="block text-xs font-extrabold text-slate-500 uppercase tracking-widest">
-                1. Select Your Campus Role:
-              </label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {/* Right Column: Role Selector & Auth */}
+          <div className="lg:col-span-7 bg-slate-800/70 backdrop-blur-2xl text-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl border border-white/10 flex flex-col justify-between space-y-8">
+
+            {/* Step label */}
+            <div className="space-y-5">
+              <div className="flex items-center gap-3">
+                <div className="w-7 h-7 rounded-full bg-primary/30 border border-primary/50 text-primary text-xs font-extrabold flex items-center justify-center">1</div>
+                <span className="text-xs font-extrabold uppercase tracking-widest text-slate-300">Select Your Campus Role</span>
+              </div>
+
+              {/* Role Cards — 2 column grid, rich premium look */}
+              <div className="grid grid-cols-2 gap-4">
                 {ROLE_OPTIONS.map((r) => {
                   const Icon = r.icon;
                   const isSelected = selectedRole === r.role;
@@ -184,20 +187,52 @@ const Login = () => {
                       key={r.role}
                       type="button"
                       onClick={() => setSelectedRole(r.role)}
-                      className={`group relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between gap-3 overflow-hidden ${
-                        isSelected 
-                          ? r.activeColor
-                          : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300 hover:shadow-md'
+                      className={`group relative overflow-hidden rounded-2xl border text-left transition-all duration-300 ${
+                        isSelected
+                          ? `border-transparent ring-2 ring-offset-2 ring-offset-slate-800 shadow-2xl`
+                          : 'border-white/10 bg-slate-700/50 hover:bg-slate-700 hover:border-white/20 hover:shadow-xl'
                       }`}
+                      style={isSelected ? { borderColor: 'transparent' } : {}}
                     >
-                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity bg-gradient-to-br ${r.gradient}`} />
-                      <div className="relative flex items-center justify-between">
-                        <Icon size={24} className={`transition-transform duration-300 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}`} />
-                        {isSelected && <CheckCircle2 size={18} className="text-white drop-shadow-sm" />}
-                      </div>
-                      <div className="relative">
-                        <span className="text-[9px] font-extrabold uppercase tracking-widest opacity-80 block mb-1">{r.role}</span>
-                        <h4 className="font-bold text-sm font-heading">{r.title}</h4>
+                      {/* Gradient background when selected */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${r.gradient} transition-opacity duration-300 ${isSelected ? 'opacity-100' : 'opacity-0 group-hover:opacity-10'}`} />
+
+                      {/* Top accent strip */}
+                      {!isSelected && <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${r.gradient} opacity-60`} />}
+
+                      <div className="relative p-5 space-y-4">
+                        {/* Icon row */}
+                        <div className="flex items-start justify-between">
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 shadow-md ${
+                            isSelected
+                              ? 'bg-white/20 text-white scale-110'
+                              : 'bg-slate-600/80 text-slate-200 group-hover:scale-105'
+                          }`}>
+                            <Icon size={22} strokeWidth={1.8} />
+                          </div>
+                          {isSelected && (
+                            <div className="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
+                              <CheckCircle2 size={14} className="text-white" />
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Role label + title */}
+                        <div>
+                          <span className={`text-[9px] font-extrabold uppercase tracking-widest block mb-1 ${isSelected ? 'text-white/70' : 'text-slate-400'}`}>
+                            {r.role}
+                          </span>
+                          <h4 className={`font-bold text-sm font-heading leading-tight ${isSelected ? 'text-white' : 'text-slate-100'}`}>
+                            {r.title}
+                          </h4>
+                        </div>
+
+                        {/* Badge */}
+                        <span className={`inline-block text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                          isSelected ? 'bg-white/20 text-white border-white/30' : 'bg-slate-600/60 text-slate-300 border-white/10'
+                        }`}>
+                          {r.badge}
+                        </span>
                       </div>
                     </button>
                   );
@@ -211,27 +246,29 @@ const Login = () => {
               </div>
             )}
 
-            {/* Credential Form */}
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div className="pt-2">
-                <Button
-                  type="submit"
-                  fullWidth
-                  size="lg"
-                  isLoading={isSubmitting}
-                  icon={ArrowRight}
-                  className={`bg-gradient-to-r ${currentRoleObj.gradient || 'from-primary to-primary-light'} shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 text-base py-4`}
-                >
-                  Proceed to Dashboard as {currentRoleObj.title}
-                </Button>
+            {/* CTA Button */}
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full py-4 rounded-2xl font-extrabold text-base text-white flex items-center justify-center gap-3 bg-gradient-to-r ${currentRoleObj.gradient} shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-70`}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center gap-2"><span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" /> Signing in...</span>
+                ) : (
+                  <>
+                    <ArrowRight size={18} />
+                    Proceed to Dashboard as {currentRoleObj.title}
+                  </>
+                )}
+              </button>
+
+              <div className="text-center pt-1">
+                <p className="text-xs text-slate-500 font-medium">
+                  Authorized Personnel &bull; Chandigarh University S-06 Inclusion Drive
+                </p>
               </div>
             </form>
-
-            <div className="text-center border-t border-slate-100 pt-4">
-              <p className="text-xs text-slate-500 font-medium">
-                Authorized Personnel &bull; Chandigarh University S-06 Inclusion Drive
-              </p>
-            </div>
 
           </div>
         </div>
