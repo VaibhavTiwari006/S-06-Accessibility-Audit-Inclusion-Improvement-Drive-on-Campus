@@ -62,7 +62,7 @@ const ROLE_OPTIONS = [
 const Login = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const initialRole = queryParams.get('role') || 'ADMIN';
+  const initialRole = queryParams.get('role') || null;
 
   const [selectedRole, setSelectedRole] = useState(initialRole);
   const [error, setError] = useState('');
@@ -71,15 +71,17 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const currentRole = ROLE_OPTIONS.find(r => r.role === selectedRole) || ROLE_OPTIONS[0];
+  const currentRole = ROLE_OPTIONS.find(r => r.role === selectedRole) || null;
 
-  const [email, setEmail] = useState(currentRole.email);
-  const [password, setPassword] = useState(currentRole.password);
+  const [email, setEmail] = useState(currentRole ? currentRole.email : '');
+  const [password, setPassword] = useState(currentRole ? currentRole.password : '');
 
   useEffect(() => {
-    setEmail(currentRole.email);
-    setPassword(currentRole.password);
-  }, [currentRole.role]);
+    if (currentRole) {
+      setEmail(currentRole.email);
+      setPassword(currentRole.password);
+    }
+  }, [selectedRole]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -221,57 +223,68 @@ const Login = () => {
               {error && <Alert variant="danger">{error}</Alert>}
 
               {/* CTA & Form */}
-              <form onSubmit={handleSubmit} className="space-y-5 bg-white/60 p-6 rounded-2xl border border-gray-100">
-                <div className="space-y-4">
-                  {/* Email Field */}
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                      <Mail size={18} />
+              {currentRole ? (
+                <form onSubmit={handleSubmit} className="space-y-5 bg-white/60 p-6 rounded-2xl border border-gray-100">
+                  <div className="space-y-4">
+                    {/* Email Field */}
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                        <Mail size={18} />
+                      </div>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                        placeholder="Email address"
+                      />
                     </div>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
-                      placeholder="Email address"
-                    />
+
+                    {/* Password Field */}
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                        <Lock size={18} />
+                      </div>
+                      <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                        placeholder="Password"
+                      />
+                    </div>
                   </div>
 
-                  {/* Password Field */}
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                      <Lock size={18} />
-                    </div>
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
-                      placeholder="Password"
-                    />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`w-full py-4 rounded-2xl font-extrabold text-base text-white flex items-center justify-center gap-3 bg-gradient-to-r ${currentRole.gradient} shadow-lg hover:brightness-105 hover:shadow-xl active:scale-[0.98] transition-all duration-300 disabled:opacity-70`}
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center gap-2">
+                        <span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" />
+                        Signing in...
+                      </span>
+                    ) : (
+                      <>
+                        <ArrowRight size={18} />
+                        Sign In as {currentRole.title}
+                      </>
+                    )}
+                  </button>
+                </form>
+              ) : (
+                <div className="bg-gray-50 border border-gray-200 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center space-y-3">
+                  <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-gray-400">
+                    <UserCheck size={24} />
                   </div>
+                  <p className="text-sm font-medium text-gray-500 max-w-[200px]">
+                    Select a role above to reveal sign-in credentials
+                  </p>
                 </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full py-4 rounded-2xl font-extrabold text-base text-white flex items-center justify-center gap-3 bg-gradient-to-r ${currentRole.gradient} shadow-lg hover:brightness-105 hover:shadow-xl active:scale-[0.98] transition-all duration-300 disabled:opacity-70`}
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      <span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" />
-                      Signing in...
-                    </span>
-                  ) : (
-                    <>
-                      <ArrowRight size={18} />
-                      Sign In as {currentRole.title}
-                    </>
-                  )}
-                </button>
-              </form>
+              )}
 
               <p className="text-center text-xs text-gray-400 font-medium -mt-4">
                 Authorized Personnel &bull; Chandigarh University S-06 Inclusion Drive
