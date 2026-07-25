@@ -254,19 +254,20 @@ const Landing = () => {
         </div>
 
         {/* Role Selector & Credential Authentication Section */}
-        <section id="role-selector-section" className="relative pt-12 pb-20 px-6 md:px-12 lg:px-16 bg-white overflow-hidden">
+        <section id="role-selector-section" className="relative pt-12 pb-20 px-6 md:px-12 lg:px-16 bg-slate-900 overflow-hidden">
           <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
+            <div className="absolute bottom-0 right-1/4 translate-x-1/4 translate-y-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s' }} />
           </div>
           <div className="relative z-10 w-full space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="inline-block text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
+              <span className="inline-block text-xs font-bold text-primary uppercase tracking-widest bg-primary/20 px-3 py-1.5 rounded-full border border-primary/30">
                 Authentication Required
               </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary">
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-white">
                 Select Your Campus Role to Proceed
               </h2>
-              <p className="text-textLight text-base font-medium">
+              <p className="text-slate-300 text-base font-medium">
                 Access to the AccessAudit dashboard requires role-based authentication. Choose your role below to test with sample credentials.
               </p>
             </div>
