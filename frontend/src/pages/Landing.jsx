@@ -336,19 +336,11 @@ const Landing = () => {
                       </div>
                     </div>
 
-                    {/* Connection dot at bottom center for interconnected feel */}
-                    {index < ROLES.length - 1 && (
-                      <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10">
-                        <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${r.gradient} shadow-md border-2 border-white`} />
-                      </div>
-                    )}
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Connecting line behind cards (desktop) */}
-            <div className="hidden lg:block absolute left-[12.5%] right-[12.5%] top-1/2 h-0.5 bg-gradient-to-r from-rose-200 via-blue-200 via-emerald-200 to-amber-200 -z-0 pointer-events-none" style={{ top: 'calc(50% + 2rem)' }} />
           </div>
         </section>
 
