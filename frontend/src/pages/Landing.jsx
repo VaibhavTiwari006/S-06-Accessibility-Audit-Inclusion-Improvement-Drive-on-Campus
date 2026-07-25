@@ -327,8 +327,7 @@ const Landing = () => {
                   <motion.div
                     key={feat.id}
                     whileHover={{ y: -6, scale: 1.02 }}
-                    onClick={() => navigate('/login')}
-                    className={`group relative p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${feat.hoverRing} hover:ring-4`}
+                    className={`group relative p-6 rounded-3xl border transition-all flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${feat.hoverRing} hover:ring-4`}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50/50 rounded-3xl -z-10" />
 
@@ -346,9 +345,12 @@ const Landing = () => {
                     </div>
 
                     <div className="mt-8">
-                      <div className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 ${feat.bgColor} group-hover:shadow-md`}>
+                      <button 
+                        onClick={() => navigate('/login')}
+                        className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 ${feat.bgColor} hover:shadow-md cursor-pointer`}
+                      >
                         View Demo <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                      </div>
+                      </button>
                     </div>
                   </motion.div>
                 );
