@@ -325,7 +325,7 @@ const Landing = () => {
                         {/* Title & desc */}
                         <div className="space-y-2">
                           <h3 className="text-lg font-bold font-heading text-gray-900 group-hover:text-gray-800 transition-colors leading-tight">{r.title}</h3>
-                          <p className="text-xs text-gray-400 leading-relaxed">{r.desc}</p>
+                          <p className="text-sm text-gray-500 leading-relaxed font-medium">{r.desc}</p>
                         </div>
                       </div>
 
