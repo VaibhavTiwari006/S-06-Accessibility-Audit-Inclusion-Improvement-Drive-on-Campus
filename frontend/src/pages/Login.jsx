@@ -160,129 +160,112 @@ const Login = () => {
                 </h1>
               </div>
 
-              {/* Role Cards */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {ROLE_OPTIONS.map((r) => {
-                  const Icon = r.icon;
-                  const isSelected = selectedRole === r.role;
-                  return (
-                    <button
-                      key={r.role}
-                      type="button"
-                      onClick={() => { setSelectedRole(r.role); setError(''); }}
-                      className="group relative text-left rounded-2xl border-2 transition-all duration-300 overflow-hidden focus:outline-none"
-                      style={{
-                        borderColor: isSelected ? r.accent : '#e5e7eb',
-                        background: isSelected ? r.soft : 'rgba(249,250,251,0.8)',
-                        boxShadow: isSelected ? `0 8px 30px -6px ${r.accent}50` : '0 1px 4px rgba(0,0,0,0.05)',
-                        transform: isSelected ? 'translateY(-4px) scale(1.02)' : 'translateY(0) scale(1)',
-                      }}
-                    >
-                      {/* Gradient top strip */}
-                      <div className={`h-1.5 w-full bg-gradient-to-r ${r.gradient}`} />
+              {!currentRole ? (
+                <>
+                  {/* Role Cards */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {ROLE_OPTIONS.map((r) => {
+                      const Icon = r.icon;
+                      const isSelected = selectedRole === r.role;
+                      return (
+                        <button
+                          key={r.role}
+                          type="button"
+                          onClick={() => { setSelectedRole(r.role); setError(''); }}
+                          className="group relative text-left rounded-2xl border-2 transition-all duration-300 overflow-hidden focus:outline-none hover:shadow-xl hover:-translate-y-1 bg-white/80"
+                          style={{
+                            borderColor: isSelected ? r.accent : '#e5e7eb',
+                          }}
+                        >
+                          {/* Gradient top strip */}
+                          <div className={`h-1.5 w-full bg-gradient-to-r ${r.gradient}`} />
 
-                      <div className="p-8 space-y-6 flex flex-col justify-between h-full min-h-[160px]">
-                        {/* Icon + check */}
-                        <div className="flex items-start justify-between">
-                          <div
-                            className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white shadow-md transition-all duration-300`}
-                            style={{ transform: isSelected ? 'scale(1.1) rotate(3deg)' : 'scale(1)' }}
-                          >
-                            <Icon size={24} strokeWidth={1.8} />
-                          </div>
-                          {isSelected ? (
-                            <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: r.accent }}>
-                              <CheckCircle2 size={14} className="text-white" />
+                          <div className="p-8 space-y-6 flex flex-col justify-between h-full min-h-[160px]">
+                            {/* Icon + check */}
+                            <div className="flex items-start justify-between">
+                              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white shadow-md transition-all duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                                <Icon size={24} strokeWidth={1.8} />
+                              </div>
+                              <div className="w-6 h-6 rounded-full border-2 border-gray-200 group-hover:border-rose-400 transition-colors" />
                             </div>
-                          ) : (
-                            <div className="w-6 h-6 rounded-full border-2 border-gray-200" />
-                          )}
-                        </div>
 
-                        {/* Title & Badge */}
-                        <div className="space-y-3">
-                          <h4 className="font-bold text-base font-heading text-gray-900 leading-tight">{r.title}</h4>
-                          <span
-                            className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-3 py-1.5 rounded-full border"
-                            style={{
-                              background: isSelected ? r.accent + '18' : '#f3f4f6',
-                              color: isSelected ? r.accent : '#6b7280',
-                              borderColor: isSelected ? r.accent + '40' : '#e5e7eb'
-                            }}
-                          >
-                            {r.badge}
-                          </span>
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Error */}
-              {error && <Alert variant="danger">{error}</Alert>}
-
-              {/* CTA & Form */}
-              {currentRole ? (
-                <form onSubmit={handleSubmit} className="space-y-5 bg-white/60 p-6 rounded-2xl border border-gray-100">
-                  <div className="space-y-4">
-                    {/* Email Field */}
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                        <Mail size={18} />
-                      </div>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
-                        placeholder="Email address"
-                      />
-                    </div>
-
-                    {/* Password Field */}
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                        <Lock size={18} />
-                      </div>
-                      <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
-                        placeholder="Password"
-                      />
-                    </div>
+                            {/* Title & Badge */}
+                            <div className="space-y-3">
+                              <h4 className="font-bold text-base font-heading text-gray-900 leading-tight">{r.title}</h4>
+                              <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-3 py-1.5 rounded-full bg-gray-100 text-gray-500 border border-gray-200">
+                                {r.badge}
+                              </span>
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
                   </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`w-full py-4 rounded-2xl font-extrabold text-base text-white flex items-center justify-center gap-3 bg-gradient-to-r ${currentRole.gradient} shadow-lg hover:brightness-105 hover:shadow-xl active:scale-[0.98] transition-all duration-300 disabled:opacity-70`}
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" />
-                        Signing in...
-                      </span>
-                    ) : (
-                      <>
-                        <ArrowRight size={18} />
-                        Sign In as {currentRole.title}
-                      </>
-                    )}
-                  </button>
-                </form>
+                </>
               ) : (
-                <div className="bg-gray-50 border border-gray-200 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center space-y-3">
-                  <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-gray-400">
-                    <UserCheck size={24} />
-                  </div>
-                  <p className="text-sm font-medium text-gray-500 max-w-[200px]">
-                    Select a role above to reveal sign-in credentials
-                  </p>
+                <div className="space-y-6">
+                  <button 
+                    onClick={() => { setSelectedRole(null); setError(''); }} 
+                    className="text-sm font-bold text-gray-500 hover:text-gray-900 flex items-center gap-2 transition-colors focus:outline-none"
+                  >
+                    <ArrowLeft size={16} /> Choose a different role
+                  </button>
+
+                  {/* Error */}
+                  {error && <Alert variant="danger">{error}</Alert>}
+
+                  {/* CTA & Form */}
+                  <form onSubmit={handleSubmit} className="space-y-5 bg-white/60 p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <div className="space-y-4">
+                      {/* Email Field */}
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                          <Mail size={18} />
+                        </div>
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                          className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                          placeholder="Email address"
+                        />
+                      </div>
+
+                      {/* Password Field */}
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                          <Lock size={18} />
+                        </div>
+                        <input
+                          type="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                          className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                          placeholder="Password"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`w-full py-4 rounded-2xl font-extrabold text-base text-white flex items-center justify-center gap-3 bg-gradient-to-r ${currentRole.gradient} shadow-lg hover:brightness-105 hover:shadow-xl active:scale-[0.98] transition-all duration-300 disabled:opacity-70`}
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center gap-2">
+                          <span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" />
+                          Signing in...
+                        </span>
+                      ) : (
+                        <>
+                          <ArrowRight size={18} />
+                          Sign In as {currentRole.title}
+                        </>
+                      )}
+                    </button>
+                  </form>
                 </div>
               )}
 
