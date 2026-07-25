@@ -170,14 +170,14 @@ const Login = () => {
                       {/* Gradient top strip */}
                       <div className={`h-1.5 w-full bg-gradient-to-r ${r.gradient}`} />
 
-                      <div className="p-6 space-y-4">
+                      <div className="p-8 space-y-6 flex flex-col justify-between h-full min-h-[160px]">
                         {/* Icon + check */}
                         <div className="flex items-start justify-between">
                           <div
-                            className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white shadow-md transition-all duration-300`}
+                            className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white shadow-md transition-all duration-300`}
                             style={{ transform: isSelected ? 'scale(1.1) rotate(3deg)' : 'scale(1)' }}
                           >
-                            <Icon size={22} strokeWidth={1.8} />
+                            <Icon size={24} strokeWidth={1.8} />
                           </div>
                           {isSelected ? (
                             <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: r.accent }}>
@@ -188,28 +188,20 @@ const Login = () => {
                           )}
                         </div>
 
-                        {/* Role + Title */}
-                        <div>
-                          <span className="text-[9px] font-extrabold uppercase tracking-widest block mb-0.5" style={{ color: isSelected ? r.accent : '#9ca3af' }}>
-                            {r.role}
+                        {/* Title & Badge */}
+                        <div className="space-y-3">
+                          <h4 className="font-bold text-base font-heading text-gray-900 leading-tight">{r.title}</h4>
+                          <span
+                            className="inline-block text-[10px] font-extrabold uppercase tracking-wider px-3 py-1.5 rounded-full border"
+                            style={{
+                              background: isSelected ? r.accent + '18' : '#f3f4f6',
+                              color: isSelected ? r.accent : '#6b7280',
+                              borderColor: isSelected ? r.accent + '40' : '#e5e7eb'
+                            }}
+                          >
+                            {r.badge}
                           </span>
-                          <h4 className="font-bold text-sm font-heading text-gray-900 leading-tight">{r.title}</h4>
                         </div>
-
-                        {/* Desc */}
-                        <p className="text-[11px] text-gray-400 leading-relaxed hidden md:block">{r.desc}</p>
-
-                        {/* Badge */}
-                        <span
-                          className="inline-block text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full border"
-                          style={{
-                            background: isSelected ? r.accent + '18' : '#f3f4f6',
-                            color: isSelected ? r.accent : '#6b7280',
-                            borderColor: isSelected ? r.accent + '40' : '#e5e7eb'
-                          }}
-                        >
-                          {r.badge}
-                        </span>
                       </div>
                     </button>
                   );
