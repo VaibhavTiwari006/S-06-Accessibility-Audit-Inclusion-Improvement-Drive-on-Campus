@@ -235,6 +235,56 @@ const Landing = () => {
           </div>
         </section>
 
+        {/* Role Selector & Credential Authentication Section */}
+        <section id="role-selector-section" className="py-20 px-6 md:px-12 lg:px-16 bg-white border-t border-gray-100">
+          <div className="w-full space-y-12">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                Authentication Required
+              </span>
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary">
+                Select Your Campus Role to Proceed
+              </h2>
+              <p className="text-textLight text-base font-medium">
+                Access to the AccessAudit dashboard requires role-based authentication. Choose your role below to test with sample credentials.
+              </p>
+            </div>
+
+            {/* Role Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {ROLES.map((r) => {
+                const Icon = r.icon;
+                return (
+                  <motion.div
+                    key={r.role}
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    className={`p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between ${r.color} shadow-sm hover:shadow-soft-lg`}
+                    onClick={() => handleSelectRole(r)}
+                  >
+                    <div className="space-y-4">
+                      <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-xs">
+                        <Icon size={24} />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-80">{r.role}</span>
+                        <h3 className="text-xl font-bold font-heading">{r.title}</h3>
+                      </div>
+                      <p className="text-xs opacity-90 leading-relaxed font-medium">{r.desc}</p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-current/10 space-y-3">
+
+                      <Button size="sm" fullWidth className="bg-white text-textMain hover:bg-gray-100 font-bold shadow-xs">
+                        Sign In as {r.title}
+                      </Button>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* Impactful Features Showcase Section */}
         <section id="impact-features-section" className="py-20 px-6 md:px-12 lg:px-16 bg-background">
           <div className="w-full space-y-12">
@@ -311,55 +361,6 @@ const Landing = () => {
           </div>
         </section>
 
-        {/* Role Selector & Credential Authentication Section */}
-        <section id="role-selector-section" className="py-20 px-6 md:px-12 lg:px-16 bg-white border-t border-gray-100">
-          <div className="w-full space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
-                Authentication Required
-              </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary">
-                Select Your Campus Role to Proceed
-              </h2>
-              <p className="text-textLight text-base font-medium">
-                Access to the AccessAudit dashboard requires role-based authentication. Choose your role below to test with sample credentials.
-              </p>
-            </div>
-
-            {/* Role Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {ROLES.map((r) => {
-                const Icon = r.icon;
-                return (
-                  <motion.div
-                    key={r.role}
-                    whileHover={{ y: -6, scale: 1.02 }}
-                    className={`p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between ${r.color} shadow-sm hover:shadow-soft-lg`}
-                    onClick={() => handleSelectRole(r)}
-                  >
-                    <div className="space-y-4">
-                      <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-xs">
-                        <Icon size={24} />
-                      </div>
-                      <div>
-                        <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-80">{r.role}</span>
-                        <h3 className="text-xl font-bold font-heading">{r.title}</h3>
-                      </div>
-                      <p className="text-xs opacity-90 leading-relaxed font-medium">{r.desc}</p>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-current/10 space-y-3">
-
-                      <Button size="sm" fullWidth className="bg-white text-textMain hover:bg-gray-100 font-bold shadow-xs">
-                        Sign In as {r.title}
-                      </Button>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* Footer */}
