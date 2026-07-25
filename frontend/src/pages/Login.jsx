@@ -18,7 +18,8 @@ const ROLE_OPTIONS = [
     icon: ShieldCheck,
     badge: 'Full Access',
     color: 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100',
-    activeColor: 'bg-primary text-white border-primary shadow-lg',
+    activeColor: 'bg-gradient-to-br from-rose-500 to-red-600 text-white border-transparent shadow-lg shadow-red-500/30 ring-2 ring-red-500/50 ring-offset-2',
+    gradient: 'from-rose-500 to-red-600',
     desc: 'System settings, cross-department analytics, user role assignment, and audit report generation.'
   },
   {
@@ -29,7 +30,8 @@ const ROLE_OPTIONS = [
     icon: UserCheck,
     badge: 'Audit & Scan',
     color: 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100',
-    activeColor: 'bg-blue-600 text-white border-blue-600 shadow-lg',
+    activeColor: 'bg-gradient-to-br from-blue-500 to-indigo-600 text-white border-transparent shadow-lg shadow-blue-500/30 ring-2 ring-blue-500/50 ring-offset-2',
+    gradient: 'from-blue-500 to-indigo-600',
     desc: 'Physical building audits, WCAG AI code scanner, photo evidence upload, and wheelchair routing.'
   },
   {
@@ -40,7 +42,8 @@ const ROLE_OPTIONS = [
     icon: Users,
     badge: 'Report & Quiz',
     color: 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100',
-    activeColor: 'bg-emerald-600 text-white border-emerald-600 shadow-lg',
+    activeColor: 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white border-transparent shadow-lg shadow-emerald-500/30 ring-2 ring-emerald-500/50 ring-offset-2',
+    gradient: 'from-emerald-500 to-teal-600',
     desc: 'Barrier reporting, 1-tap mobile QR posters, disability awareness videos, and community forum.'
   },
   {
@@ -51,7 +54,8 @@ const ROLE_OPTIONS = [
     icon: Wrench,
     badge: '5-Stage Repair',
     color: 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100',
-    activeColor: 'bg-amber-600 text-white border-amber-600 shadow-lg',
+    activeColor: 'bg-gradient-to-br from-amber-500 to-orange-500 text-white border-transparent shadow-lg shadow-amber-500/30 ring-2 ring-amber-500/50 ring-offset-2',
+    gradient: 'from-amber-500 to-orange-500',
     desc: 'Manage 5-stage repair Kanban board (Reported → Assigned → In Progress → Fixed → Verified).'
   }
 ];
@@ -180,19 +184,20 @@ const Login = () => {
                       key={r.role}
                       type="button"
                       onClick={() => setSelectedRole(r.role)}
-                      className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between gap-3 ${
+                      className={`group relative p-4 rounded-2xl border text-left transition-all duration-300 flex flex-col justify-between gap-3 overflow-hidden ${
                         isSelected 
                           ? r.activeColor
-                          : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                          : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300 hover:shadow-md'
                       }`}
                     >
-                      <div className="flex items-center justify-between">
-                        <Icon size={20} />
-                        {isSelected && <CheckCircle2 size={16} />}
+                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity bg-gradient-to-br ${r.gradient}`} />
+                      <div className="relative flex items-center justify-between">
+                        <Icon size={24} className={`transition-transform duration-300 ${isSelected ? 'scale-110' : 'group-hover:scale-110'}`} />
+                        {isSelected && <CheckCircle2 size={18} className="text-white drop-shadow-sm" />}
                       </div>
-                      <div>
-                        <span className="text-[9px] font-extrabold uppercase tracking-widest opacity-80 block">{r.role}</span>
-                        <h4 className="font-bold text-xs font-heading truncate">{r.title}</h4>
+                      <div className="relative">
+                        <span className="text-[9px] font-extrabold uppercase tracking-widest opacity-80 block mb-1">{r.role}</span>
+                        <h4 className="font-bold text-sm font-heading">{r.title}</h4>
                       </div>
                     </button>
                   );
@@ -215,7 +220,7 @@ const Login = () => {
                   size="lg"
                   isLoading={isSubmitting}
                   icon={ArrowRight}
-                  className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary shadow-lg text-base py-4"
+                  className={`bg-gradient-to-r ${currentRoleObj.gradient || 'from-primary to-primary-light'} shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 text-base py-4`}
                 >
                   Proceed to Dashboard as {currentRoleObj.title}
                 </Button>

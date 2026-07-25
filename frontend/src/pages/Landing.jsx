@@ -101,7 +101,9 @@ const ROLES = [
     password: 'admin123',
     icon: ShieldCheck,
     desc: 'Full administrative access, department comparisons, system settings, and user management.',
-    color: 'border-red-200 bg-red-50/50 hover:bg-red-50 text-red-700'
+    gradient: 'from-rose-500 to-red-600',
+    bgLight: 'bg-rose-50 text-rose-700 border-rose-100',
+    hoverRing: 'hover:ring-rose-200'
   },
   {
     role: 'AUDITOR',
@@ -110,7 +112,9 @@ const ROLES = [
     password: 'auditor123',
     icon: UserCheck,
     desc: 'Conduct physical audits, upload photo evidence, calculate wheelchair routes, and evaluate WCAG scores.',
-    color: 'border-blue-200 bg-blue-50/50 hover:bg-blue-50 text-blue-700'
+    gradient: 'from-blue-500 to-indigo-600',
+    bgLight: 'bg-blue-50 text-blue-700 border-blue-100',
+    hoverRing: 'hover:ring-blue-200'
   },
   {
     role: 'STUDENT',
@@ -119,7 +123,9 @@ const ROLES = [
     password: 'student123',
     icon: Users,
     desc: 'Report barriers, scan QR codes, take awareness quizzes, and view public campus maps.',
-    color: 'border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50 text-emerald-700'
+    gradient: 'from-emerald-500 to-teal-600',
+    bgLight: 'bg-emerald-50 text-emerald-700 border-emerald-100',
+    hoverRing: 'hover:ring-emerald-200'
   },
   {
     role: 'MAINTENANCE',
@@ -128,7 +134,9 @@ const ROLES = [
     password: 'maintenance123',
     icon: Wrench,
     desc: 'Manage the 5-stage repair Kanban board, update issue status, and mark barriers as fixed.',
-    color: 'border-amber-200 bg-amber-50/50 hover:bg-amber-50 text-amber-700'
+    gradient: 'from-amber-500 to-orange-500',
+    bgLight: 'bg-amber-50 text-amber-700 border-amber-100',
+    hoverRing: 'hover:ring-amber-200'
   }
 ];
 
@@ -258,25 +266,28 @@ const Landing = () => {
                   <motion.div
                     key={r.role}
                     whileHover={{ y: -6, scale: 1.02 }}
-                    className={`p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between ${r.color} shadow-sm hover:shadow-soft-lg`}
+                    className={`group relative p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${r.hoverRing} hover:ring-4`}
                     onClick={() => handleSelectRole(r)}
                   >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50/50 rounded-3xl -z-10" />
+                    
                     <div className="space-y-4">
-                      <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-xs">
-                        <Icon size={24} />
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br ${r.gradient} text-white transform group-hover:scale-110 transition-transform duration-300`}>
+                        <Icon size={26} />
                       </div>
                       <div>
-                        <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-80">{r.role}</span>
-                        <h3 className="text-xl font-bold font-heading">{r.title}</h3>
+                        <span className={`text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md border ${r.bgLight}`}>
+                          {r.role}
+                        </span>
+                        <h3 className="text-xl font-bold font-heading mt-3 mb-1 text-gray-900 group-hover:text-primary transition-colors">{r.title}</h3>
                       </div>
-                      <p className="text-xs opacity-90 leading-relaxed font-medium">{r.desc}</p>
+                      <p className="text-xs text-gray-500 leading-relaxed font-medium">{r.desc}</p>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-current/10 space-y-3">
-
-                      <Button size="sm" fullWidth className="bg-white text-textMain hover:bg-gray-100 font-bold shadow-xs">
-                        Sign In as {r.title}
-                      </Button>
+                    <div className="mt-8">
+                      <div className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 ${r.bgLight} group-hover:shadow-md`}>
+                        Sign In <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
                   </motion.div>
                 );
