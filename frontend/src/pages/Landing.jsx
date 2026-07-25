@@ -249,8 +249,12 @@ const Landing = () => {
           </div>
         </section>
 
+        <div className="w-full px-6 md:px-12 lg:px-16 bg-white">
+          <hr className="border-gray-200 max-w-6xl mx-auto" />
+        </div>
+
         {/* Role Selector & Credential Authentication Section */}
-        <section id="role-selector-section" className="pt-6 pb-20 px-6 md:px-12 lg:px-16 bg-white">
+        <section id="role-selector-section" className="pt-12 pb-20 px-6 md:px-12 lg:px-16 bg-white">
           <div className="w-full space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
