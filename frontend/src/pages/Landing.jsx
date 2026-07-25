@@ -256,11 +256,11 @@ const Landing = () => {
         {/* Role Selector & Credential Authentication Section */}
         <section id="role-selector-section" className="pt-12 pb-20 px-6 md:px-12 lg:px-16 bg-white">
           <div className="w-full space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+            <div className="text-center max-w-2xl mx-auto space-y-5">
+              <span className="inline-block text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
                 Authentication Required
               </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary">
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary mt-4">
                 Select Your Campus Role to Proceed
               </h2>
               <p className="text-textLight text-base font-medium">
