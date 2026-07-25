@@ -272,41 +272,79 @@ const Landing = () => {
               </p>
             </div>
 
-            {/* Role Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {ROLES.map((r) => {
+            {/* Role Cards Grid — Premium Interconnected Design */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {ROLES.map((r, index) => {
                 const Icon = r.icon;
                 return (
                   <motion.div
                     key={r.role}
-                    whileHover={{ y: -6, scale: 1.02 }}
-                    className={`group relative p-6 rounded-3xl border transition-all cursor-pointer flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${r.hoverRing} hover:ring-4`}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    whileHover={{ y: -8, scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="group relative cursor-pointer"
                     onClick={() => handleSelectRole(r)}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50/50 rounded-3xl -z-10" />
-                    
-                    <div className="space-y-4">
-                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-md bg-gradient-to-br ${r.gradient} text-white transform group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon size={26} />
+                    {/* Card */}
+                    <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500">
+                      {/* Gradient top strip */}
+                      <div className={`h-1.5 w-full bg-gradient-to-r ${r.gradient}`} />
+
+                      {/* Animated gradient glow on hover */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${r.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl`} />
+
+                      <div className="p-6 space-y-5">
+                        {/* Icon with gradient background */}
+                        <div className="flex items-start justify-between">
+                          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                            <Icon size={26} strokeWidth={1.8} />
+                          </div>
+                          <motion.div
+                            className={`w-7 h-7 rounded-full flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white opacity-0 group-hover:opacity-100`}
+                            initial={false}
+                            animate={{ rotate: 0 }}
+                            whileHover={{ rotate: 360 }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            <ArrowRight size={13} />
+                          </motion.div>
+                        </div>
+
+                        {/* Role badge */}
+                        <div>
+                          <span className={`inline-block text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full border ${r.bgLight}`}>
+                            {r.role}
+                          </span>
+                        </div>
+
+                        {/* Title & desc */}
+                        <div className="space-y-2">
+                          <h3 className="text-lg font-bold font-heading text-gray-900 group-hover:text-gray-800 transition-colors leading-tight">{r.title}</h3>
+                          <p className="text-xs text-gray-400 leading-relaxed">{r.desc}</p>
+                        </div>
                       </div>
-                      <div>
-                        <span className={`text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-md border ${r.bgLight}`}>
-                          {r.role}
-                        </span>
-                        <h3 className="text-xl font-bold font-heading mt-3 mb-1 text-gray-900 group-hover:text-primary transition-colors">{r.title}</h3>
+
+                      {/* Sign In footer bar */}
+                      <div className={`mx-4 mb-4 py-2.5 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 bg-gradient-to-r ${r.gradient} text-white opacity-80 group-hover:opacity-100 group-hover:shadow-lg`}>
+                        Sign In <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                       </div>
-                      <p className="text-xs text-gray-500 leading-relaxed font-medium">{r.desc}</p>
                     </div>
 
-                    <div className="mt-8">
-                      <div className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 font-bold text-sm transition-all duration-300 ${r.bgLight} group-hover:shadow-md`}>
-                        Sign In <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    {/* Connection dot at bottom center for interconnected feel */}
+                    {index < ROLES.length - 1 && (
+                      <div className="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10">
+                        <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${r.gradient} shadow-md border-2 border-white`} />
                       </div>
-                    </div>
+                    )}
                   </motion.div>
                 );
               })}
             </div>
+
+            {/* Connecting line behind cards (desktop) */}
+            <div className="hidden lg:block absolute left-[12.5%] right-[12.5%] top-1/2 h-0.5 bg-gradient-to-r from-rose-200 via-blue-200 via-emerald-200 to-amber-200 -z-0 pointer-events-none" style={{ top: 'calc(50% + 2rem)' }} />
           </div>
         </section>
 
