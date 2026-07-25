@@ -175,17 +175,11 @@ const Landing = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          {user ? (
-            <Link to="/dashboard">
-              <Button variant="primary" icon={ArrowRight}>Enter Dashboard ({user.role})</Button>
-            </Link>
-          ) : (
             <Link to="/login">
               <Button variant="primary" icon={LogIn}>
                 Select Role & Sign In
               </Button>
             </Link>
-          )}
         </div>
       </nav>
 
