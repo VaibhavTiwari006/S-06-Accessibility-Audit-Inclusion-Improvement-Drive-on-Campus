@@ -129,7 +129,7 @@ const Login = () => {
 
       {/* ── Main Content ── */}
       <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-10">
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-5xl">
 
           {/* Frosted glass container */}
           <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.6)' }}>
@@ -140,20 +140,17 @@ const Login = () => {
             <div className="p-8 md:p-10 space-y-8">
 
               {/* Header */}
-              <div className="text-center space-y-2">
+              <div className="text-center space-y-2 pb-2">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 text-rose-600 font-bold text-xs border border-rose-200 uppercase tracking-wider">
                   <Zap size={11} /> Role-Based Access Portal · Chandigarh University
                 </div>
                 <h1 className="text-2xl md:text-3xl font-heading font-extrabold text-gray-900">
                   Select Your Campus Role
                 </h1>
-                <p className="text-gray-400 text-sm font-medium max-w-sm mx-auto">
-                  Choose your role below to sign in and explore the AccessAudit platform.
-                </p>
               </div>
 
               {/* Role Cards */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {ROLE_OPTIONS.map((r) => {
                   const Icon = r.icon;
                   const isSelected = selectedRole === r.role;
@@ -171,9 +168,9 @@ const Login = () => {
                       }}
                     >
                       {/* Gradient top strip */}
-                      <div className={`h-1 w-full bg-gradient-to-r ${r.gradient}`} />
+                      <div className={`h-1.5 w-full bg-gradient-to-r ${r.gradient}`} />
 
-                      <div className="p-4 space-y-3">
+                      <div className="p-6 space-y-4">
                         {/* Icon + check */}
                         <div className="flex items-start justify-between">
                           <div
