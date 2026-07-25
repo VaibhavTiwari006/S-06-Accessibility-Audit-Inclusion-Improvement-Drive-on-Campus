@@ -151,8 +151,6 @@ const ROLES = [
 const Landing = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [selectedFeature, setSelectedFeature] = useState(IMPACTFUL_FEATURES[0]);
-
   const scrollToRoles = () => {
     document.getElementById('role-selector-section')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -355,32 +353,6 @@ const Landing = () => {
                   </motion.div>
                 );
               })}
-            </div>
-
-            {/* Selected Feature Live Preview Box */}
-            <div className="p-8 bg-white rounded-3xl border border-gray-200 shadow-soft-lg space-y-6">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-100 pb-6">
-                <div className="flex items-center gap-4">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-md bg-gradient-to-br ${selectedFeature.color}`}>
-                    <selectedFeature.icon size={28} />
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold text-primary uppercase tracking-wider">{selectedFeature.badge} Feature</span>
-                    <h3 className="text-2xl font-extrabold text-textMain font-heading">{selectedFeature.title}</h3>
-                  </div>
-                </div>
-                <Button variant="primary" icon={LogIn} onClick={scrollToRoles}>
-                  Try Feature via Role Login
-                </Button>
-              </div>
-
-              <div className="p-5 bg-slate-50 rounded-2xl border border-slate-200 text-sm font-medium text-slate-700 flex items-start gap-3">
-                <CheckCircle2 size={20} className="text-emerald-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-slate-900 font-bold block mb-1">Impact Summary:</strong>
-                  {selectedFeature.demo}
-                </div>
-              </div>
             </div>
           </div>
         </section>
