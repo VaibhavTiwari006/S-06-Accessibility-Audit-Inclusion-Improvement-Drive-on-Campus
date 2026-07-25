@@ -1,8 +1,8 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { 
-  ShieldCheck, UserCheck, Users, Wrench, 
+import {
+  ShieldCheck, UserCheck, Users, Wrench,
   ArrowRight, CheckCircle2, ArrowLeft, Zap
 } from 'lucide-react';
 import Alert from '../components/ui/Alert';
@@ -16,9 +16,7 @@ const ROLE_OPTIONS = [
     icon: ShieldCheck,
     badge: 'Full Access',
     gradient: 'from-rose-500 to-red-600',
-    light: 'bg-rose-50 text-rose-600 border-rose-200',
-    ring: 'ring-rose-400',
-    soft: '#fff1f2',
+    soft: 'rgba(255,241,242,0.95)',
     accent: '#e11d48',
     desc: 'System settings, department analytics & user management.'
   },
@@ -30,9 +28,7 @@ const ROLE_OPTIONS = [
     icon: UserCheck,
     badge: 'Audit & Scan',
     gradient: 'from-violet-500 to-purple-600',
-    light: 'bg-violet-50 text-violet-600 border-violet-200',
-    ring: 'ring-violet-400',
-    soft: '#f5f3ff',
+    soft: 'rgba(245,243,255,0.95)',
     accent: '#7c3aed',
     desc: 'Physical audits, WCAG scanner & wheelchair routing.'
   },
@@ -42,11 +38,9 @@ const ROLE_OPTIONS = [
     email: 'student@campus.edu',
     password: 'student123',
     icon: Users,
-    badge: 'Report & Quiz',
+    badge: 'Report & Learn',
     gradient: 'from-emerald-500 to-teal-600',
-    light: 'bg-emerald-50 text-emerald-600 border-emerald-200',
-    ring: 'ring-emerald-400',
-    soft: '#ecfdf5',
+    soft: 'rgba(236,253,245,0.95)',
     accent: '#059669',
     desc: 'Barrier reporting, QR posters & awareness quizzes.'
   },
@@ -58,9 +52,7 @@ const ROLE_OPTIONS = [
     icon: Wrench,
     badge: '5-Stage Repair',
     gradient: 'from-amber-500 to-orange-500',
-    light: 'bg-amber-50 text-amber-600 border-amber-200',
-    ring: 'ring-amber-400',
-    soft: '#fffbeb',
+    soft: 'rgba(255,251,235,0.95)',
     accent: '#d97706',
     desc: 'Kanban repair board from report to verification.'
   }
@@ -94,146 +86,173 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans" style={{ background: 'linear-gradient(135deg, #fff5f5 0%, #fafafa 50%, #f5f3ff 100%)' }}>
+    <div className="min-h-screen flex flex-col font-sans relative overflow-hidden">
 
-      {/* Navbar */}
-      <header className="px-6 md:px-12 py-4 flex items-center justify-between border-b border-gray-100 bg-white/70 backdrop-blur-md sticky top-0 z-50">
+      {/* ── Campus Background with Ken Burns zoom animation ── */}
+      <style>{`
+        @keyframes kenburns {
+          0%   { transform: scale(1)    translateX(0)     translateY(0); }
+          50%  { transform: scale(1.08) translateX(-1%)   translateY(-1%); }
+          100% { transform: scale(1)    translateX(0)     translateY(0); }
+        }
+        .campus-bg {
+          animation: kenburns 20s ease-in-out infinite;
+        }
+      `}</style>
+
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src="/campus_bg.jpg"
+          alt="Chandigarh University Campus"
+          className="campus-bg w-full h-full object-cover object-center"
+        />
+        {/* Multi-layer overlay for depth and readability */}
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.65) 100%)' }} />
+        {/* Subtle color tint matching CU brand red */}
+        <div className="absolute inset-0" style={{ background: 'rgba(120,0,20,0.15)' }} />
+      </div>
+
+      {/* ── Navbar ── */}
+      <header className="relative z-10 px-6 md:px-12 py-4 flex items-center justify-between border-b border-white/10 bg-black/20 backdrop-blur-md">
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white font-bold font-heading shadow-sm group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-rose-600 flex items-center justify-center text-white font-bold font-heading shadow-md group-hover:scale-105 transition-transform">
             CU
           </div>
-          <span className="text-xl font-heading font-extrabold text-gray-900 tracking-tight">
-            CU <span className="text-rose-600">Access</span> Audit
+          <span className="text-xl font-heading font-extrabold text-white tracking-tight drop-shadow">
+            CU <span className="text-rose-400">Access</span> Audit
           </span>
         </Link>
-        <Link to="/" className="text-xs font-bold text-gray-500 hover:text-gray-900 flex items-center gap-1.5 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-xl transition-all">
+        <Link to="/" className="text-xs font-bold text-white/80 hover:text-white flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-xl transition-all backdrop-blur-sm">
           <ArrowLeft size={13} /> Back to Home
         </Link>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center px-6 py-12">
-        <div className="w-full max-w-5xl">
+      {/* ── Main Content ── */}
+      <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-10">
+        <div className="w-full max-w-4xl">
 
-          {/* Page heading */}
-          <div className="text-center mb-10 space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 text-rose-600 font-bold text-xs border border-rose-200 uppercase tracking-wider mb-2">
-              <Zap size={12} /> Role-Based Access Portal
-            </div>
-            <h1 className="text-3xl md:text-4xl font-heading font-extrabold text-gray-900">
-              Select Your Campus Role
-            </h1>
-            <p className="text-gray-400 text-sm font-medium max-w-md mx-auto">
-              Choose your role below to sign in with sample credentials and explore the AccessAudit platform.
-            </p>
-          </div>
+          {/* Frosted glass container */}
+          <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.6)' }}>
 
-          {/* Role Cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            {ROLE_OPTIONS.map((r) => {
-              const Icon = r.icon;
-              const isSelected = selectedRole === r.role;
-              return (
-                <button
-                  key={r.role}
-                  type="button"
-                  onClick={() => { setSelectedRole(r.role); setError(''); }}
-                  className="group relative text-left rounded-3xl border-2 transition-all duration-300 overflow-hidden focus:outline-none"
-                  style={{
-                    borderColor: isSelected ? r.accent : '#e5e7eb',
-                    background: isSelected ? r.soft : '#ffffff',
-                    boxShadow: isSelected
-                      ? `0 8px 30px -4px ${r.accent}30, 0 0 0 3px ${r.accent}20`
-                      : '0 1px 4px rgba(0,0,0,0.05)',
-                    transform: isSelected ? 'translateY(-4px)' : 'translateY(0)',
-                  }}
-                >
-                  {/* Top gradient bar */}
-                  <div className={`h-1 w-full bg-gradient-to-r ${r.gradient}`} />
+            {/* Top banner strip */}
+            <div className={`h-1.5 w-full bg-gradient-to-r ${currentRole.gradient} transition-all duration-500`} />
 
-                  <div className="p-5 space-y-4">
-                    {/* Icon */}
-                    <div className="flex items-start justify-between">
-                      <div
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 text-white bg-gradient-to-br ${r.gradient} shadow-md`}
-                        style={{ transform: isSelected ? 'scale(1.1) rotate(3deg)' : 'scale(1)' }}
-                      >
-                        <Icon size={22} strokeWidth={1.8} />
-                      </div>
-                      {isSelected && (
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: r.accent }}>
-                          <CheckCircle2 size={14} className="text-white" />
-                        </div>
-                      )}
-                    </div>
+            <div className="p-8 md:p-10 space-y-8">
 
-                    {/* Role name + Title */}
-                    <div>
-                      <span
-                        className="text-[9px] font-extrabold uppercase tracking-widest block mb-1"
-                        style={{ color: isSelected ? r.accent : '#9ca3af' }}
-                      >
-                        {r.role}
-                      </span>
-                      <h4 className="font-bold text-sm font-heading text-gray-800 leading-tight group-hover:text-gray-900">
-                        {r.title}
-                      </h4>
-                    </div>
+              {/* Header */}
+              <div className="text-center space-y-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 text-rose-600 font-bold text-xs border border-rose-200 uppercase tracking-wider">
+                  <Zap size={11} /> Role-Based Access Portal · Chandigarh University
+                </div>
+                <h1 className="text-2xl md:text-3xl font-heading font-extrabold text-gray-900">
+                  Select Your Campus Role
+                </h1>
+                <p className="text-gray-400 text-sm font-medium max-w-sm mx-auto">
+                  Choose your role below to sign in and explore the AccessAudit platform.
+                </p>
+              </div>
 
-                    {/* Description */}
-                    <p className="text-[11px] text-gray-400 leading-relaxed hidden md:block">{r.desc}</p>
-
-                    {/* Badge */}
-                    <span
-                      className="inline-block text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full border"
+              {/* Role Cards */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {ROLE_OPTIONS.map((r) => {
+                  const Icon = r.icon;
+                  const isSelected = selectedRole === r.role;
+                  return (
+                    <button
+                      key={r.role}
+                      type="button"
+                      onClick={() => { setSelectedRole(r.role); setError(''); }}
+                      className="group relative text-left rounded-2xl border-2 transition-all duration-300 overflow-hidden focus:outline-none"
                       style={{
-                        background: isSelected ? r.soft : '#f9fafb',
-                        color: isSelected ? r.accent : '#6b7280',
-                        borderColor: isSelected ? r.accent + '40' : '#e5e7eb'
+                        borderColor: isSelected ? r.accent : '#e5e7eb',
+                        background: isSelected ? r.soft : 'rgba(249,250,251,0.8)',
+                        boxShadow: isSelected ? `0 8px 30px -6px ${r.accent}50` : '0 1px 4px rgba(0,0,0,0.05)',
+                        transform: isSelected ? 'translateY(-4px) scale(1.02)' : 'translateY(0) scale(1)',
                       }}
                     >
-                      {r.badge}
+                      {/* Gradient top strip */}
+                      <div className={`h-1 w-full bg-gradient-to-r ${r.gradient}`} />
+
+                      <div className="p-4 space-y-3">
+                        {/* Icon + check */}
+                        <div className="flex items-start justify-between">
+                          <div
+                            className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${r.gradient} text-white shadow-md transition-all duration-300`}
+                            style={{ transform: isSelected ? 'scale(1.1) rotate(3deg)' : 'scale(1)' }}
+                          >
+                            <Icon size={22} strokeWidth={1.8} />
+                          </div>
+                          {isSelected ? (
+                            <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: r.accent }}>
+                              <CheckCircle2 size={14} className="text-white" />
+                            </div>
+                          ) : (
+                            <div className="w-6 h-6 rounded-full border-2 border-gray-200" />
+                          )}
+                        </div>
+
+                        {/* Role + Title */}
+                        <div>
+                          <span className="text-[9px] font-extrabold uppercase tracking-widest block mb-0.5" style={{ color: isSelected ? r.accent : '#9ca3af' }}>
+                            {r.role}
+                          </span>
+                          <h4 className="font-bold text-sm font-heading text-gray-900 leading-tight">{r.title}</h4>
+                        </div>
+
+                        {/* Desc */}
+                        <p className="text-[11px] text-gray-400 leading-relaxed hidden md:block">{r.desc}</p>
+
+                        {/* Badge */}
+                        <span
+                          className="inline-block text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full border"
+                          style={{
+                            background: isSelected ? r.accent + '18' : '#f3f4f6',
+                            color: isSelected ? r.accent : '#6b7280',
+                            borderColor: isSelected ? r.accent + '40' : '#e5e7eb'
+                          }}
+                        >
+                          {r.badge}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Error */}
+              {error && <Alert variant="danger">{error}</Alert>}
+
+              {/* CTA */}
+              <form onSubmit={handleSubmit}>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`w-full py-4 rounded-2xl font-extrabold text-base text-white flex items-center justify-center gap-3 bg-gradient-to-r ${currentRole.gradient} shadow-lg hover:brightness-105 hover:shadow-xl active:scale-[0.98] transition-all duration-300 disabled:opacity-70`}
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" />
+                      Signing in...
                     </span>
-                  </div>
+                  ) : (
+                    <>
+                      <ArrowRight size={18} />
+                      Proceed to Dashboard as {currentRole.title}
+                    </>
+                  )}
                 </button>
-              );
-            })}
-          </div>
+              </form>
 
-          {/* Error */}
-          {error && (
-            <div className="mb-4 animate-bounce-once">
-              <Alert variant="danger">{error}</Alert>
+              <p className="text-center text-xs text-gray-400 font-medium -mt-4">
+                Authorized Personnel &bull; Chandigarh University S-06 Inclusion Drive
+              </p>
+
             </div>
-          )}
-
-          {/* CTA + Footer */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full py-4 rounded-2xl font-extrabold text-base text-white flex items-center justify-center gap-3 bg-gradient-to-r ${currentRole.gradient} shadow-lg hover:shadow-xl hover:brightness-105 active:scale-[0.98] transition-all duration-300 disabled:opacity-70`}
-            >
-              {isSubmitting ? (
-                <span className="flex items-center gap-2">
-                  <span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" />
-                  Signing in...
-                </span>
-              ) : (
-                <>
-                  <ArrowRight size={18} />
-                  Proceed to Dashboard as {currentRole.title}
-                </>
-              )}
-            </button>
-
-            <p className="text-center text-xs text-gray-400 font-medium pt-1">
-              Authorized Personnel &bull; Chandigarh University S-06 Inclusion Drive
-            </p>
-          </form>
+          </div>
 
         </div>
       </main>
+
     </div>
   );
 };
