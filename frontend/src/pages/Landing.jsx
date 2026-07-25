@@ -27,7 +27,7 @@ const IMPACTFUL_FEATURES = [
     icon: Map,
     badge: 'Interactive Navigation',
     title: 'Wheelchair Route Navigation & Map',
-    desc: 'Interactive campus map with color-coded building scores, feature layers (Ramps ♿, Elevators 🛗, Washrooms 🚻), and barrier-free wheelchair routing.',
+    desc: 'Interactive campus map with color-coded building scores, feature layers (Ramps, Elevators, Washrooms), and barrier-free wheelchair routing.',
     color: 'from-blue-500 to-indigo-600',
     bgColor: 'bg-blue-50 text-blue-700 border-blue-200',
     hoverRing: 'hover:ring-blue-200',
