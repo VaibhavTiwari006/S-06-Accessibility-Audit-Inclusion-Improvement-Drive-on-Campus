@@ -49,7 +49,7 @@ const InclusionLeaderboard = () => {
   if (loading) return <div className="animate-pulse bg-gray-100 rounded-xl h-64 w-full"></div>;
 
   return (
-    <Card className="h-full relative overflow-hidden mt-6">
+    <Card className="h-full relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
       
       <CardHeader className="pb-2">
