@@ -127,6 +127,7 @@
 
 @keyframes textShine {
   0% { background-position: -200% center; }
+  20% { background-position: 200% center; }
   100% { background-position: 200% center; }
 }
 
@@ -161,7 +162,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: textShine 3s linear infinite;
+    animation: textShine 5s linear infinite;
   }
   .btn-primary {
     @apply bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_-6px_rgba(218,37,29,0.5)] focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 active:scale-95;
