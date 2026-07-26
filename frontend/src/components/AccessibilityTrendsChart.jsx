@@ -13,8 +13,15 @@ const fullData = [
   { month: 'Jul', score: 78, reports: 2, audits: 22 },
 ];
 
+const weeklyData1M = [
+  { month: 'Wk 1', score: 72, reports: 4 },
+  { month: 'Wk 2', score: 74, reports: 3 },
+  { month: 'Wk 3', score: 76, reports: 3 },
+  { month: 'Wk 4', score: 78, reports: 2 },
+];
+
 const TIMEFRAMES = [
-  { label: '1M', days: 1, text: 'last month' },
+  { label: '1M', days: 4, text: 'last 30 days (weekly breakdown)', isWeekly: true },
   { label: '3M', days: 3, text: 'last 3 months' },
   { label: '6M', days: 6, text: 'last 6 months' },
   { label: '1Y', days: 7, text: 'full year' },
@@ -24,7 +31,7 @@ const AccessibilityTrendsChart = () => {
   const [selectedTimeframe, setSelectedTimeframe] = useState('6M');
 
   const tf = TIMEFRAMES.find(t => t.label === selectedTimeframe) || TIMEFRAMES[2];
-  const chartData = fullData.slice(-tf.days);
+  const chartData = tf.isWeekly ? weeklyData1M : fullData.slice(-tf.days);
 
   return (
     <Card className="h-full flex flex-col justify-between shadow-sm border border-gray-100 overflow-hidden">
