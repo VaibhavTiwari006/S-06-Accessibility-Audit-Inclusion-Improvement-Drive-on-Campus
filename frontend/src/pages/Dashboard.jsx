@@ -26,15 +26,20 @@ const itemVariants = {
 };
 
 const DashboardHero = ({ title, subtitle, bgClass = 'bg-primary' }) => (
-  <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="relative w-full h-48 md:h-56 rounded-3xl overflow-hidden mb-8 shadow-sm group">
+  <motion.div 
+    initial={{ opacity: 0, scale: 0.98 }} 
+    animate={{ opacity: 1, scale: 1 }} 
+    transition={{ duration: 0.4, ease: 'easeOut' }} 
+    className="relative w-full rounded-2xl overflow-hidden mb-6 p-6 md:p-8 shadow-sm group border border-white/10"
+  >
     <div 
-      className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay transition-transform duration-1000 group-hover:scale-105"
+      className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay transition-transform duration-700 group-hover:scale-105"
       style={{ backgroundImage: "url('/campus_bg.jpg')" }}
     ></div>
     <div className={`absolute inset-0 ${bgClass}`}></div>
-    <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-end">
-      <h1 className="text-3xl md:text-4xl font-heading font-extrabold text-white mb-2">{title}</h1>
-      <p className="text-white/90 font-medium max-w-xl text-sm md:text-base">{subtitle}</p>
+    <div className="relative z-10 flex flex-col justify-start">
+      <h1 className="text-3xl md:text-4xl font-heading font-black text-white tracking-tight mb-2 drop-shadow-xs">{title}</h1>
+      <p className="text-white/95 font-bold max-w-2xl text-sm md:text-base leading-snug drop-shadow-xs">{subtitle}</p>
     </div>
   </motion.div>
 );
