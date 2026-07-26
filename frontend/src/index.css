@@ -81,6 +81,12 @@
   input, textarea, select {
     @apply transition-all duration-200;
   }
+
+  /* Hide native browser password reveal icons (e.g., in Edge) */
+  input[type="password"]::-ms-reveal,
+  input[type="password"]::-ms-clear {
+    display: none;
+  }
 }
 
 @keyframes fadeIn {
