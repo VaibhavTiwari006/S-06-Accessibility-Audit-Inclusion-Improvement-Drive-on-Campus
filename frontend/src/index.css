@@ -126,9 +126,9 @@
 }
 
 @keyframes textShine {
-  0% { background-position: -200% center; }
-  18% { background-position: 200% center; }
-  100% { background-position: 200% center; }
+  0% { background-position: 120% center; }
+  15% { background-position: -20% center; }
+  100% { background-position: -20% center; }
 }
 
 @layer utilities {
