@@ -258,7 +258,13 @@ const Landing = () => {
             <div className="absolute bottom-0 right-1/4 translate-x-1/4 translate-y-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s' }} />
           </div>
           <div className="relative z-10 w-full space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-3">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="text-center max-w-2xl mx-auto space-y-3"
+            >
               <span className="inline-block text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
                 Authentication Required
               </span>
@@ -268,7 +274,7 @@ const Landing = () => {
               <p className="text-textLight text-base font-medium">
                 Access to the AccessAudit dashboard requires role-based authentication. Choose your role below to test with sample credentials.
               </p>
-            </div>
+            </motion.div>
 
             {/* Role Cards Grid — Premium Interconnected Design */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
