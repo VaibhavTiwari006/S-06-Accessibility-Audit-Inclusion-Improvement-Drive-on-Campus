@@ -232,15 +232,15 @@ const Landing = () => {
                 <p className="text-xs font-bold text-textLight uppercase tracking-wider">Buildings Audited</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-emerald-600 mb-1 text-shine" style={{ animationDelay: '0.5s' }}>1,200+</p>
+                <p className="text-4xl font-heading font-extrabold text-emerald-600 mb-1 text-shine" style={{ animationDelay: '1s' }}>1,200+</p>
                 <p className="text-xs font-bold text-textLight uppercase tracking-wider">Barriers Resolved</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-blue-600 mb-1 text-shine" style={{ animationDelay: '1s' }}>150+</p>
+                <p className="text-4xl font-heading font-extrabold text-blue-600 mb-1 text-shine" style={{ animationDelay: '2s' }}>150+</p>
                 <p className="text-xs font-bold text-textLight uppercase tracking-wider">Active Auditors</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-indigo-600 mb-1 text-shine" style={{ animationDelay: '1.5s' }}>92%</p>
+                <p className="text-4xl font-heading font-extrabold text-indigo-600 mb-1 text-shine" style={{ animationDelay: '3s' }}>92%</p>
                 <p className="text-xs font-bold text-textLight uppercase tracking-wider">RPWD Compliance</p>
               </div>
             </div>
