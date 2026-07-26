@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import {
   ShieldCheck, UserCheck, Users, Wrench,
   ArrowRight, CheckCircle2, ArrowLeft, Zap,
-  Mail, Lock
+  Mail, Lock, Eye, EyeOff
 } from 'lucide-react';
 import Alert from '../components/ui/Alert';
 
@@ -75,6 +75,7 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     setEmail('');
@@ -238,13 +239,20 @@ const Login = () => {
                           <Lock size={18} />
                         </div>
                         <input
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           required
-                          className="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                          className="w-full pl-11 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
                           placeholder="Password"
                         />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+                        >
+                          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                        </button>
                       </div>
                     </div>
 
