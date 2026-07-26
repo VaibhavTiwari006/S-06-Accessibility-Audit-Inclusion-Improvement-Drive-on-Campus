@@ -123,18 +123,11 @@ const DepartmentComparison = () => {
             <div className="w-full bg-gray-100 h-3 rounded-full overflow-hidden p-0.5 relative">
               <motion.div
                 initial={{ width: '0%' }}
-                whileInView={{ 
-                  width: [
-                    '0%', 
-                    `${Math.min(dept.score + 12, 98)}%`, 
-                    `${dept.score}%`
-                  ] 
-                }}
+                whileInView={{ width: `${dept.score}%` }}
                 viewport={{ once: false, amount: 0.3 }}
                 transition={{
-                  duration: 1.2,
-                  times: [0, 0.65, 1],
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: 1.0,
+                  ease: [0.16, 1, 0.3, 1], // snappy fast start, smooth finish
                   delay: index * 0.15,
                 }}
                 className={`h-full rounded-full relative overflow-hidden ${dept.color}`}
