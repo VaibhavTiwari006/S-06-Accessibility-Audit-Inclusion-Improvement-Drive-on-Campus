@@ -89,7 +89,7 @@ const Login = () => {
     if (result.success) {
       navigate('/dashboard');
     } else {
-      setError(result.message || 'Invalid credentials.');
+      setError('Wrong login credentials, please try again.');
       setIsSubmitting(false);
     }
   };
