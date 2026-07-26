@@ -353,7 +353,13 @@ const Landing = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
           </div>
           <div className="relative z-10 w-full space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6 }}
+              className="text-center max-w-3xl mx-auto space-y-3"
+            >
               <span className="inline-block text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
                 Platform Demonstrations
               </span>
@@ -363,7 +369,7 @@ const Landing = () => {
               <p className="text-textLight text-base font-medium">
                 Click any feature below to inspect how it transforms accessibility management on campus.
               </p>
-            </div>
+            </motion.div>
 
             {/* Feature Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
