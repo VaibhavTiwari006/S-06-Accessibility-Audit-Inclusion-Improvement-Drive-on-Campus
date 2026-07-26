@@ -277,9 +277,10 @@ const Landing = () => {
                 return (
                   <motion.div
                     key={r.role}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                     whileHover={{ y: -8, scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
                     className="group relative h-full"
