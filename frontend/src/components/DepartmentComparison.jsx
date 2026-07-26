@@ -1,5 +1,6 @@
-import React from 'react';
-import { Building, TrendingUp, ShieldCheck, Award } from 'lucide-react';
+import React, { useState } from 'react';
+import { Building, TrendingUp, Trophy, Play } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Card, CardHeader, CardContent } from './ui/Card';
 
 const departmentsData = [
@@ -10,7 +11,9 @@ const departmentsData = [
     resolvedBarriers: 24,
     pendingBarriers: 2,
     trend: '+6.2%',
-    status: 'EXCELLENT',
+    color: 'bg-emerald-500',
+    accent: '#10b981',
+    isWinner: true
   },
   {
     name: 'University Institute of Computing',
@@ -19,7 +22,8 @@ const departmentsData = [
     resolvedBarriers: 18,
     pendingBarriers: 4,
     trend: '+4.1%',
-    status: 'GOOD',
+    color: 'bg-emerald-500',
+    accent: '#10b981'
   },
   {
     name: 'Chandigarh Business School',
@@ -28,7 +32,8 @@ const departmentsData = [
     resolvedBarriers: 14,
     pendingBarriers: 6,
     trend: '+2.8%',
-    status: 'MODERATE',
+    color: 'bg-amber-500',
+    accent: '#f59e0b'
   },
   {
     name: 'Pharmaceutical Sciences',
@@ -37,15 +42,18 @@ const departmentsData = [
     resolvedBarriers: 9,
     pendingBarriers: 11,
     trend: '+5.0%',
-    status: 'NEEDS_ATTENTION',
+    color: 'bg-rose-500',
+    accent: '#f43f5e'
   },
 ];
 
 const DepartmentComparison = () => {
+  const [raceKey, setRaceKey] = useState(0);
+
   return (
-    <Card className="h-full">
+    <Card className="h-full shadow-sm border border-gray-100">
       <CardHeader>
-        <div className="flex justify-between items-start w-full">
+        <div className="flex flex-wrap justify-between items-center w-full gap-3">
           <div>
             <h3 className="text-xl font-heading font-bold text-textMain flex items-center gap-2">
               <Building className="text-primary" size={24} /> Departmental Accessibility Comparison
@@ -54,28 +62,48 @@ const DepartmentComparison = () => {
               Compare WCAG & RPWD compliance metrics across university departments.
             </p>
           </div>
-          <span className="flex items-center gap-1 text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
-            <TrendingUp size={14} /> +4.5% Avg Growth
-          </span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setRaceKey(prev => prev + 1)}
+              className="flex items-center gap-1.5 text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full transition-all focus:outline-none active:scale-95 shadow-2xs"
+              title="Re-run the accessibility race"
+            >
+              <Play size={13} className="fill-gray-700" /> Race Again
+            </button>
+            <span className="flex items-center gap-1 text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
+              <TrendingUp size={14} /> +4.5% Avg Growth
+            </span>
+          </div>
         </div>
       </CardHeader>
 
       <CardContent className="space-y-4">
-        {departmentsData.map((dept) => (
+        {departmentsData.map((dept, index) => (
           <div
-            key={dept.code}
-            className="p-4 bg-white/70 rounded-2xl border border-gray-100 space-y-3 hover:shadow-sm transition-all"
+            key={`${dept.code}-${raceKey}`}
+            className={`p-4 rounded-2xl border transition-all duration-300 ${
+              dept.isWinner 
+                ? 'bg-gradient-to-r from-emerald-50/40 via-white to-white border-emerald-200/80 shadow-xs' 
+                : 'bg-white/80 border-gray-100 hover:shadow-xs'
+            }`}
           >
-            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-3">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary font-bold text-sm flex items-center justify-center flex-shrink-0">
+                <div className={`w-10 h-10 rounded-xl font-extrabold text-sm flex items-center justify-center flex-shrink-0 ${
+                  dept.isWinner ? 'bg-emerald-500 text-white shadow-xs' : 'bg-primary/10 text-primary'
+                }`}>
                   {dept.code}
                 </div>
                 <div>
-                  <h4 className="font-bold text-textMain text-sm leading-tight">
+                  <h4 className="font-bold text-textMain text-sm leading-tight flex items-center gap-2">
                     {dept.name}
+                    {dept.isWinner && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
+                        <Trophy size={11} className="text-amber-500" /> #1 Winner
+                      </span>
+                    )}
                   </h4>
-                  <span className="text-[11px] text-textLight font-medium">
+                  <span className="text-[11px] text-textLight font-semibold">
                     {dept.resolvedBarriers} Barriers Fixed • {dept.pendingBarriers} Pending
                   </span>
                 </div>
@@ -91,18 +119,40 @@ const DepartmentComparison = () => {
               </div>
             </div>
 
-            {/* Score Progress Bar */}
-            <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all duration-700 ${
-                  dept.score >= 80
-                    ? 'bg-emerald-500'
-                    : dept.score >= 70
-                    ? 'bg-amber-500'
-                    : 'bg-rose-500'
-                }`}
-                style={{ width: `${dept.score}%` }}
-              />
+            {/* Racing Progress Bar */}
+            <div className="w-full bg-gray-100 h-3 rounded-full overflow-hidden p-0.5 relative">
+              <motion.div
+                initial={{ width: '0%' }}
+                whileInView={{ 
+                  width: [
+                    '0%', 
+                    `${Math.min(dept.score + 12, 98)}%`, 
+                    `${dept.score}%`
+                  ] 
+                }}
+                viewport={{ once: false, amount: 0.3 }}
+                transition={{
+                  duration: 1.2,
+                  times: [0, 0.65, 1],
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: index * 0.15,
+                }}
+                className={`h-full rounded-full relative overflow-hidden ${dept.color}`}
+              >
+                {/* Fast Racing Light Streak */}
+                <motion.div 
+                  initial={{ x: '-100%' }}
+                  whileInView={{ x: '200%' }}
+                  viewport={{ once: false }}
+                  transition={{
+                    duration: 1.0,
+                    repeat: Infinity,
+                    repeatDelay: 1.5,
+                    delay: index * 0.15 + 0.5
+                  }}
+                  className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/70 to-transparent transform -skew-x-12"
+                />
+              </motion.div>
             </div>
           </div>
         ))}
