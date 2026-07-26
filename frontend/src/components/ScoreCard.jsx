@@ -18,12 +18,12 @@ const ScoreCard = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  // Smooth springs for 3D rotation
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+  // Smooth, high-response springs for instant 3D rotation
+  const mouseXSpring = useSpring(x, { stiffness: 800, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 800, damping: 30 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -65,31 +65,31 @@ const ScoreCard = ({
           transformStyle: "preserve-3d",
         }}
         whileHover={{
-          scale: 1.03,
-          y: -6,
+          scale: 1.025,
+          y: -5,
         }}
-        whileTap={isClickable ? { scale: 0.97, y: 0 } : {}}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        className={`group relative h-full bg-white/95 backdrop-blur-xl rounded-2xl p-6 border border-gray-100/90 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.15)] transition-all duration-300 flex flex-col justify-between overflow-hidden select-none ${
+        whileTap={isClickable ? { scale: 0.98, y: 0 } : {}}
+        transition={{ type: "spring", stiffness: 700, damping: 25 }}
+        className={`group relative h-full bg-white/95 backdrop-blur-xl rounded-2xl p-6 border border-gray-100/90 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_35px_-10px_rgba(0,0,0,0.12)] transition-shadow duration-150 flex flex-col justify-between overflow-hidden select-none ${
           isClickable ? 'cursor-pointer' : ''
         }`}
       >
-        {/* Background Image Layer with Parallax Zoom & Blend */}
+        {/* Background Image Layer with Instant Parallax Zoom & Blend */}
         {bgImage && (
           <div 
-            className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-20 transition-all duration-700 scale-100 group-hover:scale-110 filter saturate-150 mix-blend-multiply pointer-events-none"
+            className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-20 transition-all duration-200 scale-100 group-hover:scale-105 filter saturate-150 mix-blend-multiply pointer-events-none"
             style={{ backgroundImage: `url('${bgImage}')` }}
           />
         )}
 
         {/* Lively Animated Gradient Sheen / Mesh in Background */}
         <div 
-          className="absolute -inset-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 group-hover:animate-shimmer pointer-events-none" 
+          className="absolute -inset-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:animate-shimmer pointer-events-none" 
         />
 
         {/* Ambient Color Glow on Hover */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/90 to-primary/10 opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" 
+          className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/90 to-primary/10 opacity-60 group-hover:opacity-90 transition-opacity duration-150 pointer-events-none" 
         />
         
         {/* Subtle 3D Top Border Glow Accent */}
