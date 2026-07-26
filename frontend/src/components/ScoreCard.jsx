@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import { ArrowUpRight, TrendingUp, TrendingDown } from 'lucide-react';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 
-const ScoreCard = ({ title, value, icon, colorClass = "text-primary bg-primary/10", onClick, trend, trendLabel }) => {
+const ScoreCard = ({ 
+  title, 
+  value, 
+  icon, 
+  colorClass = "text-primary bg-primary/10", 
+  onClick, 
+  trend, 
+  trendLabel,
+  bgImage = "/campus_bg.jpg" 
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Mouse tilt position
@@ -61,30 +70,43 @@ const ScoreCard = ({ title, value, icon, colorClass = "text-primary bg-primary/1
         }}
         whileTap={isClickable ? { scale: 0.97, y: 0 } : {}}
         transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        className={`group relative h-full bg-white rounded-2xl p-6 border border-gray-100/80 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] transition-shadow duration-300 flex flex-col justify-between overflow-hidden select-none ${
+        className={`group relative h-full bg-white/95 backdrop-blur-xl rounded-2xl p-6 border border-gray-100/90 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.15)] transition-all duration-300 flex flex-col justify-between overflow-hidden select-none ${
           isClickable ? 'cursor-pointer' : ''
         }`}
       >
-        {/* Subtle ambient gradient overlay on hover */}
+        {/* Background Image Layer with Parallax Zoom & Blend */}
+        {bgImage && (
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-10 group-hover:opacity-20 transition-all duration-700 scale-100 group-hover:scale-110 filter saturate-150 mix-blend-multiply pointer-events-none"
+            style={{ backgroundImage: `url('${bgImage}')` }}
+          />
+        )}
+
+        {/* Lively Animated Gradient Sheen / Mesh in Background */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" 
+          className="absolute -inset-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 group-hover:animate-shimmer pointer-events-none" 
+        />
+
+        {/* Ambient Color Glow on Hover */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/90 to-primary/10 opacity-60 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" 
         />
         
         {/* Subtle 3D Top Border Glow Accent */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {/* Top Row: Icon + Arrow */}
         <div className="flex items-start justify-between mb-5 relative z-10" style={{ transform: "translateZ(20px)" }}>
           <motion.div 
             whileHover={{ rotate: 8, scale: 1.1 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className={`p-3.5 rounded-2xl ${colorClass} shadow-sm group-hover:shadow-md transition-shadow duration-300 flex items-center justify-center`}
+            className={`p-3.5 rounded-2xl ${colorClass} shadow-sm group-hover:shadow-md transition-shadow duration-300 flex items-center justify-center backdrop-blur-md`}
           >
             {icon}
           </motion.div>
 
           {isClickable && (
-            <div className="p-2 rounded-xl bg-gray-50 group-hover:bg-primary/10 text-gray-400 group-hover:text-primary transition-all duration-300 flex items-center justify-center transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:scale-110 shadow-xs">
+            <div className="p-2 rounded-xl bg-white/80 group-hover:bg-primary/10 text-gray-400 group-hover:text-primary transition-all duration-300 flex items-center justify-center transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:scale-110 shadow-xs border border-gray-100/50">
               <ArrowUpRight size={18} />
             </div>
           )}
@@ -101,8 +123,8 @@ const ScoreCard = ({ title, value, icon, colorClass = "text-primary bg-primary/1
 
           {trend !== undefined && (
             <div 
-              className={`flex items-center gap-1.5 mt-3.5 text-xs font-bold px-3 py-1 rounded-full w-fit shadow-xs ${
-                trend >= 0 ? 'text-emerald-700 bg-emerald-50 border border-emerald-100' : 'text-rose-700 bg-rose-50 border border-rose-100'
+              className={`flex items-center gap-1.5 mt-3.5 text-xs font-bold px-3 py-1 rounded-full w-fit shadow-xs backdrop-blur-md ${
+                trend >= 0 ? 'text-emerald-700 bg-emerald-50/90 border border-emerald-100' : 'text-rose-700 bg-rose-50/90 border border-rose-100'
               }`}
             >
               {trend >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />}

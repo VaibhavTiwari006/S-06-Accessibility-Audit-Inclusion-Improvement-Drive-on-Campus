@@ -49,32 +49,32 @@ const AdminDashboard = ({ stats, navigate }) => (
     />
     <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-label="Key Performance Indicators">
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} aria-hidden="true" />} colorClass="text-accent bg-accent/10" onClick={() => navigate('/buildings')} />
+        <ScoreCard title="Total Buildings" value={stats?.totalBuildings ?? '—'} icon={<Building2 size={24} aria-hidden="true" />} colorClass="text-accent bg-accent/10" onClick={() => navigate('/buildings')} bgImage="/campus_bg.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} aria-hidden="true" />} colorClass="text-warning-dark bg-warning/10" onClick={() => navigate('/audits')} />
+        <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} aria-hidden="true" />} colorClass="text-warning-dark bg-warning/10" onClick={() => navigate('/audits')} bgImage="/tactile-map.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} aria-hidden="true" />} colorClass="text-success-dark bg-success/10" onClick={() => navigate('/reports')} trend={2.4} trendLabel="vs last month" />
+        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} aria-hidden="true" />} colorClass="text-success-dark bg-success/10" onClick={() => navigate('/reports')} trend={2.4} trendLabel="vs last month" bgImage="/campus_bg.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} aria-hidden="true" />} colorClass="text-danger-dark bg-danger/10" onClick={() => navigate('/issues')} trend={-5} trendLabel="fewer issues" />
+        <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} aria-hidden="true" />} colorClass="text-danger-dark bg-danger/10" onClick={() => navigate('/issues')} trend={-5} trendLabel="fewer issues" bgImage="/tactile-map.jpg" />
       </motion.div>
     </motion.div>
     
     <motion.h3 variants={itemVariants} className="text-xl font-heading font-bold text-textMain mt-12 mb-6" id="ops-community-heading">Operations & Community</motion.h3>
     <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" role="group" aria-labelledby="ops-community-heading">
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} aria-hidden="true" />} colorClass="text-gray-700 bg-gray-100" onClick={() => navigate('/roadmap')} />
+        <ScoreCard title="Maintenance Tasks" value={stats?.totalMaintenanceTasks ?? '—'} icon={<Wrench size={24} aria-hidden="true" />} colorClass="text-gray-700 bg-gray-100" onClick={() => navigate('/roadmap')} bgImage="/campus_bg.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} aria-hidden="true" />} colorClass="text-purple-700 bg-purple-100" />
+        <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} aria-hidden="true" />} colorClass="text-purple-700 bg-purple-100" bgImage="/tactile-map.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Est. Remediation" value={stats?.totalEstimatedCost ? `₹${(stats.totalEstimatedCost/1000).toFixed(1)}k` : '—'} icon={<IndianRupee size={24} aria-hidden="true" />} colorClass="text-emerald-700 bg-emerald-100" onClick={() => navigate('/reports')} />
+        <ScoreCard title="Est. Remediation" value={stats?.totalEstimatedCost ? `₹${(stats.totalEstimatedCost/1000).toFixed(1)}k` : '—'} icon={<IndianRupee size={24} aria-hidden="true" />} colorClass="text-emerald-700 bg-emerald-100" onClick={() => navigate('/reports')} bgImage="/campus_bg.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Community Events" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} aria-hidden="true" />} colorClass="text-pink-700 bg-pink-100" onClick={() => navigate('/community')} />
+        <ScoreCard title="Community Events" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} aria-hidden="true" />} colorClass="text-pink-700 bg-pink-100" onClick={() => navigate('/community')} bgImage="/tactile-map.jpg" />
       </motion.div>
     </motion.div>
 
