@@ -62,18 +62,9 @@ const DepartmentComparison = () => {
               Compare WCAG & RPWD compliance metrics across university departments.
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setRaceKey(prev => prev + 1)}
-              className="flex items-center gap-1.5 text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full transition-all focus:outline-none active:scale-95 shadow-2xs"
-              title="Re-run the accessibility race"
-            >
-              <Play size={13} className="fill-gray-700" /> Race Again
-            </button>
-            <span className="flex items-center gap-1 text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
-              <TrendingUp size={14} /> +4.5% Avg Growth
-            </span>
-          </div>
+          <span className="flex items-center gap-1 text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
+            <TrendingUp size={14} /> +4.5% Avg Growth
+          </span>
         </div>
       </CardHeader>
 
