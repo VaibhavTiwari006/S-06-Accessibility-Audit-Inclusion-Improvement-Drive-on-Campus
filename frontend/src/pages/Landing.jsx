@@ -373,11 +373,15 @@ const Landing = () => {
 
             {/* Feature Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {IMPACTFUL_FEATURES.map((feat) => {
+              {IMPACTFUL_FEATURES.map((feat, index) => {
                 const Icon = feat.icon;
                 return (
                   <motion.div
                     key={feat.id}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                     whileHover={{ y: -6, scale: 1.02 }}
                     className={`group relative p-6 rounded-3xl border transition-all flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${feat.hoverRing} hover:ring-4`}
                   >
