@@ -16,7 +16,6 @@ Inclusion requires proactive evaluation. An audit of physical and digital campus
 
 ## Stakeholders
 | Stakeholder | Role |
-| :--- | :--- |
 | Students/staff with disabilities | Central voice and co-researchers |
 | University facilities management | Implementation partner |
 | University administration | Decision makers |
@@ -77,3 +76,4 @@ To meet the evaluation guidelines, detailed project documentation has been organ
 ## Bonus Impact Opportunities
 - Develop a student-led disability ally network
 - Create a tactile campus map for visually impaired students.
+  
