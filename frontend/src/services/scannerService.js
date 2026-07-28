@@ -15,20 +15,20 @@ export const scanWebsite = async (url) => {
       impact: 'CRITICAL',
       category: 'Images & Media',
       element: 'img.hero-banner-image',
-      pageZone: 'Header Banner (Top Center)',
-      visualGuide: 'The main campus announcement image banner located at the very top of the page.',
-      simpleLanguage: 'The big announcement banner image at the top of the homepage has no text description attached to it.',
-      mainProblem: 'Visually impaired students using screen readers will hear only "Unlabeled Image" or a random file path, completely missing the announcement details.',
-      afterFixLook: 'Screen readers will clearly speak: "Chandigarh University Annual Accessibility Drive 2026 banner", making the announcement 100% accessible to blind users.',
-      description: 'Campus announcement banner is missing descriptive alt text.',
-      snippet: '<img src="/assets/hero-2026.png" class="hero-banner-image" />',
-      aiFix: '<img src="/assets/hero-2026.png" class="hero-banner-image" alt="Chandigarh University Annual Accessibility Drive 2026 banner" />',
-      remediation: 'Add an alt attribute describing the image content for screen reader users.',
+      pageZone: 'Today\'s Highlight Banner (Top Center)',
+      visualGuide: 'The "Today\'s Highlight" banner image featuring Chandigarh University & RMIT University Bachelor of Business 2+2 Articulation Program.',
+      simpleLanguage: 'The "Today\'s Highlight" banner image (Bachelor of Business 2+2 Program with RMIT University) at the top of the homepage has no text description attached to it.',
+      mainProblem: 'All important information (program details, 2+2 years breakdown, contact number +91-7087014157, and email) is trapped inside a graphic image. Screen readers hear only "Unlabeled Image", so blind students miss the entire announcement!',
+      afterFixLook: 'Screen readers will clearly read out loud: "Chandigarh University & RMIT University Bachelor of Business 2+2 Articulation Program highlight banner. Contact: +91-7087014157, Simranjeet.e20222@cumail.in", making all information 100% accessible.',
+      description: 'Campus "Today\'s Highlight" announcement banner is missing descriptive alt text.',
+      snippet: '<img src="/assets/cuchd-rmit-banner.png" class="hero-banner-image" />',
+      aiFix: '<img src="/assets/cuchd-rmit-banner.png" class="hero-banner-image" alt="Chandigarh University & RMIT University Bachelor of Business 2+2 Articulation Program banner. Call +91-7087014157 or email Simranjeet.e20222@cumail.in" />',
+      remediation: 'Add a comprehensive alt attribute describing the image text, program details, and contact info for screen reader users.',
       previewUrl: '/campus_bg.jpg',
       stepByStepFix: [
-        '1. Open your website code editor or CMS page builder.',
-        '2. Locate the <img> tag with class "hero-banner-image" at the top header.',
-        '3. Add alt="Chandigarh University Annual Accessibility Drive 2026 banner" to the image tag.'
+        '1. Open your website code editor or CMS portal page builder.',
+        '2. Locate the <img> tag under the "Today\'s Highlight" section.',
+        '3. Add alt="Chandigarh University & RMIT University Bachelor of Business 2+2 Articulation Program banner. Call +91-7087014157 or email Simranjeet.e20222@cumail.in" to the image tag.'
       ]
     },
     {
