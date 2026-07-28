@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import issueService from '../services/issueService';
-import { AlertCircle, Plus, MapPin, User, Clock, CheckCircle, Search, Filter, X, QrCode, Printer } from 'lucide-react';
+import { AlertCircle, Plus, MapPin, Clock, CheckCircle, Search, Filter, QrCode, Printer } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReportIssueModal from '../components/ReportIssueModal';
