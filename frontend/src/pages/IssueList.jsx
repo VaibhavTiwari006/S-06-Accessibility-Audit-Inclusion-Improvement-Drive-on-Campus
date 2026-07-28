@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import issueService from '../services/issueService';
-import { AlertCircle, Plus, MapPin, User, Clock, CheckCircle, Search, Filter, X } from 'lucide-react';
+import { AlertCircle, Plus, MapPin, User, Clock, CheckCircle, Search, Filter, X, QrCode, Printer } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReportIssueModal from '../components/ReportIssueModal';
+import CampusQrPosterModal from '../components/CampusQrPosterModal';
 import { useAuth } from '../context/AuthContext';
 import { Card, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -16,6 +17,7 @@ const IssueList = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState(null);
+  const [qrPosterIssue, setQrPosterIssue] = useState(null);
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
@@ -197,10 +199,18 @@ const IssueList = () => {
                   )}
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-gray-100 flex justify-between items-center">
-                  <span className="text-xs font-bold text-gray-400 flex items-center gap-1.5 uppercase tracking-wider bg-gray-50 px-2 py-1 rounded-lg">
-                    <User size={12} className="text-gray-400" /> {issue.reporterName}
-                  </span>
+                <div className="mt-5 pt-4 border-t border-gray-100 flex justify-between items-center gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setQrPosterIssue(issue);
+                    }}
+                    className="flex items-center gap-1 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-2.5 py-1.5 rounded-xl transition-all shadow-2xs cursor-pointer"
+                    title="Export Printable QR Code Poster"
+                  >
+                    <QrCode size={14} className="text-amber-600" /> Print QR Poster
+                  </button>
+
                   <Button 
                     variant="ghost"
                     size="sm"
@@ -327,16 +337,34 @@ const IssueList = () => {
                 </div>
               )}
 
-              <div className="flex justify-between items-center pt-5 border-t border-gray-100 mt-2">
-                <span className="text-xs font-bold text-gray-400 flex items-center gap-1.5 uppercase tracking-wider bg-gray-50 px-3 py-1.5 rounded-lg">
-                  <User size={12} className="text-gray-400" /> {selectedIssue.reporterName}
-                </span>
+              <div className="flex justify-between items-center pt-5 border-t border-gray-100 mt-2 gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  icon={Printer}
+                  onClick={() => {
+                    setQrPosterIssue(selectedIssue);
+                    setSelectedIssue(null);
+                  }}
+                >
+                  Print QR Poster
+                </Button>
                 <Button variant="secondary" onClick={() => setSelectedIssue(null)}>
                   Close Details
                 </Button>
               </div>
             </motion.div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Printable Campus Barrier QR Poster Modal */}
+      <AnimatePresence>
+        {qrPosterIssue && (
+          <CampusQrPosterModal 
+            issue={qrPosterIssue} 
+            onClose={() => setQrPosterIssue(null)} 
+          />
         )}
       </AnimatePresence>
     </div>
