@@ -688,8 +688,6 @@ ${issue.aiFix}
           </div>
         )}
       </AnimatePresence>
-        </motion.div>
-      )}
     </div>
   );
 };
