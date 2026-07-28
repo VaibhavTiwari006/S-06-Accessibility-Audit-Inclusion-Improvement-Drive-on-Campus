@@ -20,6 +20,16 @@ const AIScanner = () => {
   const [activeFilter, setActiveFilter] = useState('ALL');
   const [expandedStepId, setExpandedStepId] = useState(null);
   const [showVisualMap, setShowVisualMap] = useState(true);
+  const [showPassedModal, setShowPassedModal] = useState(false);
+
+  const handleScoreCardClick = (filterType, toastMsg) => {
+    setActiveFilter(filterType);
+    const element = document.getElementById('remediation-diagnostics-card');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (toastMsg) toast.info(toastMsg);
+  };
 
   const scanSteps = [
     'Connecting to website DOM...',
@@ -264,31 +274,35 @@ ${issue.aiFix}
           animate={{ opacity: 1, y: 0 }}
           className="space-y-8"
         >
-          {/* Overview Score Cards */}
+          {/* Overview Score Cards - Interactive Filter Triggers */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <ScoreCard
               title="WCAG 2.1 Score"
               value={`${results.score}/100`}
               colorClass={results.score >= 80 ? 'text-success bg-success-50' : 'text-primary bg-primary-50'}
               icon={<ShieldCheck size={24} />}
+              onClick={() => handleScoreCardClick('ALL', 'Showing complete WCAG Audit Report (All Issues)')}
             />
             <ScoreCard
               title="Critical Violations"
               value={results.summary.critical}
               colorClass="text-danger bg-danger-50"
               icon={<AlertTriangle size={24} />}
+              onClick={() => handleScoreCardClick('CRITICAL', 'Filtered report to Critical Violations')}
             />
             <ScoreCard
               title="High Impact Issues"
               value={results.summary.high}
               colorClass="text-amber-600 bg-amber-50"
               icon={<AlertTriangle size={24} />}
+              onClick={() => handleScoreCardClick('HIGH', 'Filtered report to High Impact Issues')}
             />
             <ScoreCard
               title="Passed Rules"
               value={`${results.summary.passed}/${results.summary.totalRulesChecked}`}
               colorClass="text-emerald-600 bg-emerald-50"
               icon={<CheckCircle size={24} />}
+              onClick={() => setShowPassedModal(true)}
             />
           </div>
 
@@ -402,212 +416,278 @@ ${issue.aiFix}
           </Card>
 
           {/* Detailed Findings & AI Remediation */}
-          <Card>
-            <CardHeader className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <div>
-                <h3 className="text-xl font-heading font-bold text-textMain flex items-center gap-2">
-                  <Code2 className="text-primary" /> AI Remediation Diagnostics
-                </h3>
-                <p className="text-xs text-textLight font-medium mt-0.5">
-                  Showing detected WCAG compliance issues, exact page locations, and AI-generated code solutions.
-                </p>
-              </div>
+          <div id="remediation-diagnostics-card">
+            <Card>
+              <CardHeader className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                  <h3 className="text-xl font-heading font-bold text-textMain flex items-center gap-2">
+                    <Code2 className="text-primary" /> AI Remediation Diagnostics
+                  </h3>
+                  <p className="text-xs text-textLight font-medium mt-0.5">
+                    Showing detected WCAG compliance issues, exact page locations, and AI-generated code solutions.
+                  </p>
+                </div>
 
-              {/* Impact Filters */}
-              <div className="flex bg-gray-100 p-1 rounded-xl gap-1 text-xs font-bold">
-                {['ALL', 'CRITICAL', 'HIGH', 'MEDIUM'].map((filter) => (
-                  <button
-                    key={filter}
-                    onClick={() => setActiveFilter(filter)}
-                    className={`px-3 py-1.5 rounded-lg transition-all ${
-                      activeFilter === filter
-                        ? 'bg-white text-primary shadow-sm'
-                        : 'text-gray-600 hover:text-textMain'
-                    }`}
+                {/* Impact Filters */}
+                <div className="flex bg-gray-100 p-1 rounded-xl gap-1 text-xs font-bold">
+                  {['ALL', 'CRITICAL', 'HIGH', 'MEDIUM'].map((filter) => (
+                    <button
+                      key={filter}
+                      onClick={() => setActiveFilter(filter)}
+                      className={`px-3 py-1.5 rounded-lg transition-all ${
+                        activeFilter === filter
+                          ? 'bg-white text-primary shadow-sm'
+                          : 'text-gray-600 hover:text-textMain'
+                      }`}
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                </div>
+              </CardHeader>
+
+              <CardContent className="space-y-6 pt-4">
+                {filteredIssues.map((issue, idx) => (
+                  <div
+                    key={issue.id}
+                    className="p-5 rounded-2xl border border-gray-100 bg-white/60 shadow-sm space-y-4 hover:border-primary/30 transition-all"
                   >
-                    {filter}
-                  </button>
-                ))}
-              </div>
-            </CardHeader>
-
-            <CardContent className="space-y-6 pt-4">
-              {filteredIssues.map((issue, idx) => (
-                <div
-                  key={issue.id}
-                  className="p-5 rounded-2xl border border-gray-100 bg-white/60 shadow-sm space-y-4 hover:border-primary/30 transition-all"
-                >
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-2.5 flex-wrap">
-                        <span className="text-xs font-mono font-bold px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md">
-                          #{idx + 1} {issue.id.toUpperCase()}
-                        </span>
-                        <span
-                          className={`text-xs font-extrabold px-2.5 py-1 rounded-full ${
-                            issue.impact === 'CRITICAL'
-                              ? 'bg-red-50 text-red-700 border border-red-200'
-                              : issue.impact === 'HIGH'
-                              ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                              : 'bg-blue-50 text-blue-700 border border-blue-200'
-                          }`}
-                        >
-                          {issue.impact} IMPACT
-                        </span>
-                        <span className="text-xs font-semibold text-textLight">
-                          Category: <strong>{issue.category}</strong>
-                        </span>
-                      </div>
-
-                      <h4 className="text-base font-bold text-textMain font-heading mt-1">
-                        {issue.rule}
-                      </h4>
-                    </div>
-
-                    <span className="text-xs font-mono bg-gray-50 border border-gray-200 text-gray-600 px-3 py-1.5 rounded-lg">
-                      Selector: {issue.element}
-                    </span>
-                  </div>
-
-                  {/* Location Tag & Visual Guide Callout */}
-                  <div className="p-3.5 rounded-xl bg-blue-50/50 border border-blue-100 space-y-1.5">
-                    <div className="flex items-center gap-2 text-xs font-bold text-blue-900">
-                      <MapPin size={15} className="text-blue-600 flex-shrink-0" />
-                      <span>Exact Page Location: <strong className="text-blue-700 bg-blue-100 px-2 py-0.5 rounded">{issue.pageZone}</strong></span>
-                    </div>
-                    {issue.visualGuide && (
-                      <p className="text-xs text-blue-800 font-medium pl-6">
-                        <strong>Visual Guide:</strong> {issue.visualGuide}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* 3 User-Friendly Plain-English Cards for Non-Technical Visitors */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
-                    {/* Simple Explanation */}
-                    <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
-                      <div className="text-xs font-black text-amber-900 flex items-center gap-1.5 uppercase tracking-wider">
-                        <span className="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs">🗣️</span>
-                        Simple Explanation
-                      </div>
-                      <p className="text-xs text-amber-950 font-bold leading-relaxed">
-                        {issue.simpleLanguage || issue.description}
-                      </p>
-                    </div>
-
-                    {/* Main Problem */}
-                    <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
-                      <div className="text-xs font-black text-rose-900 flex items-center gap-1.5 uppercase tracking-wider">
-                        <span className="w-6 h-6 rounded-lg bg-rose-600 text-white flex items-center justify-center text-xs">⚠️</span>
-                        Main Problem (Impact)
-                      </div>
-                      <p className="text-xs text-rose-950 font-bold leading-relaxed">
-                        {issue.mainProblem || issue.description}
-                      </p>
-                    </div>
-
-                    {/* After Fix Look */}
-                    <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
-                      <div className="text-xs font-black text-emerald-900 flex items-center gap-1.5 uppercase tracking-wider">
-                        <span className="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs">✨</span>
-                        After Fix Look & Behavior
-                      </div>
-                      <p className="text-xs text-emerald-950 font-bold leading-relaxed">
-                        {issue.afterFixLook || issue.remediation}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Side-by-Side Code Fix Comparison */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                    {/* Detected Non-Compliant HTML */}
-                    <div className="p-4 bg-red-50/50 border border-red-200/80 rounded-xl space-y-2">
-                      <div className="flex items-center justify-between text-xs font-bold text-red-700 uppercase tracking-wider">
-                        <span>Detected Issue Snippet</span>
-                        <span className="text-[10px] bg-red-100 px-2 py-0.5 rounded">Non-Compliant</span>
-                      </div>
-                      <pre className="text-xs font-mono text-red-900 bg-white p-3 rounded-lg border border-red-100 overflow-x-auto">
-                        <code>{issue.snippet}</code>
-                      </pre>
-
-                      {issue.previewUrl && (
-                        <div className="mt-2 relative rounded-lg overflow-hidden border border-red-200 shadow-xs bg-gray-100 group">
-                          <img src={issue.previewUrl} alt="Non-compliant target banner preview" className="w-full h-28 object-cover filter brightness-90 group-hover:scale-105 transition-transform" />
-                          <div className="absolute inset-0 bg-red-900/30 backdrop-blur-[1px] flex items-center justify-center p-2">
-                            <span className="bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
-                              <AlertTriangle size={12} /> Target Image Preview (Missing ALT)
-                            </span>
-                          </div>
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div className="space-y-1.5">
+                        <div className="flex items-center gap-2.5 flex-wrap">
+                          <span className="text-xs font-mono font-bold px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md">
+                            #{idx + 1} {issue.id.toUpperCase()}
+                          </span>
+                          <span
+                            className={`text-xs font-extrabold px-2.5 py-1 rounded-full ${
+                              issue.impact === 'CRITICAL'
+                                ? 'bg-red-50 text-red-700 border border-red-200'
+                                : issue.impact === 'HIGH'
+                                ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                                : 'bg-blue-50 text-blue-700 border border-blue-200'
+                            }`}
+                          >
+                            {issue.impact} IMPACT
+                          </span>
+                          <span className="text-xs font-semibold text-textLight">
+                            Category: <strong>{issue.category}</strong>
+                          </span>
                         </div>
+
+                        <h4 className="text-base font-bold text-textMain font-heading mt-1">
+                          {issue.rule}
+                        </h4>
+                      </div>
+
+                      <span className="text-xs font-mono bg-gray-50 border border-gray-200 text-gray-600 px-3 py-1.5 rounded-lg">
+                        Selector: {issue.element}
+                      </span>
+                    </div>
+
+                    {/* Location Tag & Visual Guide Callout */}
+                    <div className="p-3.5 rounded-xl bg-blue-50/50 border border-blue-100 space-y-1.5">
+                      <div className="flex items-center gap-2 text-xs font-bold text-blue-900">
+                        <MapPin size={15} className="text-blue-600 flex-shrink-0" />
+                        <span>Exact Page Location: <strong className="text-blue-700 bg-blue-100 px-2 py-0.5 rounded">{issue.pageZone}</strong></span>
+                      </div>
+                      {issue.visualGuide && (
+                        <p className="text-xs text-blue-800 font-medium pl-6">
+                          <strong>Visual Guide:</strong> {issue.visualGuide}
+                        </p>
                       )}
                     </div>
 
-                    {/* AI Remediation Fix */}
-                    <div className="p-4 bg-emerald-50/50 border border-emerald-200/80 rounded-xl space-y-2 relative">
-                      <div className="flex items-center justify-between text-xs font-bold text-emerald-700 uppercase tracking-wider">
-                        <span className="flex items-center gap-1">
-                          <Sparkles size={14} className="text-emerald-600" /> AI Suggested Code Fix
-                        </span>
-                        <button
-                          onClick={() => handleCopyCode(issue.aiFix, issue.id)}
-                          className="flex items-center gap-1 text-[11px] bg-white border border-emerald-200 hover:bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md transition-all font-semibold cursor-pointer"
-                        >
-                          {copiedId === issue.id ? <Check size={13} /> : <Copy size={13} />}
-                          {copiedId === issue.id ? 'Copied' : 'Copy Fix'}
-                        </button>
+                    {/* 3 User-Friendly Plain-English Cards for Non-Technical Visitors */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+                      {/* Simple Explanation */}
+                      <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
+                        <div className="text-xs font-black text-amber-900 flex items-center gap-1.5 uppercase tracking-wider">
+                          <span className="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs">🗣️</span>
+                          Simple Explanation
+                        </div>
+                        <p className="text-xs text-amber-950 font-bold leading-relaxed">
+                          {issue.simpleLanguage || issue.description}
+                        </p>
                       </div>
-                      <pre className="text-xs font-mono text-emerald-950 bg-white p-3 rounded-lg border border-emerald-100 overflow-x-auto">
-                        <code>{issue.aiFix}</code>
-                      </pre>
-                    </div>
-                  </div>
 
-                  <div className="bg-primary/5 p-3 rounded-xl text-xs font-medium text-primary flex items-center justify-between gap-3 flex-wrap">
-                    <div className="flex items-center gap-2">
-                      <Zap size={14} className="flex-shrink-0" />
-                      <span><strong>AI Guidance:</strong> {issue.remediation}</span>
+                      {/* Main Problem */}
+                      <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
+                        <div className="text-xs font-black text-rose-900 flex items-center gap-1.5 uppercase tracking-wider">
+                          <span className="w-6 h-6 rounded-lg bg-rose-600 text-white flex items-center justify-center text-xs">⚠️</span>
+                          Main Problem (Impact)
+                        </div>
+                        <p className="text-xs text-rose-950 font-bold leading-relaxed">
+                          {issue.mainProblem || issue.description}
+                        </p>
+                      </div>
+
+                      {/* After Fix Look */}
+                      <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
+                        <div className="text-xs font-black text-emerald-900 flex items-center gap-1.5 uppercase tracking-wider">
+                          <span className="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs">✨</span>
+                          After Fix Look & Behavior
+                        </div>
+                        <p className="text-xs text-emerald-950 font-bold leading-relaxed">
+                          {issue.afterFixLook || issue.remediation}
+                        </p>
+                      </div>
                     </div>
 
-                    {issue.stepByStepFix && (
-                      <button
-                        onClick={() => setExpandedStepId(expandedStepId === issue.id ? null : issue.id)}
-                        className="flex items-center gap-1 text-[11px] font-bold text-primary hover:underline cursor-pointer bg-white px-2.5 py-1 rounded-lg border border-primary/20 shadow-2xs"
+                    {/* Side-by-Side Code Fix Comparison */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {/* Detected Non-Compliant HTML */}
+                      <div className="p-4 bg-red-50/50 border border-red-200/80 rounded-xl space-y-2">
+                        <div className="flex items-center justify-between text-xs font-bold text-red-700 uppercase tracking-wider">
+                          <span>Detected Issue Snippet</span>
+                          <span className="text-[10px] bg-red-100 px-2 py-0.5 rounded">Non-Compliant</span>
+                        </div>
+                        <pre className="text-xs font-mono text-red-900 bg-white p-3 rounded-lg border border-red-100 overflow-x-auto">
+                          <code>{issue.snippet}</code>
+                        </pre>
+
+                        {issue.previewUrl && (
+                          <div className="mt-2 relative rounded-lg overflow-hidden border border-red-200 shadow-xs bg-gray-100 group">
+                            <img src={issue.previewUrl} alt="Non-compliant target banner preview" className="w-full h-28 object-cover filter brightness-90 group-hover:scale-105 transition-transform" />
+                            <div className="absolute inset-0 bg-red-900/30 backdrop-blur-[1px] flex items-center justify-center p-2">
+                              <span className="bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                <AlertTriangle size={12} /> Target Image Preview (Missing ALT)
+                              </span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* AI Remediation Fix */}
+                      <div className="p-4 bg-emerald-50/50 border border-emerald-200/80 rounded-xl space-y-2 relative">
+                        <div className="flex items-center justify-between text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                          <span className="flex items-center gap-1">
+                            <Sparkles size={14} className="text-emerald-600" /> AI Suggested Code Fix
+                          </span>
+                          <button
+                            onClick={() => handleCopyCode(issue.aiFix, issue.id)}
+                            className="flex items-center gap-1 text-[11px] bg-white border border-emerald-200 hover:bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md transition-all font-semibold cursor-pointer"
+                          >
+                            {copiedId === issue.id ? <Check size={13} /> : <Copy size={13} />}
+                            {copiedId === issue.id ? 'Copied' : 'Copy Fix'}
+                          </button>
+                        </div>
+                        <pre className="text-xs font-mono text-emerald-950 bg-white p-3 rounded-lg border border-emerald-100 overflow-x-auto">
+                          <code>{issue.aiFix}</code>
+                        </pre>
+                      </div>
+                    </div>
+
+                    <div className="bg-primary/5 p-3 rounded-xl text-xs font-medium text-primary flex items-center justify-between gap-3 flex-wrap">
+                      <div className="flex items-center gap-2">
+                        <Zap size={14} className="flex-shrink-0" />
+                        <span><strong>AI Guidance:</strong> {issue.remediation}</span>
+                      </div>
+
+                      {issue.stepByStepFix && (
+                        <button
+                          onClick={() => setExpandedStepId(expandedStepId === issue.id ? null : issue.id)}
+                          className="flex items-center gap-1 text-[11px] font-bold text-primary hover:underline cursor-pointer bg-white px-2.5 py-1 rounded-lg border border-primary/20 shadow-2xs"
+                        >
+                          <HelpCircle size={13} />
+                          {expandedStepId === issue.id ? 'Hide Action Plan' : 'How to Fix (3 Steps)'}
+                        </button>
+                      )}
+                    </div>
+
+                    {/* Expandable Step-by-Step Fix Accordion */}
+                    {expandedStepId === issue.id && issue.stepByStepFix && (
+                      <motion.div 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-2 text-xs text-gray-800"
                       >
-                        <HelpCircle size={13} />
-                        {expandedStepId === issue.id ? 'Hide Action Plan' : 'How to Fix (3 Steps)'}
-                      </button>
+                        <div className="font-extrabold text-xs text-textMain uppercase tracking-wider flex items-center gap-1.5">
+                          🛠️ Step-by-Step Fix Guide for {issue.id.toUpperCase()}
+                        </div>
+                        <ul className="space-y-1.5 pl-2 font-medium">
+                          {issue.stepByStepFix.map((step, sIdx) => (
+                            <li key={sIdx} className="flex items-start gap-2 text-gray-700">
+                              <span>{step}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
                     )}
                   </div>
+                ))}
 
-                  {/* Expandable Step-by-Step Fix Accordion */}
-                  {expandedStepId === issue.id && issue.stepByStepFix && (
-                    <motion.div 
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      className="p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-2 text-xs text-gray-800"
-                    >
-                      <div className="font-extrabold text-xs text-textMain uppercase tracking-wider flex items-center gap-1.5">
-                        🛠️ Step-by-Step Fix Guide for {issue.id.toUpperCase()}
+                {filteredIssues.length === 0 && (
+                  <div className="text-center py-12 text-textLight font-medium">
+                    No issues found matching the "{activeFilter}" impact filter.
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Passed WCAG 2.1 Rules Modal */}
+      <AnimatePresence>
+        {showPassedModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white rounded-3xl p-6 max-w-2xl w-full shadow-2xl space-y-4 max-h-[85vh] flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+                    <CheckCircle size={22} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-heading font-bold text-textMain">Passed WCAG 2.1 AA Rules Checklist</h3>
+                    <p className="text-xs text-textLight font-medium">38 out of 43 evaluated accessibility rules passed on {url}</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowPassedModal(false)}
+                  className="text-gray-400 hover:text-textMain font-bold text-lg p-1"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="overflow-y-auto pr-1 space-y-3 flex-1">
+                {[
+                  { code: 'WCAG 1.2.1', title: 'Audio/Video Transcripts', desc: 'Pre-recorded media files have equivalent text transcripts available.' },
+                  { code: 'WCAG 1.3.2', title: 'Meaningful DOM Order', desc: 'Screen reading sequence matches visual layout order.' },
+                  { code: 'WCAG 1.4.1', title: 'Color Independence', desc: 'Information is not conveyed solely using visual color.' },
+                  { code: 'WCAG 1.4.4', title: '200% Text Resizing', desc: 'Layout remains functional without overflow when zoomed 200%.' },
+                  { code: 'WCAG 2.1.1', title: 'Keyboard Operability', desc: 'All links, buttons, and form controls are operable via keyboard.' },
+                  { code: 'WCAG 2.1.2', title: 'No Keyboard Traps', desc: 'Keyboard focus can enter and exit all interactive components.' },
+                  { code: 'WCAG 2.4.1', title: 'Skip to Content Link', desc: 'Valid "Skip to main content" link present for keyboard navigation.' },
+                  { code: 'WCAG 2.4.2', title: 'Page Title', desc: 'Descriptive <title> tag present in HTML head.' },
+                  { code: 'WCAG 3.1.1', title: 'Language Attribute', desc: 'HTML lang="en" attribute properly set.' },
+                  { code: 'WCAG 4.1.1', title: 'Valid HTML Syntax', desc: 'No duplicate ID attributes or malformed DOM elements.' }
+                ].map((rule, idx) => (
+                  <div key={idx} className="p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 flex items-start gap-3">
+                    <CheckCircle size={16} className="text-emerald-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-mono font-bold text-emerald-800">{rule.code}</span>
+                        <span className="text-xs font-bold text-textMain">{rule.title}</span>
                       </div>
-                      <ul className="space-y-1.5 pl-2 font-medium">
-                        {issue.stepByStepFix.map((step, sIdx) => (
-                          <li key={sIdx} className="flex items-start gap-2 text-gray-700">
-                            <span>{step}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  )}
-                </div>
-              ))}
+                      <p className="text-xs text-gray-600 mt-0.5">{rule.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-              {filteredIssues.length === 0 && (
-                <div className="text-center py-12 text-textLight font-medium">
-                  No issues found matching the "{activeFilter}" impact filter.
-                </div>
-              )}
-            </CardContent>
-          </Card>
+              <div className="pt-2 border-t border-gray-100 flex justify-end">
+                <Button onClick={() => setShowPassedModal(false)}>Close Checklist</Button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
         </motion.div>
       )}
     </div>
