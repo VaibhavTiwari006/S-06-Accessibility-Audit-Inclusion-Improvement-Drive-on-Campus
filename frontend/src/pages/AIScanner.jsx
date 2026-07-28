@@ -306,6 +306,17 @@ const AIScanner = () => {
                       <pre className="text-xs font-mono text-red-900 bg-white p-3 rounded-lg border border-red-100 overflow-x-auto">
                         <code>{issue.snippet}</code>
                       </pre>
+
+                      {issue.previewUrl && (
+                        <div className="mt-2 relative rounded-lg overflow-hidden border border-red-200 shadow-xs bg-gray-100 group">
+                          <img src={issue.previewUrl} alt="Non-compliant target banner preview" className="w-full h-28 object-cover filter brightness-90 group-hover:scale-105 transition-transform" />
+                          <div className="absolute inset-0 bg-red-900/30 backdrop-blur-[1px] flex items-center justify-center p-2">
+                            <span className="bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                              <AlertTriangle size={12} /> Target Image Preview (Missing ALT)
+                            </span>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* AI Remediation Fix */}

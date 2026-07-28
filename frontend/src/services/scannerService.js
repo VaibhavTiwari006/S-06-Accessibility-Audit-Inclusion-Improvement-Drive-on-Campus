@@ -19,6 +19,7 @@ export const scanWebsite = async (url) => {
       snippet: '<img src="/assets/hero-2026.png" class="hero-banner-image" />',
       aiFix: '<img src="/assets/hero-2026.png" class="hero-banner-image" alt="Chandigarh University Annual Accessibility Drive 2026 banner" />',
       remediation: 'Add an alt attribute describing the image content for screen reader users.',
+      previewUrl: '/campus_bg.jpg',
     },
     {
       id: 'wcag-1.4.3',
