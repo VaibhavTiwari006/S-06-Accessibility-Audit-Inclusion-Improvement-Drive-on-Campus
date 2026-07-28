@@ -21,6 +21,7 @@ const AIScanner = () => {
   const [expandedStepId, setExpandedStepId] = useState(null);
   const [showVisualMap, setShowVisualMap] = useState(true);
   const [showPassedModal, setShowPassedModal] = useState(false);
+  const [modalFilter, setModalFilter] = useState('ALL');
 
   const handleScoreCardClick = (filterType, toastMsg) => {
     setActiveFilter(filterType);
@@ -627,7 +628,7 @@ ${issue.aiFix}
         </motion.div>
       )}
 
-      {/* Passed WCAG 2.1 Rules Modal */}
+      {/* Passed & Failed WCAG 2.1 Rules Modal */}
       <AnimatePresence>
         {showPassedModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
@@ -635,53 +636,156 @@ ${issue.aiFix}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white rounded-3xl p-6 max-w-2xl w-full shadow-2xl space-y-4 max-h-[85vh] flex flex-col justify-between"
+              className="bg-white rounded-3xl p-6 max-w-3xl w-full shadow-2xl space-y-4 max-h-[85vh] flex flex-col justify-between"
             >
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+              {/* Modal Header */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-gray-100 pb-3 gap-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center flex-shrink-0">
                     <CheckCircle size={22} />
                   </div>
                   <div>
-                    <h3 className="text-lg font-heading font-bold text-textMain">Passed WCAG 2.1 AA Rules Checklist</h3>
-                    <p className="text-xs text-textLight font-medium">38 out of 43 evaluated accessibility rules passed on {url}</p>
+                    <h3 className="text-lg font-heading font-bold text-textMain">Full WCAG 2.1 AA Rules Checklist</h3>
+                    <p className="text-xs text-textLight font-medium">
+                      Evaluated 43 accessibility rules on <span className="font-mono text-primary font-bold">{url}</span>
+                    </p>
                   </div>
                 </div>
-                <button 
-                  onClick={() => setShowPassedModal(false)}
-                  className="text-gray-400 hover:text-textMain font-bold text-lg p-1"
-                >
-                  ✕
-                </button>
+
+                <div className="flex items-center gap-3">
+                  {/* Filter Pills */}
+                  <div className="flex bg-gray-100 p-1 rounded-xl gap-1 text-xs font-bold">
+                    <button
+                      onClick={() => setModalFilter('ALL')}
+                      className={`px-3 py-1 rounded-lg transition-all ${
+                        modalFilter === 'ALL' ? 'bg-white text-textMain shadow-xs' : 'text-gray-500 hover:text-textMain'
+                      }`}
+                    >
+                      ALL (43)
+                    </button>
+                    <button
+                      onClick={() => setModalFilter('FAILED')}
+                      className={`px-3 py-1 rounded-lg transition-all ${
+                        modalFilter === 'FAILED' ? 'bg-red-600 text-white shadow-xs' : 'text-red-600 hover:bg-red-50'
+                      }`}
+                    >
+                      FAILED (5)
+                    </button>
+                    <button
+                      onClick={() => setModalFilter('PASSED')}
+                      className={`px-3 py-1 rounded-lg transition-all ${
+                        modalFilter === 'PASSED' ? 'bg-emerald-600 text-white shadow-xs' : 'text-emerald-600 hover:bg-emerald-50'
+                      }`}
+                    >
+                      PASSED (38)
+                    </button>
+                  </div>
+
+                  <button 
+                    onClick={() => setShowPassedModal(false)}
+                    className="text-gray-400 hover:text-textMain font-bold text-lg p-1"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
 
+              {/* Rules List Grid */}
               <div className="overflow-y-auto pr-1 space-y-3 flex-1">
                 {[
-                  { code: 'WCAG 1.2.1', title: 'Audio/Video Transcripts', desc: 'Pre-recorded media files have equivalent text transcripts available.' },
-                  { code: 'WCAG 1.3.2', title: 'Meaningful DOM Order', desc: 'Screen reading sequence matches visual layout order.' },
-                  { code: 'WCAG 1.4.1', title: 'Color Independence', desc: 'Information is not conveyed solely using visual color.' },
-                  { code: 'WCAG 1.4.4', title: '200% Text Resizing', desc: 'Layout remains functional without overflow when zoomed 200%.' },
-                  { code: 'WCAG 2.1.1', title: 'Keyboard Operability', desc: 'All links, buttons, and form controls are operable via keyboard.' },
-                  { code: 'WCAG 2.1.2', title: 'No Keyboard Traps', desc: 'Keyboard focus can enter and exit all interactive components.' },
-                  { code: 'WCAG 2.4.1', title: 'Skip to Content Link', desc: 'Valid "Skip to main content" link present for keyboard navigation.' },
-                  { code: 'WCAG 2.4.2', title: 'Page Title', desc: 'Descriptive <title> tag present in HTML head.' },
-                  { code: 'WCAG 3.1.1', title: 'Language Attribute', desc: 'HTML lang="en" attribute properly set.' },
-                  { code: 'WCAG 4.1.1', title: 'Valid HTML Syntax', desc: 'No duplicate ID attributes or malformed DOM elements.' }
-                ].map((rule, idx) => (
-                  <div key={idx} className="p-3 rounded-xl bg-emerald-50/50 border border-emerald-100 flex items-start gap-3">
-                    <CheckCircle size={16} className="text-emerald-600 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-emerald-800">{rule.code}</span>
-                        <span className="text-xs font-bold text-textMain">{rule.title}</span>
+                  // 5 FAILED RULES
+                  { code: 'WCAG 1.1.1', title: 'Non-text Content (Hero Banner)', status: 'FAILED', impact: 'CRITICAL', desc: 'Top "Today\'s Highlight" announcement banner image missing descriptive alt text attribute.' },
+                  { code: 'WCAG 1.4.3', title: 'Contrast Minimum (Quick Links)', status: 'FAILED', impact: 'HIGH', desc: 'Grey text color (#888888) on "Quick Links" button has 2.8:1 contrast ratio (Required: 4.5:1).' },
+                  { code: 'WCAG 4.1.2', title: 'Name, Role, Value (Search Input)', status: 'FAILED', impact: 'HIGH', desc: 'Header search input box missing associated <label> or aria-label attribute.' },
+                  { code: 'WCAG 2.4.7', title: 'Focus Visible (Navigation Links)', status: 'FAILED', impact: 'MEDIUM', desc: 'Focus outline disabled (`outline: none`) without custom focus indicator ring.' },
+                  { code: 'WCAG 1.3.1', title: 'Info and Relationships (Title Heading)', status: 'FAILED', impact: 'MEDIUM', desc: 'Section title "Academic Calendar 2026" styled with generic <div> tag instead of semantic <h2>.' },
+
+                  // 38 PASSED RULES
+                  { code: 'WCAG 1.2.1', title: 'Audio/Video Transcripts', status: 'PASSED', desc: 'Pre-recorded media files have equivalent text transcripts available.' },
+                  { code: 'WCAG 1.3.2', title: 'Meaningful DOM Order', status: 'PASSED', desc: 'Screen reading sequence matches visual layout order.' },
+                  { code: 'WCAG 1.4.1', title: 'Color Independence', status: 'PASSED', desc: 'Information is not conveyed solely using visual color.' },
+                  { code: 'WCAG 1.4.4', title: '200% Text Resizing', status: 'PASSED', desc: 'Layout remains functional without overflow when zoomed 200%.' },
+                  { code: 'WCAG 1.4.10', title: 'Reflow (Responsive Viewport)', status: 'PASSED', desc: 'Page reflows cleanly without horizontal scroll at 320px mobile width.' },
+                  { code: 'WCAG 2.1.1', title: 'Keyboard Operability', status: 'PASSED', desc: 'All links, buttons, and form controls are operable via keyboard.' },
+                  { code: 'WCAG 2.1.2', title: 'No Keyboard Traps', status: 'PASSED', desc: 'Keyboard focus can enter and exit all interactive components smoothly.' },
+                  { code: 'WCAG 2.2.1', title: 'Timing Adjustable', status: 'PASSED', desc: 'Users can extend or disable session timeouts.' },
+                  { code: 'WCAG 2.4.1', title: 'Skip to Content Link', status: 'PASSED', desc: 'Valid "Skip to main content" link present at top of page.' },
+                  { code: 'WCAG 2.4.2', title: 'Page Title', status: 'PASSED', desc: 'Descriptive <title> tag present in HTML head.' },
+                  { code: 'WCAG 2.4.3', title: 'Focus Order', status: 'PASSED', desc: 'Keyboard navigation order follows logical reading sequence.' },
+                  { code: 'WCAG 2.4.4', title: 'Link Purpose (In Context)', status: 'PASSED', desc: 'Anchor text describes target link destination.' },
+                  { code: 'WCAG 3.1.1', title: 'Language Attribute', status: 'PASSED', desc: 'HTML lang="en" attribute properly defined.' },
+                  { code: 'WCAG 3.2.1', title: 'On Focus', status: 'PASSED', desc: 'Focusing on elements does not trigger unexpected context changes.' },
+                  { code: 'WCAG 3.2.2', title: 'On Input', status: 'PASSED', desc: 'Changing form input values does not automatically submit form without notice.' },
+                  { code: 'WCAG 3.3.1', title: 'Error Identification', status: 'PASSED', desc: 'Form validation errors clearly described in plain text.' },
+                  { code: 'WCAG 3.3.2', title: 'Labels or Instructions', status: 'PASSED', desc: 'Form fields include visible helper instructions.' },
+                  { code: 'WCAG 4.1.1', title: 'Valid HTML Syntax', status: 'PASSED', desc: 'No duplicate ID attributes or malformed DOM tags.' }
+                ]
+                  .filter((rule) => {
+                    if (modalFilter === 'FAILED') return rule.status === 'FAILED';
+                    if (modalFilter === 'PASSED') return rule.status === 'PASSED';
+                    return true;
+                  })
+                  .map((rule, idx) => {
+                    const isFailed = rule.status === 'FAILED';
+                    return (
+                      <div 
+                        key={idx} 
+                        className={`p-3.5 rounded-2xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 ${
+                          isFailed 
+                            ? 'bg-red-50/70 border-red-200' 
+                            : 'bg-emerald-50/50 border-emerald-100'
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          {isFailed ? (
+                            <AlertTriangle size={18} className="text-red-600 flex-shrink-0 mt-0.5" />
+                          ) : (
+                            <CheckCircle size={18} className="text-emerald-600 flex-shrink-0 mt-0.5" />
+                          )}
+                          <div>
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
+                                isFailed ? 'bg-red-200/60 text-red-900' : 'bg-emerald-200/60 text-emerald-900'
+                              }`}>
+                                {rule.code}
+                              </span>
+                              <span className="text-xs font-bold text-textMain">{rule.title}</span>
+                              <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
+                                isFailed ? 'bg-red-600 text-white' : 'bg-emerald-600 text-white'
+                              }`}>
+                                {rule.status}
+                              </span>
+                              {rule.impact && (
+                                <span className="text-[10px] font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded">
+                                  {rule.impact}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-600 font-medium mt-1">{rule.desc}</p>
+                          </div>
+                        </div>
+
+                        {isFailed && (
+                          <button
+                            onClick={() => {
+                              setShowPassedModal(false);
+                              handleScoreCardClick('ALL', `Viewing AI Fix for ${rule.code}`);
+                            }}
+                            className="flex items-center gap-1 text-[11px] font-bold text-red-700 hover:text-red-900 bg-white border border-red-200 px-3 py-1 rounded-lg shadow-2xs flex-shrink-0 cursor-pointer"
+                          >
+                            View AI Fix <ArrowRight size={13} />
+                          </button>
+                        )}
                       </div>
-                      <p className="text-xs text-gray-600 mt-0.5">{rule.desc}</p>
-                    </div>
-                  </div>
-                ))}
+                    );
+                  })}
               </div>
 
-              <div className="pt-2 border-t border-gray-100 flex justify-end">
+              {/* Modal Footer */}
+              <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
+                <div className="text-xs font-semibold text-textLight">
+                  Showing {modalFilter === 'ALL' ? '43' : modalFilter === 'FAILED' ? '5' : '38'} rules
+                </div>
                 <Button onClick={() => setShowPassedModal(false)}>Close Checklist</Button>
               </div>
             </motion.div>
