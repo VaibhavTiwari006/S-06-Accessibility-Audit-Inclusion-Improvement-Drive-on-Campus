@@ -116,6 +116,11 @@ ${issue.aiFix}
     toast.success('Executive AI Audit Report downloaded!');
   };
 
+  const filteredIssues = results?.issues.filter((issue) => {
+    if (activeFilter === 'ALL') return true;
+    return issue.impact === activeFilter;
+  }) || [];
+
   return (
     <div className="space-y-8 animate-fade-in pb-12">
       {/* Page Header */}
