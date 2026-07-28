@@ -7,6 +7,7 @@ import {
 import buildingService from '../services/buildingService';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import CampusQrPosterModal from '../components/CampusQrPosterModal';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -14,6 +15,7 @@ const QRCodeManager = () => {
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedBuilding, setSelectedBuilding] = useState(null);
+  const [posterBuilding, setPosterBuilding] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,11 +35,18 @@ const QRCodeManager = () => {
   }, []);
 
   const handleSimulateScan = (buildingId) => {
+    if (!buildingId) {
+      toast.error('Please select a building first.');
+      return;
+    }
+    toast.info(`Opening Instant Mobile Barrier Report Form for ${selectedBuilding?.buildingName}...`);
     navigate(`/qr-report/${buildingId}`);
   };
 
-  const handleDownloadPoster = (bName) => {
-    toast.success(`Printable QR poster for ${bName} downloaded!`);
+  const handleDownloadPoster = (b) => {
+    if (!b) return;
+    setPosterBuilding(b);
+    toast.info(`Generated Printable QR Poster for ${b.buildingName}`);
   };
 
   return (
@@ -149,10 +158,10 @@ const QRCodeManager = () => {
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => handleDownloadPoster(selectedBuilding.buildingName)}
-                      icon={Download}
+                      onClick={() => handleDownloadPoster(selectedBuilding)}
+                      icon={Printer}
                     >
-                      Download Poster
+                      Download / Print Poster
                     </Button>
                   </div>
                 </div>
@@ -162,6 +171,22 @@ const QRCodeManager = () => {
           )}
         </div>
       )}
+
+      {/* Printable Campus QR Poster Modal */}
+      <AnimatePresence>
+        {posterBuilding && (
+          <CampusQrPosterModal
+            issue={{
+              id: posterBuilding.id,
+              buildingName: posterBuilding.buildingName,
+              description: `Physical Accessibility Barrier Notice for ${posterBuilding.buildingName}. Mobile reporting & maintenance tracking active.`,
+              locationDetails: posterBuilding.location || 'Main Building Entrance Zone',
+              status: 'IN_PROGRESS'
+            }}
+            onClose={() => setPosterBuilding(null)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
