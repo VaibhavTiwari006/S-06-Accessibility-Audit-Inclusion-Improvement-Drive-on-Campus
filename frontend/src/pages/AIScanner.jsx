@@ -482,34 +482,37 @@ ${issue.aiFix}
                     )}
                   </div>
 
-                  {/* 3 User-Friendly Plain-English Cards */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {/* 3 User-Friendly Plain-English Cards for Non-Technical Visitors */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
                     {/* Simple Explanation */}
-                    <div className="p-3.5 rounded-xl bg-amber-50/60 border border-amber-200/70 space-y-1">
-                      <div className="text-xs font-extrabold text-amber-900 flex items-center gap-1.5 uppercase tracking-wider">
-                        🗣️ Simple Explanation
+                    <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
+                      <div className="text-xs font-black text-amber-900 flex items-center gap-1.5 uppercase tracking-wider">
+                        <span className="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs">🗣️</span>
+                        Simple Explanation
                       </div>
-                      <p className="text-xs text-amber-900/90 font-medium leading-relaxed">
+                      <p className="text-xs text-amber-950 font-bold leading-relaxed">
                         {issue.simpleLanguage || issue.description}
                       </p>
                     </div>
 
                     {/* Main Problem */}
-                    <div className="p-3.5 rounded-xl bg-red-50/60 border border-red-200/70 space-y-1">
-                      <div className="text-xs font-extrabold text-red-900 flex items-center gap-1.5 uppercase tracking-wider">
-                        ⚠️ Main Problem (Impact)
+                    <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
+                      <div className="text-xs font-black text-rose-900 flex items-center gap-1.5 uppercase tracking-wider">
+                        <span className="w-6 h-6 rounded-lg bg-rose-600 text-white flex items-center justify-center text-xs">⚠️</span>
+                        Main Problem (Impact)
                       </div>
-                      <p className="text-xs text-red-900/90 font-medium leading-relaxed">
+                      <p className="text-xs text-rose-950 font-bold leading-relaxed">
                         {issue.mainProblem || issue.description}
                       </p>
                     </div>
 
                     {/* After Fix Look */}
-                    <div className="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200/70 space-y-1">
-                      <div className="text-xs font-extrabold text-emerald-900 flex items-center gap-1.5 uppercase tracking-wider">
-                        ✨ After Fix Look & Behavior
+                    <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-200 shadow-2xs space-y-1.5 flex flex-col justify-between">
+                      <div className="text-xs font-black text-emerald-900 flex items-center gap-1.5 uppercase tracking-wider">
+                        <span className="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center text-xs">✨</span>
+                        After Fix Look & Behavior
                       </div>
-                      <p className="text-xs text-emerald-900/90 font-medium leading-relaxed">
+                      <p className="text-xs text-emerald-950 font-bold leading-relaxed">
                         {issue.afterFixLook || issue.remediation}
                       </p>
                     </div>
