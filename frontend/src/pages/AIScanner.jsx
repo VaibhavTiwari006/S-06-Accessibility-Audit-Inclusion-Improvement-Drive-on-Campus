@@ -87,7 +87,16 @@ ${results.issues.map((issue, idx) => `
 - **Impact Level:** ${issue.impact}
 - **Category:** ${issue.category}
 - **Target Selector:** \`${issue.element}\`
-- **Description:** ${issue.description}
+- **Page Location:** ${issue.pageZone || 'Page Content'}
+
+#### 🗣️ Simple Explanation:
+${issue.simpleLanguage || issue.description}
+
+#### ⚠️ Main Problem (Who is affected):
+${issue.mainProblem || issue.description}
+
+#### ✨ After Fix Look & Behavior:
+${issue.afterFixLook || issue.remediation}
 
 #### Non-Compliant HTML Snippet:
 \`\`\`html
@@ -473,9 +482,38 @@ ${issue.aiFix}
                     )}
                   </div>
 
-                  <p className="text-sm text-gray-700 font-medium">
-                    {issue.description}
-                  </p>
+                  {/* 3 User-Friendly Plain-English Cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {/* Simple Explanation */}
+                    <div className="p-3.5 rounded-xl bg-amber-50/60 border border-amber-200/70 space-y-1">
+                      <div className="text-xs font-extrabold text-amber-900 flex items-center gap-1.5 uppercase tracking-wider">
+                        🗣️ Simple Explanation
+                      </div>
+                      <p className="text-xs text-amber-900/90 font-medium leading-relaxed">
+                        {issue.simpleLanguage || issue.description}
+                      </p>
+                    </div>
+
+                    {/* Main Problem */}
+                    <div className="p-3.5 rounded-xl bg-red-50/60 border border-red-200/70 space-y-1">
+                      <div className="text-xs font-extrabold text-red-900 flex items-center gap-1.5 uppercase tracking-wider">
+                        ⚠️ Main Problem (Impact)
+                      </div>
+                      <p className="text-xs text-red-900/90 font-medium leading-relaxed">
+                        {issue.mainProblem || issue.description}
+                      </p>
+                    </div>
+
+                    {/* After Fix Look */}
+                    <div className="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200/70 space-y-1">
+                      <div className="text-xs font-extrabold text-emerald-900 flex items-center gap-1.5 uppercase tracking-wider">
+                        ✨ After Fix Look & Behavior
+                      </div>
+                      <p className="text-xs text-emerald-900/90 font-medium leading-relaxed">
+                        {issue.afterFixLook || issue.remediation}
+                      </p>
+                    </div>
+                  </div>
 
                   {/* Side-by-Side Code Fix Comparison */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
