@@ -63,7 +63,7 @@ const QuickActions = () => {
         </div>
       </CardHeader>
       
-      <CardContent className="pt-4 flex-1 flex flex-col justify-center">
+      <CardContent className="pt-4 flex-1 flex flex-col justify-start space-y-4">
         <div className="grid grid-cols-2 gap-3.5">
           {actions.map((action, i) => {
             const Icon = action.icon;
@@ -96,6 +96,16 @@ const QuickActions = () => {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* System Tip Footer Banner */}
+        <div className="p-3.5 rounded-2xl bg-gray-50 border border-gray-100 flex items-center gap-3 mt-auto">
+          <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center flex-shrink-0 font-bold text-xs">
+            💡
+          </div>
+          <p className="text-xs text-textLight font-medium leading-tight">
+            <strong className="text-textMain font-bold">Pro Tip:</strong> Click <span className="text-primary font-bold">View Audits</span> to generate WCAG compliance certificates.
+          </p>
         </div>
       </CardContent>
     </Card>
