@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, Scan, Globe, AlertTriangle, CheckCircle, ShieldCheck, 
-  Code2, Download, Copy, Check, ArrowRight, ExternalLink, RefreshCw, Zap
+  Code2, Download, Copy, Check, ArrowRight, ExternalLink, RefreshCw, Zap,
+  MapPin, Eye, HelpCircle, Layers, ChevronDown, ChevronUp
 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { scanWebsite } from '../services/scannerService';
@@ -17,6 +18,8 @@ const AIScanner = () => {
   const [results, setResults] = useState(null);
   const [copiedId, setCopiedId] = useState(null);
   const [activeFilter, setActiveFilter] = useState('ALL');
+  const [expandedStepId, setExpandedStepId] = useState(null);
+  const [showVisualMap, setShowVisualMap] = useState(true);
 
   const scanSteps = [
     'Connecting to website DOM...',
@@ -280,6 +283,115 @@ ${issue.aiFix}
             />
           </div>
 
+          {/* Interactive Visual Page Location Map Box */}
+          <Card className="border border-blue-200/80 bg-gradient-to-br from-blue-50/40 via-white to-emerald-50/20 shadow-md">
+            <CardHeader className="flex flex-row items-center justify-between pb-2 border-b border-gray-100">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-blue-500/10 text-blue-600">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-heading font-bold text-textMain flex items-center gap-2">
+                    Visual Page Layout & Element Location Map
+                  </h3>
+                  <p className="text-xs text-textLight font-medium">
+                    Numbered visual overlays showing exactly where each violation lies on <span className="font-mono text-primary font-bold">{url}</span>
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setShowVisualMap(!showVisualMap)}
+                className="flex items-center gap-1 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                {showVisualMap ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                {showVisualMap ? 'Hide Visual Map' : 'Show Visual Map'}
+              </button>
+            </CardHeader>
+
+            {showVisualMap && (
+              <CardContent className="pt-4 space-y-4">
+                {/* Simulated Web Page Frame */}
+                <div className="relative rounded-2xl border border-gray-200 bg-white p-4 shadow-inner space-y-3 overflow-hidden font-sans">
+                  {/* Browser Bar Header */}
+                  <div className="flex items-center justify-between bg-gray-100 px-3 py-2 rounded-xl text-xs text-gray-500 font-mono">
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                      <span className="ml-2 font-bold text-gray-700">{url}</span>
+                    </div>
+                    <span className="text-[10px] bg-white px-2 py-0.5 rounded border">DOM Visual Inspector Mode</span>
+                  </div>
+
+                  {/* Header & Navbar Section */}
+                  <div className="relative p-3 rounded-xl bg-gray-50 border border-dashed border-gray-300 space-y-2">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <div className="font-black text-sm text-gray-800 flex items-center gap-2">
+                        🏫 Campus Portal Header
+                      </div>
+
+                      {/* Pin #2: Quick Links Contrast */}
+                      <div className="relative group">
+                        <span className="inline-flex items-center gap-1 text-xs font-extrabold px-3 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded-lg animate-pulse">
+                          <span className="w-5 h-5 rounded-full bg-amber-600 text-white text-[10px] flex items-center justify-center font-black">#2</span>
+                          Quick Links (Low Contrast)
+                        </span>
+                      </div>
+
+                      {/* Pin #3: Search Bar Name */}
+                      <div className="relative group">
+                        <span className="inline-flex items-center gap-1 text-xs font-extrabold px-3 py-1 bg-amber-100 text-amber-900 border border-amber-300 rounded-lg animate-pulse">
+                          <span className="w-5 h-5 rounded-full bg-amber-600 text-white text-[10px] flex items-center justify-center font-black">#3</span>
+                          Search Box (Missing Label)
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Pin #4: Navigation Menu Links */}
+                    <div className="flex gap-3 text-xs font-bold text-gray-600 border-t border-gray-200 pt-2 flex-wrap">
+                      <span className="px-2 py-1 bg-red-100 text-red-900 rounded border border-red-300 flex items-center gap-1">
+                        <span className="w-4 h-4 rounded-full bg-red-600 text-white text-[9px] flex items-center justify-center font-bold">#4</span>
+                        Nav Menu Links (Outline Disabled)
+                      </span>
+                      <span className="opacity-50">Academics</span>
+                      <span className="opacity-50">Admissions</span>
+                      <span className="opacity-50">Campus Life</span>
+                    </div>
+                  </div>
+
+                  {/* Top Hero Banner Section - Pin #1 */}
+                  <div className="relative p-6 rounded-xl bg-gradient-to-r from-red-500/10 via-amber-500/10 to-rose-500/10 border-2 border-dashed border-red-400 text-center space-y-2">
+                    <div className="absolute top-2 left-2 flex items-center gap-1.5 bg-red-600 text-white text-[11px] font-black px-3 py-1 rounded-full shadow-md">
+                      <span className="w-5 h-5 rounded-full bg-white text-red-600 flex items-center justify-center text-[10px]">#1</span>
+                      CRITICAL: Hero Banner (Missing ALT Text)
+                    </div>
+                    <div className="pt-4 font-extrabold text-base text-gray-800">
+                      [ 📸 Top Announcement Banner Image: hero-2026.png ]
+                    </div>
+                    <p className="text-xs text-gray-600 font-medium max-w-lg mx-auto">
+                      Visual Guide: Main top image banner displaying university announcements at the top center of the web page.
+                    </p>
+                  </div>
+
+                  {/* Main Content Body Feed - Pin #5 */}
+                  <div className="relative p-4 rounded-xl bg-gray-50 border border-dashed border-gray-300 flex items-center justify-between flex-wrap gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-[10px] flex items-center justify-center font-black">#5</span>
+                      <div>
+                        <div className="text-xs font-bold text-gray-800">Main Content Heading ("Academic Calendar 2026")</div>
+                        <div className="text-[11px] text-gray-500">Styled using generic &lt;div&gt; instead of semantic &lt;h2&gt; heading</div>
+                      </div>
+                    </div>
+                    <span className="text-[11px] font-mono bg-blue-50 text-blue-700 px-2.5 py-1 rounded border border-blue-200">
+                      div.header-title-text
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            )}
+          </Card>
+
           {/* Detailed Findings & AI Remediation */}
           <Card>
             <CardHeader className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -288,7 +400,7 @@ ${issue.aiFix}
                   <Code2 className="text-primary" /> AI Remediation Diagnostics
                 </h3>
                 <p className="text-xs text-textLight font-medium mt-0.5">
-                  Showing detected WCAG compliance issues and AI-generated code solutions.
+                  Showing detected WCAG compliance issues, exact page locations, and AI-generated code solutions.
                 </p>
               </div>
 
@@ -311,16 +423,16 @@ ${issue.aiFix}
             </CardHeader>
 
             <CardContent className="space-y-6 pt-4">
-              {filteredIssues.map((issue) => (
+              {filteredIssues.map((issue, idx) => (
                 <div
                   key={issue.id}
                   className="p-5 rounded-2xl border border-gray-100 bg-white/60 shadow-sm space-y-4 hover:border-primary/30 transition-all"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       <div className="flex items-center gap-2.5 flex-wrap">
                         <span className="text-xs font-mono font-bold px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md">
-                          {issue.id.toUpperCase()}
+                          #{idx + 1} {issue.id.toUpperCase()}
                         </span>
                         <span
                           className={`text-xs font-extrabold px-2.5 py-1 rounded-full ${
@@ -337,6 +449,7 @@ ${issue.aiFix}
                           Category: <strong>{issue.category}</strong>
                         </span>
                       </div>
+
                       <h4 className="text-base font-bold text-textMain font-heading mt-1">
                         {issue.rule}
                       </h4>
@@ -345,6 +458,19 @@ ${issue.aiFix}
                     <span className="text-xs font-mono bg-gray-50 border border-gray-200 text-gray-600 px-3 py-1.5 rounded-lg">
                       Selector: {issue.element}
                     </span>
+                  </div>
+
+                  {/* Location Tag & Visual Guide Callout */}
+                  <div className="p-3.5 rounded-xl bg-blue-50/50 border border-blue-100 space-y-1.5">
+                    <div className="flex items-center gap-2 text-xs font-bold text-blue-900">
+                      <MapPin size={15} className="text-blue-600 flex-shrink-0" />
+                      <span>Exact Page Location: <strong className="text-blue-700 bg-blue-100 px-2 py-0.5 rounded">{issue.pageZone}</strong></span>
+                    </div>
+                    {issue.visualGuide && (
+                      <p className="text-xs text-blue-800 font-medium pl-6">
+                        <strong>Visual Guide:</strong> {issue.visualGuide}
+                      </p>
+                    )}
                   </div>
 
                   <p className="text-sm text-gray-700 font-medium">
@@ -383,7 +509,7 @@ ${issue.aiFix}
                         </span>
                         <button
                           onClick={() => handleCopyCode(issue.aiFix, issue.id)}
-                          className="flex items-center gap-1 text-[11px] bg-white border border-emerald-200 hover:bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md transition-all font-semibold"
+                          className="flex items-center gap-1 text-[11px] bg-white border border-emerald-200 hover:bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md transition-all font-semibold cursor-pointer"
                         >
                           {copiedId === issue.id ? <Check size={13} /> : <Copy size={13} />}
                           {copiedId === issue.id ? 'Copied' : 'Copy Fix'}
@@ -395,10 +521,42 @@ ${issue.aiFix}
                     </div>
                   </div>
 
-                  <div className="bg-primary/5 p-3 rounded-xl text-xs font-medium text-primary flex items-center gap-2">
-                    <Zap size={14} className="flex-shrink-0" />
-                    <span><strong>AI Guidance:</strong> {issue.remediation}</span>
+                  <div className="bg-primary/5 p-3 rounded-xl text-xs font-medium text-primary flex items-center justify-between gap-3 flex-wrap">
+                    <div className="flex items-center gap-2">
+                      <Zap size={14} className="flex-shrink-0" />
+                      <span><strong>AI Guidance:</strong> {issue.remediation}</span>
+                    </div>
+
+                    {issue.stepByStepFix && (
+                      <button
+                        onClick={() => setExpandedStepId(expandedStepId === issue.id ? null : issue.id)}
+                        className="flex items-center gap-1 text-[11px] font-bold text-primary hover:underline cursor-pointer bg-white px-2.5 py-1 rounded-lg border border-primary/20 shadow-2xs"
+                      >
+                        <HelpCircle size={13} />
+                        {expandedStepId === issue.id ? 'Hide Action Plan' : 'How to Fix (3 Steps)'}
+                      </button>
+                    )}
                   </div>
+
+                  {/* Expandable Step-by-Step Fix Accordion */}
+                  {expandedStepId === issue.id && issue.stepByStepFix && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-2 text-xs text-gray-800"
+                    >
+                      <div className="font-extrabold text-xs text-textMain uppercase tracking-wider flex items-center gap-1.5">
+                        🛠️ Step-by-Step Fix Guide for {issue.id.toUpperCase()}
+                      </div>
+                      <ul className="space-y-1.5 pl-2 font-medium">
+                        {issue.stepByStepFix.map((step, sIdx) => (
+                          <li key={sIdx} className="flex items-start gap-2 text-gray-700">
+                            <span>{step}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
                 </div>
               ))}
 
