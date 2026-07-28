@@ -252,7 +252,7 @@ const Landing = () => {
         </div>
 
         {/* Role Selector & Credential Authentication Section */}
-        <section id="role-selector-section" className="relative pt-12 pb-20 px-6 md:px-12 lg:px-16 bg-white overflow-hidden">
+        <section id="role-selector-section" className="relative pt-12 pb-8 px-6 md:px-12 lg:px-16 bg-white overflow-hidden">
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
             <div className="absolute bottom-0 right-1/4 translate-x-1/4 translate-y-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s' }} />
@@ -348,7 +348,7 @@ const Landing = () => {
         </section>
 
         {/* Impactful Features Showcase Section */}
-        <section id="impact-features-section" className="relative py-20 px-6 md:px-12 lg:px-16 bg-background overflow-hidden">
+        <section id="impact-features-section" className="relative pt-6 pb-16 px-6 md:px-12 lg:px-16 bg-background overflow-hidden">
           <div className="absolute inset-0 z-0 pointer-events-none">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
           </div>
