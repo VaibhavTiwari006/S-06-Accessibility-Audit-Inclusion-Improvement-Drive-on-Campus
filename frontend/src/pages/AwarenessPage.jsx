@@ -46,7 +46,7 @@ const EDUCATIONAL_VIDEOS = [
     duration: '4 mins',
     category: 'Digital Tech',
     thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=500',
-    url: 'https://www.youtube.com/watch?v=dEbl5jvLKGQ',
+    url: 'https://www.youtube.com/watch?v=7Rs3YpsnfoI',
   },
   {
     id: 3,
@@ -54,7 +54,7 @@ const EDUCATIONAL_VIDEOS = [
     duration: '5 mins',
     category: 'Navigation',
     thumbnail: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=500',
-    url: 'https://www.youtube.com/watch?v=UzFFnpIBL0s',
+    url: 'https://www.youtube.com/watch?v=r84B-yMhMBc',
   },
 ];
 
