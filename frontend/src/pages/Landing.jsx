@@ -12,17 +12,6 @@ import { Card, CardContent } from '../components/ui/Card';
 
 const IMPACTFUL_FEATURES = [
   {
-    id: 'scanner',
-    icon: Sparkles,
-    badge: 'AI Powered',
-    title: 'AI Web Accessibility Scanner',
-    desc: 'Scans web components against WCAG 2.1 AA standards, identifies color contrast and alt-text issues, and provides 1-click copyable AI code fixes.',
-    color: 'from-amber-500 to-orange-600',
-    bgColor: 'bg-amber-50 text-amber-700 border-amber-200',
-    hoverRing: 'hover:ring-amber-200',
-    demo: 'Scans 15+ WCAG rules & generates instant JSX/HTML code patches.'
-  },
-  {
     id: 'map',
     icon: Map,
     badge: 'Interactive Navigation',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, Sparkles, QrCode, BookOpen, Calculator } from 'lucide-react';
+import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, QrCode, BookOpen, Calculator } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -12,7 +12,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { name: 'Dashboard',  path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-    { name: 'AI Scanner', path: '/scanner',   icon: Sparkles,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'QR Feedback', path: '/qr-code',  icon: QrCode,          roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Calculator', path: '/calculator', icon: Calculator,     roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },

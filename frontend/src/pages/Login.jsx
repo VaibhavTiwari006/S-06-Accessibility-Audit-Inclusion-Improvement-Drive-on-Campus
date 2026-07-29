@@ -31,7 +31,7 @@ const ROLE_OPTIONS = [
     gradient: 'from-violet-500 to-purple-600',
     soft: 'rgba(245,243,255,0.95)',
     accent: '#7c3aed',
-    desc: 'Physical audits, WCAG scanner & wheelchair routing.'
+    desc: 'Physical audits, evidence gallery & wheelchair routing.'
   },
   {
     role: 'STUDENT',
