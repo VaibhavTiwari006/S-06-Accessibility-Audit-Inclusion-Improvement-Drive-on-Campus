@@ -38,6 +38,7 @@ const EDUCATIONAL_VIDEOS = [
     duration: '3 mins',
     category: 'Architecture',
     thumbnail: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=500',
+    url: 'https://www.youtube.com/watch?v=mPGveBkiVOo',
   },
   {
     id: 2,
@@ -45,6 +46,7 @@ const EDUCATIONAL_VIDEOS = [
     duration: '4 mins',
     category: 'Digital Tech',
     thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=500',
+    url: 'https://www.youtube.com/watch?v=dEbl5jvLKGQ',
   },
   {
     id: 3,
@@ -52,6 +54,7 @@ const EDUCATIONAL_VIDEOS = [
     duration: '5 mins',
     category: 'Navigation',
     thumbnail: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=500',
+    url: 'https://www.youtube.com/watch?v=UzFFnpIBL0s',
   },
 ];
 
@@ -107,7 +110,14 @@ const AwarenessPage = () => {
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {EDUCATIONAL_VIDEOS.map((vid) => (
-            <Card key={vid.id} className="overflow-hidden border border-gray-100 group cursor-pointer hover:shadow-xl transition-all">
+            <Card
+              key={vid.id}
+              className="overflow-hidden border border-gray-100 group cursor-pointer hover:shadow-xl transition-all"
+              onClick={() => window.open(vid.url, '_blank', 'noopener,noreferrer')}
+              role="link"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.open(vid.url, '_blank', 'noopener,noreferrer'); } }}
+            >
               <div className="relative h-44 overflow-hidden bg-slate-900">
                 <img
                   src={vid.thumbnail}
@@ -121,6 +131,9 @@ const AwarenessPage = () => {
                 </div>
                 <span className="absolute bottom-3 right-3 bg-black/70 text-white text-[10px] font-mono font-bold px-2 py-0.5 rounded">
                   {vid.duration}
+                </span>
+                <span className="absolute top-3 right-3 bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                  ▶ YouTube
                 </span>
               </div>
               <CardContent className="p-4 space-y-1">
