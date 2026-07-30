@@ -14,6 +14,8 @@ Inclusion requires proactive evaluation. An audit of physical and digital campus
 5. Run an awareness campaign to build an inclusive campus culture
 6. Pilot at least one low-cost accessibility improvement with admin support
 
+   .
+
 ## Stakeholders
 | Stakeholder | Role |
 | Students/staff with disabilities | Central voice and co-researchers |
