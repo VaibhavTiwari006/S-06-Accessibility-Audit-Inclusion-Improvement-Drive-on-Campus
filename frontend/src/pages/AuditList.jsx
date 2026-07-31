@@ -121,7 +121,7 @@ const AuditList = () => {
                 </div>
                 <Button 
                   variant="outline"
-                  onClick={() => audit.status === 'APPROVED' ? navigate('/reports') : toast.info('Audit continuation feature coming soon.')}
+                  onClick={() => audit.status === 'APPROVED' ? navigate('/reports') : navigate(`/audits/${audit.id}/conduct`)}
                   icon={FileText}
                 >
                   {audit.status === 'APPROVED' ? 'View Report' : 'Continue'}

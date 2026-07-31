@@ -19,6 +19,27 @@ const auditService = {
   submitChecklistResponse: async (auditId, responses) => {
     const response = await api.post(`/audits/${auditId}/responses`, responses);
     return response.data.data;
+  },
+
+  updateDraft: async (id, data) => {
+    const response = await api.put(`/audits/${id}`, data);
+    return response.data.data;
+  },
+
+  submitAudit: async (id) => {
+    const response = await api.post(`/audits/${id}/submit`);
+    return response.data.data;
+  },
+
+  getChecklists: async (categoryId) => {
+    const url = categoryId ? `/audit-checklists?categoryId=${categoryId}` : '/audit-checklists';
+    const response = await api.get(url);
+    return response.data.data ?? [];
+  },
+
+  getCategories: async () => {
+    const response = await api.get('/audit-categories');
+    return response.data.data ?? [];
   }
 };
 

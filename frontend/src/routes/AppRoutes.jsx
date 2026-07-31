@@ -23,6 +23,7 @@ const InstantQRReport = lazy(() => import('../pages/InstantQRReport'));
 const PublicTrackBarrier = lazy(() => import('../pages/PublicTrackBarrier'));
 const AwarenessPage = lazy(() => import('../pages/AwarenessPage'));
 const CalculatorPage = lazy(() => import('../pages/CalculatorPage'));
+const AuditConduct = lazy(() => import('../pages/AuditConduct'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -93,6 +94,7 @@ const AnimatedRoutes = () => {
         <Route path="/roadmap" element={<ProtectedRoute allowedRoles={['ADMIN', 'MAINTENANCE']}><MainLayout><Roadmap /></MainLayout></ProtectedRoute>} />
         <Route path="/buildings" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><BuildingList /></MainLayout></ProtectedRoute>} />
         <Route path="/audits" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><AuditList /></MainLayout></ProtectedRoute>} />
+        <Route path="/audits/:id/conduct" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><AuditConduct /></MainLayout></ProtectedRoute>} />
         <Route path="/issues" element={<ProtectedRoute><MainLayout><IssueList /></MainLayout></ProtectedRoute>} />
         <Route path="/evidence" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR', 'MAINTENANCE']}><MainLayout><EvidenceGallery /></MainLayout></ProtectedRoute>} />
         <Route path="/reports" element={<ProtectedRoute allowedRoles={['ADMIN']}><MainLayout><Reports /></MainLayout></ProtectedRoute>} />
