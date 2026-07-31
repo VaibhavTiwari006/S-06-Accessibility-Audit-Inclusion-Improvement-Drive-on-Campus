@@ -265,7 +265,7 @@ const EvidenceGallery = () => {
                 </button>
               </div>
 
-              <form onSubmit={handleUploadEvidence} className="space-y-4 overflow-y-auto flex-1 pr-1">
+              <form onSubmit={handleUploadEvidence} className="space-y-4 overflow-y-auto overflow-x-hidden flex-1 pr-1.5 pb-2">
                 <div>
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
                     Building Name
