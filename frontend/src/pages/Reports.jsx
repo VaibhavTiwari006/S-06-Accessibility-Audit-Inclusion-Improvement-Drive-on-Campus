@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { BarChart3, Download, Building2, ClipboardCheck, AlertTriangle, PenTool, Lightbulb, FileText, ShieldCheck, Globe } from 'lucide-react';
+import { 
+  BarChart3, Download, Building2, ClipboardCheck, AlertTriangle, 
+  PenTool, Lightbulb, FileText, ShieldCheck, Globe, Users, Laptop, Wrench, Megaphone, CheckCircle2, Target
+} from 'lucide-react';
 import { 
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend, 
   BarChart, Bar, XAxis, YAxis, CartesianGrid
@@ -329,7 +332,6 @@ const Reports = () => {
                     </motion.div>
                   </div>
                 </div>
-              ))}
             </div>
             <p className="text-xs text-textLight mt-6 font-medium">Benchmarked against RPWD Act 2016 mandates and WCAG 2.1 AA standards.</p>
           </CardContent>
@@ -338,43 +340,93 @@ const Reports = () => {
         {/* Impact Metrics vs Targets */}
         <Card>
           <CardHeader>
-            <h3 className="text-lg font-heading font-bold text-textMain flex items-center gap-2">
-              <Globe size={20} className="text-secondary" /> Impact Metrics vs. Targets
-            </h3>
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-xl bg-secondary/10 border border-secondary/20 text-secondary">
+                <Target size={20} />
+              </div>
+              <div>
+                <h3 className="text-lg font-heading font-bold text-textMain">Impact Metrics vs. Targets</h3>
+                <p className="text-xs text-textLight mt-0.5">Physical and digital indicators against inclusion drive goals.</p>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
-                <thead>
-                  <tr className="border-b border-gray-100 uppercase tracking-wider text-xs">
-                    <th className="pb-3 text-textLight font-semibold">Metric</th>
-                    <th className="pb-3 text-center text-textLight font-semibold">Target</th>
-                    <th className="pb-3 text-center text-textLight font-semibold">Achieved</th>
-                    <th className="pb-3 text-center text-textLight font-semibold">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
-                  {[
-                    { metric: 'Buildings Audited', target: '≥10', achieved: stats.totalBuildings ?? '-', met: (stats.totalBuildings ?? 0) >= 10 },
-                    { metric: 'Digital Assets Audited', target: '≥5', achieved: 5, met: true },
-                    { metric: 'Students/Staff Engaged', target: '≥20', achieved: 43, met: true },
-                    { metric: 'Remediation Items', target: '≥50', achieved: stats.totalMaintenanceTasks ?? '-', met: (stats.totalMaintenanceTasks ?? 0) >= 50 },
-                    { metric: 'Awareness Campaign Reach', target: '≥300', achieved: 450, met: true },
-                  ].map(row => (
-                    <tr key={row.metric} className="hover:bg-gray-50/50 transition-colors">
-                      <td className="py-3 text-textMain font-medium">{row.metric}</td>
-                      <td className="py-3 text-center text-textLight">{row.target}</td>
-                      <td className="py-3 text-center font-bold text-textMain">{row.achieved}</td>
-                      <td className="py-3 text-center">
-                        {row.met
-                          ? <span className="text-xs bg-success/10 text-success-dark px-2.5 py-1 rounded-md font-semibold">✓ Met</span>
-                          : <span className="text-xs bg-warning/10 text-warning-dark px-2.5 py-1 rounded-md font-semibold">In Progress</span>
-                        }
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="space-y-4">
+              {[
+                { metric: 'Buildings Audited', target: 10, achieved: stats.totalBuildings ?? 0, met: (stats.totalBuildings ?? 0) >= 10, icon: Building2, color: 'text-primary bg-primary/10 border-primary/20', colorBar: 'bg-primary' },
+                { metric: 'Digital Assets Audited', target: 5, achieved: 5, met: true, icon: Laptop, color: 'text-secondary bg-secondary/10 border-secondary/20', colorBar: 'bg-secondary' },
+                { metric: 'Students/Staff Engaged', target: 20, achieved: 43, met: true, icon: Users, color: 'text-pink-600 bg-pink-50 border-pink-100', colorBar: 'bg-pink-500' },
+                { metric: 'Remediation Items', target: 50, achieved: stats.totalMaintenanceTasks ?? 0, met: (stats.totalMaintenanceTasks ?? 0) >= 50, icon: Wrench, color: 'text-orange-600 bg-orange-50 border-orange-100', colorBar: 'bg-orange-500' },
+                { metric: 'Awareness Campaign Reach', target: 300, achieved: 450, met: true, icon: Megaphone, color: 'text-indigo-600 bg-indigo-50 border-indigo-100', colorBar: 'bg-indigo-500' },
+              ].map((row, idx) => {
+                const IconComponent = row.icon;
+                const percentage = Math.min(100, Math.round((row.achieved / row.target) * 100));
+                return (
+                  <div 
+                    key={row.metric}
+                    className="p-4 bg-gray-50/50 rounded-2xl border border-gray-100 hover:shadow-xs transition-all duration-300 flex flex-col gap-3"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-9 h-9 rounded-xl border flex items-center justify-center flex-shrink-0 ${row.color}`}>
+                          <IconComponent size={16} />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-textMain text-sm leading-none mb-1">{row.metric}</h4>
+                          <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">
+                            Target: ≥{row.target} • Achieved: {row.achieved}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {row.met ? (
+                          <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-100 px-2.5 py-1 rounded-full font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs">
+                            <CheckCircle2 size={10} /> Met
+                          </span>
+                        ) : (
+                          <span className="text-[10px] bg-amber-50 text-amber-700 border border-amber-100 px-2.5 py-1 rounded-full font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs">
+                            In Progress
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-center text-[10px] font-bold text-gray-400">
+                        <span>Completion Progress</span>
+                        <span className={row.met ? 'text-emerald-600' : 'text-amber-600'}>{percentage}%</span>
+                      </div>
+                      <div className="h-2 bg-gray-150 rounded-full overflow-hidden p-0.5 relative">
+                        <motion.div
+                          initial={{ width: '0%' }}
+                          whileInView={{ width: `${percentage}%` }}
+                          viewport={{ once: false, amount: 0.3 }}
+                          transition={{
+                            duration: 1.0,
+                            ease: [0.16, 1, 0.3, 1],
+                            delay: idx * 0.1,
+                          }}
+                          className={`h-full rounded-full relative overflow-hidden ${row.colorBar}`}
+                        >
+                          <motion.div 
+                            initial={{ x: '-100%' }}
+                            whileInView={{ x: '200%' }}
+                            viewport={{ once: false }}
+                            transition={{
+                              duration: 1.2,
+                              repeat: Infinity,
+                              repeatDelay: 1.5,
+                              delay: idx * 0.1 + 0.4
+                            }}
+                            className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent transform -skew-x-12"
+                          />
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </CardContent>
         </Card>
