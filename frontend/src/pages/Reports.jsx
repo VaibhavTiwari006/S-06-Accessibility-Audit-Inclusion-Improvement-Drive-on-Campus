@@ -201,45 +201,31 @@ const Reports = () => {
                 <ClipboardCheck size={20} className="text-primary" /> Audits by Status
               </h3>
             </CardHeader>
-            <CardContent className="flex-1 min-h-[300px]">
+            <CardContent className="flex-1 min-h-[350px]">
               {auditsData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
-                    <PieChart margin={{ top: 10, right: 10, left: 10, bottom: 15 }}>
-                      <Pie
-                        data={auditsData}
-                        cx="50%"
-                        cy="47%"
-                        innerRadius={65}
-                        outerRadius={95}
-                        paddingAngle={5}
-                        dataKey="value"
-                        isAnimationActive={true}
-                        animationBegin={200}
-                        animationDuration={1500}
-                        animationEasing="ease-out"
-                      >
-                        {auditsData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip formatter={(value) => [value, 'Count']} contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                      <Legend 
-                        verticalAlign="bottom" 
-                        height={36} 
-                        wrapperStyle={{ bottom: 0 }}
-                        formatter={(value, entry) => {
-                          const { payload } = entry;
-                          if (!payload) return value;
-                          const total = auditsData.reduce((sum, item) => sum + item.value, 0);
-                          const percentage = total > 0 ? Math.round((payload.value / total) * 100) : 0;
-                          return (
-                            <span className="text-xs font-bold text-textMain mr-2">
-                              {value} ({percentage}%)
-                            </span>
-                          );
-                        }}
-                      />
-                    </PieChart>
+                  <PieChart margin={{ top: 25, right: 30, left: 30, bottom: 20 }}>
+                    <Pie
+                      data={auditsData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={75}
+                      paddingAngle={5}
+                      dataKey="value"
+                      isAnimationActive={true}
+                      animationBegin={200}
+                      animationDuration={1500}
+                      animationEasing="ease-out"
+                      label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    >
+                      {auditsData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => [value, 'Count']} contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ bottom: 0 }} />
+                  </PieChart>
                 </ResponsiveContainer>
               ) : (
                 <div className="h-full flex items-center justify-center text-textLight">No audit data available</div>
