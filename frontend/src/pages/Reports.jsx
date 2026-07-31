@@ -332,6 +332,7 @@ const Reports = () => {
                     </motion.div>
                   </div>
                 </div>
+              ))}
             </div>
             <p className="text-xs text-textLight mt-6 font-medium">Benchmarked against RPWD Act 2016 mandates and WCAG 2.1 AA standards.</p>
           </CardContent>
