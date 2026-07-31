@@ -70,8 +70,26 @@ const EvidenceGallery = () => {
     }
   };
 
-  const handleUploadEvidence = (e) => {
+  const handleDragOver = (e) => {
     e.preventDefault();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error('File size exceeds the 10MB limit.');
+        return;
+      }
+      setSelectedFile(file);
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
+  };
+
+  const handleUploadEvidence = (e) => {
+    if (e) e.preventDefault();
     if (!newBuilding || !newDescription) {
       toast.error('Please enter building name and description.');
       return;
@@ -286,6 +304,8 @@ const EvidenceGallery = () => {
                 {/* Interactive Drag & Drop Area */}
                 <div 
                   onClick={() => !previewUrl && fileInputRef.current?.click()}
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
                   className={`p-4 border-2 border-dashed border-primary/30 bg-primary/5 rounded-2xl text-center space-y-2 ${!previewUrl ? 'cursor-pointer hover:bg-primary/10 transition-colors' : ''}`}
                 >
                   {previewUrl ? (
@@ -337,7 +357,12 @@ const EvidenceGallery = () => {
                   )}
                 </div>
 
-                <Button type="submit" icon={Sparkles} className="w-full py-3 shadow-md">
+                <Button 
+                  type="submit" 
+                  icon={Sparkles} 
+                  className="w-full py-3 shadow-md"
+                  onClick={handleUploadEvidence}
+                >
                   Upload & Analyze with AI
                 </Button>
               </form>
