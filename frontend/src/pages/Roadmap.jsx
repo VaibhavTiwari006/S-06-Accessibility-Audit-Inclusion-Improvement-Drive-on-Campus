@@ -180,10 +180,10 @@ const Roadmap = () => {
                       {stage.id !== 'COMPLETED' && (
                         <button
                           onClick={() => handleAdvanceStatus(task.id, stage.id)}
-                          className="w-full mt-1 text-[11px] font-bold text-primary bg-primary/5 hover:bg-primary/10 border border-primary/20 py-1.5 rounded-lg flex items-center justify-center gap-1 transition-all"
+                          className={`w-full mt-3 text-[11px] font-bold border py-2 rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-xs ${getNextStageDetails(stage.id).bg}`}
                         >
-                          <span>Advance Stage</span>
-                          <ArrowRight size={12} />
+                          <span>{getNextStageDetails(stage.id).label}</span>
+                          <ArrowRight size={12} className="opacity-80" />
                         </button>
                       )}
                     </div>
