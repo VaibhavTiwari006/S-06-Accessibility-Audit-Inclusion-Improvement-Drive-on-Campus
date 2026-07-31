@@ -51,7 +51,49 @@ const CalculatorPage = () => {
   };
 
   const handleExportEstimate = () => {
-    toast.success('Budget estimate report downloaded!');
+    const selectedItems = items.filter(item => item.quantity > 0);
+    
+    if (selectedItems.length === 0) {
+      toast.warning('No items selected in the calculator to export!');
+      return;
+    }
+
+    const headers = ['Item ID', 'Description', 'Category', 'Impact Level', 'Cost Level', 'Unit Cost (INR)', 'Quantity', 'Subtotal (INR)'];
+    const rows = selectedItems.map(item => {
+      const template = REMEDIATION_TEMPLATES.find(t => t.id === item.id);
+      if (!template) return null;
+      return [
+        template.id,
+        `"${template.name}"`,
+        template.category,
+        template.impact,
+        template.costRating,
+        template.unitCost,
+        item.quantity,
+        template.unitCost * item.quantity
+      ];
+    }).filter(Boolean);
+
+    // Add total row
+    const totalBudget = calculateTotal();
+    rows.push(['TOTAL', '"Total Estimated Budget"', '', '', '', '', '', totalBudget]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Accessibility_Budget_Estimate_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast.success('Budget estimate report downloaded successfully!');
   };
 
   return (
