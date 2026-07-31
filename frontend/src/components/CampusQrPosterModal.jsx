@@ -72,11 +72,14 @@ const CampusQrPosterModal = ({ issue, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
+      {/* Backdrop overlay for closing on click-outside */}
+      <div className="absolute inset-0 cursor-default" onClick={onClose} />
+
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
-        className="bg-white rounded-3xl shadow-2xl max-w-xl w-full p-6 space-y-5 my-8 relative border border-gray-100"
+        className="bg-white rounded-3xl shadow-2xl max-w-xl w-full p-6 space-y-5 my-8 relative border border-gray-100 z-10"
       >
         {/* Modal Controls Header */}
         <div className="flex items-center justify-between border-b border-gray-100 pb-3 print:hidden">
@@ -204,6 +207,13 @@ const CampusQrPosterModal = ({ issue, onClose }) => {
             <span>Official Poster • AccessAudit Inclusion Drive</span>
             <span>Issue Ref: #{issue.id}</span>
           </div>
+        </div>
+
+        {/* Modal Controls Footer */}
+        <div className="flex justify-end pt-2 border-t border-gray-100 print:hidden">
+          <Button variant="secondary" onClick={onClose}>
+            Close Poster
+          </Button>
         </div>
       </motion.div>
     </div>
