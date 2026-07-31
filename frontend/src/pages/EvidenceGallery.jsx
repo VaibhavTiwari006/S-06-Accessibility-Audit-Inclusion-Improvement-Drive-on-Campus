@@ -285,19 +285,48 @@ const EvidenceGallery = () => {
 
                 {/* Interactive Drag & Drop Area */}
                 <div 
-                  onClick={() => fileInputRef.current?.click()}
-                  className="p-4 border-2 border-dashed border-primary/30 bg-primary/5 rounded-2xl text-center space-y-2 cursor-pointer hover:bg-primary/10 transition-colors"
+                  onClick={() => !previewUrl && fileInputRef.current?.click()}
+                  className={`p-4 border-2 border-dashed border-primary/30 bg-primary/5 rounded-2xl text-center space-y-2 ${!previewUrl ? 'cursor-pointer hover:bg-primary/10 transition-colors' : ''}`}
                 >
                   {previewUrl ? (
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <img 
                         src={previewUrl} 
                         alt="Preview" 
                         className="mx-auto h-32 object-cover rounded-xl border border-gray-200 shadow-xs" 
                       />
-                      <p className="text-[10px] text-gray-500 font-semibold truncate max-w-xs mx-auto">
-                        Selected: {selectedFile?.name}
-                      </p>
+                      <div className="space-y-1">
+                        <p className="text-[10px] text-gray-500 font-semibold truncate max-w-xs mx-auto">
+                          {selectedFile?.name}
+                        </p>
+                        <p className="text-[9px] text-gray-400">
+                          {((selectedFile?.size || 0) / (1024 * 1024)).toFixed(2)} MB
+                        </p>
+                      </div>
+                      
+                      <div className="flex justify-center gap-2 pt-1">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            fileInputRef.current?.click();
+                          }}
+                          className="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-[10px] font-bold hover:bg-gray-50 hover:border-gray-300 transition-colors shadow-2xs"
+                        >
+                          Change Photo
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedFile(null);
+                            setPreviewUrl('');
+                          }}
+                          className="px-3 py-1.5 bg-red-50 border border-red-100 text-red-600 rounded-lg text-[10px] font-bold hover:bg-red-100 hover:border-red-200 transition-colors shadow-2xs"
+                        >
+                          Remove Photo
+                        </button>
+                      </div>
                     </div>
                   ) : (
                     <>
