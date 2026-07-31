@@ -308,6 +308,7 @@ const CalculatorPage = () => {
               <span>Fixes prioritized by max accessibility impact per rupee spent.</span>
             </div>
           </Card>
+        </div>
       </div>
 
       {/* Export Format Selector Modal */}
