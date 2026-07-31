@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
+import Modal from '../components/ui/Modal';
 import { toast } from 'react-toastify';
 
 const REMEDIATION_TEMPLATES = [
@@ -18,6 +19,7 @@ const REMEDIATION_TEMPLATES = [
 ];
 
 const CalculatorPage = () => {
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [items, setItems] = useState([
     { id: 'RAMP', quantity: 2 },
     { id: 'TACTILE', quantity: 5 },
