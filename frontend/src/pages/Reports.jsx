@@ -295,17 +295,38 @@ const Reports = () => {
                 { standard: 'WCAG 2.1 AA – LMS Accessibility',          compliance: 61, color: 'bg-secondary' },
                 { standard: 'RPWD Act 2016 – Washroom Access',          compliance: 55, color: 'bg-danger' },
                 { standard: 'RPWD Act 2016 – Emergency Signage',        compliance: 80, color: 'bg-success' },
-              ].map(item => (
+              ].map((item, index) => (
                 <div key={item.standard}>
                   <div className="flex justify-between text-sm mb-1.5">
                     <span className="text-textLight font-medium">{item.standard}</span>
                     <span className="font-bold text-textMain">{item.compliance}%</span>
                   </div>
-                  <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${item.color} transition-all duration-700`}
-                      style={{ width: `${item.compliance}%` }}
-                    />
+                  <div className="h-3 bg-gray-100 rounded-full overflow-hidden p-0.5 relative">
+                    <motion.div
+                      initial={{ width: '0%' }}
+                      whileInView={{ width: `${item.compliance}%` }}
+                      viewport={{ once: false, amount: 0.3 }}
+                      transition={{
+                        duration: 1.0,
+                        ease: [0.16, 1, 0.3, 1], // snappy fast start, smooth finish
+                        delay: index * 0.1,
+                      }}
+                      className={`h-full rounded-full relative overflow-hidden ${item.color}`}
+                    >
+                      {/* Fast Racing Light Streak */}
+                      <motion.div 
+                        initial={{ x: '-100%' }}
+                        whileInView={{ x: '200%' }}
+                        viewport={{ once: false }}
+                        transition={{
+                          duration: 1.0,
+                          repeat: Infinity,
+                          repeatDelay: 1.5,
+                          delay: index * 0.1 + 0.5
+                        }}
+                        className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/70 to-transparent transform -skew-x-12"
+                      />
+                    </motion.div>
                   </div>
                 </div>
               ))}
