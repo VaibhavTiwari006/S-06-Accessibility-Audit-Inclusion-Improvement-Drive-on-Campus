@@ -9,6 +9,7 @@ import { Card, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import Input from '../components/ui/Input';
+import Modal from '../components/ui/Modal';
 import { useAuth } from '../context/AuthContext';
 
 const BuildingList = () => {
@@ -22,6 +23,7 @@ const BuildingList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedBuilding, setSelectedBuilding] = useState(null);
 
   const fetchBuildings = async () => {
     try {
@@ -227,7 +229,7 @@ const BuildingList = () => {
                       </Badge>
                     </td>
                     <td className="px-6 py-5 whitespace-nowrap text-right">
-                      <Button variant="ghost" size="sm">
+                      <Button variant="ghost" size="sm" onClick={() => setSelectedBuilding(building)}>
                         View Details
                       </Button>
                     </td>
@@ -263,6 +265,60 @@ const BuildingList = () => {
         </div>
       </Card>
       )}
+
+      {/* Building Detail Modal */}
+      <Modal isOpen={!!selectedBuilding} onClose={() => setSelectedBuilding(null)} title={selectedBuilding?.buildingName || 'Building Details'} maxWidth="max-w-md">
+        {selectedBuilding && (
+          <div className="space-y-5">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center border border-primary/20">
+                <Building2 size={28} className="text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-textMain font-heading">{selectedBuilding.buildingName}</h3>
+                <span className="text-xs font-mono font-semibold text-gray-400">{selectedBuilding.buildingCode}</span>
+              </div>
+            </div>
+
+            {selectedBuilding.description && (
+              <p className="text-sm text-gray-500 leading-relaxed">{selectedBuilding.description}</p>
+            )}
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Location</p>
+                <p className="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                  <MapPin size={14} className="text-red-400" />
+                  {selectedBuilding.location || 'Not specified'}
+                </p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Floors</p>
+                <p className="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                  <Layers size={14} className="text-gray-400" />
+                  {selectedBuilding.numberOfFloors} floors
+                </p>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Status</p>
+                <Badge variant={getStatusVariant(selectedBuilding.status)}>
+                  {selectedBuilding.status?.replace(/_/g, ' ')}
+                </Badge>
+              </div>
+              <div className="bg-gray-50 rounded-xl p-3 border border-gray-100">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Building ID</p>
+                <p className="text-sm font-semibold text-gray-700 font-mono">#{selectedBuilding.id}</p>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <Button variant="primary" className="w-full" onClick={() => setSelectedBuilding(null)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
