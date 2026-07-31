@@ -28,15 +28,19 @@ const CalculatorPage = () => {
   ]);
 
   const updateQuantity = (id, delta) => {
-    setItems((prev) =>
-      prev.map((item) => {
+    setItems((prev) => {
+      const exists = prev.some((item) => item.id === id);
+      if (!exists) {
+        return [...prev, { id, quantity: Math.max(0, delta) }];
+      }
+      return prev.map((item) => {
         if (item.id === id) {
           const newQty = Math.max(0, item.quantity + delta);
           return { ...item, quantity: newQty };
         }
         return item;
-      })
-    );
+      });
+    });
   };
 
   const calculateTotal = () => {
