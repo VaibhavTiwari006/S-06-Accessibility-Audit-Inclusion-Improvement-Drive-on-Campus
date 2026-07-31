@@ -204,25 +204,25 @@ const Reports = () => {
             <CardContent className="flex-1 min-h-[300px]">
               {auditsData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
-                  <PieChart margin={{ top: 10, right: 10, left: 10, bottom: 25 }}>
+                  <PieChart margin={{ top: 15, right: 10, left: 10, bottom: 20 }}>
                     <Pie
-                      data={auditsData}
-                      cx="50%"
-                      cy="43%"
-                      innerRadius={60}
-                      outerRadius={95}
-                      paddingAngle={5}
-                      dataKey="value"
-                      isAnimationActive={true}
-                      animationBegin={200}
-                      animationDuration={1500}
-                      animationEasing="ease-out"
-                      label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
-                    >
-                      {auditsData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
+                       data={auditsData}
+                       cx="50%"
+                       cy="47%"
+                       innerRadius={55}
+                       outerRadius={85}
+                       paddingAngle={5}
+                       dataKey="value"
+                       isAnimationActive={true}
+                       animationBegin={200}
+                       animationDuration={1500}
+                       animationEasing="ease-out"
+                       label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
+                     >
+                       {auditsData.map((entry, index) => (
+                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                       ))}
+                     </Pie>
                     <Tooltip formatter={(value) => [value, 'Count']} contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
                     <Legend verticalAlign="bottom" height={36} wrapperStyle={{ bottom: 0 }} />
                   </PieChart>
