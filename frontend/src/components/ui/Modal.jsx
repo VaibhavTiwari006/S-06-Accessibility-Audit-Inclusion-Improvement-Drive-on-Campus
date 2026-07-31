@@ -18,7 +18,7 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-lg' }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center pt-20 pb-6 px-4 sm:px-6" role="dialog" aria-modal="true" aria-labelledby="modal-title">
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="absolute inset-0 bg-secondary/40 backdrop-blur-sm"
