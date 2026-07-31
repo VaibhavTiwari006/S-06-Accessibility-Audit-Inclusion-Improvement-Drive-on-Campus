@@ -132,13 +132,13 @@ const Roadmap = () => {
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 overflow-x-auto min-h-[600px]">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 overflow-x-auto pb-4">
           {WORKFLOW_STAGES.map((stage) => {
             const stageTasks = tasks.filter((t) => t.workflowStatus === stage.id);
             return (
               <div
                 key={stage.id}
-                className={`flex flex-col rounded-2xl border p-3 ${stage.color} space-y-3 min-w-[220px]`}
+                className={`flex flex-col rounded-2xl border p-3 ${stage.color} space-y-3 min-w-[260px] h-[680px]`}
               >
                 <div className="flex items-center justify-between font-bold text-xs text-gray-700 uppercase tracking-wider pb-2 border-b border-gray-200/60">
                   <div className="flex items-center gap-1.5">
