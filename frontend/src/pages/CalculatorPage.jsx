@@ -23,6 +23,8 @@ const CalculatorPage = () => {
     { id: 'TACTILE', quantity: 5 },
     { id: 'SIGNAGE', quantity: 8 },
     { id: 'GRABBAR', quantity: 4 },
+    { id: 'DOOR', quantity: 0 },
+    { id: 'ELEVATOR', quantity: 0 },
   ]);
 
   const updateQuantity = (id, delta) => {
