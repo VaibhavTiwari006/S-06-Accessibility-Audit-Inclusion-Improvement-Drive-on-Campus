@@ -393,38 +393,6 @@ const Reports = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between items-center text-[10px] font-bold text-gray-400">
-                        <span>Completion Progress</span>
-                        <span className={row.met ? 'text-emerald-600' : 'text-amber-600'}>{percentage}%</span>
-                      </div>
-                      <div className="h-2 bg-gray-150 rounded-full overflow-hidden p-0.5 relative">
-                        <motion.div
-                          initial={{ width: '0%' }}
-                          whileInView={{ width: `${percentage}%` }}
-                          viewport={{ once: false, amount: 0.3 }}
-                          transition={{
-                            duration: 1.0,
-                            ease: [0.16, 1, 0.3, 1],
-                            delay: idx * 0.1,
-                          }}
-                          className={`h-full rounded-full relative overflow-hidden ${row.colorBar}`}
-                        >
-                          <motion.div 
-                            initial={{ x: '-100%' }}
-                            whileInView={{ x: '200%' }}
-                            viewport={{ once: false }}
-                            transition={{
-                              duration: 1.2,
-                              repeat: Infinity,
-                              repeatDelay: 1.5,
-                              delay: idx * 0.1 + 0.4
-                            }}
-                            className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent transform -skew-x-12"
-                          />
-                        </motion.div>
-                      </div>
-                    </div>
                   </div>
                 );
               })}
