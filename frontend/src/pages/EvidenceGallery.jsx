@@ -361,7 +361,6 @@ const EvidenceGallery = () => {
                   type="submit" 
                   icon={Sparkles} 
                   className="w-full py-3 shadow-md"
-                  onClick={handleUploadEvidence}
                 >
                   Upload & Analyze with AI
                 </Button>
