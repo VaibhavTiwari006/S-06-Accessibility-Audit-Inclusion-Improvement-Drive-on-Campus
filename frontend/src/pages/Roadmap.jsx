@@ -150,7 +150,7 @@ const Roadmap = () => {
                   </span>
                 </div>
 
-                <div className="space-y-3 flex-1 overflow-y-auto">
+                <div className="space-y-3 flex-1 overflow-y-auto pr-1.5 scrollbar-thin">
                   {stageTasks.map((task) => (
                     <div
                       key={task.id}
