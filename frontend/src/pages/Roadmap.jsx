@@ -10,17 +10,18 @@ import { Card } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 
 const WORKFLOW_STAGES = [
-  { id: 'OPEN', label: 'Reported', color: 'border-red-200 bg-red-50/50', icon: <AlertCircle size={16} className="text-red-600" /> },
-  { id: 'ASSIGNED', label: 'Assigned', color: 'border-blue-200 bg-blue-50/50', icon: <UserCheck size={16} className="text-blue-600" /> },
-  { id: 'IN_PROGRESS', label: 'In Progress', color: 'border-purple-200 bg-purple-50/50', icon: <Clock size={16} className="text-purple-600" /> },
-  { id: 'FIXED', label: 'Fixed', color: 'border-amber-200 bg-amber-50/50', icon: <Wrench size={16} className="text-amber-600" /> },
-  { id: 'COMPLETED', label: 'Verified & Closed', color: 'border-emerald-200 bg-emerald-50/50', icon: <ShieldCheck size={16} className="text-emerald-600" /> },
+  { id: 'OPEN', label: 'Reported', color: 'border-red-200 bg-red-50/50', icon: <AlertCircle size={15} className="text-red-600" />, dot: 'bg-red-500' },
+  { id: 'ASSIGNED', label: 'Assigned', color: 'border-blue-200 bg-blue-50/50', icon: <UserCheck size={15} className="text-blue-600" />, dot: 'bg-blue-500' },
+  { id: 'IN_PROGRESS', label: 'In Progress', color: 'border-purple-200 bg-purple-50/50', icon: <Clock size={15} className="text-purple-600" />, dot: 'bg-purple-500' },
+  { id: 'FIXED', label: 'Fixed', color: 'border-amber-200 bg-amber-50/50', icon: <Wrench size={15} className="text-amber-600" />, dot: 'bg-amber-500' },
+  { id: 'COMPLETED', label: 'Verified & Closed', color: 'border-emerald-200 bg-emerald-50/50', icon: <ShieldCheck size={15} className="text-emerald-600" />, dot: 'bg-emerald-500' },
 ];
 
 const Roadmap = () => {
   const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeStage, setActiveStage] = useState('OPEN');
 
   useEffect(() => {
     fetchTasks();
@@ -30,7 +31,6 @@ const Roadmap = () => {
     try {
       setLoading(true);
       const data = await maintenanceService.getAllTasks();
-      // Map statuses into 5-stage workflow
       const mapped = data.map((t, idx) => ({
         ...t,
         workflowStatus: t.status === 'COMPLETED' ? 'COMPLETED' : 
@@ -83,6 +83,9 @@ const Roadmap = () => {
     return Math.round((completed / tasks.length) * 100);
   };
 
+  const activeStageObj = WORKFLOW_STAGES.find((s) => s.id === activeStage);
+  const activeTasks = tasks.filter((t) => t.workflowStatus === activeStage);
+
   return (
     <div className="space-y-6 animate-fade-in pb-12">
       {/* Header & Metrics */}
@@ -124,100 +127,99 @@ const Roadmap = () => {
         </div>
       </div>
 
-      {/* 5-Column Kanban Board */}
+      {/* Stage Tabs */}
+      <div className="flex flex-wrap gap-2">
+        {WORKFLOW_STAGES.map((stage) => {
+          const count = tasks.filter((t) => t.workflowStatus === stage.id).length;
+          const isActive = activeStage === stage.id;
+          return (
+            <button
+              key={stage.id}
+              onClick={() => setActiveStage(stage.id)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 border ${
+                isActive
+                  ? `${stage.color} shadow-sm`
+                  : 'bg-white text-gray-500 border-gray-100 hover:bg-gray-50 hover:border-gray-200'
+              }`}
+            >
+              {stage.icon}
+              <span>{stage.label}</span>
+              <span className={`ml-1 px-1.5 py-0.5 rounded-md text-[10px] font-extrabold ${
+                isActive ? 'bg-white/70 text-gray-700' : 'bg-gray-100 text-gray-500'
+              }`}>
+                {count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Task Cards Grid */}
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 h-[600px]">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="bg-gray-50 rounded-2xl p-4 h-full animate-pulse"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="bg-gray-50 rounded-2xl p-5 h-48 animate-pulse"></div>
           ))}
         </div>
+      ) : activeTasks.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-gray-100 p-12 flex flex-col items-center justify-center text-center">
+          <CheckCircle2 size={36} className="text-gray-300 mb-3" />
+          <p className="text-sm font-semibold text-gray-400">No tasks in {activeStageObj?.label}</p>
+          <p className="text-xs text-gray-400 mt-1">Tasks will appear here when moved to this stage.</p>
+        </div>
       ) : (
-        <div className="flex gap-6 overflow-x-auto pb-6 snap-x">
-          {WORKFLOW_STAGES.map((stage) => {
-            const stageTasks = tasks.filter((t) => t.workflowStatus === stage.id);
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {activeTasks.map((task) => {
+            const priorityColor =
+              (task.priority || 'HIGH') === 'HIGH' ? 'bg-red-100 text-red-700 border-red-200' :
+              (task.priority || 'HIGH') === 'MEDIUM' ? 'bg-amber-100 text-amber-700 border-amber-200' :
+              'bg-emerald-100 text-emerald-700 border-emerald-200';
+
             return (
               <div
-                key={stage.id}
-                className={`flex flex-col rounded-2xl border p-5 ${stage.color} min-w-[340px] w-[340px] flex-shrink-0 snap-start`}
-                style={{ maxHeight: 'calc(100vh - 260px)' }}
+                key={task.id}
+                className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-3"
               >
-                {/* Column Header */}
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-gray-200/60">
-                  <div className="flex items-center gap-2">
-                    {stage.icon}
-                    <span className="font-bold text-base text-gray-800 tracking-wide">{stage.label}</span>
-                  </div>
-                  <span className="bg-white text-gray-700 text-sm font-bold px-3 py-1 rounded-full shadow-sm border border-gray-100">
-                    {stageTasks.length}
+                {/* Priority + ID */}
+                <div className="flex items-center justify-between">
+                  <span className={`text-[10px] font-extrabold uppercase px-2 py-1 rounded-md border ${priorityColor}`}>
+                    {task.priority || 'HIGH'}
+                  </span>
+                  <span className="text-xs text-gray-400 font-mono">#{task.id}</span>
+                </div>
+
+                {/* Title */}
+                <h4 className="font-bold text-textMain text-sm leading-snug font-heading">
+                  {task.title}
+                </h4>
+
+                {/* Description */}
+                <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                  {task.description}
+                </p>
+
+                {/* Location + Cost */}
+                <div className="pt-2.5 mt-auto border-t border-gray-100 flex items-center justify-between">
+                  <span className="text-xs text-gray-500 font-medium truncate max-w-[140px] flex items-center gap-1">
+                    <MapPin size={12} className="text-red-400 flex-shrink-0" />
+                    {task.buildingName || 'Campus Wide'}
+                  </span>
+                  <span className="text-xs font-bold text-gray-700 flex items-center gap-0.5">
+                    <IndianRupee size={11} />
+                    {(task.estimatedCost || 25000).toLocaleString()}
                   </span>
                 </div>
 
-                {/* Scrollable Task List */}
-                <div className="space-y-4 flex-1 overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin' }}>
-                  {stageTasks.map((task) => {
-                    const priorityColor =
-                      (task.priority || 'HIGH') === 'HIGH' ? 'bg-red-100 text-red-700 border-red-200' :
-                      (task.priority || 'HIGH') === 'MEDIUM' ? 'bg-amber-100 text-amber-700 border-amber-200' :
-                      'bg-emerald-100 text-emerald-700 border-emerald-200';
-
-                    return (
-                      <div
-                        key={task.id}
-                        className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-200 flex flex-col gap-4"
-                      >
-                        {/* Priority + ID Row */}
-                        <div className="flex items-center justify-between">
-                          <span className={`text-xs font-extrabold uppercase px-3 py-1.5 rounded-lg border ${priorityColor}`}>
-                            {task.priority || 'HIGH'}
-                          </span>
-                          <span className="text-sm text-gray-400 font-mono font-semibold">
-                            #{task.id}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h4 className="font-bold text-gray-900 text-base leading-normal font-heading">
-                          {task.title}
-                        </h4>
-
-                        {/* Description */}
-                        <p className="text-sm text-gray-500 line-clamp-3 leading-relaxed">
-                          {task.description}
-                        </p>
-
-                        {/* Location + Cost Footer */}
-                        <div className="pt-4 mt-auto border-t border-gray-100 flex items-center justify-between">
-                          <span className="text-sm text-gray-500 font-medium truncate max-w-[160px] flex items-center gap-1.5">
-                            <MapPin size={14} className="text-red-400 flex-shrink-0" />
-                            {task.buildingName || 'Campus Wide'}
-                          </span>
-                          <span className="text-sm font-bold text-gray-700 flex items-center gap-0.5">
-                            <IndianRupee size={13} />
-                            {(task.estimatedCost || 25000).toLocaleString()}
-                          </span>
-                        </div>
-
-                        {/* Action Button */}
-                        {stage.id !== 'COMPLETED' && (
-                          <button
-                            onClick={() => handleAdvanceStatus(task.id, stage.id)}
-                            className={`w-full text-sm font-bold border py-3 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-sm hover:shadow-md ${getNextStageDetails(stage.id).bg}`}
-                          >
-                            {getNextStageDetails(stage.id).label}
-                            <ArrowRight size={15} className="opacity-70" />
-                          </button>
-                        )}
-                      </div>
-                    );
-                  })}
-
-                  {stageTasks.length === 0 && (
-                    <div className="h-40 flex flex-col items-center justify-center border-2 border-dashed border-gray-200/80 rounded-2xl text-gray-400 text-sm font-medium gap-2">
-                      <CheckCircle2 size={22} className="opacity-40" />
-                      No tasks in {stage.label}
-                    </div>
-                  )}
-                </div>
+                {/* Action Button */}
+                {activeStage !== 'COMPLETED' && (
+                  <button
+                    onClick={() => handleAdvanceStatus(task.id, activeStage)}
+                    className={`w-full text-xs font-bold border py-2 rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 shadow-xs hover:shadow-sm ${getNextStageDetails(activeStage).bg}`}
+                  >
+                    {getNextStageDetails(activeStage).label}
+                    <ArrowRight size={13} className="opacity-70" />
+                  </button>
+                )}
               </div>
             );
           })}
