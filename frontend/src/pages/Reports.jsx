@@ -201,13 +201,13 @@ const Reports = () => {
             <CardContent className="flex-1 min-h-[300px]">
               {auditsData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
+                  <PieChart margin={{ top: 10, right: 10, left: 10, bottom: 25 }}>
                     <Pie
                       data={auditsData}
                       cx="50%"
-                      cy="50%"
-                      innerRadius={70}
-                      outerRadius={110}
+                      cy="43%"
+                      innerRadius={60}
+                      outerRadius={95}
                       paddingAngle={5}
                       dataKey="value"
                       isAnimationActive={true}
@@ -221,7 +221,7 @@ const Reports = () => {
                       ))}
                     </Pie>
                     <Tooltip formatter={(value) => [value, 'Count']} contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                    <Legend />
+                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ bottom: 0 }} />
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
