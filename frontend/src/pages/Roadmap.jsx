@@ -58,6 +58,21 @@ const Roadmap = () => {
     }
   };
 
+  const getNextStageDetails = (currentStage) => {
+    switch (currentStage) {
+      case 'OPEN':
+        return { label: 'Assign Task', bg: 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100/70' };
+      case 'ASSIGNED':
+        return { label: 'Start Work', bg: 'bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100/70' };
+      case 'IN_PROGRESS':
+        return { label: 'Finish Repair', bg: 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100/70' };
+      case 'FIXED':
+        return { label: 'Verify & Close', bg: 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100/70' };
+      default:
+        return { label: 'Advance', bg: 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100' };
+    }
+  };
+
   const calculateTotalCost = () => {
     return tasks.reduce((sum, task) => sum + (task.estimatedCost || 25000), 0);
   };
