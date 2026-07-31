@@ -60,6 +60,11 @@ const CalculatorPage = () => {
       return;
     }
 
+    setIsExportModalOpen(true);
+  };
+
+  const exportCSV = () => {
+    const selectedItems = items.filter(item => item.quantity > 0);
     const headers = ['Item ID', 'Description', 'Category', 'Impact Level', 'Cost Level', 'Unit Cost (INR)', 'Quantity', 'Subtotal (INR)'];
     const rows = selectedItems.map(item => {
       const template = REMEDIATION_TEMPLATES.find(t => t.id === item.id);
@@ -76,7 +81,6 @@ const CalculatorPage = () => {
       ];
     }).filter(Boolean);
 
-    // Add total row
     const totalBudget = calculateTotal();
     rows.push(['TOTAL', '"Total Estimated Budget"', '', '', '', '', '', totalBudget]);
 
@@ -95,7 +99,103 @@ const CalculatorPage = () => {
     link.click();
     document.body.removeChild(link);
     
-    toast.success('Budget estimate report downloaded successfully!');
+    setIsExportModalOpen(false);
+    toast.success('CSV spreadsheet downloaded successfully!');
+  };
+
+  const exportPDF = () => {
+    const selectedItems = items.filter(item => item.quantity > 0);
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      toast.error('Pop-up blocker prevented generating PDF. Please allow popups for this site.');
+      return;
+    }
+
+    const totalBudget = calculateTotal();
+    const totalItems = items.reduce((s, i) => s + i.quantity, 0);
+
+    const htmlRows = selectedItems.map(item => {
+      const template = REMEDIATION_TEMPLATES.find(t => t.id === item.id);
+      if (!template) return '';
+      return `
+        <tr>
+          <td><strong>${template.name}</strong><br/><small>${template.category}</small></td>
+          <td style="text-align: center;"><span style="padding: 2px 8px; font-size: 11px; border-radius: 4px; background: #ecfdf5; color: #047857; font-weight: bold;">${template.impact}</span></td>
+          <td style="text-align: right;">₹${template.unitCost.toLocaleString()}</td>
+          <td style="text-align: center;">${item.quantity}</td>
+          <td style="text-align: right; font-weight: bold;">₹${(template.unitCost * item.quantity).toLocaleString()}</td>
+        </tr>
+      `;
+    }).join('');
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Accessibility Budget Estimate Report</title>
+          <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: #1f2937; line-height: 1.5; padding: 40px; }
+            .header { border-bottom: 2px solid #10b981; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+            .title { font-size: 24px; font-weight: 800; color: #111827; margin: 0; }
+            .meta { font-size: 13px; color: #6b7280; text-align: right; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+            th { background-color: #f9fafb; border-bottom: 2px solid #e5e7eb; padding: 12px; font-weight: bold; text-align: left; font-size: 13px; color: #4b5563; }
+            td { border-bottom: 1px solid #e5e7eb; padding: 12px; font-size: 13px; }
+            .total-section { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+            .total-title { font-size: 14px; font-weight: bold; color: #047857; margin: 0; }
+            .total-val { font-size: 24px; font-weight: 800; color: #065f46; margin: 0; }
+            @media print {
+              body { padding: 0; }
+              button { display: none; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <div>
+              <h1 class="title">Accessibility Remediation Estimate</h1>
+              <p style="margin: 4px 0 0 0; font-size: 14px; color: #4b5563;">Official Campus Infrastructure Improvement Plan</p>
+            </div>
+            <div class="meta">
+              Date: ${new Date().toLocaleDateString()}<br/>
+              Status: Draft Budget Proposal
+            </div>
+          </div>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Remediation Item</th>
+                <th style="text-align: center;">Priority Impact</th>
+                <th style="text-align: right;">Unit Cost</th>
+                <th style="text-align: center;">Quantity</th>
+                <th style="text-align: right;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${htmlRows}
+            </tbody>
+          </table>
+
+          <div class="total-section">
+            <div>
+              <p class="total-title">TOTAL PROPOSED REMEDIATION BUDGET</p>
+              <p style="margin: 2px 0 0 0; color: #065f46; font-size: 13px;">Selected Units: ${totalItems} improvement items</p>
+            </div>
+            <div class="total-val">₹${totalBudget.toLocaleString()}</div>
+          </div>
+          
+          <script>
+            window.onload = function() {
+              window.print();
+              setTimeout(function() { window.close(); }, 500);
+            };
+          </script>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+    setIsExportModalOpen(false);
+    toast.success('Budget estimate PDF generated successfully!');
   };
 
   return (
