@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Camera, Search, Filter, X, MapPin, User, CheckCircle, 
   AlertCircle, Sparkles, Upload, Eye, IndianRupee, Clock, ShieldCheck, Plus 
@@ -31,6 +31,9 @@ const EvidenceGallery = () => {
   // Upload Form State
   const [newBuilding, setNewBuilding] = useState('');
   const [newDescription, setNewDescription] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState('');
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const fetchEvidence = async () => {
@@ -54,10 +57,27 @@ const EvidenceGallery = () => {
     setViewMode('BEFORE');
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error('File size exceeds the 10MB limit.');
+        return;
+      }
+      setSelectedFile(file);
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
+  };
+
   const handleUploadEvidence = (e) => {
     e.preventDefault();
     if (!newBuilding || !newDescription) {
       toast.error('Please enter building name and description.');
+      return;
+    }
+    if (!selectedFile) {
+      toast.error('Please select a photo evidence.');
       return;
     }
 
@@ -68,13 +88,15 @@ const EvidenceGallery = () => {
       status: 'PENDING',
       locationDetails: 'Main Entrance',
       reporterName: 'Current User',
-      photoUrl: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=800',
+      photoUrl: previewUrl || 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?auto=format&fit=crop&q=80&w=800',
     });
 
     setEvidenceItems([newEvidence, ...evidenceItems]);
     setShowUploadModal(false);
     setNewBuilding('');
     setNewDescription('');
+    setSelectedFile(null);
+    setPreviewUrl('');
     toast.success('Evidence photo uploaded & AI analyzed!');
   };
 
@@ -207,16 +229,16 @@ const EvidenceGallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center pt-20 pb-6 px-4 bg-black/60 backdrop-blur-sm"
           >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowUploadModal(false)}></div>
+            <div className="absolute inset-0 cursor-default" onClick={() => setShowUploadModal(false)}></div>
             <motion.div
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
-              className="relative w-full max-w-lg bg-white rounded-3xl p-6 shadow-2xl space-y-4"
+              className="relative w-full max-w-lg bg-white rounded-3xl p-6 shadow-2xl space-y-4 z-10 flex flex-col max-h-[85vh] overflow-hidden"
             >
-              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-3 flex-shrink-0">
                 <h3 className="text-lg font-bold font-heading text-textMain flex items-center gap-2">
                   <Upload className="text-primary" size={20} /> Upload Photo Evidence
                 </h3>
@@ -225,7 +247,7 @@ const EvidenceGallery = () => {
                 </button>
               </div>
 
-              <form onSubmit={handleUploadEvidence} className="space-y-4">
+              <form onSubmit={handleUploadEvidence} className="space-y-4 overflow-y-auto flex-1 pr-1">
                 <div>
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
                     Building Name
@@ -252,10 +274,38 @@ const EvidenceGallery = () => {
                   />
                 </div>
 
-                <div className="p-4 border-2 border-dashed border-primary/30 bg-primary/5 rounded-2xl text-center space-y-2">
-                  <Camera size={24} className="mx-auto text-primary" />
-                  <p className="text-xs font-bold text-primary">Click to select photo or drag and drop</p>
-                  <p className="text-[10px] text-gray-400">Supports PNG, JPG up to 10MB</p>
+                {/* Hidden File Input */}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
+
+                {/* Interactive Drag & Drop Area */}
+                <div 
+                  onClick={() => fileInputRef.current?.click()}
+                  className="p-4 border-2 border-dashed border-primary/30 bg-primary/5 rounded-2xl text-center space-y-2 cursor-pointer hover:bg-primary/10 transition-colors"
+                >
+                  {previewUrl ? (
+                    <div className="space-y-2">
+                      <img 
+                        src={previewUrl} 
+                        alt="Preview" 
+                        className="mx-auto h-32 object-cover rounded-xl border border-gray-200 shadow-xs" 
+                      />
+                      <p className="text-[10px] text-gray-500 font-semibold truncate max-w-xs mx-auto">
+                        Selected: {selectedFile?.name}
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <Camera size={24} className="mx-auto text-primary" />
+                      <p className="text-xs font-bold text-primary">Click to select photo or drag and drop</p>
+                      <p className="text-[10px] text-gray-400">Supports PNG, JPG up to 10MB</p>
+                    </>
+                  )}
                 </div>
 
                 <Button type="submit" icon={Sparkles} className="w-full py-3 shadow-md">
