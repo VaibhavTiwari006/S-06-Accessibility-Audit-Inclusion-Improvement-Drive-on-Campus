@@ -308,8 +308,55 @@ const CalculatorPage = () => {
               <span>Fixes prioritized by max accessibility impact per rupee spent.</span>
             </div>
           </Card>
-        </div>
       </div>
+
+      {/* Export Format Selector Modal */}
+      <Modal
+        isOpen={isExportModalOpen}
+        onClose={() => setIsExportModalOpen(false)}
+        title="Select Export Format"
+        maxWidth="max-w-md"
+      >
+        <div className="p-6 space-y-4">
+          <p className="text-sm text-gray-500 font-medium">
+            Choose how you would like to download your campus accessibility budget breakdown:
+          </p>
+
+          <div className="grid grid-cols-1 gap-3 pt-2">
+            <button
+              onClick={exportCSV}
+              className="flex items-center gap-4 p-4 rounded-2xl border border-gray-200 hover:border-primary/40 hover:bg-primary/5 transition-all text-left group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-lg group-hover:scale-105 transition-transform">
+                CSV
+              </div>
+              <div>
+                <h4 className="font-bold text-textMain text-sm">Spreadsheet (CSV)</h4>
+                <p className="text-xs text-gray-500">Perfect for Microsoft Excel or Google Sheets.</p>
+              </div>
+            </button>
+
+            <button
+              onClick={exportPDF}
+              className="flex items-center gap-4 p-4 rounded-2xl border border-gray-200 hover:border-primary/40 hover:bg-primary/5 transition-all text-left group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center font-bold text-lg group-hover:scale-105 transition-transform">
+                PDF
+              </div>
+              <div>
+                <h4 className="font-bold text-textMain text-sm">Printable Document (PDF)</h4>
+                <p className="text-xs text-gray-500">Clean, formatted proposal document ready to print.</p>
+              </div>
+            </button>
+          </div>
+
+          <div className="pt-4 border-t border-gray-100 flex justify-end">
+            <Button variant="outline" size="sm" onClick={() => setIsExportModalOpen(false)}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
