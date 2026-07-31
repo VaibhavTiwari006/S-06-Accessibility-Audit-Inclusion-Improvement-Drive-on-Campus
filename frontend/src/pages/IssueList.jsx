@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import issueService from '../services/issueService';
-import { AlertCircle, Plus, MapPin, Clock, CheckCircle, Search, Filter, QrCode, Printer } from 'lucide-react';
+import { AlertCircle, Plus, MapPin, Clock, CheckCircle, Search, Filter, QrCode, Printer, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReportIssueModal from '../components/ReportIssueModal';
@@ -263,81 +263,96 @@ const IssueList = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden p-4"
+            className="fixed inset-0 z-[100] flex items-center justify-center pt-20 pb-6 px-4 bg-black/50 backdrop-blur-xs"
           >
-            <div className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm" onClick={() => setSelectedIssue(null)}></div>
+            <div className="absolute inset-0 cursor-default" onClick={() => setSelectedIssue(null)}></div>
             <motion.div 
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative glass-premium rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-white/60 p-7"
+              className="relative bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden border border-gray-100 flex flex-col max-h-[90vh] z-10"
             >
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-heading font-extrabold text-textMain pr-4">{selectedIssue.buildingName}</h3>
-                <Badge variant={getStatusVariant(selectedIssue.status)}>
-                  <StatusIcon status={selectedIssue.status} /> {selectedIssue.status?.replace(/_/g, ' ')}
-                </Badge>
-              </div>
-              
-              <p className="text-sm text-gray-700 mb-5 leading-relaxed bg-white/40 p-4 rounded-xl border border-white/50">{selectedIssue.description}</p>
-              
-              <div className="text-sm font-medium text-gray-500 mb-5 flex items-center gap-2 bg-gray-50 p-3 rounded-xl">
-                <div className="bg-white p-1.5 rounded-lg shadow-sm"><MapPin size={16} className="text-gray-400" /></div>
-                {selectedIssue.locationDetails || 'Location not specified'}
-              </div>
-
-              {selectedIssue.photoUrl && (
-                <div className="mb-5">
-                  <p className="text-xs font-bold text-gray-400 uppercase mb-2 tracking-wider">Attached Evidence</p>
-                  <img src={selectedIssue.photoUrl} alt="Evidence" className="w-full h-48 object-cover rounded-xl shadow-soft-sm border border-gray-100" />
-                </div>
-              )}
-
-              {/* Real-time Resolution Stepper */}
-              <div className="mb-5 p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
-                <span className="text-xs font-bold text-gray-500 uppercase tracking-wider block">Live Resolution Progress:</span>
-                <div className="flex items-center justify-between relative">
-                  <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0" />
-                  <div 
-                    className="absolute top-1/2 left-0 h-1 bg-emerald-500 -translate-y-1/2 z-0 transition-all duration-500" 
-                    style={{
-                      width: selectedIssue.status === 'RESOLVED' ? '100%' : selectedIssue.status === 'IN_PROGRESS' ? '60%' : '20%'
-                    }}
-                  />
-
-                  {/* Stage 1: Reported */}
-                  <div className="relative z-10 flex flex-col items-center">
-                    <div className="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold shadow-md">✓</div>
-                    <span className="text-[10px] font-bold text-gray-600 mt-1">Reported</span>
+              {/* Header */}
+              <div className="flex justify-between items-start p-6 border-b border-gray-100 flex-shrink-0">
+                <div className="space-y-1">
+                  <h3 className="text-xl font-heading font-extrabold text-textMain">{selectedIssue.buildingName}</h3>
+                  <div className="pt-0.5">
+                    <Badge variant={getStatusVariant(selectedIssue.status)}>
+                      <StatusIcon status={selectedIssue.status} /> {selectedIssue.status?.replace(/_/g, ' ')}
+                    </Badge>
                   </div>
+                </div>
+                <button 
+                  onClick={() => setSelectedIssue(null)}
+                  className="text-gray-400 hover:text-textMain font-bold text-lg p-1.5 rounded-xl hover:bg-gray-100 transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
 
-                  {/* Stage 2: In Progress */}
-                  <div className="relative z-10 flex flex-col items-center">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-md ${selectedIssue.status === 'IN_PROGRESS' || selectedIssue.status === 'RESOLVED' ? 'bg-emerald-500 text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
-                      {selectedIssue.status === 'IN_PROGRESS' || selectedIssue.status === 'RESOLVED' ? '✓' : '2'}
+              {/* Scrollable Body */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-xl border border-gray-100">{selectedIssue.description}</p>
+                
+                <div className="text-sm font-medium text-gray-600 flex items-center gap-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <div className="bg-white p-1.5 rounded-lg shadow-xs"><MapPin size={16} className="text-gray-400" /></div>
+                  {selectedIssue.locationDetails || 'Location not specified'}
+                </div>
+
+                {selectedIssue.photoUrl && (
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Attached Evidence</p>
+                    <img src={selectedIssue.photoUrl} alt="Evidence" className="w-full h-48 object-cover rounded-xl shadow-xs border border-gray-100" />
+                  </div>
+                )}
+
+                {/* Real-time Resolution Stepper */}
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
+                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block">Live Resolution Progress:</span>
+                  <div className="flex items-center justify-between relative">
+                    <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2 z-0" />
+                    <div 
+                      className="absolute top-1/2 left-0 h-0.5 bg-emerald-500 -translate-y-1/2 z-0 transition-all duration-500" 
+                      style={{
+                        width: selectedIssue.status === 'RESOLVED' ? '100%' : selectedIssue.status === 'IN_PROGRESS' ? '50%' : '0%'
+                      }}
+                    />
+
+                    {/* Stage 1: Reported */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-bold shadow-xs">✓</div>
+                      <span className="text-[9px] font-bold text-gray-500 mt-1">Reported</span>
                     </div>
-                    <span className="text-[10px] font-bold text-gray-600 mt-1">In Repair</span>
-                  </div>
 
-                  {/* Stage 3: Resolved */}
-                  <div className="relative z-10 flex flex-col items-center">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-md ${selectedIssue.status === 'RESOLVED' ? 'bg-emerald-500 text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
-                      {selectedIssue.status === 'RESOLVED' ? '✓' : '3'}
+                    {/* Stage 2: In Progress */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shadow-xs ${selectedIssue.status === 'IN_PROGRESS' || selectedIssue.status === 'RESOLVED' ? 'bg-emerald-500 text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                        {selectedIssue.status === 'IN_PROGRESS' || selectedIssue.status === 'RESOLVED' ? '✓' : '2'}
+                      </div>
+                      <span className="text-[9px] font-bold text-gray-500 mt-1">In Repair</span>
                     </div>
-                    <span className="text-[10px] font-bold text-gray-600 mt-1">Fixed</span>
+
+                    {/* Stage 3: Resolved */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shadow-xs ${selectedIssue.status === 'RESOLVED' ? 'bg-emerald-500 text-white' : 'bg-white border-2 border-gray-300 text-gray-400'}`}>
+                        {selectedIssue.status === 'RESOLVED' ? '✓' : '3'}
+                      </div>
+                      <span className="text-[9px] font-bold text-gray-500 mt-1">Fixed</span>
+                    </div>
                   </div>
                 </div>
+
+                {selectedIssue.adminNotes && (
+                  <div className="bg-primary/5 text-primary-dark p-4 rounded-xl text-sm border border-primary/20">
+                    <span className="font-extrabold flex items-center gap-1.5 mb-1.5 uppercase text-[10px] tracking-wider"><AlertCircle size={14}/> Admin Response</span>
+                    {selectedIssue.adminNotes}
+                  </div>
+                )}
               </div>
 
-              {selectedIssue.adminNotes && (
-                <div className="bg-primary/5 text-primary-dark p-4 rounded-xl text-sm mb-5 border border-primary/20">
-                  <span className="font-extrabold flex items-center gap-1.5 mb-1.5 uppercase text-[10px] tracking-wider"><AlertCircle size={14}/> Admin Response</span>
-                  {selectedIssue.adminNotes}
-                </div>
-              )}
-
-              <div className="flex justify-between items-center pt-5 border-t border-gray-100 mt-2 gap-2">
+              {/* Fixed Footer */}
+              <div className="flex justify-between items-center p-6 border-t border-gray-100 flex-shrink-0 bg-gray-50/50 gap-2">
                 <Button 
                   variant="outline" 
                   size="sm"
