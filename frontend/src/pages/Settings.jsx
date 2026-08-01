@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera, Accessibility, Volume2, Eye, IndianRupee } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
@@ -24,12 +24,29 @@ const Settings = () => {
   });
 
   const [fullName, setFullName] = useState(user?.fullName || '');
+  const [avatar, setAvatar] = useState(user?.avatar || '');
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (user?.fullName) {
       setFullName(user.fullName);
     }
+    if (user?.avatar) {
+      setAvatar(user.avatar);
+    }
   }, [user]);
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+        toast.info("Click 'Save Changes' to update your profile photo.");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSave = async () => {
     try {
@@ -40,7 +57,7 @@ const Settings = () => {
       if (user?.id) {
         await userService.updateUser(user.id, fullName);
       }
-      updateUser({ fullName });
+      updateUser({ fullName, avatar });
       toast.success('Profile updated successfully!');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to update profile.');
@@ -124,14 +141,29 @@ const Settings = () => {
                   
                   <div className="flex flex-col sm:flex-row items-center gap-6 p-5 bg-gray-50/50 border border-gray-100 rounded-2xl shadow-2xs">
                     <div className="relative group">
-                      <div className="w-20 h-20 bg-gradient-to-tr from-primary to-primary-dark rounded-full p-0.5 shadow-sm">
-                        <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-primary font-heading font-black text-3xl">
-                          {user?.fullName?.charAt(0)}
-                        </div>
+                      <div className="w-20 h-20 bg-gradient-to-tr from-primary to-primary-dark rounded-full p-0.5 shadow-sm overflow-hidden flex items-center justify-center">
+                        {avatar ? (
+                          <img src={avatar} alt="Avatar" className="w-full h-full rounded-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-primary font-heading font-black text-3xl">
+                            {user?.fullName?.charAt(0)}
+                          </div>
+                        )}
                       </div>
-                      <button className="absolute bottom-0 right-0 w-7 h-7 bg-white border border-gray-200 text-gray-600 hover:text-primary rounded-full flex items-center justify-center shadow-sm hover:scale-105 transition-transform cursor-pointer">
+                      <button 
+                        type="button" 
+                        onClick={() => fileInputRef.current?.click()}
+                        className="absolute bottom-0 right-0 w-7 h-7 bg-white border border-gray-200 text-gray-600 hover:text-primary rounded-full flex items-center justify-center shadow-sm hover:scale-105 transition-transform cursor-pointer"
+                      >
                         <Camera size={12} />
                       </button>
+                      <input 
+                        type="file" 
+                        ref={fileInputRef} 
+                        onChange={handleAvatarChange} 
+                        accept="image/*" 
+                        className="hidden" 
+                      />
                     </div>
                     <div className="text-center sm:text-left space-y-1">
                       <h4 className="text-base font-extrabold text-textMain leading-none">{user?.fullName}</h4>

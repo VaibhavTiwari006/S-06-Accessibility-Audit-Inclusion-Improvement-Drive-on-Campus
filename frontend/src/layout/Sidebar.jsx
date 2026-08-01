@@ -101,7 +101,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
         {/* User info strip */}
         <div className="mx-4 mb-6 p-3 rounded-2xl bg-gray-50 border border-gray-100 shadow-sm flex items-center gap-3">
-          <Avatar name={user.fullName} size="md" />
+          <Avatar name={user.fullName} src={user.avatar} size="md" />
           <div className="overflow-hidden">
             <p className="text-sm font-bold text-gray-900 truncate leading-tight">{user.fullName?.split(' ')[0]}</p>
             <p className="text-xs font-semibold text-primary truncate mt-0.5">{user.role}</p>

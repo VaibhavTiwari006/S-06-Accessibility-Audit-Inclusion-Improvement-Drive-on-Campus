@@ -136,7 +136,7 @@ const Navbar = ({ toggleSidebar }) => {
                 onClick={() => setShowUserMenu(!showUserMenu)}
                 className="flex items-center gap-2 p-1 rounded-full hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all focus:outline-none focus:ring-2 focus:ring-primary/30"
               >
-                <Avatar name={user.fullName} size="sm" />
+                <Avatar name={user.fullName} src={user.avatar} size="sm" />
                 <span className="hidden md:block text-sm font-medium text-textMain px-2 max-w-[120px] truncate">
                   {user.fullName?.split(' ')[0]}
                 </span>
