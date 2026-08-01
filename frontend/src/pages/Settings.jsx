@@ -45,7 +45,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in">
       <div className="flex flex-col">
         <h2 className="text-3xl font-heading font-extrabold text-textMain flex items-center gap-3">
           <SettingsIcon className="text-primary" size={32} /> System Settings
