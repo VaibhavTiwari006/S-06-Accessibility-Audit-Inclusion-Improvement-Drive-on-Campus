@@ -48,6 +48,11 @@ const Settings = () => {
     }
   };
 
+  const handleRemoveAvatar = () => {
+    setAvatar('');
+    toast.info("Click 'Save Changes' to confirm profile photo removal.");
+  };
+
   const handleSave = async () => {
     try {
       if (!fullName.trim()) {
@@ -167,10 +172,19 @@ const Settings = () => {
                     </div>
                     <div className="text-center sm:text-left space-y-1">
                       <h4 className="text-base font-extrabold text-textMain leading-none">{user?.fullName}</h4>
-                      <div className="pt-0.5">
+                      <div className="pt-0.5 flex flex-wrap gap-2 items-center justify-center sm:justify-start">
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
                           {user?.role}
                         </span>
+                        {avatar && (
+                          <button
+                            type="button"
+                            onClick={handleRemoveAvatar}
+                            className="text-[11px] font-bold text-red-600 hover:text-red-805 hover:underline transition-all cursor-pointer"
+                          >
+                            Remove Photo
+                          </button>
+                        )}
                       </div>
                       <p className="text-[10px] text-gray-400 font-semibold tracking-wide">Click the camera badge to upload a custom avatar</p>
                     </div>

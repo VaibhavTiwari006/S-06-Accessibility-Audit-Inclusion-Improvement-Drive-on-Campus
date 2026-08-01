@@ -79,6 +79,13 @@ export const AuthProvider = ({ children }) => {
     if (updatedData.fullName) {
       localStorage.setItem('userFullName', updatedData.fullName);
     }
+    if (updatedData.avatar !== undefined) {
+      if (updatedData.avatar) {
+        localStorage.setItem('userAvatar', updatedData.avatar);
+      } else {
+        localStorage.removeItem('userAvatar');
+      }
+    }
     setUser(prev => prev ? { ...prev, ...updatedData } : null);
   };
 
