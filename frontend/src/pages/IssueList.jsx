@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import issueService from '../services/issueService';
-import { AlertCircle, Plus, MapPin, Clock, CheckCircle, Search, Filter, QrCode, Printer, X } from 'lucide-react';
+import { AlertCircle, Plus, MapPin, Clock, CheckCircle, Search, Filter, QrCode, Printer, X, IndianRupee } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReportIssueModal from '../components/ReportIssueModal';
@@ -10,6 +10,16 @@ import { Card, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import Input from '../components/ui/Input';
+
+const getEstimatedCost = (description = '') => {
+  const desc = description.toLowerCase();
+  if (desc.includes('elevator') || desc.includes('lift')) return 350000;
+  if (desc.includes('ramp')) return 45000;
+  if (desc.includes('washroom') || desc.includes('toilet') || desc.includes('restroom')) return 65000;
+  if (desc.includes('slippery') || desc.includes('tile') || desc.includes('floor')) return 28000;
+  if (desc.includes('signage') || desc.includes('sign') || desc.includes('tactile')) return 8000;
+  return 25000; // default cost
+};
 
 const IssueList = () => {
   const { user } = useAuth();
@@ -191,6 +201,11 @@ const IssueList = () => {
                     {issue.locationDetails || 'Location not specified'}
                   </div>
 
+                  <div className="text-sm font-bold text-emerald-700 flex items-center gap-2 bg-emerald-50/50 p-2.5 rounded-xl border border-emerald-100/50 mt-2">
+                    <div className="bg-white p-1.5 rounded-lg shadow-sm text-emerald-500"><IndianRupee size={14} /></div> 
+                    Est. Repair Cost: ₹{getEstimatedCost(issue.description).toLocaleString('en-IN')}
+                  </div>
+
                   {issue.adminNotes && (
                     <div className="mt-4 bg-primary/5 border border-primary/20 text-primary-dark text-xs p-3 rounded-xl shadow-inner">
                       <span className="font-extrabold flex items-center gap-1 mb-1"><AlertCircle size={12}/> Admin Notes:</span> 
@@ -298,6 +313,11 @@ const IssueList = () => {
                 <div className="text-sm font-medium text-gray-600 flex items-center gap-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
                   <div className="bg-white p-1.5 rounded-lg shadow-xs"><MapPin size={16} className="text-gray-400" /></div>
                   {selectedIssue.locationDetails || 'Location not specified'}
+                </div>
+
+                <div className="text-sm font-bold text-emerald-800 flex items-center gap-2 bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
+                  <div className="bg-white p-1.5 rounded-lg shadow-xs"><IndianRupee size={16} className="text-emerald-500" /></div>
+                  Estimated Cost to Fix: ₹{getEstimatedCost(selectedIssue.description).toLocaleString('en-IN')}
                 </div>
 
                 {selectedIssue.photoUrl && (
