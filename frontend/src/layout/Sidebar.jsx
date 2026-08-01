@@ -12,15 +12,15 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { name: 'Dashboard',  path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-    { name: 'QR Feedback', path: '/qr-code',  icon: QrCode,          roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-    { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-    { name: 'Calculator', path: '/calculator', icon: Calculator,     roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Roadmap',    path: '/roadmap',   icon: Map,             roles: ['ADMIN', 'MAINTENANCE'] },
     { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR'] },
     { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR'] },
     { name: user?.role === 'STUDENT' ? 'Track My Issues' : 'Issues', path: '/issues', icon: AlertCircle, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-    { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN'] },
+    { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'QR Scanner',  path: '/qr-code',  icon: QrCode,          roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
+    { name: 'Calculator', path: '/calculator', icon: Calculator,     roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN'] },
     { name: 'Accessibility', path: '/accessibility', icon: Settings, roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
   ];
