@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAccessibility } from '../context/AccessibilityContext';
 import { motion } from 'framer-motion';
-import { Eye, Type, Palette, Maximize, Activity, Focus, Bell, Type as TextIcon } from 'lucide-react';
+import { Eye, Type, Palette, Maximize, Activity, Focus, Bell, Type as TextIcon, Volume2 } from 'lucide-react';
 
 const AccessibilityPreferences = () => {
   const { 
@@ -12,7 +12,9 @@ const AccessibilityPreferences = () => {
     colorBlindTheme, changeColorBlindTheme, 
     distractionFree, toggleDistractionFree, 
     magnifyMode, toggleMagnifyMode, 
-    visualAlerts, toggleVisualAlerts 
+    visualAlerts, toggleVisualAlerts,
+    textToSpeech, toggleTextToSpeech,
+    ttsVoice, changeTtsVoice
   } = useAccessibility();
 
   const containerVariants = {
@@ -162,6 +164,59 @@ const AccessibilityPreferences = () => {
               </div>
             </div>
             <ToggleSwitch checked={visualAlerts} onChange={toggleVisualAlerts} label="Toggle Visual Alerts" />
+          </div>
+
+          <div className="border-t border-gray-200/60 pt-4 mt-4 space-y-4">
+            <h3 className="font-bold text-textMain text-sm flex items-center gap-2">
+              <Volume2 className="text-secondary" size={18} /> Screen Reader (TTS)
+            </h3>
+            
+            <div className="flex items-center justify-between p-4 bg-white/50 hover:bg-white/80 transition-colors rounded-xl border border-gray-100/50 shadow-sm group">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-secondary/10 rounded-lg text-secondary group-hover:scale-110 transition-transform"><Volume2 size={20} /></div>
+                <div>
+                  <h3 className="font-bold text-textMain">Text-To-Speech</h3>
+                  <p className="text-sm text-textLight mt-0.5">Read hovered text aloud</p>
+                </div>
+              </div>
+              <ToggleSwitch checked={textToSpeech} onChange={toggleTextToSpeech} label="Toggle Screen Reader" />
+            </div>
+
+            {textToSpeech && (
+              <div className="mt-3 p-4 bg-white/40 border border-gray-100 rounded-xl space-y-3">
+                <div>
+                  <label className="block text-xs font-bold text-textMain mb-1.5">Voice Preference</label>
+                  <select 
+                    value={ttsVoice} 
+                    onChange={(e) => changeTtsVoice(e.target.value)}
+                    className="w-full bg-white border border-gray-250 rounded-lg px-3 py-2 text-sm font-semibold text-textMain focus:outline-none focus:ring-2 focus:ring-primary shadow-sm cursor-pointer"
+                  >
+                    <option value="default">System Default Voice</option>
+                    <option value="Google US English">Google US English</option>
+                    <option value="Google UK English Female">Google UK English Female</option>
+                    <option value="Microsoft David - English (United States)">Microsoft David (US Male)</option>
+                    <option value="Microsoft Zira - English (United States)">Microsoft Zira (US Female)</option>
+                  </select>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!window.speechSynthesis) return;
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance("Welcome! Screen Reader accessibility assistant is active.");
+                    if (ttsVoice !== 'default') {
+                      const voices = window.speechSynthesis.getVoices();
+                      const selected = voices.find(v => v.name.includes(ttsVoice));
+                      if (selected) utterance.voice = selected;
+                    }
+                    window.speechSynthesis.speak(utterance);
+                  }}
+                  className="w-full py-1.5 border border-primary/20 bg-primary/10 hover:bg-primary/15 text-primary text-[11px] font-bold rounded-lg transition-colors flex items-center justify-center gap-1 shadow-2xs cursor-pointer"
+                >
+                  <Volume2 size={12} /> Play Voice Demo
+                </button>
+              </div>
+            )}
           </div>
         </motion.div>
       </motion.div>

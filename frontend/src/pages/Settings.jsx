@@ -105,8 +105,7 @@ const Settings = () => {
               { id: 'profile', icon: <User size={16} />, label: 'Profile Info' },
               { id: 'notifications', icon: <Bell size={16} />, label: 'Notifications' },
               { id: 'security', icon: <Shield size={16} />, label: 'Security & Auth' },
-              { id: 'appearance', icon: <Paintbrush size={16} />, label: 'Appearance' },
-              { id: 'accessibility', icon: <Accessibility size={16} />, label: 'Deep Accessibility' }
+              { id: 'appearance', icon: <Paintbrush size={16} />, label: 'Appearance' }
             ].map(tab => (
               <button 
                 key={tab.id}
@@ -366,114 +365,7 @@ const Settings = () => {
               </motion.div>
             )}
 
-            {activeTab === 'accessibility' && (
-              <motion.div key="accessibility" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5 h-full flex flex-col justify-between flex-1">
-                <div className="space-y-4">
-                  <div className="border-b border-gray-100 pb-3.5">
-                    <h3 className="text-xl font-bold text-textMain">Deep Accessibility</h3>
-                    <p className="text-xs text-textLight mt-0.5">Configure advanced accessibility options like Screen Reader and Dyslexia support.</p>
-                  </div>
-                  
-                  {/* Screen Reader Settings */}
-                  <div className="bg-gray-50/50 border border-gray-100 rounded-2xl p-4.5 shadow-2xs hover:shadow-soft transition-all">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2 bg-primary/10 text-primary rounded-xl"><Volume2 size={18} /></div>
-                        <div>
-                          <h4 className="font-bold text-sm text-textMain">Screen Reader (TTS)</h4>
-                          <p className="text-xs text-textLight mt-0.5">Read out text when hovering over key elements.</p>
-                        </div>
-                      </div>
-                      <ToggleSwitch checked={textToSpeech} onChange={toggleTextToSpeech} label="Toggle Screen Reader" />
-                    </div>
-                    
-                    {textToSpeech && (
-                      <div className="mt-3 pt-3.5 border-t border-gray-200/60">
-                        <label className="block text-xs font-bold text-textMain mb-1.5">Voice Preference</label>
-                        <select 
-                          value={ttsVoice} 
-                          onChange={(e) => changeTtsVoice(e.target.value)}
-                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-xs font-bold text-textMain focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary shadow-2xs cursor-pointer"
-                        >
-                          <option value="default">System Default Voice</option>
-                          <option value="Google US English">Google US English</option>
-                          <option value="Google UK English Female">Google UK English Female</option>
-                          <option value="Microsoft David - English (United States)">Microsoft David (US Male)</option>
-                          <option value="Microsoft Zira - English (United States)">Microsoft Zira (US Female)</option>
-                        </select>
-                      </div>
-                    )}
-                  </div>
 
-                  {/* Visual Settings */}
-                  <div className="bg-gray-50/50 border border-gray-100 rounded-2xl p-4.5 shadow-2xs hover:shadow-soft transition-all">
-                    <div className="flex items-center gap-3 mb-4.5">
-                      <div className="p-2 bg-primary/10 text-primary rounded-xl"><Eye size={18} /></div>
-                      <div>
-                        <h4 className="font-bold text-sm text-textMain">Visual Adaptations</h4>
-                        <p className="text-xs text-textLight mt-0.5">Adjust fonts and contrast for readability.</p>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-3">
-                        <div>
-                          <h5 className="font-bold text-xs text-textMain">High Contrast Mode</h5>
-                          <p className="text-[10px] text-textLight mt-0.5">Increase border thickness and color contrast.</p>
-                        </div>
-                        <ToggleSwitch checked={highContrast} onChange={toggleHighContrast} label="Toggle High Contrast" />
-                      </div>
-                      
-                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-3">
-                        <div>
-                          <h5 className="font-bold text-xs text-textMain">Dark Mode</h5>
-                          <p className="text-[10px] text-textLight mt-0.5">Switch to a dark color palette to reduce eye strain.</p>
-                        </div>
-                        <ToggleSwitch checked={darkMode} onChange={() => setDarkMode(!darkMode)} label="Toggle Dark Mode" />
-                      </div>
-                      
-                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-3">
-                        <div>
-                          <h5 className="font-bold text-xs text-textMain">Dyslexia-Friendly Font</h5>
-                          <p className="text-[10px] text-textLight mt-0.5">Use OpenDyslexic font for easier reading.</p>
-                        </div>
-                        <ToggleSwitch checked={dyslexiaFont} onChange={toggleDyslexiaFont} label="Toggle Dyslexia Font" />
-                      </div>
-
-                      <div className="pt-1">
-                        <label className="block text-xs font-bold text-textMain mb-2">Interface Font Size</label>
-                        <div className="flex gap-2">
-                          {['Small', 'Medium', 'Large'].map((size) => (
-                            <button
-                              key={size}
-                              onClick={() => changeFontSize(size)}
-                              className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                                fontSize === size 
-                                  ? 'bg-primary text-white shadow-soft-sm' 
-                                  : 'bg-white hover:bg-gray-50 text-gray-500 border border-gray-200'
-                              }`}
-                            >
-                              {size}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex justify-end pt-5 border-t border-gray-150 mt-6">
-                  <motion.button 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    onClick={handleSave} 
-                    className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-xs shadow-md shadow-primary/10 hover:bg-primary-dark transition-colors flex items-center gap-1.5 cursor-pointer"
-                  >
-                    <CheckCircle size={14} /> Save Preferences
-                  </motion.button>
-                </div>
-              </motion.div>
-            )}
           </AnimatePresence>
         </div>
       </div>
