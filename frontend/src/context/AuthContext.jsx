@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
         const role = localStorage.getItem('userRole');
         const fullName = localStorage.getItem('userFullName');
         const email = localStorage.getItem('userEmail');
+        const userId = localStorage.getItem('userId');
 
         // Validate JWT structure — 3 parts separated by dots
         if (!isValidJwt(token)) {
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         // Token looks valid — restore the session from localStorage
-        setUser({ role, fullName, email });
+        setUser({ id: userId ? parseInt(userId) : null, role, fullName, email });
         setLoading(false);
       } catch (err) {
         console.error('Failed to initialize auth state:', err);
@@ -60,7 +61,8 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('userRole', data.role);
       localStorage.setItem('userFullName', data.fullName);
       localStorage.setItem('userEmail', data.email);
-      setUser({ role: data.role, fullName: data.fullName, email: data.email });
+      localStorage.setItem('userId', data.userId);
+      setUser({ id: data.userId, role: data.role, fullName: data.fullName, email: data.email });
       return { success: true };
     } catch (error) {
       return { success: false, message: error.response?.data?.message || 'Login failed' };
@@ -73,8 +75,15 @@ export const AuthProvider = ({ children }) => {
     window.location.href = '/login';
   };
 
+  const updateUser = (updatedData) => {
+    if (updatedData.fullName) {
+      localStorage.setItem('userFullName', updatedData.fullName);
+    }
+    setUser(prev => prev ? { ...prev, ...updatedData } : null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, updateUser }}>
       {!loading && children}
     </AuthContext.Provider>
   );

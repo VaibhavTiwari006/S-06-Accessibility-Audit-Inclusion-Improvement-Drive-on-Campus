@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera, Accessibility, Volume2, Eye, IndianRupee } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useAccessibility } from '../context/AccessibilityContext';
+import userService from '../services/userService';
 
 const Settings = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, updateUser } = useAuth();
   const { 
     darkMode, setDarkMode, 
     textToSpeech, toggleTextToSpeech, ttsVoice, changeTtsVoice,
@@ -22,8 +23,28 @@ const Settings = () => {
     updates: true,
   });
 
-  const handleSave = () => {
-    toast.success('Settings saved successfully!');
+  const [fullName, setFullName] = useState(user?.fullName || '');
+
+  useEffect(() => {
+    if (user?.fullName) {
+      setFullName(user.fullName);
+    }
+  }, [user]);
+
+  const handleSave = async () => {
+    try {
+      if (!fullName.trim()) {
+        toast.error('Name cannot be empty.');
+        return;
+      }
+      if (user?.id) {
+        await userService.updateUser(user.id, fullName);
+      }
+      updateUser({ fullName });
+      toast.success('Profile updated successfully!');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to update profile.');
+    }
   };
 
   const ToggleSwitch = ({ checked, onChange, label }) => (
@@ -128,7 +149,8 @@ const Settings = () => {
                       <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block ml-1">Full Name</label>
                       <input 
                         type="text" 
-                        defaultValue={user?.fullName} 
+                        value={fullName} 
+                        onChange={(e) => setFullName(e.target.value)} 
                         className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-textMain focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-2xs" 
                       />
                     </div>
