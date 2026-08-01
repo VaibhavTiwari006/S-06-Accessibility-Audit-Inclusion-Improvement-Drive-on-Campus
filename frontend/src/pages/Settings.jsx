@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera, Accessibility, Volume2, Eye, Monitor } from 'lucide-react';
+import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera, Accessibility, Volume2, Eye, IndianRupee } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -29,308 +29,381 @@ const Settings = () => {
   const ToggleSwitch = ({ checked, onChange, label }) => (
     <button 
       onClick={onChange}
-      className={`relative inline-flex h-7 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 shadow-inner ${checked ? 'bg-primary' : 'bg-gray-300'}`}
+      className={`relative inline-flex h-6 w-12 items-center rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-primary/40 shadow-inner ${checked ? 'bg-primary' : 'bg-gray-300'}`}
       role="switch"
       aria-checked={checked}
       aria-label={label}
     >
-      <span className={`inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition-transform ${checked ? 'translate-x-8' : 'translate-x-1'}`} />
+      <span className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-md transition-transform ${checked ? 'translate-x-7' : 'translate-x-1'}`} />
     </button>
   );
 
   const tabContentVariants = {
     hidden: { opacity: 0, y: 15 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
-    exit: { opacity: 0, y: -15, transition: { duration: 0.2 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+    exit: { opacity: 0, y: -15, transition: { duration: 0.15 } }
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
-      <div className="flex flex-col mb-4">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
+      <div className="flex flex-col">
         <h2 className="text-3xl font-heading font-extrabold text-textMain flex items-center gap-3">
           <SettingsIcon className="text-primary" size={32} /> System Settings
         </h2>
-        <p className="text-textLight mt-2 font-medium">Manage your account preferences, security, and notification settings.</p>
+        <p className="text-textLight mt-1.5 font-medium">Manage your account preferences, security, and notification settings.</p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col md:flex-row gap-6 items-stretch">
         {/* Sidebar Menu */}
         <div className="w-full md:w-64 flex-shrink-0">
-          <div className="glass-panel p-3 rounded-2xl shadow-soft-sm border border-white/60 flex flex-col gap-1 sticky top-24">
+          <div className="bg-white/80 backdrop-blur-md p-4 rounded-3xl border border-gray-100 shadow-soft-sm flex flex-col gap-1.5 h-full min-h-[480px]">
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-3 pb-2 pt-1 border-b border-gray-50 mb-1">Preferences</p>
             {[
-              { id: 'profile', icon: <User size={18} />, label: 'Profile Information' },
-              { id: 'notifications', icon: <Bell size={18} />, label: 'Notifications' },
-              { id: 'security', icon: <Shield size={18} />, label: 'Security' },
-              { id: 'appearance', icon: <Paintbrush size={18} />, label: 'Appearance' },
-              { id: 'accessibility', icon: <Accessibility size={18} />, label: 'Accessibility' }
+              { id: 'profile', icon: <User size={16} />, label: 'Profile Info' },
+              { id: 'notifications', icon: <Bell size={16} />, label: 'Notifications' },
+              { id: 'security', icon: <Shield size={16} />, label: 'Security & Auth' },
+              { id: 'appearance', icon: <Paintbrush size={16} />, label: 'Appearance' },
+              { id: 'accessibility', icon: <Accessibility size={16} />, label: 'Deep Accessibility' }
             ].map(tab => (
               <button 
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 relative overflow-hidden ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 border relative overflow-hidden ${
                   activeTab === tab.id 
-                    ? 'text-primary bg-primary/10 shadow-sm border border-primary/20' 
-                    : 'text-gray-600 hover:bg-white/60 hover:text-gray-900 border border-transparent'
+                    ? 'text-primary bg-primary/10 border-primary/20 shadow-2xs font-extrabold scale-[1.01]' 
+                    : 'text-gray-500 hover:bg-gray-55/40 hover:text-gray-900 border-transparent'
                 }`}
               >
                 {tab.icon} {tab.label}
+                {activeTab === tab.id && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-5 bg-primary rounded-r-full" />}
               </button>
             ))}
             
-            <div className="border-t border-gray-200/50 my-2 mx-2"></div>
+            <div className="border-t border-gray-100 my-3 mx-2"></div>
             
             <button 
               onClick={logout}
-              className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-danger hover:bg-danger/10 border border-transparent hover:border-danger/20 transition-all duration-300 group"
+              className="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-red-600 hover:bg-red-50 border border-transparent hover:border-red-100 transition-all duration-300 group mt-auto"
             >
-              <LogOut size={18} className="group-hover:scale-110 transition-transform" /> Sign Out
+              <LogOut size={16} className="group-hover:translate-x-0.5 transition-transform" /> Sign Out
             </button>
           </div>
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 glass-panel py-6 px-8 rounded-3xl shadow-soft-md border border-white/60 h-fit max-w-2xl">
+        <div className="flex-1 bg-white/80 backdrop-blur-md p-8 rounded-3xl border border-gray-100 shadow-soft-md min-h-[480px] flex flex-col justify-between">
           <AnimatePresence mode="wait">
             {activeTab === 'profile' && (
-              <motion.div key="profile" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
-                <div className="border-b border-gray-100 pb-3">
-                  <h3 className="text-2xl font-bold text-textMain">Profile Information</h3>
-                  <p className="text-sm text-textLight mt-1">Update your account details and public profile.</p>
-                </div>
-                
-                <div className="flex items-center gap-8">
-                  <div className="relative group cursor-pointer">
-                    <div className="w-28 h-28 bg-gradient-to-br from-primary/20 to-primary/5 rounded-full flex items-center justify-center text-primary text-4xl font-heading font-bold shadow-soft-sm border-2 border-primary/20 group-hover:border-primary/50 transition-all">
-                      {user?.fullName?.charAt(0)}
+              <motion.div key="profile" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-6 h-full flex flex-col justify-between flex-1">
+                <div className="space-y-5">
+                  <div className="border-b border-gray-100 pb-3.5">
+                    <h3 className="text-xl font-bold text-textMain">Profile Information</h3>
+                    <p className="text-xs text-textLight mt-0.5">Update your account details and public profile.</p>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row items-center gap-6 p-5 bg-gray-50/50 border border-gray-100 rounded-2xl shadow-2xs">
+                    <div className="relative group">
+                      <div className="w-20 h-20 bg-gradient-to-tr from-primary to-primary-dark rounded-full p-0.5 shadow-sm">
+                        <div className="w-full h-full bg-white rounded-full flex items-center justify-center text-primary font-heading font-black text-3xl">
+                          {user?.fullName?.charAt(0)}
+                        </div>
+                      </div>
+                      <button className="absolute bottom-0 right-0 w-7 h-7 bg-white border border-gray-200 text-gray-600 hover:text-primary rounded-full flex items-center justify-center shadow-sm hover:scale-105 transition-transform cursor-pointer">
+                        <Camera size={12} />
+                      </button>
                     </div>
-                    <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Camera className="text-white" size={28} />
+                    <div className="text-center sm:text-left space-y-1">
+                      <h4 className="text-base font-extrabold text-textMain leading-none">{user?.fullName}</h4>
+                      <div className="pt-0.5">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
+                          {user?.role}
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-gray-400 font-semibold tracking-wide">Click the camera badge to upload a custom avatar</p>
                     </div>
                   </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-textMain">{user?.fullName}</h4>
-                    <p className="text-textLight text-sm font-medium">{user?.role}</p>
-                    <button className="mt-3 bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-semibold hover:bg-gray-50 hover:shadow-sm transition-all">
-                      Change Avatar
-                    </button>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block ml-1">Full Name</label>
+                      <input 
+                        type="text" 
+                        defaultValue={user?.fullName} 
+                        className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-textMain focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-2xs" 
+                      />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block ml-1">Email Address</label>
+                      <input 
+                        type="email" 
+                        defaultValue={user?.email} 
+                        disabled 
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-gray-400 cursor-not-allowed shadow-2xs" 
+                      />
+                    </div>
+                    <div className="space-y-1.5 md:col-span-2">
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block ml-1">System Role</label>
+                      <input 
+                        type="text" 
+                        defaultValue={user?.role} 
+                        disabled 
+                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-gray-400 cursor-not-allowed shadow-2xs" 
+                      />
+                    </div>
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Full Name</label>
-                    <input type="text" defaultValue={user?.fullName} className="w-full bg-white/50 border border-gray-200 rounded-xl px-4 py-3 font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white outline-none transition-all shadow-sm" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Email Address</label>
-                    <input type="email" defaultValue={user?.email} disabled className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 font-medium text-gray-500 cursor-not-allowed shadow-sm" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">System Role</label>
-                    <input type="text" defaultValue={user?.role} disabled className="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-3 font-medium text-gray-500 cursor-not-allowed shadow-sm" />
-                  </div>
-                </div>
-                
-                <div className="flex justify-end pt-6 border-t border-gray-100">
-                  <button onClick={handleSave} className="btn-primary shadow-soft-md">
-                    Save Changes
-                  </button>
+                <div className="flex justify-end pt-5 border-t border-gray-150 mt-6">
+                  <motion.button 
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={handleSave} 
+                    className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-xs shadow-md shadow-primary/10 hover:bg-primary-dark transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <CheckCircle size={14} /> Save Changes
+                  </motion.button>
                 </div>
               </motion.div>
             )}
 
             {activeTab === 'notifications' && (
-              <motion.div key="notifications" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
-                <div className="border-b border-gray-100 pb-3">
-                  <h3 className="text-2xl font-bold text-textMain">Notification Preferences</h3>
-                  <p className="text-sm text-textLight mt-1">Control how and when you receive system alerts.</p>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-5 border border-gray-100/50 rounded-2xl bg-white/50 hover:bg-white/80 transition-colors shadow-sm group">
-                    <div className="flex gap-4 items-center">
-                      <div className="p-3 bg-primary/10 rounded-xl text-primary group-hover:scale-110 transition-transform"><Bell size={20} /></div>
-                      <div>
-                        <h4 className="font-bold text-textMain">Email Notifications</h4>
-                        <p className="text-sm text-textLight mt-0.5">Receive daily summaries and critical alerts via email.</p>
-                      </div>
-                    </div>
-                    <ToggleSwitch checked={notifications.email} onChange={() => setNotifications({...notifications, email: !notifications.email})} label="Toggle Email Notifications" />
+              <motion.div key="notifications" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5 h-full flex flex-col justify-between flex-1">
+                <div className="space-y-5">
+                  <div className="border-b border-gray-100 pb-3.5">
+                    <h3 className="text-xl font-bold text-textMain">Notification Preferences</h3>
+                    <p className="text-xs text-textLight mt-0.5">Control how and when you receive system alerts.</p>
                   </div>
                   
-                  <div className="flex items-center justify-between p-5 border border-gray-100/50 rounded-2xl bg-white/50 hover:bg-white/80 transition-colors shadow-sm group">
-                    <div className="flex gap-4 items-center">
-                      <div className="p-3 bg-primary/10 rounded-xl text-primary group-hover:scale-110 transition-transform"><Bell size={20} /></div>
-                      <div>
-                        <h4 className="font-bold text-textMain">Push Notifications</h4>
-                        <p className="text-sm text-textLight mt-0.5">Real-time alerts for audit assignments and approvals.</p>
+                  <div className="space-y-3.5">
+                    <div className="flex items-center justify-between p-4 border border-gray-100 rounded-2xl bg-gray-50/50 hover:bg-gray-50/80 transition-colors shadow-2xs group">
+                      <div className="flex gap-3.5 items-center">
+                        <div className="p-2.5 bg-primary/10 rounded-xl text-primary group-hover:scale-105 transition-transform"><Bell size={18} /></div>
+                        <div>
+                          <h4 className="font-bold text-sm text-textMain">Email Notifications</h4>
+                          <p className="text-xs text-textLight mt-0.5">Receive daily summaries and critical alerts via email.</p>
+                        </div>
                       </div>
+                      <ToggleSwitch checked={notifications.email} onChange={() => setNotifications({...notifications, email: !notifications.email})} label="Toggle Email Notifications" />
                     </div>
-                    <ToggleSwitch checked={notifications.push} onChange={() => setNotifications({...notifications, push: !notifications.push})} label="Toggle Push Notifications" />
+                    
+                    <div className="flex items-center justify-between p-4 border border-gray-100 rounded-2xl bg-gray-50/50 hover:bg-gray-50/80 transition-colors shadow-2xs group">
+                      <div className="flex gap-3.5 items-center">
+                        <div className="p-2.5 bg-primary/10 rounded-xl text-primary group-hover:scale-105 transition-transform"><Bell size={18} /></div>
+                        <div>
+                          <h4 className="font-bold text-sm text-textMain">Push Notifications</h4>
+                          <p className="text-xs text-textLight mt-0.5">Real-time alerts for audit assignments and approvals.</p>
+                        </div>
+                      </div>
+                      <ToggleSwitch checked={notifications.push} onChange={() => setNotifications({...notifications, push: !notifications.push})} label="Toggle Push Notifications" />
+                    </div>
                   </div>
+                </div>
+                
+                <div className="flex justify-end pt-5 border-t border-gray-150 mt-6">
+                  <motion.button 
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={handleSave} 
+                    className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-xs shadow-md shadow-primary/10 hover:bg-primary-dark transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <CheckCircle size={14} /> Save Preferences
+                  </motion.button>
                 </div>
               </motion.div>
             )}
 
             {activeTab === 'security' && (
-              <motion.div key="security" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
-                <div className="border-b border-gray-100 pb-3">
-                  <h3 className="text-2xl font-bold text-textMain">Security Settings</h3>
-                  <p className="text-sm text-textLight mt-1">Update your password and secure your account.</p>
+              <motion.div key="security" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5 h-full flex flex-col justify-between flex-1">
+                <div className="space-y-5">
+                  <div className="border-b border-gray-100 pb-3.5">
+                    <h3 className="text-xl font-bold text-textMain">Security Settings</h3>
+                    <p className="text-xs text-textLight mt-0.5">Update your password and secure your account.</p>
+                  </div>
+                  
+                  <div className="space-y-4 max-w-md pt-2">
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block ml-1">Current Password</label>
+                      <input type="password" placeholder="••••••••" className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-textMain focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-2xs" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block ml-1">New Password</label>
+                      <input type="password" placeholder="••••••••" className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-semibold text-textMain focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all shadow-2xs" />
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="space-y-5 max-w-md">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">Current Password</label>
-                    <input type="password" placeholder="••••••••" className="w-full bg-white/50 border border-gray-200 rounded-xl px-4 py-3 font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white outline-none transition-all shadow-sm" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700 ml-1">New Password</label>
-                    <input type="password" placeholder="••••••••" className="w-full bg-white/50 border border-gray-200 rounded-xl px-4 py-3 font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-white outline-none transition-all shadow-sm" />
-                  </div>
-                  <div className="pt-4">
-                    <button onClick={handleSave} className="w-full bg-gray-800 text-white px-6 py-3 rounded-xl font-semibold hover:bg-black hover:shadow-md transition-all">
-                      Update Password
-                    </button>
-                  </div>
+                <div className="flex justify-end pt-5 border-t border-gray-150 mt-6">
+                  <motion.button 
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={handleSave} 
+                    className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-xs shadow-md shadow-primary/10 hover:bg-primary-dark transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <CheckCircle size={14} /> Update Password
+                  </motion.button>
                 </div>
               </motion.div>
             )}
 
             {activeTab === 'appearance' && (
-              <motion.div key="appearance" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5">
-                <div className="border-b border-gray-100 pb-3">
-                  <h3 className="text-2xl font-bold text-textMain">Appearance</h3>
-                  <p className="text-sm text-textLight mt-1">Customize the visual theme of your dashboard.</p>
-                </div>
-                
-                <div>
-                  <label className="text-sm font-bold text-gray-700 block mb-4 ml-1">Theme Preference</label>
-                  <div className="flex gap-6">
-                    <div 
-                      onClick={() => setDarkMode(false)}
-                      className={`border-2 rounded-2xl p-1.5 cursor-pointer shadow-soft-sm transition-all ${!darkMode ? 'border-primary bg-primary/5' : 'border-transparent bg-white/50 hover:bg-white/80'}`}
-                    >
-                      <div className="bg-white border border-gray-200 rounded-xl w-32 h-20 flex flex-col items-center justify-center gap-1.5 shadow-sm">
-                        <div className="w-16 h-2.5 bg-gray-200 rounded-full"></div>
-                        <div className="w-10 h-2 bg-gray-100 rounded-full"></div>
+              <motion.div key="appearance" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5 h-full flex flex-col justify-between flex-1">
+                <div className="space-y-5">
+                  <div className="border-b border-gray-100 pb-3.5">
+                    <h3 className="text-xl font-bold text-textMain">Appearance</h3>
+                    <p className="text-xs text-textLight mt-0.5">Customize the visual theme of your dashboard.</p>
+                  </div>
+                  
+                  <div>
+                    <label className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-3 ml-1">Theme Preference</label>
+                    <div className="flex gap-4">
+                      <div 
+                        onClick={() => setDarkMode(false)}
+                        className={`border-2 rounded-2xl p-1.5 cursor-pointer shadow-2xs transition-all w-36 ${!darkMode ? 'border-primary bg-primary/5' : 'border-transparent bg-gray-50/50 hover:bg-gray-50'}`}
+                      >
+                        <div className="bg-white border border-gray-200 rounded-xl w-full h-16 flex flex-col items-center justify-center gap-1.5 shadow-2xs">
+                          <div className="w-12 h-2 bg-gray-200 rounded-full"></div>
+                          <div className="w-8 h-1.5 bg-gray-100 rounded-full"></div>
+                        </div>
+                        <p className={`text-xs text-center mt-2.5 font-bold flex items-center justify-center gap-1 ${!darkMode ? 'text-primary' : 'text-gray-500'}`}>
+                          {!darkMode && <CheckCircle size={12} />} Light Mode
+                        </p>
                       </div>
-                      <p className={`text-sm text-center mt-2 font-bold flex items-center justify-center gap-1 ${!darkMode ? 'text-primary' : 'text-gray-500'}`}>
-                        {!darkMode && <CheckCircle size={14} />} Light Mode
-                      </p>
-                    </div>
-                    
-                    <div 
-                      onClick={() => setDarkMode(true)}
-                      className={`border-2 rounded-2xl p-1.5 cursor-pointer shadow-soft-sm transition-all ${darkMode ? 'border-primary bg-primary/5' : 'border-transparent bg-white/50 hover:bg-white/80'}`}
-                    >
-                      <div className="bg-gray-900 border border-gray-700 rounded-xl w-32 h-20 flex flex-col items-center justify-center gap-1.5 shadow-sm">
-                        <div className="w-16 h-2.5 bg-gray-700 rounded-full"></div>
-                        <div className="w-10 h-2 bg-gray-800 rounded-full"></div>
+                      
+                      <div 
+                        onClick={() => setDarkMode(true)}
+                        className={`border-2 rounded-2xl p-1.5 cursor-pointer shadow-2xs transition-all w-36 ${darkMode ? 'border-primary bg-primary/5' : 'border-transparent bg-gray-50/50 hover:bg-gray-50'}`}
+                      >
+                        <div className="bg-gray-950 border border-gray-800 rounded-xl w-full h-16 flex flex-col items-center justify-center gap-1.5 shadow-2xs">
+                          <div className="w-12 h-2 bg-gray-700 rounded-full"></div>
+                          <div className="w-8 h-1.5 bg-gray-800 rounded-full"></div>
+                        </div>
+                        <p className={`text-xs text-center mt-2.5 font-bold flex items-center justify-center gap-1 ${darkMode ? 'text-primary' : 'text-gray-500'}`}>
+                          {darkMode && <CheckCircle size={12} />} Dark Mode
+                        </p>
                       </div>
-                      <p className={`text-sm text-center mt-2 font-bold flex items-center justify-center gap-1 ${darkMode ? 'text-primary' : 'text-gray-500'}`}>
-                        {darkMode && <CheckCircle size={14} />} Dark Mode
-                      </p>
                     </div>
                   </div>
+                </div>
+                
+                <div className="flex justify-end pt-5 border-t border-gray-150 mt-6">
+                  <motion.button 
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={handleSave} 
+                    className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-xs shadow-md shadow-primary/10 hover:bg-primary-dark transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <CheckCircle size={14} /> Save Appearance
+                  </motion.button>
                 </div>
               </motion.div>
             )}
 
             {activeTab === 'accessibility' && (
-              <motion.div key="accessibility" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-6">
-                <div className="border-b border-gray-100 pb-3">
-                  <h3 className="text-2xl font-bold text-textMain">Deep Accessibility</h3>
-                  <p className="text-sm text-textLight mt-1">Configure advanced accessibility options like Screen Reader and Dyslexia support.</p>
+              <motion.div key="accessibility" variants={tabContentVariants} initial="hidden" animate="visible" exit="exit" className="space-y-5 h-full flex flex-col justify-between flex-1">
+                <div className="space-y-4">
+                  <div className="border-b border-gray-100 pb-3.5">
+                    <h3 className="text-xl font-bold text-textMain">Deep Accessibility</h3>
+                    <p className="text-xs text-textLight mt-0.5">Configure advanced accessibility options like Screen Reader and Dyslexia support.</p>
+                  </div>
+                  
+                  {/* Screen Reader Settings */}
+                  <div className="bg-gray-50/50 border border-gray-100 rounded-2xl p-4.5 shadow-2xs hover:shadow-soft transition-all">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2 bg-primary/10 text-primary rounded-xl"><Volume2 size={18} /></div>
+                        <div>
+                          <h4 className="font-bold text-sm text-textMain">Screen Reader (TTS)</h4>
+                          <p className="text-xs text-textLight mt-0.5">Read out text when hovering over key elements.</p>
+                        </div>
+                      </div>
+                      <ToggleSwitch checked={textToSpeech} onChange={toggleTextToSpeech} label="Toggle Screen Reader" />
+                    </div>
+                    
+                    {textToSpeech && (
+                      <div className="mt-3 pt-3.5 border-t border-gray-200/60">
+                        <label className="block text-xs font-bold text-textMain mb-1.5">Voice Preference</label>
+                        <select 
+                          value={ttsVoice} 
+                          onChange={(e) => changeTtsVoice(e.target.value)}
+                          className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-xs font-bold text-textMain focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary shadow-2xs cursor-pointer"
+                        >
+                          <option value="default">System Default Voice</option>
+                          <option value="Google US English">Google US English</option>
+                          <option value="Google UK English Female">Google UK English Female</option>
+                          <option value="Microsoft David - English (United States)">Microsoft David (US Male)</option>
+                          <option value="Microsoft Zira - English (United States)">Microsoft Zira (US Female)</option>
+                        </select>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Visual Settings */}
+                  <div className="bg-gray-50/50 border border-gray-100 rounded-2xl p-4.5 shadow-2xs hover:shadow-soft transition-all">
+                    <div className="flex items-center gap-3 mb-4.5">
+                      <div className="p-2 bg-primary/10 text-primary rounded-xl"><Eye size={18} /></div>
+                      <div>
+                        <h4 className="font-bold text-sm text-textMain">Visual Adaptations</h4>
+                        <p className="text-xs text-textLight mt-0.5">Adjust fonts and contrast for readability.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-3">
+                        <div>
+                          <h5 className="font-bold text-xs text-textMain">High Contrast Mode</h5>
+                          <p className="text-[10px] text-textLight mt-0.5">Increase border thickness and color contrast.</p>
+                        </div>
+                        <ToggleSwitch checked={highContrast} onChange={toggleHighContrast} label="Toggle High Contrast" />
+                      </div>
+                      
+                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-3">
+                        <div>
+                          <h5 className="font-bold text-xs text-textMain">Dark Mode</h5>
+                          <p className="text-[10px] text-textLight mt-0.5">Switch to a dark color palette to reduce eye strain.</p>
+                        </div>
+                        <ToggleSwitch checked={darkMode} onChange={() => setDarkMode(!darkMode)} label="Toggle Dark Mode" />
+                      </div>
+                      
+                      <div className="flex items-center justify-between border-b border-gray-200/40 pb-3">
+                        <div>
+                          <h5 className="font-bold text-xs text-textMain">Dyslexia-Friendly Font</h5>
+                          <p className="text-[10px] text-textLight mt-0.5">Use OpenDyslexic font for easier reading.</p>
+                        </div>
+                        <ToggleSwitch checked={dyslexiaFont} onChange={toggleDyslexiaFont} label="Toggle Dyslexia Font" />
+                      </div>
+
+                      <div className="pt-1">
+                        <label className="block text-xs font-bold text-textMain mb-2">Interface Font Size</label>
+                        <div className="flex gap-2">
+                          {['Small', 'Medium', 'Large'].map((size) => (
+                            <button
+                              key={size}
+                              onClick={() => changeFontSize(size)}
+                              className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                                fontSize === size 
+                                  ? 'bg-primary text-white shadow-soft-sm' 
+                                  : 'bg-white hover:bg-gray-50 text-gray-500 border border-gray-200'
+                              }`}
+                            >
+                              {size}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
-                {/* Screen Reader Settings */}
-                <div className="bg-cards border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-soft transition-all">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2.5 bg-primary/10 text-primary rounded-xl"><Volume2 size={22} /></div>
-                      <div>
-                        <h4 className="font-bold text-textMain text-lg">Screen Reader (TTS)</h4>
-                        <p className="text-sm text-textLight">Read out text when hovering over key elements.</p>
-                      </div>
-                    </div>
-                    <ToggleSwitch checked={textToSpeech} onChange={toggleTextToSpeech} label="Toggle Screen Reader" />
-                  </div>
-                  
-                  {textToSpeech && (
-                    <div className="mt-4 pt-4 border-t border-gray-100 pl-2 pr-2">
-                      <label className="block text-sm font-bold text-textMain mb-2">Voice Preference</label>
-                      <select 
-                        value={ttsVoice} 
-                        onChange={(e) => changeTtsVoice(e.target.value)}
-                        className="w-full bg-cards border border-gray-200 rounded-xl px-4 py-2.5 text-sm font-medium text-textMain focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-sm"
-                      >
-                        <option value="default">System Default Voice</option>
-                        <option value="Google US English">Google US English</option>
-                        <option value="Google UK English Female">Google UK English Female</option>
-                        <option value="Microsoft David - English (United States)">Microsoft David (US Male)</option>
-                        <option value="Microsoft Zira - English (United States)">Microsoft Zira (US Female)</option>
-                      </select>
-                    </div>
-                  )}
+                <div className="flex justify-end pt-5 border-t border-gray-150 mt-6">
+                  <motion.button 
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={handleSave} 
+                    className="px-6 py-2.5 bg-primary text-white rounded-xl font-bold text-xs shadow-md shadow-primary/10 hover:bg-primary-dark transition-colors flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <CheckCircle size={14} /> Save Preferences
+                  </motion.button>
                 </div>
-
-                {/* Visual Settings */}
-                <div className="bg-cards border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-soft transition-all">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2.5 bg-primary/10 text-primary rounded-xl"><Eye size={22} /></div>
-                    <div>
-                      <h4 className="font-bold text-textMain text-lg">Visual Adaptations</h4>
-                      <p className="text-sm text-textLight">Adjust fonts and contrast for readability.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-5">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h5 className="font-bold text-textMain">High Contrast Mode</h5>
-                        <p className="text-xs text-textLight mt-0.5">Increase border thickness and color contrast.</p>
-                      </div>
-                      <ToggleSwitch checked={highContrast} onChange={toggleHighContrast} label="Toggle High Contrast" />
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h5 className="font-bold text-textMain">Dark Mode</h5>
-                        <p className="text-xs text-textLight mt-0.5">Switch to a dark color palette to reduce eye strain.</p>
-                      </div>
-                      <ToggleSwitch checked={darkMode} onChange={() => setDarkMode(!darkMode)} label="Toggle Dark Mode" />
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h5 className="font-bold text-textMain">Dyslexia-Friendly Font</h5>
-                        <p className="text-xs text-textLight mt-0.5">Use OpenDyslexic font for easier reading.</p>
-                      </div>
-                      <ToggleSwitch checked={dyslexiaFont} onChange={toggleDyslexiaFont} label="Toggle Dyslexia Font" />
-                    </div>
-
-                    <div className="pt-2">
-                      <label className="block text-sm font-bold text-textMain mb-2">Interface Font Size</label>
-                      <div className="flex gap-3">
-                        {['Small', 'Medium', 'Large'].map((size) => (
-                          <button
-                            key={size}
-                            onClick={() => changeFontSize(size)}
-                            className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-all ${
-                              fontSize === size 
-                                ? 'bg-primary text-white shadow-soft-md' 
-                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                            }`}
-                          >
-                            {size}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
               </motion.div>
             )}
           </AnimatePresence>
