@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
-import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, IndianRupee } from 'lucide-react';
+import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, IndianRupee, Trophy, BookOpen } from 'lucide-react';
 import dashboardService from '../services/dashboardService';
 import InclusionLeaderboard from '../components/InclusionLeaderboard';
 import AccessibilityTrendsChart from '../components/AccessibilityTrendsChart';
@@ -233,6 +233,50 @@ const StudentDashboard = ({ stats, navigate }) => (
           >
             Report & Track New Barrier
           </button>
+        </div>
+      </motion.div>
+    </motion.div>
+
+    {/* Gamified Quiz Challenge & Daily Fact section */}
+    <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+      {/* Quiz Invite Banner */}
+      <motion.div variants={itemVariants} className="lg:col-span-2 bg-gradient-to-br from-indigo-500 to-primary rounded-3xl p-6 text-white border border-indigo-400/20 shadow-md flex flex-col justify-between">
+        <div>
+          <div className="flex justify-between items-start">
+            <h3 className="text-xl font-heading font-extrabold flex items-center gap-2">
+              <Trophy className="text-amber-300 animate-pulse" size={24} /> Inclusion Quiz Challenge
+            </h3>
+            <span className="text-[10px] bg-white/20 px-2.5 py-0.5 rounded-full font-bold uppercase">Rank #5</span>
+          </div>
+          <p className="text-xs text-indigo-100 mt-2 leading-relaxed max-w-xl">
+            Test your knowledge of disability rights, WCAG accessibility specifications, and help build a more inclusive campus community! Win points and climb the rankings.
+          </p>
+        </div>
+        <div className="pt-4 border-t border-indigo-400/30 flex items-center justify-between mt-4">
+          <span className="text-[10px] text-indigo-200 font-semibold">Weekly challenge is active</span>
+          <button 
+            onClick={() => navigate('/quiz')}
+            className="px-5 py-2 bg-white text-primary rounded-xl text-xs font-black shadow-md hover:bg-indigo-50 hover:scale-[1.01] active:scale-[0.99] transition-all cursor-pointer"
+          >
+            Start Quiz &rarr;
+          </button>
+        </div>
+      </motion.div>
+
+      {/* Daily Knowledge Snippet */}
+      <motion.div variants={itemVariants} className="lg:col-span-1 glass-panel border border-gray-150 p-6 rounded-3xl shadow-soft-sm flex flex-col justify-between bg-white">
+        <div>
+          <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-wider mb-2">
+            <BookOpen size={16} /> Daily Knowledge
+          </div>
+          <h4 className="font-extrabold text-sm text-textMain">Tactile Walkways</h4>
+          <p className="text-xs text-textLight mt-2 leading-relaxed">
+            Yellow blister-pattern paving alerts visually impaired individuals of hazard zones and stairs, while strip tile patterns guide them along a safe route.
+          </p>
+        </div>
+        <div className="pt-4 border-t border-gray-100 mt-4 flex justify-between items-center text-[10px] text-textLight font-medium">
+          <span>Refreshes Daily</span>
+          <span className="text-primary hover:underline cursor-pointer font-bold" onClick={() => navigate('/quiz')}>More Facts &rarr;</span>
         </div>
       </motion.div>
     </motion.div>
