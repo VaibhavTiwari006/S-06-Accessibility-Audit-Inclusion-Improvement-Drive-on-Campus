@@ -52,7 +52,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
       // Handle shortcuts (Alt + Key)
       if (e.altKey && !e.ctrlKey && !e.metaKey) {
         const key = e.key.toUpperCase();
-        const cmd = commands.find(c => c.shortcut === key);
+        const cmd = roleAllowedCommands.find(c => c.shortcut === key);
         if (cmd) {
           e.preventDefault();
           handleSelect(cmd.path);
@@ -79,7 +79,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose, navigate, search, filteredCommands, selectedIndex]);
+  }, [isOpen, onClose, navigate, search, roleAllowedCommands, filteredCommands, selectedIndex]);
 
   return (
     <AnimatePresence>
