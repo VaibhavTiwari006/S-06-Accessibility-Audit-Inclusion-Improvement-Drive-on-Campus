@@ -130,7 +130,15 @@ const RecentAuditsTable = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.2, delay: idx * 0.04 }}
-                    onClick={() => canViewAudits && navigate(`/audits/${audit.id}`)}
+                    onClick={() => {
+                      if (canViewAudits) {
+                        if (audit.status === 'APPROVED') {
+                          navigate('/reports');
+                        } else {
+                          navigate(`/audits/${audit.id}/conduct`);
+                        }
+                      }
+                    }}
                     className={`group relative p-3.5 rounded-2xl border transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
                       canViewAudits ? 'cursor-pointer hover:bg-gray-50/90 hover:border-gray-200 hover:shadow-xs' : ''
                     } bg-white border-gray-100`}
