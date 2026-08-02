@@ -91,6 +91,46 @@ const DUMMY_ISSUES = [
     adminNotes: 'Supplies cleared. Custodial team instructed to keep it open and functional.',
     photoUrl: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
     createdAt: new Date().toISOString()
+  },
+  {
+    id: 108,
+    buildingName: 'Food Court',
+    description: 'Tactile warning tiles are missing near the entrance stairs of the Food Court, posing a safety risk for visually impaired students.',
+    locationDetails: 'Main entrance stairs, Food Court',
+    status: 'IN_PROGRESS',
+    adminNotes: 'Tactile paving installation has been requested from contractor.',
+    photoUrl: null,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 109,
+    buildingName: 'Science Block Seminar Hall',
+    description: 'No hearing loop systems or assistive listening devices are available in the main Seminar Hall for students with hearing loss.',
+    locationDetails: 'Seminar Hall - Ground Floor',
+    status: 'PENDING',
+    adminNotes: 'Hardware team researching budget options for loop induction setup.',
+    photoUrl: null,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 110,
+    buildingName: 'Administrative Block',
+    description: 'The reception desk is too high (1200mm) and does not have a lower section for wheelchair users to interact with staff.',
+    locationDetails: 'Main Reception, Administrative Block',
+    status: 'RESOLVED',
+    adminNotes: 'Lowered auxiliary counter section has been added to the left of the desk.',
+    photoUrl: null,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 111,
+    buildingName: 'Sports Complex Gym',
+    description: 'The gym entrance lacks a step-free pathway, requiring students in wheelchairs to ask for manual assistance to enter.',
+    locationDetails: 'Gym Entrance, Sports Complex',
+    status: 'PENDING',
+    adminNotes: 'Awaiting design approval for a portable metal ramp setup.',
+    photoUrl: null,
+    createdAt: new Date().toISOString()
   }
 ];
 
