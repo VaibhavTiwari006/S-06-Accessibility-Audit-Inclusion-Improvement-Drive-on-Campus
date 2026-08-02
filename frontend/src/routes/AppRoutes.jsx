@@ -24,6 +24,7 @@ const PublicTrackBarrier = lazy(() => import('../pages/PublicTrackBarrier'));
 const AwarenessPage = lazy(() => import('../pages/AwarenessPage'));
 const CalculatorPage = lazy(() => import('../pages/CalculatorPage'));
 const AuditConduct = lazy(() => import('../pages/AuditConduct'));
+const QuizPage = lazy(() => import('../pages/QuizPage'));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -107,6 +108,7 @@ const AnimatedRoutes = () => {
         <Route path="/track/:issueId" element={<ProtectedRoute><MainLayout><PublicTrackBarrier /></MainLayout></ProtectedRoute>} />
         <Route path="/awareness" element={<ProtectedRoute><MainLayout><AwarenessPage /></MainLayout></ProtectedRoute>} />
         <Route path="/calculator" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR', 'MAINTENANCE']}><MainLayout><CalculatorPage /></MainLayout></ProtectedRoute>} />
+        <Route path="/quiz" element={<ProtectedRoute allowedRoles={['ADMIN', 'STUDENT']}><MainLayout><QuizPage /></MainLayout></ProtectedRoute>} />
 
         {/* Catch All */}
         <Route path="*" element={<NotFound />} />
