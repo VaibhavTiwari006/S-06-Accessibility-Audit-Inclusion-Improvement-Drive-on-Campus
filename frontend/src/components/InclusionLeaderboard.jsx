@@ -190,6 +190,7 @@ const InclusionLeaderboard = () => {
           )}
         </div>
       </CardContent>
+    </Card>
   );
 };
 
