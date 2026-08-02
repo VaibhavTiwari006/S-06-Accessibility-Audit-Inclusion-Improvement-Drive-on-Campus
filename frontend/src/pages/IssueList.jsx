@@ -17,11 +17,41 @@ const getEstimatedCost = (description = '') => {
   if (desc.includes('ramp')) return 45000;
   if (desc.includes('washroom') || desc.includes('toilet') || desc.includes('restroom')) return 65000;
   if (desc.includes('slippery') || desc.includes('tile') || desc.includes('floor')) return 28000;
-  if (desc.includes('signage') || desc.includes('sign') || desc.includes('tactile')) return 8000;
+  if (desc.includes('signage') || desc.includes('sign') || desc.includes('tactile') || desc.includes('parking')) return 8000;
   return 25000; // default cost
 };
 
 const DUMMY_ISSUES = [
+  {
+    id: 105,
+    buildingName: 'Engineering Block - A',
+    description: 'The ramp near Gate 2 entrance of Engineering Block A has a steep gradient that makes it dangerous for wheelchair users, especially during rain when it gets slippery.',
+    locationDetails: 'Ground floor, Gate 2 entrance',
+    status: 'SUBMITTED',
+    adminNotes: '',
+    photoUrl: null,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 106,
+    buildingName: 'Management Block',
+    description: 'The main door of the Management Block is extremely heavy and does not have an automatic opener. Students using crutches struggle to open it.',
+    locationDetails: 'Main entrance, Management Block',
+    status: 'SUBMITTED',
+    adminNotes: '',
+    photoUrl: null,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 107,
+    buildingName: 'Research & Innovation Centre',
+    description: 'The parking lot near the Research Centre has no designated accessible parking spots. Wheelchair users have to travel a long distance from regular spots.',
+    locationDetails: 'Outdoor parking lot, Research & Innovation Centre',
+    status: 'SUBMITTED',
+    adminNotes: '',
+    photoUrl: null,
+    createdAt: new Date().toISOString()
+  },
   {
     id: 101,
     buildingName: 'Boys Hostel Block - H1',
