@@ -123,7 +123,7 @@ const AuditorDashboard = ({ stats, navigate }) => (
         <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/audits')} />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" />
+        <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" onClick={() => navigate('/reports')} />
       </motion.div>
     </motion.div>
     
