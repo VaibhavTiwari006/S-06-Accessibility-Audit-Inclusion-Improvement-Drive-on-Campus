@@ -201,6 +201,35 @@ const QuizPage = () => {
 
   return (
     <div className="space-y-8 animate-fade-in pb-12">
+      {/* Inline styles for quiz page medal shine effects */}
+      <style>{`
+        @keyframes medalShineQuiz {
+          0% { transform: translateX(-150%) rotate(25deg); }
+          50% { transform: translateX(250%) rotate(25deg); }
+          100% { transform: translateX(250%) rotate(25deg); }
+        }
+        .medal-shine-quiz-container {
+          position: relative;
+          overflow: hidden;
+        }
+        .medal-shine-quiz-effect {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 60%;
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.65) 50%,
+            rgba(255, 255, 255, 0) 100%
+          );
+          transform: rotate(25deg);
+          animation: medalShineQuiz 2.5s infinite ease-in-out;
+          pointer-events: none;
+        }
+      `}</style>
+
       {/* Header */}
       <div className="flex flex-col">
         <h2 className="text-3xl font-heading font-extrabold text-textMain flex items-center gap-3">
@@ -251,34 +280,50 @@ const QuizPage = () => {
               </div>
 
               <div className="space-y-2.5">
-                {leaderboard.map((member) => (
-                  <div 
-                    key={member.rank} 
-                    className={`flex items-center justify-between p-3.5 rounded-2xl border transition-all ${
-                      member.current 
-                        ? 'bg-primary/5 border-primary/20 shadow-2xs' 
-                        : 'bg-gray-50/30 border-gray-100 hover:bg-gray-50'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className={`w-6.5 h-6.5 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 ${
-                        member.rank === 1 ? 'bg-amber-400 text-white shadow-2xs' :
-                        member.rank === 2 ? 'bg-gray-300 text-white shadow-2xs' :
-                        member.rank === 3 ? 'bg-amber-600 text-white shadow-2xs' :
-                        member.current ? 'bg-primary text-white' : 'bg-gray-150 text-gray-500'
-                      }`}>
-                        {member.rank}
+                {leaderboard.map((member) => {
+                  const isGold = member.rank === 1;
+                  const isSilver = member.rank === 2;
+                  const isBronze = member.rank === 3;
+
+                  let rankStyle = "bg-gray-150 text-gray-500";
+                  if (isGold) rankStyle = "bg-gradient-to-br from-amber-400 via-yellow-100 to-amber-600 text-amber-950 font-black medal-shine-quiz-container shadow-sm";
+                  else if (isSilver) rankStyle = "bg-gradient-to-br from-slate-300 via-white to-slate-550 text-slate-900 font-black medal-shine-quiz-container shadow-sm";
+                  else if (isBronze) rankStyle = "bg-gradient-to-br from-orange-400 via-orange-100 to-amber-700 text-orange-950 font-black medal-shine-quiz-container shadow-sm";
+                  else if (member.current) rankStyle = "bg-primary text-white";
+
+                  return (
+                    <motion.div 
+                      key={member.rank}
+                      whileHover={{ scale: 1.005, y: -0.5 }}
+                      className={`flex items-center justify-between p-3 rounded-2xl border transition-all ${
+                        member.current 
+                          ? 'bg-primary/5 border-primary/25 shadow-3xs' 
+                          : 'bg-gray-50/30 border-gray-100 hover:bg-gray-50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3.5 min-w-0">
+                        <div className="relative">
+                          {isGold && (
+                            <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 text-xs select-none z-10 animate-bounce-slow">
+                              👑
+                            </div>
+                          )}
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 relative overflow-hidden ${rankStyle}`}>
+                            {(isGold || isSilver || isBronze) && <div className="medal-shine-quiz-effect" />}
+                            {member.rank}
+                          </div>
+                        </div>
+                        <div className="min-w-0">
+                          <p className={`text-xs font-bold text-textMain truncate leading-tight ${member.current ? 'text-primary' : ''}`}>
+                            {member.name}
+                          </p>
+                          <span className="text-[9px] text-gray-400 font-semibold block mt-0.5">{member.badge}</span>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <p className={`text-xs font-bold text-textMain truncate leading-tight ${member.current ? 'text-primary' : ''}`}>
-                          {member.name}
-                        </p>
-                        <span className="text-[9px] text-gray-400 font-semibold block mt-0.5">{member.badge}</span>
-                      </div>
-                    </div>
-                    <span className="text-xs font-black text-textMain">{member.points} pts</span>
-                  </div>
-                ))}
+                      <span className="text-xs font-black text-textMain">{member.points} pts</span>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </Card>
