@@ -37,6 +37,7 @@ const Community = () => {
   const [pledged, setPledged] = useState(false);
   const [showPilotModal, setShowPilotModal] = useState(false);
   const [updatingPilot, setUpdatingPilot] = useState(null);
+  const [pilotFilter, setPilotFilter] = useState('ALL');
 
   const fetchData = async () => {
     try {
@@ -120,6 +121,12 @@ const Community = () => {
     inProgress: pilots.filter(p => p.status === 'IN_PROGRESS').length,
   };
 
+  const filteredPilots = pilots.filter(pilot => {
+    if (pilotFilter === 'DONE') return pilot.status === 'COMPLETED';
+    if (pilotFilter === 'ACTIVE') return pilot.status === 'IN_PROGRESS' || pilot.status === 'APPROVED';
+    return true;
+  });
+
   return (
     <div className="space-y-10">
       <div className="flex items-start justify-between flex-wrap gap-4">
@@ -149,10 +156,37 @@ const Community = () => {
           <h3 className="text-lg font-semibold text-textMain flex items-center gap-2">
             <Lightbulb className="text-yellow-500" /> Pilot Accessibility Improvements
           </h3>
-          <div className="flex gap-3 text-sm">
-            <span className="px-3 py-1 bg-primary-50 text-primary rounded-full font-medium">{pilotStats.total} Total</span>
-            <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full font-medium">{pilotStats.completed} Done</span>
-            <span className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full font-medium hidden sm:inline">{pilotStats.inProgress} Active</span>
+          <div className="flex gap-2 text-xs font-bold bg-gray-50 p-1 rounded-xl border border-gray-150">
+            <button
+              onClick={() => setPilotFilter('ALL')}
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                pilotFilter === 'ALL'
+                  ? 'bg-white text-gray-900 shadow-2xs font-extrabold'
+                  : 'text-gray-500 hover:text-gray-900'
+              }`}
+            >
+              {pilotStats.total} Total
+            </button>
+            <button
+              onClick={() => setPilotFilter('DONE')}
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                pilotFilter === 'DONE'
+                  ? 'bg-emerald-500 text-white shadow-2xs font-extrabold'
+                  : 'text-gray-500 hover:text-emerald-600'
+              }`}
+            >
+              {pilotStats.completed} Done
+            </button>
+            <button
+              onClick={() => setPilotFilter('ACTIVE')}
+              className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                pilotFilter === 'ACTIVE'
+                  ? 'bg-purple-500 text-white shadow-2xs font-extrabold'
+                  : 'text-gray-500 hover:text-purple-600'
+              }`}
+            >
+              {pilotStats.inProgress} Active
+            </button>
           </div>
         </div>
 
@@ -166,7 +200,12 @@ const Community = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {pilots.map(pilot => {
+            {filteredPilots.length === 0 ? (
+              <div className="col-span-2 text-center py-10 text-gray-400 font-semibold text-sm">
+                No pilot improvements match this filter.
+              </div>
+            ) : (
+              filteredPilots.map(pilot => {
               const sc = statusConfig[pilot.status] || statusConfig.PROPOSED;
               return (
                 <div key={pilot.id} className="p-4 border border-gray-100 rounded-lg hover:shadow-md transition-all bg-white relative group">
@@ -261,7 +300,7 @@ const Community = () => {
                   )}
                 </div>
               );
-            })}
+            }))}
             {pilots.length === 0 && (
               <div className="col-span-1 md:col-span-2 text-center py-16 px-4 glass-panel rounded-3xl border border-white/60">
                 <div className="bg-white/50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 border border-white shadow-soft-sm">
