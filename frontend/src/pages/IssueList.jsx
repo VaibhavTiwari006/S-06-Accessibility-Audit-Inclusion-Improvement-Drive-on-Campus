@@ -153,11 +153,20 @@ const IssueList = () => {
         ? await issueService.getMyIssues() 
         : await issueService.getAllIssues();
       
-      if (data && data.length > 0) {
-        setIssues(data);
-      } else {
-        setIssues(DUMMY_ISSUES);
+      const combined = [];
+      if (Array.isArray(data)) {
+        combined.push(...data);
       }
+      
+      // Filter out duplicate IDs if any, then append dummy issues
+      const existingIds = new Set(combined.map(item => item.id));
+      DUMMY_ISSUES.forEach(dummy => {
+        if (!existingIds.has(dummy.id)) {
+          combined.push(dummy);
+        }
+      });
+
+      setIssues(combined);
     } catch (error) {
       console.warn('Failed to fetch issues, falling back to dummy data', error);
       setIssues(DUMMY_ISSUES);
