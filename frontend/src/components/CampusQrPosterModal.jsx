@@ -72,6 +72,27 @@ const CampusQrPosterModal = ({ issue, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center pt-20 pb-6 px-4 bg-black/70 backdrop-blur-sm">
+      <style>{`
+        @media print {
+          body * {
+            visibility: hidden;
+          }
+          .print-poster, .print-poster * {
+            visibility: visible;
+          }
+          .print-poster {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: white !important;
+          }
+        }
+      `}</style>
       {/* Backdrop overlay for closing on click-outside */}
       <div className="absolute inset-0 cursor-default" onClick={onClose} />
 
