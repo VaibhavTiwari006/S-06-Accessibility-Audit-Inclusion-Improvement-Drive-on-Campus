@@ -108,6 +108,38 @@ export const AccessibilityProvider = ({ children }) => {
     localStorage.setItem('access_ttsVoice', ttsVoice);
   }, [ttsVoice]);
 
+  useEffect(() => {
+    if (!textToSpeech || !window.speechSynthesis) return;
+
+    let speechTimeout;
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      const tag = target.tagName?.toLowerCase();
+      const isTextTag = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'button', 'a', 'li', 'label', 'strong'].includes(tag);
+      const textToRead = target.getAttribute('aria-label') || target.getAttribute('title') || (isTextTag ? target.innerText?.trim() : null);
+
+      if (textToRead && textToRead.length > 0 && textToRead.length < 500) {
+        clearTimeout(speechTimeout);
+        speechTimeout = setTimeout(() => {
+          speak(textToRead);
+        }, 450); // 450ms debounce delay to avoid stuttering on quick movements
+      }
+    };
+
+    const handleMouseOut = () => {
+      clearTimeout(speechTimeout);
+    };
+
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
+
+    return () => {
+      clearTimeout(speechTimeout);
+      document.removeEventListener('mouseover', handleMouseOver);
+      document.removeEventListener('mouseout', handleMouseOut);
+    };
+  }, [textToSpeech, ttsVoice]);
+
   const speak = (text) => {
     if (!textToSpeech || !window.speechSynthesis) return;
     
