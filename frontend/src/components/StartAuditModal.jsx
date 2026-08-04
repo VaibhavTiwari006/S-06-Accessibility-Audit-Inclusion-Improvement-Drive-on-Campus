@@ -6,8 +6,10 @@ import { accessibleToast as toast } from '../utils/accessibleToast';
 import RampCalculator from './RampCalculator';
 import Button from './ui/Button';
 import Input from './ui/Input';
+import { useAuth } from '../context/AuthContext';
 
 const StartAuditModal = ({ onClose, onSuccess }) => {
+  const { user } = useAuth();
   const [buildings, setBuildings] = useState([]);
   const [form, setForm] = useState({ buildingId: '', auditorId: '', auditDate: new Date().toISOString().split('T')[0], remarks: '' });
   const [loading, setLoading] = useState(false);
@@ -27,10 +29,9 @@ const StartAuditModal = ({ onClose, onSuccess }) => {
     if (!form.buildingId) { toast.error('Please select a building.'); return; }
     try {
       setLoading(true);
-      // auditorId is sent as 0 to let the backend use the currently authenticated user
       await auditService.startAudit({
         buildingId: parseInt(form.buildingId),
-        auditorId: 2, // auditor@campus.edu is user ID 2 in seeded data
+        auditorId: user?.id || 2,
         auditDate: form.auditDate,
         remarks: form.remarks,
         responses: []
