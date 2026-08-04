@@ -10,7 +10,7 @@ const maintenanceService = {
     return response.data.data;
   },
   updateTaskStatus: async (id, status, notes) => {
-    const response = await api.patch(`/maintenance-tasks/${id}/status`, { status, completionNotes: notes });
+    const response = await api.patch(`/maintenance-tasks/${id}`, { status, completionNotes: notes });
     return response.data.data;
   }
 };

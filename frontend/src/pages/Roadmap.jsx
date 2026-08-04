@@ -53,15 +53,30 @@ const Roadmap = () => {
     }
   };
 
-  const handleAdvanceStatus = (taskId, currentStatus) => {
+  const handleAdvanceStatus = async (taskId, currentStatus) => {
     const stageOrder = ['OPEN', 'ASSIGNED', 'IN_PROGRESS', 'FIXED', 'COMPLETED'];
     const currentIdx = stageOrder.indexOf(currentStatus);
     if (currentIdx < stageOrder.length - 1) {
       const nextStatus = stageOrder[currentIdx + 1];
-      setTasks((prev) =>
-        prev.map((t) => (t.id === taskId ? { ...t, workflowStatus: nextStatus } : t))
-      );
-      toast.success(`Task moved to stage: ${nextStatus.replace('_', ' ')}`);
+      
+      try {
+        if (nextStatus === 'IN_PROGRESS') {
+          await maintenanceService.updateTaskStatus(taskId, 'IN_PROGRESS');
+        } else if (nextStatus === 'COMPLETED') {
+          await maintenanceService.updateTaskStatus(taskId, 'COMPLETED', 'Remediation completed and verified.');
+        } else if (nextStatus === 'ASSIGNED') {
+          await maintenanceService.updateTaskStatus(taskId, 'OPEN');
+        } else if (nextStatus === 'FIXED') {
+          await maintenanceService.updateTaskStatus(taskId, 'IN_PROGRESS');
+        }
+
+        setTasks((prev) =>
+          prev.map((t) => (t.id === taskId ? { ...t, workflowStatus: nextStatus } : t))
+        );
+        toast.success(`Task moved to stage: ${nextStatus.replace('_', ' ')}`);
+      } catch (error) {
+        toast.error('Failed to update task status in database.');
+      }
     }
   };
 
