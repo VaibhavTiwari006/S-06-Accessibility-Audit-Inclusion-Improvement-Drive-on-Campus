@@ -49,7 +49,7 @@ public class MaintenanceTaskController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','MAINTENANCE','AUDITOR','STUDENT')")
     @Operation(summary = "Get maintenance tasks", description = "Retrieves maintenance tasks with optional building, assignee, and status filters.")
     public ResponseEntity<ApiResponse<List<MaintenanceTaskResponse>>> getTasks(
             @RequestParam(required = false) Long buildingId,
