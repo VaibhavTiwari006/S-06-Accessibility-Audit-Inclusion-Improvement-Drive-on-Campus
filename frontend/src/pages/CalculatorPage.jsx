@@ -29,6 +29,40 @@ const CalculatorPage = () => {
     { id: 'ELEVATOR', quantity: 0 },
   ]);
 
+  // Ramp Simulator State
+  const [rampRatio, setRampRatio] = useState(12);
+  const [isSimulating, setIsSimulating] = useState(false);
+  const [simProgress, setSimProgress] = useState(0);
+
+  const rampAngle = Math.atan(1 / rampRatio) * (180 / Math.PI);
+  const wedgeHeight = (200 / rampRatio) * 1.5; // Scaled up slightly for clear visibility
+
+  const wheelchairX = 250 - 200 * simProgress;
+  const wheelchairY = (110 - wedgeHeight) + wedgeHeight * simProgress;
+
+  const rampColor = rampRatio < 12 ? '#EF4444' : rampRatio <= 14 ? '#F59E0B' : '#10B981';
+
+  const handleSimulate = () => {
+    setIsSimulating(true);
+    setSimProgress(0);
+    let current = 0;
+    const duration = 1500; // 1.5 seconds
+    const intervalTime = 30; // 30ms ticks
+    const steps = duration / intervalTime;
+    const increment = 1 / steps;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= 1) {
+        clearInterval(timer);
+        setSimProgress(1);
+        setIsSimulating(false);
+      } else {
+        setSimProgress(current);
+      }
+    }, intervalTime);
+  };
+
   const updateQuantity = (id, delta) => {
     setItems((prev) => {
       const exists = prev.some((item) => item.id === id);
@@ -306,6 +340,117 @@ const CalculatorPage = () => {
             <div className="p-3.5 bg-emerald-100/60 rounded-xl text-xs font-bold text-emerald-950 flex items-center gap-2">
               <ShieldCheck size={18} className="text-emerald-700 flex-shrink-0" />
               <span>Fixes prioritized by max accessibility impact per rupee spent.</span>
+            </div>
+          </Card>
+
+          {/* Ramp Simulator Card */}
+          <Card className="p-6 bg-white border border-gray-100 shadow-xl space-y-5">
+            <div className="border-b border-gray-100 pb-3">
+              <h3 className="font-bold text-textMain text-sm font-heading flex items-center gap-2">
+                <Sparkles size={16} className="text-primary animate-pulse" />
+                Interactive Ramp Simulator
+              </h3>
+              <p className="text-[11px] text-gray-400 font-medium">Verify safe slopes for physical access design.</p>
+            </div>
+
+            <div className="space-y-4">
+              {/* Slope Ratio Control */}
+              <div>
+                <div className="flex justify-between text-xs font-bold text-gray-600 mb-1">
+                  <span>Slope Ratio (1 : X)</span>
+                  <span className="text-primary">1 : {rampRatio}</span>
+                </div>
+                <input 
+                  type="range" 
+                  min="6" 
+                  max="20" 
+                  step="1"
+                  value={rampRatio} 
+                  onChange={(e) => {
+                    setRampRatio(parseInt(e.target.value));
+                    setIsSimulating(false);
+                    setSimProgress(0);
+                  }}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary" 
+                />
+              </div>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-2.5 bg-gray-50 rounded-xl border border-gray-100">
+                  <span className="text-[10px] text-gray-400 font-bold block uppercase tracking-wider">Ramp Angle</span>
+                  <span className="text-sm font-extrabold text-gray-700">{rampAngle.toFixed(1)}°</span>
+                </div>
+                <div className="p-2.5 bg-gray-50 rounded-xl border border-gray-100">
+                  <span className="text-[10px] text-gray-400 font-bold block uppercase tracking-wider">Safety Status</span>
+                  <span className={`text-xs font-black uppercase tracking-wider block mt-0.5 ${
+                    rampRatio < 12 ? 'text-red-600' : rampRatio <= 14 ? 'text-amber-600' : 'text-emerald-600'
+                  }`}>
+                    {rampRatio < 12 ? '❌ Dangerous' : rampRatio <= 14 ? '⚠️ Borderline' : '✅ Safe'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Virtual Ramp Drawing (SVG) */}
+              <div className="h-32 bg-slate-900 rounded-2xl relative overflow-hidden flex items-end p-4 border border-slate-800 shadow-inner">
+                {/* SVG for Ramp Vector */}
+                <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                  {/* Ground Level line */}
+                  <line x1="0" y1="120" x2="300" y2="120" stroke="#334155" strokeWidth="2" />
+                  
+                  {/* Wedge (Ramp) */}
+                  <polygon 
+                    points={`30,110 30,110 270,${110 - wedgeHeight} 270,110`} 
+                    fill={rampColor} 
+                    className="opacity-20 transition-all duration-300"
+                  />
+                  <line 
+                    x1="30" 
+                    y1="110" 
+                    x2="270" 
+                    y2={110 - wedgeHeight} 
+                    stroke={rampColor} 
+                    strokeWidth="3" 
+                    className="transition-all duration-300"
+                  />
+
+                  {/* Wheelchair Avatar */}
+                  <g 
+                    transform={`translate(${wheelchairX}, ${wheelchairY}) rotate(${-rampAngle})`}
+                    className="transition-all duration-100"
+                  >
+                    {/* Wheelchair Circle Wheel */}
+                    <circle cx="0" cy="0" r="8" stroke="#f8fafc" strokeWidth="2" fill="none" />
+                    <circle cx="0" cy="0" r="3" fill="#f8fafc" />
+                    {/* Seat and back */}
+                    <path d="M-5,-11 L-5,-3 L6,-3" stroke="#f8fafc" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    {/* Passenger head */}
+                    <circle cx="-1" cy="-16" r="3" fill="#f8fafc" />
+                  </g>
+                </svg>
+
+                {/* Crash/Success Label */}
+                {simProgress === 1 && (
+                  <div className={`absolute top-3 right-3 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider animate-bounce shadow-md ${
+                    rampRatio < 12 ? 'bg-red-500 text-white' : 'bg-emerald-500 text-white'
+                  }`}>
+                    {rampRatio < 12 ? '💥 Tipped over!' : '🎉 Safe descent!'}
+                  </div>
+                )}
+              </div>
+
+              {/* Simulator Action Button */}
+              <button
+                onClick={handleSimulate}
+                disabled={isSimulating}
+                className={`w-full py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer ${
+                  isSimulating 
+                    ? 'bg-gray-100 text-gray-400' 
+                    : 'bg-primary/10 hover:bg-primary/15 text-primary border border-primary/20'
+                }`}
+              >
+                {isSimulating ? 'Simulating descent...' : 'Simulate Wheelchair Descent'}
+              </button>
             </div>
           </Card>
         </div>
