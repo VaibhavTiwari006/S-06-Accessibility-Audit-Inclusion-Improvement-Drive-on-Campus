@@ -13,8 +13,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   const menuItems = [
     { name: 'Dashboard',  path: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Roadmap',    path: '/roadmap',   icon: Map,             roles: ['ADMIN', 'MAINTENANCE'] },
-    { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR'] },
-    { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR'] },
+    { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
+    { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Calculator', path: '/calculator', icon: Calculator,     roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
     { name: user?.role === 'STUDENT' ? 'Track My Issues' : 'Issues', path: '/issues', icon: AlertCircle, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN', 'AUDITOR'] },

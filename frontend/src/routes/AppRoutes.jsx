@@ -93,8 +93,8 @@ const AnimatedRoutes = () => {
         {/* Protected Routes */}
         <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>} />
         <Route path="/roadmap" element={<ProtectedRoute allowedRoles={['ADMIN', 'MAINTENANCE']}><MainLayout><Roadmap /></MainLayout></ProtectedRoute>} />
-        <Route path="/buildings" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><BuildingList /></MainLayout></ProtectedRoute>} />
-        <Route path="/audits" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><AuditList /></MainLayout></ProtectedRoute>} />
+        <Route path="/buildings" element={<ProtectedRoute><MainLayout><BuildingList /></MainLayout></ProtectedRoute>} />
+        <Route path="/audits" element={<ProtectedRoute><MainLayout><AuditList /></MainLayout></ProtectedRoute>} />
         <Route path="/audits/:id/conduct" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><AuditConduct /></MainLayout></ProtectedRoute>} />
         <Route path="/issues" element={<ProtectedRoute><MainLayout><IssueList /></MainLayout></ProtectedRoute>} />
         <Route path="/evidence" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR', 'MAINTENANCE']}><MainLayout><EvidenceGallery /></MainLayout></ProtectedRoute>} />
