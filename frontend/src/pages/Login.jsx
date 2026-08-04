@@ -78,8 +78,16 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    setEmail('');
-    setPassword('');
+    if (selectedRole) {
+      const opt = ROLE_OPTIONS.find(r => r.role === selectedRole);
+      if (opt) {
+        setEmail(opt.email);
+        setPassword(opt.password);
+      }
+    } else {
+      setEmail('');
+      setPassword('');
+    }
   }, [selectedRole]);
 
   const handleSubmit = async (e) => {
