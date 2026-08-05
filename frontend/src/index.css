@@ -382,12 +382,19 @@
   body.dark-mode .text-red-600 { @apply text-red-400; }
 
   /* General Dark Mode Fixes */
+  body.dark-mode .border-gray-150 { border-color: rgba(255, 255, 255, 0.08) !important; }
   body.dark-mode .border-gray-100 { border-color: rgba(255, 255, 255, 0.05) !important; }
   body.dark-mode .border-gray-200 { border-color: rgba(255, 255, 255, 0.1) !important; }
+  body.dark-mode .border-gray-300 { border-color: rgba(255, 255, 255, 0.18) !important; }
+  body.dark-mode .border-gray-50 { border-color: rgba(255, 255, 255, 0.05) !important; }
   body.dark-mode .bg-white { background-color: var(--bg-cards) !important; }
   body.dark-mode .bg-gray-50 { background-color: rgba(255, 255, 255, 0.02) !important; }
   body.dark-mode .bg-slate-50 { background-color: rgba(255, 255, 255, 0.02) !important; }
+  body.dark-mode .bg-gray-100 { background-color: rgba(255, 255, 255, 0.05) !important; }
+  body.dark-mode .bg-gray-200 { background-color: rgba(255, 255, 255, 0.1) !important; }
   body.dark-mode .hover\:bg-gray-50:hover { background-color: rgba(255, 255, 255, 0.04) !important; }
+  body.dark-mode .hover\:bg-gray-100:hover { background-color: rgba(255, 255, 255, 0.04) !important; }
+  body.dark-mode .hover\:bg-slate-100:hover { background-color: rgba(255, 255, 255, 0.04) !important; }
   
   /* Text Color Adaptations */
   body.dark-mode .text-gray-900 { color: #f8fafc !important; }
@@ -396,6 +403,20 @@
   body.dark-mode .text-gray-600 { color: #cbd5e1 !important; }
   body.dark-mode .text-gray-500 { color: #94a3b8 !important; }
   body.dark-mode .text-gray-400 { color: #64748b !important; }
+  body.dark-mode .text-secondary { color: #f1f5f9 !important; }
+  body.dark-mode .hover\:text-gray-900:hover { color: #f8fafc !important; }
+  body.dark-mode .group-hover\:text-gray-600:hover { color: #cbd5e1 !important; }
+  
+  /* Recharts Tooltip Overrides */
+  body.dark-mode .recharts-default-tooltip { background-color: var(--bg-cards) !important; border-color: rgba(255, 255, 255, 0.1) !important; }
+  body.dark-mode .recharts-tooltip-item { color: var(--text-main) !important; }
+  
+  /* Quiz Page Correct/Incorrect Overrides */
+  body.dark-mode .bg-emerald-50\/50 { background-color: rgba(16, 185, 129, 0.15) !important; }
+  body.dark-mode .bg-red-50\/50 { background-color: rgba(239, 68, 68, 0.15) !important; }
+  body.dark-mode .text-emerald-800 { color: #34d399 !important; }
+  body.dark-mode .text-red-800 { color: #f87171 !important; }
+  body.dark-mode .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.15) !important; }
   
   /* Stage Button Overrides */
   body.dark-mode .bg-blue-50 { background-color: rgba(37, 99, 235, 0.15) !important; color: #60a5fa !important; border-color: rgba(37, 99, 235, 0.3) !important; }
