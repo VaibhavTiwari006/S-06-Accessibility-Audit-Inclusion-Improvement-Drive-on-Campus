@@ -407,6 +407,24 @@
   body.dark-mode .hover\:bg-purple-100:hover { background-color: rgba(147, 51, 234, 0.25) !important; }
   body.dark-mode .hover\:bg-amber-100:hover { background-color: rgba(245, 158, 11, 0.25) !important; }
   body.dark-mode .hover\:bg-emerald-100:hover { background-color: rgba(16, 185, 129, 0.25) !important; }
+
+  /* Button Component Variants Overrides in Dark Mode */
+  body.dark-mode .bg-transparent.text-gray-700.border-gray-200 {
+    color: #e2e8f0 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+  body.dark-mode .bg-transparent.text-gray-700.border-gray-200:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  body.dark-mode .bg-transparent.text-gray-600 {
+    color: #cbd5e1 !important;
+  }
+  body.dark-mode .bg-transparent.text-gray-600:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #f8fafc !important;
+  }
   
   /* High Contrast Mode Overrides */
   body.high-contrast * {
