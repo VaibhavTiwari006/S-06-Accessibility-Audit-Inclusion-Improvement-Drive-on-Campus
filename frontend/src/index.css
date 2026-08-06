@@ -435,6 +435,14 @@
   body.dark-mode .text-red-800 { color: #f87171 !important; }
   body.dark-mode .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.15) !important; }
   
+  /* ScoreCard Ambient Light Glow and Shimmer Overrides in Dark Mode */
+  body.dark-mode .score-card-glow {
+    background-image: linear-gradient(to bottom right, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95), rgba(200, 16, 46, 0.15)) !important;
+  }
+  body.dark-mode .score-card-shimmer {
+    background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent) !important;
+  }
+  
   /* Stage Button Overrides */
   body.dark-mode .bg-blue-50 { background-color: rgba(37, 99, 235, 0.15) !important; color: #60a5fa !important; border-color: rgba(37, 99, 235, 0.3) !important; }
   body.dark-mode .bg-purple-50 { background-color: rgba(147, 51, 234, 0.15) !important; color: #c084fc !important; border-color: rgba(147, 51, 234, 0.3) !important; }

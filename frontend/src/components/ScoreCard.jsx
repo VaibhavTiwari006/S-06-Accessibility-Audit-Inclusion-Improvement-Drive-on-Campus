@@ -84,12 +84,12 @@ const ScoreCard = ({
 
         {/* Lively Animated Gradient Sheen / Mesh in Background */}
         <div 
-          className="absolute -inset-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:animate-shimmer pointer-events-none" 
+          className="absolute -inset-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:animate-shimmer pointer-events-none score-card-shimmer" 
         />
 
         {/* Ambient Color Glow on Hover */}
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/90 to-primary/10 opacity-60 group-hover:opacity-90 transition-opacity duration-150 pointer-events-none" 
+          className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/90 to-primary/10 opacity-60 group-hover:opacity-90 transition-opacity duration-150 pointer-events-none score-card-glow" 
         />
         
         {/* Subtle 3D Top Border Glow Accent */}
