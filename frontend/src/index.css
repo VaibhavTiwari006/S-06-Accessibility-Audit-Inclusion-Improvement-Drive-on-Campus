@@ -408,7 +408,20 @@
   body.dark-mode .bg-white\/10 { background-color: var(--bg-cards) !important; }
   body.dark-mode .bg-white\/70 { background-color: rgba(15, 23, 42, 0.3) !important; }
   body.dark-mode .bg-white\/50:hover,
-  body.dark-mode .bg-white\/80:hover { background-color: rgba(255, 255, 255, 0.04) !important; }
+  body.dark-mode .bg-white\/80:hover,
+  body.dark-mode .hover\:bg-white\/95:hover,
+  body.dark-mode .hover\:bg-white\/90:hover,
+  body.dark-mode .hover\:bg-white\/80:hover,
+  body.dark-mode .hover\:bg-white\/70:hover,
+  body.dark-mode .hover\:bg-white\/60:hover,
+  body.dark-mode .hover\:bg-white\/50:hover,
+  body.dark-mode .hover\:bg-white\/40:hover,
+  body.dark-mode .hover\:bg-white\/30:hover,
+  body.dark-mode .hover\:bg-white\/20:hover,
+  body.dark-mode .hover\:bg-white\/10:hover,
+  body.dark-mode .hover\:bg-white:hover {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+  }
   body.dark-mode .bg-gray-50 { background-color: rgba(255, 255, 255, 0.02) !important; }
   body.dark-mode .bg-gray-50\/50,
   body.dark-mode .bg-gray-55\/40,
