@@ -106,7 +106,7 @@ const ScoreCard = ({
           </motion.div>
 
           {isClickable && (
-            <div className="p-2 rounded-xl bg-white/80 group-hover:bg-primary/10 text-gray-400 group-hover:text-primary transition-all duration-300 flex items-center justify-center transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:scale-110 shadow-xs border border-gray-100/50">
+            <div className="p-2 rounded-xl bg-white/80 group-hover:bg-primary/10 text-gray-400 group-hover:text-primary transition-all duration-300 flex items-center justify-center transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:scale-110 shadow-xs border border-gray-100/50 score-card-arrow">
               <ArrowUpRight size={18} />
             </div>
           )}
