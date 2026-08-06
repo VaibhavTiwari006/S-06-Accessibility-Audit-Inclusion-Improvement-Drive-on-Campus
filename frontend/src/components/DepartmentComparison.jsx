@@ -74,7 +74,7 @@ const DepartmentComparison = () => {
             key={`${dept.code}-${raceKey}`}
             className={`p-4 rounded-2xl border transition-all duration-300 ${
               dept.isWinner 
-                ? 'bg-gradient-to-r from-emerald-50/40 via-white to-white border-emerald-200/80 shadow-xs' 
+                ? 'bg-gradient-to-r from-emerald-50/40 via-white to-white border-emerald-200/80 shadow-xs winner-card' 
                 : 'bg-white/80 border-gray-100 hover:shadow-xs'
             }`}
           >
