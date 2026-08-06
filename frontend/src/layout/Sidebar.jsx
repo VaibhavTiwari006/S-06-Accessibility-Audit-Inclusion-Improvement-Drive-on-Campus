@@ -49,7 +49,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         aria-label="Sidebar Navigation"
       >
         {/* Main nav items */}
-        <nav className="flex-1 py-6 px-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 py-6 px-4 space-y-1 overflow-y-auto sidebar-scrollbar-none">
           <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest px-2 pb-3">Navigation</p>
           {mainItems.map(item => {
             const Icon = item.icon;
