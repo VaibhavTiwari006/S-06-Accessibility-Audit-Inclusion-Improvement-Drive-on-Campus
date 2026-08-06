@@ -495,6 +495,12 @@
     color: #ffffff !important;
   }
   
+  /* Winner Card Dark Mode Overrides */
+  body.dark-mode .winner-card {
+    background-image: linear-gradient(to right, rgba(16, 185, 129, 0.12), var(--bg-cards)) !important;
+    border-color: rgba(16, 185, 129, 0.25) !important;
+  }
+  
   /* Stage Button Overrides */
   body.dark-mode .bg-blue-50 { background-color: rgba(37, 99, 235, 0.15) !important; color: #60a5fa !important; border-color: rgba(37, 99, 235, 0.3) !important; }
   body.dark-mode .bg-purple-50 { background-color: rgba(147, 51, 234, 0.15) !important; color: #c084fc !important; border-color: rgba(147, 51, 234, 0.3) !important; }
