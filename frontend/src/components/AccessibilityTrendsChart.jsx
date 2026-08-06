@@ -36,7 +36,7 @@ const AccessibilityTrendsChart = () => {
   return (
     <Card className="h-full flex flex-col justify-between shadow-sm border border-gray-100 overflow-hidden">
       <CardHeader className="pb-3 flex-wrap gap-3 items-center justify-between border-b border-gray-50">
-        <div>
+        <div className="flex-1 min-w-0">
           <h3 className="text-lg md:text-xl font-heading font-bold text-textMain flex items-center gap-2">
             <TrendingUp className="text-primary" size={22} /> Campus Accessibility Trend
           </h3>
@@ -46,7 +46,7 @@ const AccessibilityTrendsChart = () => {
         </div>
 
         {/* Duration Filter Pills */}
-        <div className="flex items-center gap-1 bg-gray-100/80 p-1 rounded-xl border border-gray-200/50">
+        <div className="flex items-center gap-1 bg-gray-100/80 p-1 rounded-xl border border-gray-200/50 filter-pills flex-shrink-0">
           {TIMEFRAMES.map((t) => (
             <button
               key={t.label}
