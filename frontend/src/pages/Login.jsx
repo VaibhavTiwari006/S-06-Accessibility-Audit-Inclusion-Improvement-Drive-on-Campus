@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import {
   ShieldCheck, UserCheck, Users, Wrench,
@@ -150,7 +151,13 @@ const Login = () => {
         <div className="w-full max-w-5xl">
 
           {/* Frosted glass container */}
-          <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.6)' }}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 100, damping: 15, delay: 0.05 }}
+            className="rounded-3xl overflow-hidden shadow-2xl" 
+            style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(24px)', border: '1px solid rgba(255,255,255,0.6)' }}
+          >
 
             {/* Top banner strip */}
             <div className={`h-1.5 w-full bg-gradient-to-r ${currentRole ? currentRole.gradient : 'from-gray-300 to-gray-400'} transition-all duration-500`} />
@@ -171,15 +178,29 @@ const Login = () => {
                 <>
                   {/* Role Cards */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    {ROLE_OPTIONS.map((r) => {
+                    {ROLE_OPTIONS.map((r, index) => {
                       const Icon = r.icon;
                       const isSelected = selectedRole === r.role;
                       return (
-                        <button
+                        <motion.button
+                          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{ 
+                            type: 'spring', 
+                            stiffness: 140, 
+                            damping: 14, 
+                            delay: 0.15 + index * 0.08 
+                          }}
+                          whileHover={{ 
+                            y: -6, 
+                            scale: 1.02,
+                            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                          }}
+                          whileTap={{ scale: 0.98 }}
                           key={r.role}
                           type="button"
                           onClick={() => { setSelectedRole(r.role); setError(''); }}
-                          className="group relative text-left rounded-2xl border-2 transition-all duration-300 overflow-hidden focus:outline-none hover:shadow-xl hover:-translate-y-1 bg-white/80"
+                          className="group relative text-left rounded-2xl border-2 transition-all duration-300 overflow-hidden focus:outline-none bg-white/80"
                           style={{
                             borderColor: isSelected ? r.accent : '#e5e7eb',
                           }}
@@ -204,13 +225,18 @@ const Login = () => {
                               </span>
                             </div>
                           </div>
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </div>
                 </>
               ) : (
-                <div className="space-y-6">
+                <motion.div 
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-6"
+                >
                   <div className="flex justify-center mb-2">
                     <button 
                       onClick={() => { setSelectedRole(null); setError(''); }} 
@@ -282,7 +308,7 @@ const Login = () => {
                       )}
                     </button>
                   </form>
-                </div>
+                </motion.div>
               )}
 
               <p className="text-center text-xs text-gray-400 font-medium -mt-4">
@@ -290,7 +316,7 @@ const Login = () => {
               </p>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </main>
