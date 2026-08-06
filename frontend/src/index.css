@@ -518,6 +518,15 @@
   body.dark-mode .text-transparent,
   body.dark-mode .gradient-text {
     color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
+
+  /* Hero Gradient Text visibility and color in Dark Mode */
+  body.dark-mode .hero-gradient-text {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    background-image: linear-gradient(to right, #ef4444, #f87171, #fca5a5) !important;
+    display: inline-block !important;
   }
   
   /* Stage Button Overrides */
