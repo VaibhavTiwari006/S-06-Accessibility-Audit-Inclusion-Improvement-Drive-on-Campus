@@ -69,7 +69,7 @@ const RecentAuditsTable = () => {
 
         <div className="flex items-center gap-2">
           {/* Quick Filter Tabs */}
-          <div className="flex items-center gap-1 bg-gray-100/80 p-1 rounded-xl border border-gray-200/50 text-xs font-bold">
+          <div className="flex items-center gap-1 bg-gray-100/80 p-1 rounded-xl border border-gray-200/50 text-xs font-bold filter-pills">
             <button
               onClick={() => setFilter('ALL')}
               className={`px-3 py-1 rounded-lg transition-all ${
