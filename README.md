@@ -29,7 +29,9 @@ Common challenges include:
 - LMS platforms not compliant with accessibility standards
 - Insufficient disability awareness among students and staff
 
+
 These issues reduce educational accessibility and negatively impact the overall campus experience.
+
 
 ---
 
