@@ -5,7 +5,6 @@
 ---
 
 ## 📌 Overview
-
 Accessibility is a fundamental requirement for creating an inclusive educational environment. Many students and staff with disabilities continue to experience barriers while accessing classrooms, laboratories, libraries, administrative offices, campus facilities, and digital platforms.
 
 This project provides a structured framework to evaluate campus accessibility, collect stakeholder feedback, generate actionable recommendations, and assist university administrators in planning accessibility improvements.
