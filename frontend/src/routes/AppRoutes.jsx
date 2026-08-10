@@ -23,7 +23,12 @@ const AwarenessPage = lazy(() => import('../pages/AwarenessPage'));
 const AuditConduct = lazy(() => import('../pages/AuditConduct'));
 const QuizPage = lazy(() => import('../pages/QuizPage'));
 
-// Loading Fallback Component
+/**
+ * PageLoader Loading Fallback Component
+ * 
+ * Renders a high-end spinning loader wrapper with brand animations for transition feedback during
+ * lazy loading page chunk imports.
+ */
 const PageLoader = () => (
   <div className="flex flex-col items-center justify-center min-h-[60vh] bg-transparent">
     <motion.div
