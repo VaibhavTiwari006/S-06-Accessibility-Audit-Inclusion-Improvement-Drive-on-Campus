@@ -70,6 +70,12 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
     locationCategory: 'Entrance'
   });
   const [loading, setLoading] = useState(false);
+  const [isDifferentConfirmed, setIsDifferentConfirmed] = useState(false);
+
+  // Reset confirmation checkbox on category/floor/building change
+  useEffect(() => {
+    setIsDifferentConfirmed(false);
+  }, [form.buildingId, form.floor, form.locationCategory]);
 
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -251,6 +257,20 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
                   );
                 })}
               </div>
+              
+              {/* Force confirmation checkbox */}
+              <div className="flex items-start gap-2.5 pt-2 border-t border-amber-250/30">
+                <input
+                  type="checkbox"
+                  id="confirmDifferent"
+                  checked={isDifferentConfirmed}
+                  onChange={(e) => setIsDifferentConfirmed(e.target.checked)}
+                  className="mt-0.5 rounded border-amber-300 text-amber-600 focus:ring-amber-500 cursor-pointer h-4 w-4"
+                />
+                <label htmlFor="confirmDifferent" className="text-xs font-semibold text-amber-800 cursor-pointer select-none leading-tight">
+                  My issue is different from the existing reported issues listed above.
+                </label>
+              </div>
             </div>
           )}
 
@@ -341,7 +361,11 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
           </div>
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-200/60 mt-6">
             <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">Cancel</button>
-            <button type="submit" disabled={loading} className="px-6 py-2.5 text-sm font-bold bg-danger text-white rounded-xl shadow-md hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:hover:translate-y-0">
+            <button 
+              type="submit" 
+              disabled={loading || (form.buildingId && duplicates.length > 0 && !isDifferentConfirmed)} 
+              className="px-6 py-2.5 text-sm font-bold bg-danger text-white rounded-xl shadow-md hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
+            >
               {loading ? 'Submitting...' : 'Submit Report'}
             </button>
           </div>
