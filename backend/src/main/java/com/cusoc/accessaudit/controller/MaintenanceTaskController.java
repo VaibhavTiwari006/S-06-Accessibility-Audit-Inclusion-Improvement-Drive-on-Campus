@@ -31,6 +31,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Maintenance Tasks", description = "Endpoints for remediation task assignment and status tracking")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * MaintenanceTaskController REST Controller
+ * 
+ * Exposes API endpoints to manage remediation work tasks:
+ * - Creates maintenance tickets from student reports or checklist compliance failures.
+ * - Handles technician job dispatch actions.
+ * - Updates status state changes from PLANNED to COMPLETED.
+ */
 public class MaintenanceTaskController {
 
     private final MaintenanceTaskService maintenanceTaskService;
