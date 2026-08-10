@@ -14,6 +14,15 @@ import { toast } from 'react-toastify';
 import LeafletMap from '../components/CampusMap';
 import Button from '../components/ui/Button';
 
+/**
+ * CampusMapPage Component
+ * 
+ * Renders the dedicated interactive campus accessibility map interface.
+ * Features:
+ * - Integrates LeafletMap layer overlays.
+ * - Interactive filtering of accessibility feature types (Ramps, Elevators, Washrooms, Parking).
+ * - Real-time wheelchair barrier-free routing simulations.
+ */
 const CampusMapPage = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [buildings, setBuildings] = useState([]);
