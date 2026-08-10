@@ -44,7 +44,7 @@ const ROLE_OPTIONS = [
     gradient: 'from-emerald-500 to-teal-600',
     soft: 'rgba(236,253,245,0.95)',
     accent: '#059669',
-    desc: 'Barrier reporting, QR posters & awareness quizzes.'
+    desc: 'Barrier reporting, feedback forum & awareness quizzes.'
   },
   {
     role: 'MAINTENANCE',

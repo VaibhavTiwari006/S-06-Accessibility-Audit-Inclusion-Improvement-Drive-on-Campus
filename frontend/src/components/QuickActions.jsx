@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Card, CardHeader, CardContent } from './ui/Card';
 import { 
-  PlusCircle, Map, FileText, Settings, ShieldAlert, QrCode, 
+  PlusCircle, Map, FileText, Settings, ShieldAlert, 
   Wrench, BookOpen, Building2, ChevronRight, Zap 
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -19,7 +19,6 @@ const QuickActions = () => {
         return [
           { label: 'View Audits', desc: 'Inspect campus compliance logs', icon: PlusCircle, path: '/audits', iconBg: 'bg-rose-500 text-white', hoverBorder: 'hover:border-rose-200' },
           { label: 'Campus Buildings', desc: 'Manage facility infrastructure', icon: Building2, path: '/buildings', iconBg: 'bg-blue-600 text-white', hoverBorder: 'hover:border-blue-200' },
-          { label: 'QR Feedback', desc: 'Manage QR posters & reports', icon: QrCode, path: '/qr-code', iconBg: 'bg-purple-600 text-white', hoverBorder: 'hover:border-purple-200' },
           { label: 'Generate Reports', desc: 'Export executive analytics', icon: FileText, path: '/reports', iconBg: 'bg-amber-500 text-white', hoverBorder: 'hover:border-amber-200' },
           { label: 'Wheelchair Map', desc: 'Barrier-free campus routing', icon: Map, path: '/map', iconBg: 'bg-emerald-600 text-white', hoverBorder: 'hover:border-emerald-200' },
           { label: 'System Settings', desc: 'Configure access controls', icon: Settings, path: '/settings', iconBg: 'bg-indigo-600 text-white', hoverBorder: 'hover:border-indigo-200' },
@@ -28,7 +27,6 @@ const QuickActions = () => {
         return [
           { label: 'Campus Audits', desc: 'Conduct physical inspections', icon: PlusCircle, path: '/audits', iconBg: 'bg-rose-500 text-white', hoverBorder: 'hover:border-rose-200' },
           { label: 'Building List', desc: 'Check WCAG compliance scores', icon: Building2, path: '/buildings', iconBg: 'bg-blue-600 text-white', hoverBorder: 'hover:border-blue-200' },
-          { label: 'QR Feedback', desc: 'Manage QR posters & reports', icon: QrCode, path: '/qr-code', iconBg: 'bg-amber-500 text-white', hoverBorder: 'hover:border-amber-200' },
           { label: 'Photo Evidence', desc: 'Inspect photo proof & RPWD', icon: Map, path: '/evidence', iconBg: 'bg-indigo-600 text-white', hoverBorder: 'hover:border-indigo-200' },
           { label: 'Campus Map', desc: 'Wheelchair barrier-free routing', icon: Map, path: '/map', iconBg: 'bg-emerald-600 text-white', hoverBorder: 'hover:border-emerald-200' },
           { label: 'Audit Reports', desc: 'Review summary statistics', icon: FileText, path: '/reports', iconBg: 'bg-purple-600 text-white', hoverBorder: 'hover:border-purple-200' },
@@ -46,7 +44,7 @@ const QuickActions = () => {
       default:
         return [
           { label: 'Track My Issues', desc: 'View reported barrier status', icon: ShieldAlert, path: '/issues', iconBg: 'bg-amber-500 text-white', hoverBorder: 'hover:border-amber-200' },
-          { label: 'Report Barrier', desc: 'Scan QR posters & report', icon: PlusCircle, path: '/issues', iconBg: 'bg-rose-500 text-white', hoverBorder: 'hover:border-rose-200' },
+          { label: 'Report Barrier', desc: 'Report a physical barrier directly', icon: PlusCircle, path: '/issues', iconBg: 'bg-rose-500 text-white', hoverBorder: 'hover:border-rose-200' },
           { label: 'Campus Map', desc: 'Find ramps & accessible washrooms', icon: Map, path: '/map', iconBg: 'bg-emerald-600 text-white', hoverBorder: 'hover:border-emerald-200' },
           { label: 'Awareness Quiz', desc: 'Take campus inclusion quiz', icon: BookOpen, path: '/awareness', iconBg: 'bg-blue-600 text-white', hoverBorder: 'hover:border-blue-200' },
           { label: 'Building Scores', desc: 'Explore campus WCAG ratings', icon: Building2, path: '/buildings', iconBg: 'bg-purple-600 text-white', hoverBorder: 'hover:border-purple-200' },

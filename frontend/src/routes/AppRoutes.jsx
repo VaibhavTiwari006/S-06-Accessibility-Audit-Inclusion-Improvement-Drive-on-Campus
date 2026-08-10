@@ -18,8 +18,6 @@ const Settings = lazy(() => import('../pages/Settings'));
 const Roadmap = lazy(() => import('../pages/Roadmap'));
 const AccessibilityPreferences = lazy(() => import('../pages/AccessibilityPreferences'));
 const CampusMap = lazy(() => import('../pages/CampusMap'));
-const QRCodeManager = lazy(() => import('../pages/QRCodeManager'));
-const InstantQRReport = lazy(() => import('../pages/InstantQRReport'));
 const PublicTrackBarrier = lazy(() => import('../pages/PublicTrackBarrier'));
 const AwarenessPage = lazy(() => import('../pages/AwarenessPage'));
 const AuditConduct = lazy(() => import('../pages/AuditConduct'));
@@ -102,8 +100,6 @@ const AnimatedRoutes = () => {
         <Route path="/settings" element={<ProtectedRoute allowedRoles={['ADMIN']}><MainLayout><Settings /></MainLayout></ProtectedRoute>} />
         <Route path="/accessibility" element={<ProtectedRoute><MainLayout><AccessibilityPreferences /></MainLayout></ProtectedRoute>} />
         <Route path="/map" element={<ProtectedRoute><MainLayout><CampusMap /></MainLayout></ProtectedRoute>} />
-        <Route path="/qr-code" element={<ProtectedRoute><MainLayout><QRCodeManager /></MainLayout></ProtectedRoute>} />
-        <Route path="/qr-report/:buildingId" element={<ProtectedRoute><MainLayout><InstantQRReport /></MainLayout></ProtectedRoute>} />
         <Route path="/track/:issueId" element={<ProtectedRoute><MainLayout><PublicTrackBarrier /></MainLayout></ProtectedRoute>} />
         <Route path="/awareness" element={<ProtectedRoute><MainLayout><AwarenessPage /></MainLayout></ProtectedRoute>} />
         <Route path="/quiz" element={<ProtectedRoute allowedRoles={['ADMIN', 'STUDENT']}><MainLayout><QuizPage /></MainLayout></ProtectedRoute>} />

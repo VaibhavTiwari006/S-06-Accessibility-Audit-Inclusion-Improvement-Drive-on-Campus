@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, ShieldCheck, Map, Users, BarChart3, ChevronRight, 
-  Sparkles, QrCode, BookOpen, Wrench, Camera, CheckCircle2, 
+  Sparkles, BookOpen, Wrench, Camera, CheckCircle2, 
   UserCheck, Lock, LogIn, Award, Building2, HelpCircle
 } from 'lucide-react';
 import Button from '../components/ui/Button';
@@ -43,17 +43,6 @@ const IMPACTFUL_FEATURES = [
     bgColor: 'bg-purple-50 text-purple-700 border-purple-200',
     hoverRing: 'hover:ring-purple-200',
     demo: 'Cross-departmental compliance radar & quarterly progress tracking.'
-  },
-  {
-    id: 'qr',
-    icon: QrCode,
-    badge: 'Mobile 1-Tap',
-    title: 'QR Code Instant Reporting System',
-    desc: 'Printable QR posters for campus buildings enabling students and visitors to report barriers instantly via mobile scan without logging in.',
-    color: 'from-rose-500 to-red-600',
-    bgColor: 'bg-rose-50 text-rose-700 border-rose-200',
-    hoverRing: 'hover:ring-rose-200',
-    demo: 'Generates building-specific poster QR codes with instant mobile form sync.'
   },
   {
     id: 'workflow',
@@ -108,7 +97,7 @@ const ROLES = [
     email: 'student@campus.edu',
     password: 'student123',
     icon: Users,
-    desc: 'Report barriers, scan QR codes, take awareness quizzes, and view public campus maps.',
+    desc: 'Report barriers, view resolved items, take awareness quizzes, and view public campus maps.',
     gradient: 'from-emerald-500 to-teal-600',
     bgLight: 'bg-emerald-50 text-emerald-700 border-emerald-100',
     hoverRing: 'hover:ring-emerald-200'

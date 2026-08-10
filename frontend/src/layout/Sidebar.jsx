@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, QrCode, BookOpen, Trophy } from 'lucide-react';
+import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, BookOpen, Trophy } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -18,7 +18,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: user?.role === 'STUDENT' ? 'Track My Issues' : 'Issues', path: '/issues', icon: AlertCircle, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN', 'AUDITOR'] },
     { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
-    { name: 'QR Scanner',  path: '/qr-code',  icon: QrCode,          roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Quiz Challenge', path: '/quiz',   icon: Trophy,          roles: ['ADMIN', 'STUDENT'] },
     { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN'] },
