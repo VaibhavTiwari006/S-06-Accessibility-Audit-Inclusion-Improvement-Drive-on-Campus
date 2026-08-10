@@ -124,6 +124,11 @@ const DUMMY_ISSUES = [
   }
 ];
 
+/**
+ * Parses structured floor and category labels from the locationDetails string.
+ * @param {string} details - The raw locationDetails from the database/API.
+ * @returns {object} parsed - An object with floor, category, and trailing details.
+ */
 const parseLocation = (details = '') => {
   const match = details.match(/^\[Floor:\s*([^|]+)\s*\|\s*Type:\s*([^\]]+)\]\s*(.*)$/i);
   if (match) {
@@ -140,6 +145,11 @@ const parseLocation = (details = '') => {
   };
 };
 
+/**
+ * IssueList Page Component
+ * Renders role-based campus accessibility issues reported by students.
+ * Supports upvoting, sorting, filtration, and specific building/barrier reviews.
+ */
 const IssueList = () => {
   const { user } = useAuth();
   const [issues, setIssues] = useState([]);
