@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, QrCode, BookOpen, Calculator, Trophy } from 'lucide-react';
+import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, QrCode, BookOpen, Trophy } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -15,7 +15,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Roadmap',    path: '/roadmap',   icon: Map,             roles: ['ADMIN', 'MAINTENANCE'] },
     { name: 'Buildings',  path: '/buildings', icon: Building2,       roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Audits',     path: '/audits',    icon: ClipboardList,   roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
-    { name: 'Calculator', path: '/calculator', icon: Calculator,     roles: ['ADMIN', 'AUDITOR', 'MAINTENANCE'] },
     { name: user?.role === 'STUDENT' ? 'Track My Issues' : 'Issues', path: '/issues', icon: AlertCircle, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN', 'AUDITOR'] },
     { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },

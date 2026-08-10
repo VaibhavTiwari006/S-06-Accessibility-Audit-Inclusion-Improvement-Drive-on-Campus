@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, ShieldCheck, Map, Users, BarChart3, ChevronRight, 
-  Sparkles, QrCode, BookOpen, Calculator, Wrench, Camera, CheckCircle2, 
+  Sparkles, QrCode, BookOpen, Wrench, Camera, CheckCircle2, 
   UserCheck, Lock, LogIn, Award, Building2, HelpCircle
 } from 'lucide-react';
 import Button from '../components/ui/Button';
@@ -76,17 +76,6 @@ const IMPACTFUL_FEATURES = [
     bgColor: 'bg-sky-50 text-sky-700 border-sky-200',
     hoverRing: 'hover:ring-sky-200',
     demo: 'Interactive quiz with instant answer feedback and etiquette cards.'
-  },
-  {
-    id: 'calculator',
-    icon: Calculator,
-    badge: 'ROI Budgeting',
-    title: 'Low-Cost Improvement Calculator',
-    desc: 'Itemize costs for ramps, tactile paving, signage, and grab bars while ranking fixes by maximum accessibility impact per rupee spent.',
-    color: 'from-teal-500 to-emerald-600',
-    bgColor: 'bg-teal-50 text-teal-700 border-teal-200',
-    hoverRing: 'hover:ring-teal-200',
-    demo: 'Impact vs. Cost matrix maximizing score improvement per budget.'
   }
 ];
 
