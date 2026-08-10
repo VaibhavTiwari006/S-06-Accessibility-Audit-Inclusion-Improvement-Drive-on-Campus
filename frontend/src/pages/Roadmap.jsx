@@ -9,6 +9,11 @@ import { toast } from 'react-toastify';
 import { Card } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 
+/**
+ * Roadmap Workflow Stages Definitions
+ * Defines the sequential milestones for task resolution, mapping status identifiers
+ * to brand-aligned Tailwind theme aesthetics, badges, rings, and Lucide icons.
+ */
 const WORKFLOW_STAGES = [
   { id: 'OPEN', label: 'Reported', icon: <AlertCircle size={18} className="text-red-500" />, ring: 'ring-red-400 bg-red-50', activeBg: 'bg-red-500', line: 'bg-red-300' },
   { id: 'ASSIGNED', label: 'Assigned', icon: <UserCheck size={18} className="text-blue-500" />, ring: 'ring-blue-400 bg-blue-50', activeBg: 'bg-blue-500', line: 'bg-blue-300' },
