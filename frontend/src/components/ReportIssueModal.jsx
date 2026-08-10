@@ -5,6 +5,17 @@ import buildingService from '../services/buildingService';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 
+/**
+ * ReportIssueModal Component
+ * 
+ * Renders an interactive form for students to report physical accessibility barriers on campus.
+ * Supports:
+ * - Building selection from seeded buildings API.
+ * - Floor and Location Category selection for detailed barrier mapping.
+ * - Real-time duplicate detection: cross-references other pending reports matching the same building,
+ *   floor, and area category to prevent duplicate tickets by suggesting upvoting.
+ * - Interactive drag & drop or click photo evidence uploads.
+ */
 const ReportIssueModal = ({ onClose, onSuccess }) => {
   const [buildings, setBuildings] = useState([]);
   const [existingIssues, setExistingIssues] = useState([]);
