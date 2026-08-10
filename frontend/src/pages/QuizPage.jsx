@@ -110,6 +110,15 @@ const INITIAL_LEADERBOARD = [
   { rank: 6, name: "Vikram Malhotra", points: 270, badge: "Accessibility Ally", current: false }
 ];
 
+/**
+ * QuizPage Component
+ * 
+ * Renders the gamified inclusion training and quiz challenge.
+ * Features:
+ * - Interactive multi-choice questions on accessibility rules (WCAG/RPWD).
+ * - Real-time answer evaluation and detailed explanations.
+ * - Score summaries, leaderboard rankings, and daily knowledge fact cards.
+ */
 const QuizPage = () => {
   const { user } = useAuth();
   
