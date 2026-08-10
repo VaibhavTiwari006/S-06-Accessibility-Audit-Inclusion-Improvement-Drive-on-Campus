@@ -12,6 +12,14 @@ import Input from '../components/ui/Input';
 import Modal from '../components/ui/Modal';
 import { useAuth } from '../context/AuthContext';
 
+/**
+ * BuildingList Page Component
+ * 
+ * Renders the campus building inventory, enabling:
+ * - Real-time filtering and search index querying.
+ * - Interactive Leaflet geospatial campus mapping view transitions.
+ * - Add new building details triggers for administrators and auditors.
+ */
 const BuildingList = () => {
   const { user } = useAuth();
   const [buildings, setBuildings] = useState([]);
