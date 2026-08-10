@@ -15,6 +15,14 @@ import ScoreCard from '../components/ScoreCard';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 
+/**
+ * Reports Page Component
+ * 
+ * Generates and downloads detailed reports and analytics summaries:
+ * - Aggregates compliance statistics by category and building department.
+ * - Downloads Executive Summary reports, Advocacy Letters, and Final Audit checklists.
+ * - Displays interactive pie and bar charts depicting barrier breakdowns.
+ */
 const Reports = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
