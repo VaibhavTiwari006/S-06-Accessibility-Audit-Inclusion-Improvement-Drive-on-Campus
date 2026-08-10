@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { useAccessibility } from '../context/AccessibilityContext';
 import { motion } from 'framer-motion';
-import { Eye, Type, Palette, Maximize, Activity, Focus, Bell, Type as TextIcon, Volume2 } from 'lucide-react';
+import { Eye, Type, Palette, Maximize, Activity, Focus, Bell, Type as TextIcon, Volume2, Sparkles } from 'lucide-react';
+
+const BRAILLE_MAP = {
+  'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠓', 'i': '⠊', 'j': '⠚',
+  'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
+  'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭', 'y': '⠽', 'z': '⠵',
+  ' ': '⠀', '1': '⠂', '2': '⠆', '3': '⠒', '4': '⠲', '5': '⠢', '6': '⠖', '7': '⠶', '8': '⠦', '9': '⠔', '0': '⠴'
+};
 
 const AccessibilityPreferences = () => {
   const { 
@@ -16,6 +24,12 @@ const AccessibilityPreferences = () => {
     textToSpeech, toggleTextToSpeech,
     ttsVoice, changeTtsVoice
   } = useAccessibility();
+
+  const [englishText, setEnglishText] = useState('welcome to campus');
+
+  const translateToBraille = (text) => {
+    return text.toLowerCase().split('').map(char => BRAILLE_MAP[char] || char).join('');
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -219,6 +233,78 @@ const AccessibilityPreferences = () => {
             )}
           </div>
         </motion.div>
+      </motion.div>
+
+      {/* Interactive Braille Translator Tool */}
+      <motion.div variants={itemVariants} className="glass-panel p-6 rounded-2xl shadow-soft-md border border-white/60 space-y-5 mt-8">
+        <div>
+          <h2 className="text-xl font-bold mb-2 flex items-center gap-2 text-textMain border-b border-gray-100 pb-3">
+            <Sparkles className="text-primary animate-pulse" size={24} /> Interactive English-to-Braille Translator
+          </h2>
+          <p className="text-sm text-textLight mt-0.5">
+            Type any English sentence or number to watch it translate to Grade 1 Braille cells in real-time.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+          {/* Input text */}
+          <div className="space-y-2">
+            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">English Text Input</label>
+            <textarea
+              value={englishText}
+              onChange={(e) => setEnglishText(e.target.value)}
+              placeholder="Type English words or numbers to translate..."
+              className="w-full h-32 bg-white/55 border border-gray-200 rounded-2xl p-4 text-sm font-semibold text-textMain focus:outline-none focus:ring-2 focus:ring-primary shadow-inner resize-none"
+              maxLength={200}
+            />
+            <div className="text-[10px] text-gray-400 font-bold text-right">
+              {englishText.length}/200 characters
+            </div>
+          </div>
+
+          {/* Output Braille dots */}
+          <div className="space-y-2 flex flex-col">
+            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider">Tactile Braille Output</label>
+            <div className="flex-1 bg-slate-900 border border-slate-800 rounded-2xl p-5 text-center flex flex-col justify-center items-center relative overflow-hidden group shadow-inner min-h-[128px]">
+              <div 
+                className="text-4xl md:text-5xl font-mono text-white tracking-widest leading-relaxed break-all select-all font-bold transition-all duration-300"
+                style={{ textShadow: '0 0 10px rgba(255,255,255,0.2)' }}
+              >
+                {englishText.trim() ? translateToBraille(englishText) : '⠀'}
+              </div>
+              {!englishText.trim() && (
+                <div className="text-xs text-slate-500 font-semibold italic">
+                  Translation will appear here
+                </div>
+              )}
+            </div>
+
+            {/* Quick buttons */}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const val = translateToBraille(englishText);
+                  if (val) {
+                    navigator.clipboard.writeText(val);
+                    toast.success('Braille copied to clipboard!');
+                  }
+                }}
+                disabled={!englishText.trim()}
+                className="flex-1 py-2 border border-gray-200 hover:border-primary/20 hover:bg-primary/5 text-gray-700 disabled:opacity-40 disabled:hover:bg-white text-xs font-bold rounded-xl transition-all cursor-pointer text-center"
+              >
+                Copy Braille Glyphs
+              </button>
+              <button
+                type="button"
+                onClick={() => setEnglishText('')}
+                className="px-4 py-2 border border-gray-200 hover:bg-gray-50 text-gray-500 text-xs font-bold rounded-xl transition-all cursor-pointer text-center"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
       </motion.div>
     </div>
   );
