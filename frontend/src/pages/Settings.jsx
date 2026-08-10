@@ -7,6 +7,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAccessibility } from '../context/AccessibilityContext';
 import userService from '../services/userService';
 
+/**
+ * Settings Page Component
+ * 
+ * Renders settings preferences including tabs for:
+ * - Profile: Manage account details, avatars, and basic details.
+ * - Accessibility Settings: Toggle contrast modes, font scale preferences, and voice preferences.
+ * - System controls and user details modifications.
+ */
 const Settings = () => {
   const { user, logout, updateUser } = useAuth();
   const { 
