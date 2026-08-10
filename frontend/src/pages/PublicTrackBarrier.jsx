@@ -11,6 +11,15 @@ import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { toast } from 'react-toastify';
 
+/**
+ * PublicTrackBarrier Page Component
+ * 
+ * Provides anonymous or direct tracking views for reported barriers via issue IDs.
+ * Features:
+ * - Real-time resolution workflow status indicators (Reported, In Progress, Resolved).
+ * - Inline upvoting mechanics for public engagement.
+ * - Dynamic route linking, back navigation, and admin note logs.
+ */
 const PublicTrackBarrier = () => {
   const { issueId } = useParams();
   const navigate = useNavigate();
