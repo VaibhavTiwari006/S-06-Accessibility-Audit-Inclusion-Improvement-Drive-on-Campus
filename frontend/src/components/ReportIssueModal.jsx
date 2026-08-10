@@ -58,6 +58,19 @@ const parseLocation = (details = '') => {
   };
 };
 
+const BLOCKED_PROFANITIES = [
+  'fuck', 'shit', 'asshole', 'bitch', 'bastard', 'cunt', 'dick', 'pussy', 'idiot', 'stupid',
+  'saala', 'kamine', 'harami', 'chutiya', 'bhenchod', 'madarchod', 'gandu', 'abuse', 'offensive'
+];
+
+const containsProfanity = (text = '') => {
+  const lowercase = text.toLowerCase();
+  return BLOCKED_PROFANITIES.some(word => {
+    const regex = new RegExp(`\\b${word}\\b`, 'i');
+    return regex.test(lowercase);
+  });
+};
+
 const ReportIssueModal = ({ onClose, onSuccess }) => {
   const [buildings, setBuildings] = useState([]);
   const [existingIssues, setExistingIssues] = useState([]);
@@ -71,6 +84,7 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
   });
   const [loading, setLoading] = useState(false);
   const [isDifferentConfirmed, setIsDifferentConfirmed] = useState(false);
+  const [profanityWarning, setProfanityWarning] = useState('');
 
   // Reset confirmation checkbox on category/floor/building change
   useEffect(() => {
@@ -86,7 +100,19 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
     issueService.getAllIssues().then(setExistingIssues).catch(() => {});
   }, []);
 
-  const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handle = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+    
+    if (name === 'description' || name === 'locationDetails') {
+      const otherValue = name === 'description' ? form.locationDetails : form.description;
+      if (containsProfanity(value) || containsProfanity(otherValue)) {
+        setProfanityWarning('Blocked language detected: Please keep comments constructive and respectful.');
+      } else {
+        setProfanityWarning('');
+      }
+    }
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
@@ -151,6 +177,10 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
 
   const submit = async (e) => {
     e.preventDefault();
+    if (containsProfanity(form.description) || containsProfanity(form.locationDetails)) {
+      toast.error('Blocked language detected: Your submission contains inappropriate words.');
+      return;
+    }
     try {
       setLoading(true);
       const payload = {
@@ -284,8 +314,17 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
           <div>
             <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Detailed Description *</label>
             <textarea name="description" value={form.description} onChange={handle} required rows={3}
-              className="w-full bg-white/70 border border-gray-205 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain resize-none"
+              className={`w-full bg-white/70 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all font-medium resize-none ${
+                profanityWarning 
+                  ? 'border-red-300 focus:ring-red-400 focus:border-red-500 text-red-900' 
+                  : 'border-gray-205 focus:ring-danger/40 focus:border-danger'
+              }`}
               placeholder="Describe the accessibility barrier in detail. What is the problem? Who is affected?" />
+            {profanityWarning && (
+              <p className="text-[11px] text-red-650 font-bold mt-1.5 flex items-center gap-1">
+                <AlertCircle size={12} /> {profanityWarning}
+              </p>
+            )}
           </div>
 
           <div>
@@ -363,7 +402,7 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
             <button type="button" onClick={onClose} className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all">Cancel</button>
             <button 
               type="submit" 
-              disabled={loading || (form.buildingId && duplicates.length > 0 && !isDifferentConfirmed)} 
+              disabled={loading || !!profanityWarning || (form.buildingId && duplicates.length > 0 && !isDifferentConfirmed)} 
               className="px-6 py-2.5 text-sm font-bold bg-danger text-white rounded-xl shadow-md hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transition-all disabled:opacity-40 disabled:hover:translate-y-0 disabled:cursor-not-allowed"
             >
               {loading ? 'Submitting...' : 'Submit Report'}
