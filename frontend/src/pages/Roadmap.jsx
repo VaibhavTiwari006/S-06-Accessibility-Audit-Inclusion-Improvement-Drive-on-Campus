@@ -122,10 +122,10 @@ const Roadmap = () => {
           </div>
           <div className="flex flex-wrap gap-4">
             <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center gap-4">
-              <div className="p-3 bg-white rounded-xl shadow-xs text-primary"><IndianRupee size={20} /></div>
+              <div className="p-3 bg-white rounded-xl shadow-xs text-primary"><AlertCircle size={20} /></div>
               <div>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Est. Budget</p>
-                <p className="text-lg font-extrabold text-gray-800">₹{calculateTotalCost().toLocaleString()}</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Pending Tasks</p>
+                <p className="text-lg font-extrabold text-gray-800">{tasks.filter(t => t.workflowStatus !== 'COMPLETED').length}</p>
               </div>
             </div>
             <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center gap-4">
@@ -242,15 +242,11 @@ const Roadmap = () => {
                     {task.description}
                   </p>
 
-                  {/* Location + Cost */}
+                  {/* Location */}
                   <div className="pt-2.5 mt-auto border-t border-gray-100 flex items-center justify-between">
-                    <span className="text-xs text-gray-500 font-medium truncate max-w-[140px] flex items-center gap-1">
+                    <span className="text-xs text-gray-500 font-medium truncate flex items-center gap-1">
                       <MapPin size={12} className="text-red-400 flex-shrink-0" />
                       {task.buildingName || 'Campus Wide'}
-                    </span>
-                    <span className="text-xs font-bold text-gray-700 flex items-center gap-0.5">
-                      <IndianRupee size={11} />
-                      {(task.estimatedCost || 25000).toLocaleString()}
                     </span>
                   </div>
 

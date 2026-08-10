@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
-import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, IndianRupee, Trophy, BookOpen } from 'lucide-react';
+import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, Camera, Trophy, BookOpen } from 'lucide-react';
 import dashboardService from '../services/dashboardService';
 import InclusionLeaderboard from '../components/InclusionLeaderboard';
 import AccessibilityTrendsChart from '../components/AccessibilityTrendsChart';
@@ -76,7 +76,7 @@ const AdminDashboard = ({ stats, navigate }) => (
         <ScoreCard title="Total Users" value={stats?.totalUsers ?? '—'} icon={<Users size={24} aria-hidden="true" />} colorClass="text-purple-700 bg-purple-100" bgImage="/card_users.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Est. Remediation" value={stats?.totalEstimatedCost ? `₹${(stats.totalEstimatedCost/1000).toFixed(1)}k` : '—'} icon={<IndianRupee size={24} aria-hidden="true" />} colorClass="text-emerald-700 bg-emerald-100" onClick={() => navigate('/reports')} bgImage="/card_remediation.jpg" />
+        <ScoreCard title="Evidence Uploads" value={stats?.totalEvidence ?? '—'} icon={<Camera size={24} aria-hidden="true" />} colorClass="text-emerald-700 bg-emerald-100" onClick={() => navigate('/evidence')} bgImage="/card_remediation.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Community Events" value={(stats?.totalAwarenessCampaigns || 0) + (stats?.totalFeedbackSessions || 0)} icon={<HeartHandshake size={24} aria-hidden="true" />} colorClass="text-pink-700 bg-pink-100" onClick={() => navigate('/community')} bgImage="/card_community.jpg" />

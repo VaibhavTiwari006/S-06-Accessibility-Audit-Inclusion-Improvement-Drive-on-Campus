@@ -456,12 +456,8 @@ const EvidenceGallery = () => {
                     {selectedImage.aiRemediationSpec.proposedSolution}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-emerald-100 font-semibold">
-                    <div className="p-2.5 bg-white rounded-xl border border-emerald-100">
-                      <span className="text-[10px] text-gray-400 block uppercase">Estimated Cost</span>
-                      <span className="text-emerald-700 font-bold">{selectedImage.aiRemediationSpec.estimatedCostRange}</span>
-                    </div>
-                    <div className="p-2.5 bg-white rounded-xl border border-emerald-100">
+                  <div className="pt-2 border-t border-emerald-100 font-semibold">
+                    <div className="p-2.5 bg-white rounded-xl border border-emerald-100 text-xs">
                       <span className="text-[10px] text-gray-400 block uppercase">Est. Work Time</span>
                       <span className="text-emerald-700 font-bold">{selectedImage.aiRemediationSpec.estimatedTimeDays}</span>
                     </div>
