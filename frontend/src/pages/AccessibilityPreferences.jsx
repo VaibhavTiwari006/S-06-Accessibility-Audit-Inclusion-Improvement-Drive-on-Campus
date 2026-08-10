@@ -4,6 +4,10 @@ import { useAccessibility } from '../context/AccessibilityContext';
 import { motion } from 'framer-motion';
 import { Eye, Type, Palette, Maximize, Activity, Focus, Bell, Type as TextIcon, Volume2, Sparkles } from 'lucide-react';
 
+/**
+ * Grade 1 Braille Glyphs Mapping Dictionary
+ * Maps English alphanumeric characters to their Unicode Braille cell patterns.
+ */
 const BRAILLE_MAP = {
   'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠓', 'i': '⠊', 'j': '⠚',
   'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏', 'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞',
@@ -11,6 +15,11 @@ const BRAILLE_MAP = {
   ' ': '⠀', '1': '⠂', '2': '⠆', '3': '⠒', '4': '⠲', '5': '⠢', '6': '⠖', '7': '⠶', '8': '⠦', '9': '⠔', '0': '⠴'
 };
 
+/**
+ * AccessibilityPreferences Page Component
+ * Renders high-end configuration controls for various visual, text-to-speech,
+ * and cognitive accessibility features, including an interactive English-to-Braille translator.
+ */
 const AccessibilityPreferences = () => {
   const { 
     highContrast, toggleHighContrast, 
