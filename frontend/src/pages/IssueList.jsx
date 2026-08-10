@@ -138,9 +138,35 @@ const parseLocation = (details = '') => {
       rest: match[3].trim()
     };
   }
+  
+  const lowercase = details.toLowerCase();
+  let floor = 'Ground Floor';
+  if (lowercase.includes('first') || lowercase.includes('1st') || lowercase.includes('floor 1')) {
+    floor = '1st Floor';
+  } else if (lowercase.includes('second') || lowercase.includes('2nd') || lowercase.includes('floor 2')) {
+    floor = '2nd Floor';
+  } else if (lowercase.includes('third') || lowercase.includes('3rd') || lowercase.includes('floor 3')) {
+    floor = '3rd Floor';
+  } else if (lowercase.includes('fourth') || lowercase.includes('4th') || lowercase.includes('above')) {
+    floor = '4th Floor & Above';
+  }
+  
+  let category = 'Other';
+  if (lowercase.includes('washroom') || lowercase.includes('toilet') || lowercase.includes('restroom')) {
+    category = 'Washroom';
+  } else if (lowercase.includes('entrance') || lowercase.includes('gate') || lowercase.includes('foyer') || lowercase.includes('lobby') || lowercase.includes('ramp')) {
+    category = 'Entrance';
+  } else if (lowercase.includes('hall') || lowercase.includes('classroom') || lowercase.includes('lab') || lowercase.includes('lecture')) {
+    category = 'Lecture Hall';
+  } else if (lowercase.includes('elevator') || lowercase.includes('lift')) {
+    category = 'Elevator';
+  } else if (lowercase.includes('corridor') || lowercase.includes('path') || lowercase.includes('walkway') || lowercase.includes('passage')) {
+    category = 'Corridor';
+  }
+  
   return {
-    floor: null,
-    category: null,
+    floor,
+    category,
     rest: details
   };
 };

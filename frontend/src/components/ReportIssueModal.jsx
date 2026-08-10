@@ -16,6 +16,48 @@ import { motion } from 'framer-motion';
  *   floor, and area category to prevent duplicate tickets by suggesting upvoting.
  * - Interactive drag & drop or click photo evidence uploads.
  */
+const parseLocation = (details = '') => {
+  const match = details.match(/^\[Floor:\s*([^|]+)\s*\|\s*Type:\s*([^\]]+)\]\s*(.*)$/i);
+  if (match) {
+    return {
+      floor: match[1].trim(),
+      category: match[2].trim(),
+      rest: match[3].trim()
+    };
+  }
+  
+  const lowercase = details.toLowerCase();
+  let floor = 'Ground Floor';
+  if (lowercase.includes('first') || lowercase.includes('1st') || lowercase.includes('floor 1')) {
+    floor = '1st Floor';
+  } else if (lowercase.includes('second') || lowercase.includes('2nd') || lowercase.includes('floor 2')) {
+    floor = '2nd Floor';
+  } else if (lowercase.includes('third') || lowercase.includes('3rd') || lowercase.includes('floor 3')) {
+    floor = '3rd Floor';
+  } else if (lowercase.includes('fourth') || lowercase.includes('4th') || lowercase.includes('above')) {
+    floor = '4th Floor & Above';
+  }
+  
+  let category = 'Other';
+  if (lowercase.includes('washroom') || lowercase.includes('toilet') || lowercase.includes('restroom')) {
+    category = 'Washroom';
+  } else if (lowercase.includes('entrance') || lowercase.includes('gate') || lowercase.includes('foyer') || lowercase.includes('lobby') || lowercase.includes('ramp')) {
+    category = 'Entrance';
+  } else if (lowercase.includes('hall') || lowercase.includes('classroom') || lowercase.includes('lab') || lowercase.includes('lecture')) {
+    category = 'Lecture Hall';
+  } else if (lowercase.includes('elevator') || lowercase.includes('lift')) {
+    category = 'Elevator';
+  } else if (lowercase.includes('corridor') || lowercase.includes('path') || lowercase.includes('walkway') || lowercase.includes('passage')) {
+    category = 'Corridor';
+  }
+  
+  return {
+    floor,
+    category,
+    rest: details
+  };
+};
+
 const ReportIssueModal = ({ onClose, onSuccess }) => {
   const [buildings, setBuildings] = useState([]);
   const [existingIssues, setExistingIssues] = useState([]);
@@ -73,10 +115,12 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
 
   // Find duplicates matching current building, floor, and category
   const duplicates = existingIssues.filter(issue => {
-    const sameBuilding = issue.building?.id === parseInt(form.buildingId);
-    const hasCategoryPrefix = issue.locationDetails?.includes(`[Floor: ${form.floor} | Type: ${form.locationCategory}]`);
+    const sameBuilding = (issue.building?.id === parseInt(form.buildingId)) || (issue.buildingId === parseInt(form.buildingId));
+    const parsed = parseLocation(issue.locationDetails);
+    const sameFloor = parsed.floor === form.floor;
+    const sameCategory = parsed.category === form.locationCategory;
     const isNotResolved = issue.status !== 'COMPLETED' && issue.status !== 'RESOLVED' && issue.status !== 'FIXED';
-    return sameBuilding && hasCategoryPrefix && isNotResolved;
+    return sameBuilding && sameFloor && sameCategory && isNotResolved;
   });
 
   const handleUpvote = (issueId) => {
