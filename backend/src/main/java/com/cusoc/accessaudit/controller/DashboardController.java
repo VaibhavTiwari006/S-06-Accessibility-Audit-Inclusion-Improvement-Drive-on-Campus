@@ -18,6 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Tag(name = "Dashboard", description = "Endpoints for accessibility audit dashboard statistics")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * DashboardController REST Controller
+ * 
+ * Provides metrics and statistics aggregation services for application landing pages:
+ * - Aggregates building counts, active audits percentages, unresolved barriers list,
+ *   and maintenance task progression counts.
+ */
 public class DashboardController {
 
     private final DashboardService dashboardService;
