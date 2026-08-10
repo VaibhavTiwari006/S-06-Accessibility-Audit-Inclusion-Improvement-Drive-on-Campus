@@ -17,6 +17,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pilot-improvements")
 @RequiredArgsConstructor
+/**
+ * PilotImprovementController REST Controller
+ * 
+ * Manages community pilot proposals:
+ * - Creates suggestions and community votes triggers.
+ * - Handles administrator proposal status approvals.
+ * - Resolves voter state counters.
+ */
 public class PilotImprovementController {
 
     private final PilotImprovementService pilotImprovementService;
