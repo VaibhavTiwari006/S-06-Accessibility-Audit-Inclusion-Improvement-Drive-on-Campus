@@ -19,6 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Tag(name = "Reports", description = "Endpoints for exporting accessibility compliance reports in PDF format")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * ReportController REST Controller
+ * 
+ * Handles report export download routes:
+ * - Generates PDF compliance documents for executives.
+ * - Generates advocacy letter formats.
+ * - Streams file arrays directly to the client.
+ */
 public class ReportController {
 
     private final ReportService reportService;
