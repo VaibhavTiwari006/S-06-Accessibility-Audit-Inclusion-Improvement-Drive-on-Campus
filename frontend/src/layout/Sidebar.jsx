@@ -4,6 +4,14 @@ import { useAuth } from '../context/AuthContext';
 import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, BookOpen, Trophy } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 
+/**
+ * Sidebar Component
+ * 
+ * Renders a glassmorphism floating sidebar navigation with:
+ * - Expand/collapse animations and mobile overlays.
+ * - Dynamic navigation item compilation filtered by user role access control lists.
+ * - Context-driven user account status indicator and session termination toggles.
+ */
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { user } = useAuth();
   const location = useLocation();
