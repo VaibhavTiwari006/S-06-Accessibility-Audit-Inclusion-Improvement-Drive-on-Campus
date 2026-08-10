@@ -21,6 +21,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Audit Checklists", description = "Endpoints for managing accessibility audit checklist questions")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * AuditChecklistController REST Controller
+ * 
+ * Manages specific accessibility checklist questions:
+ * - Creates, reads, updates, and deletes individual checklist items.
+ * - Restricts checklist modifications to administrator/auditor roles.
+ */
 public class AuditChecklistController {
 
     private final AuditChecklistService checklistService;
