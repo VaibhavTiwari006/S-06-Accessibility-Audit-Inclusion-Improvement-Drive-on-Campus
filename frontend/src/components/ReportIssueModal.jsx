@@ -60,15 +60,40 @@ const parseLocation = (details = '') => {
 
 const BLOCKED_PROFANITIES = [
   'fuck', 'shit', 'asshole', 'bitch', 'bastard', 'cunt', 'dick', 'pussy', 'idiot', 'stupid',
-  'saala', 'kamine', 'harami', 'chutiya', 'bhenchod', 'madarchod', 'gandu', 'abuse', 'offensive'
+  'saala', 'kamine', 'harami', 'chutiya', 'bhenchod', 'madarchod', 'gandu', 'abuse', 'offensive',
+  'bastard', 'crap', 'garbage', 'fck', 'sh1t', 'ass'
 ];
 
 const containsProfanity = (text = '') => {
+  if (!text) return false;
   const lowercase = text.toLowerCase();
-  return BLOCKED_PROFANITIES.some(word => {
-    const regex = new RegExp(`\\b${word}\\b`, 'i');
+  
+  // 1. Direct word boundary check
+  const hasWordMatch = BLOCKED_PROFANITIES.some(word => {
+    const regex = new RegExp(`\\b${word}\\w*\\b`, 'i');
     return regex.test(lowercase);
   });
+  if (hasWordMatch) return true;
+
+  // 2. Normalize by removing all spaces, dots, hyphens, stars, underscores
+  const normalized = lowercase.replace(/[^a-z0-9]/g, '');
+  const hasNormalizedMatch = BLOCKED_PROFANITIES.some(word => normalized.includes(word));
+  if (hasNormalizedMatch) return true;
+
+  // 3. Check for character substitutions (e.g. '@' -> 'a', '$' -> 's')
+  const substituted = lowercase
+    .replace(/@/g, 'a')
+    .replace(/\$/g, 's')
+    .replace(/0/g, 'o')
+    .replace(/1/g, 'i')
+    .replace(/3/g, 'e')
+    .replace(/4/g, 'a')
+    .replace(/5/g, 's')
+    .replace(/7/g, 't')
+    .replace(/[^a-z0-9]/g, '');
+  
+  const hasSubstitutedMatch = BLOCKED_PROFANITIES.some(word => substituted.includes(word));
+  return hasSubstitutedMatch;
 };
 
 const ReportIssueModal = ({ onClose, onSuccess }) => {
