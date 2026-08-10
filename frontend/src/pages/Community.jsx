@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   HeartHandshake, Users, Map, Download, CheckCircle,
   Calendar, MessageSquare, Lightbulb, Plus, MapPin, Megaphone,
-  ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp
+  ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp, ChevronRight
 } from 'lucide-react';
 import api from '../services/api';
 import pilotService from '../services/pilotService';
@@ -35,6 +36,7 @@ const categoryIcon = {
 
 const Community = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [feedbackSessions, setFeedbackSessions] = useState([]);
   const [campaigns, setCampaigns] = useState([]);
   const [pilots, setPilots] = useState([]);
@@ -456,20 +458,21 @@ const Community = () => {
             <h3 className="text-lg font-semibold text-textMain mb-4 flex items-center gap-2">
               <Map className="text-secondary" /> Resources
             </h3>
-            <a
-              href="/tactile-map.jpg"
-              download="Tactile_Campus_Map.jpg"
-              className="p-4 border border-gray-100 rounded-lg bg-white/50 hover:border-primary/30 transition-colors group cursor-pointer block"
-              onClick={() => toast.success('Tactile Campus Map downloaded!')}
+            <div
+              onClick={() => navigate('/map')}
+              className="p-4 border border-gray-100 rounded-lg bg-white/50 hover:border-primary/30 transition-colors group cursor-pointer block hover:bg-white/80 shadow-2xs"
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h4 className="font-medium text-textMain text-sm">Tactile Campus Map</h4>
-                  <p className="text-xs text-textLight mt-1">High-contrast, screen-reader friendly map of CU.</p>
+                  <h4 className="font-bold text-textMain text-sm flex items-center gap-1.5">
+                    Interactive Accessibility Map
+                    <span className="text-[9px] bg-emerald-500/10 text-emerald-600 px-1.5 py-0.5 rounded-md uppercase font-bold">Interactive</span>
+                  </h4>
+                  <p className="text-xs text-textLight mt-1 font-medium">View accessible routes, ramps, and elevator statuses in real-time across Chandigarh University.</p>
                 </div>
-                <Download size={18} className="text-gray-400 group-hover:text-primary transition-colors" />
+                <ChevronRight size={18} className="text-gray-400 group-hover:text-primary transition-all group-hover:translate-x-0.5" />
               </div>
-            </a>
+            </div>
             <a
               href="/wcag_checklist.md"
               download="WCAG_2.1_Checklist.md"
