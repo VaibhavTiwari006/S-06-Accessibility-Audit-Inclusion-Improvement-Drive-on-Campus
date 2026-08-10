@@ -10,6 +10,11 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../context/AuthContext';
 import ProposePilotModal from '../components/ProposePilotModal';
 
+/**
+ * Community Pilot Proposal Status Styling Configuration
+ * Maps database-backed proposal statuses to their visual styling tags, border tints,
+ * and Lucide status icons.
+ */
 const statusConfig = {
   PROPOSED:    { label: 'Proposed',    color: 'bg-yellow-50 text-yellow-700 border-yellow-200',  icon: <Clock size={12} /> },
   APPROVED:    { label: 'Approved',    color: 'bg-blue-50 text-blue-700 border-blue-200',        icon: <CheckCircle2 size={12} /> },
