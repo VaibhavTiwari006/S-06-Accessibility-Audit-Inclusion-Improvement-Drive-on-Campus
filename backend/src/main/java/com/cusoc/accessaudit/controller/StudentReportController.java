@@ -30,6 +30,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Student Reports", description = "Endpoints for student accessibility barrier reports")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * StudentReportController REST Controller
+ * 
+ * Exposes API endpoints for student barrier submissions:
+ * - Creates reported issue tickets for accessibility physical/digital barriers.
+ * - Handles admin status updates and remarks tracking.
+ * - Queries reports by building, status, or reporting student.
+ */
 public class StudentReportController {
 
     private final StudentReportService studentReportService;
