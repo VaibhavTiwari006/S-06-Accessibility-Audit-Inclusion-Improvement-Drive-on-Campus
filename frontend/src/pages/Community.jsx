@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   HeartHandshake, Users, Map, Download, CheckCircle,
   Calendar, MessageSquare, Lightbulb, Plus, MapPin, Megaphone,
-  DollarSign, ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp
+  ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp
 } from 'lucide-react';
 import api from '../services/api';
 import pilotService from '../services/pilotService';
@@ -242,9 +242,6 @@ const Community = () => {
                     <div className="flex items-center gap-3">
                       {pilot.location && (
                         <span className="flex items-center gap-1"><MapPin size={11} />{pilot.location}</span>
-                      )}
-                      {pilot.estimatedCost != null && (
-                        <span className="flex items-center gap-1"><DollarSign size={11} />₹{pilot.estimatedCost?.toLocaleString()}</span>
                       )}
                     </div>
                     {pilot.impactLevel && (

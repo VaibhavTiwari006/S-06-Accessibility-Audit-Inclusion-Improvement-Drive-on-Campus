@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Lightbulb, MapPin, DollarSign, Tag, BarChart2 } from 'lucide-react';
+import { X, Lightbulb, MapPin, Tag, BarChart2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import pilotService from '../services/pilotService';
 
@@ -11,7 +11,6 @@ const ProposePilotModal = ({ onClose, onSuccess }) => {
     title: '',
     description: '',
     location: '',
-    estimatedCost: '',
     impactLevel: 'MEDIUM',
     category: 'OTHER',
   });
@@ -29,7 +28,7 @@ const ProposePilotModal = ({ onClose, onSuccess }) => {
       setSubmitting(true);
       await pilotService.propose({
         ...form,
-        estimatedCost: form.estimatedCost ? parseFloat(form.estimatedCost) : null,
+        estimatedCost: null,
       });
       toast.success('Pilot proposal submitted successfully!');
       onSuccess();
@@ -90,34 +89,17 @@ const ProposePilotModal = ({ onClose, onSuccess }) => {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-5">
-            <div>
-              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">
-                <MapPin size={13} className="inline mr-1 text-primary" />Location
-              </label>
-              <input
-                name="location"
-                value={form.location}
-                onChange={handleChange}
-                placeholder="e.g., Block A, Ground"
-                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">
-                <DollarSign size={13} className="inline mr-1 text-success" />Est. Cost (₹)
-              </label>
-              <input
-                name="estimatedCost"
-                value={form.estimatedCost}
-                onChange={handleChange}
-                type="number"
-                min="0"
-                step="100"
-                placeholder="e.g., 2500"
-                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
-              />
-            </div>
+          <div>
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">
+              <MapPin size={13} className="inline mr-1 text-primary" />Location
+            </label>
+            <input
+              name="location"
+              value={form.location}
+              onChange={handleChange}
+              placeholder="e.g., Block A, Ground"
+              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-5">
