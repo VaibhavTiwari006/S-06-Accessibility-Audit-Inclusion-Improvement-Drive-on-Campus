@@ -20,6 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @Tag(name = "Authentication", description = "Endpoints for user registration and authentication")
+/**
+ * AuthController REST Controller
+ * 
+ * Manages user access control operations:
+ * - Direct login authentication yielding JWT Bearer tokens.
+ * - Public self-registration requests for new student accounts.
+ */
 public class AuthController {
 
     private final AuthService authService;
