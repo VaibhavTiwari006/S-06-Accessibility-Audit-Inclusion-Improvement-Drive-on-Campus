@@ -29,6 +29,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Evidence", description = "Endpoints for audit photo evidence upload and retrieval")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * EvidenceController REST Controller
+ * 
+ * Manages accessibility barrier evidence asset files:
+ * - Handles multipart file uploads of physical photo proofs.
+ * - Streams file resource payloads dynamically.
+ * - Provides query listing and deletion utilities.
+ */
 public class EvidenceController {
 
     private final EvidenceService evidenceService;
