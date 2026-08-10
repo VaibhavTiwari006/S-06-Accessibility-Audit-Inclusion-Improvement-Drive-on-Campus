@@ -31,6 +31,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Audits", description = "Endpoints for assigning, drafting, submitting, and reviewing accessibility audits")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * AuditController REST Controller
+ * 
+ * Handles client requests relating to accessibility audits:
+ * - Starting/initiating building audit checklists.
+ * - Saving active draft answers, scores, and remarks.
+ * - Finalized submissions and supervisor verification approval routes.
+ */
 public class AuditController {
 
     private final AuditService auditService;
