@@ -22,6 +22,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Users", description = "Endpoints for managing users and profiles")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * UserController REST Controller
+ * 
+ * Manages user accounts and profiles profiles:
+ * - Queries profiles listings and auditor rosters.
+ * - Handles current user update profiles forms.
+ * - Admin permissions override mapping.
+ */
 public class UserController {
 
     private final UserService userService;
