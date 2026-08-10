@@ -124,12 +124,57 @@ const DUMMY_ISSUES = [
   }
 ];
 
+const parseLocation = (details = '') => {
+  const match = details.match(/^\[Floor:\s*([^|]+)\s*\|\s*Type:\s*([^\]]+)\]\s*(.*)$/i);
+  if (match) {
+    return {
+      floor: match[1].trim(),
+      category: match[2].trim(),
+      rest: match[3].trim()
+    };
+  }
+  return {
+    floor: null,
+    category: null,
+    rest: details
+  };
+};
+
 const IssueList = () => {
   const { user } = useAuth();
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState(null);
+
+  const getUpvotesCount = (issueId) => {
+    const stored = localStorage.getItem(`upvotes-count-${issueId}`);
+    if (stored) return parseInt(stored);
+    const defaultSeed = (issueId % 7) + 1; 
+    localStorage.setItem(`upvotes-count-${issueId}`, defaultSeed.toString());
+    return defaultSeed;
+  };
+
+  const isUpvoted = (issueId) => {
+    return localStorage.getItem(`upvoted-issue-${issueId}`) === 'true';
+  };
+
+  const handleUpvote = (issueId) => {
+    const key = `upvoted-issue-${issueId}`;
+    const alreadyUpvoted = localStorage.getItem(key) === 'true';
+    const currentCount = getUpvotesCount(issueId);
+
+    if (alreadyUpvoted) {
+      localStorage.removeItem(key);
+      localStorage.setItem(`upvotes-count-${issueId}`, Math.max(1, currentCount - 1).toString());
+      toast.info('Upvote removed.');
+    } else {
+      localStorage.setItem(key, 'true');
+      localStorage.setItem(`upvotes-count-${issueId}`, (currentCount + 1).toString());
+      toast.success('Thank you! Issue upvoted to increase resolution priority.');
+    }
+    setIssues(prev => [...prev]);
+  };
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
@@ -313,10 +358,24 @@ const IssueList = () => {
 
                   <p className="text-sm text-textLight mb-4 leading-relaxed">{issue.description}</p>
 
-                  <div className="text-sm font-medium text-textLight flex items-center gap-2 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
-                    <div className="bg-white p-1.5 rounded-lg shadow-sm text-gray-400"><MapPin size={14} /></div> 
-                    {issue.locationDetails || 'Location not specified'}
-                  </div>
+                  {/* Categorization Badges */}
+                  {(() => {
+                    const parsed = parseLocation(issue.locationDetails);
+                    return (
+                      <div className="space-y-2 mb-4">
+                        {parsed.floor && (
+                          <div className="flex gap-1.5 flex-wrap">
+                            <span className="px-2 py-0.5 rounded-lg bg-red-50 text-red-700 text-[10px] font-extrabold border border-red-100">{parsed.floor}</span>
+                            <span className="px-2 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 text-[10px] font-extrabold border border-indigo-100">{parsed.category}</span>
+                          </div>
+                        )}
+                        <div className="text-sm font-medium text-textLight flex items-center gap-2 bg-gray-50 p-2.5 rounded-xl border border-gray-100">
+                          <div className="bg-white p-1.5 rounded-lg shadow-sm text-gray-400"><MapPin size={14} /></div> 
+                          <span className="truncate">{parsed.rest || 'Location not specified'}</span>
+                        </div>
+                      </div>
+                    );
+                  })()}
 
                   {issue.adminNotes && (
                     <div className="mt-4 bg-primary/5 border border-primary/20 text-primary-dark text-xs p-3 rounded-xl shadow-inner">
@@ -326,7 +385,24 @@ const IssueList = () => {
                   )}
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-gray-100 flex justify-end items-center gap-2">
+                <div className="mt-5 pt-4 border-t border-gray-100 flex justify-between items-center gap-2">
+                  <div>
+                    {issue.status !== 'RESOLVED' && issue.status !== 'COMPLETED' && issue.status !== 'FIXED' && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleUpvote(issue.id);
+                        }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all ${
+                          isUpvoted(issue.id)
+                            ? 'bg-amber-500 text-white shadow-2xs hover:bg-amber-600'
+                            : 'bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200'
+                        }`}
+                      >
+                        👍 {isUpvoted(issue.id) ? 'Upvoted' : 'Upvote'} ({getUpvotesCount(issue.id)})
+                      </button>
+                    )}
+                  </div>
                   <Button 
                     variant="ghost"
                     size="sm"
@@ -411,10 +487,23 @@ const IssueList = () => {
               <div className="flex-1 overflow-y-auto p-6 space-y-4">
                 <p className="text-sm text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-xl border border-gray-100">{selectedIssue.description}</p>
                 
-                <div className="text-sm font-medium text-gray-600 flex items-center gap-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                  <div className="bg-white p-1.5 rounded-lg shadow-xs"><MapPin size={16} className="text-gray-400" /></div>
-                  {selectedIssue.locationDetails || 'Location not specified'}
-                </div>
+                 {(() => {
+                   const parsed = parseLocation(selectedIssue.locationDetails);
+                   return (
+                     <div className="space-y-2">
+                       {parsed.floor && (
+                         <div className="flex gap-1.5 flex-wrap">
+                           <span className="px-2 py-0.5 rounded-lg bg-red-50 text-red-700 text-[10px] font-extrabold border border-red-100">{parsed.floor}</span>
+                           <span className="px-2 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 text-[10px] font-extrabold border border-indigo-100">{parsed.category}</span>
+                         </div>
+                       )}
+                       <div className="text-sm font-medium text-gray-600 flex items-center gap-2 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                         <div className="bg-white p-1.5 rounded-lg shadow-xs"><MapPin size={16} className="text-gray-400" /></div>
+                         <span>{parsed.rest || 'Location not specified'}</span>
+                       </div>
+                     </div>
+                   );
+                 })()}
 
                 {selectedIssue.photoUrl && (
                   <div className="space-y-2">

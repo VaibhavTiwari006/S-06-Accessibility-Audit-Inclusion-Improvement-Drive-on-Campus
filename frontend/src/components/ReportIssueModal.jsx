@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, AlertCircle, Camera, Sparkles, Upload } from 'lucide-react';
+import { X, AlertCircle, Camera, Sparkles, Upload, MapPin, DollarSign, Tag } from 'lucide-react';
 import issueService from '../services/issueService';
 import buildingService from '../services/buildingService';
 import { toast } from 'react-toastify';
@@ -7,7 +7,15 @@ import { motion } from 'framer-motion';
 
 const ReportIssueModal = ({ onClose, onSuccess }) => {
   const [buildings, setBuildings] = useState([]);
-  const [form, setForm] = useState({ buildingId: '', description: '', locationDetails: '', photoUrl: '' });
+  const [existingIssues, setExistingIssues] = useState([]);
+  const [form, setForm] = useState({ 
+    buildingId: '', 
+    description: '', 
+    locationDetails: '', 
+    photoUrl: '',
+    floor: 'Ground Floor',
+    locationCategory: 'Entrance'
+  });
   const [loading, setLoading] = useState(false);
 
   const fileInputRef = useRef(null);
@@ -16,6 +24,7 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
 
   useEffect(() => {
     buildingService.getAllBuildings().then(setBuildings).catch(() => {});
+    issueService.getAllIssues().then(setExistingIssues).catch(() => {});
   }, []);
 
   const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -51,6 +60,34 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
     }
   };
 
+  // Find duplicates matching current building, floor, and category
+  const duplicates = existingIssues.filter(issue => {
+    const sameBuilding = issue.building?.id === parseInt(form.buildingId);
+    const hasCategoryPrefix = issue.locationDetails?.includes(`[Floor: ${form.floor} | Type: ${form.locationCategory}]`);
+    const isNotResolved = issue.status !== 'COMPLETED' && issue.status !== 'RESOLVED' && issue.status !== 'FIXED';
+    return sameBuilding && hasCategoryPrefix && isNotResolved;
+  });
+
+  const handleUpvote = (issueId) => {
+    const storageKey = `upvoted-issue-${issueId}`;
+    const alreadyUpvoted = localStorage.getItem(storageKey) === 'true';
+    
+    if (alreadyUpvoted) {
+      localStorage.removeItem(storageKey);
+      const currentCount = parseInt(localStorage.getItem(`upvotes-count-${issueId}`) || '1');
+      localStorage.setItem(`upvotes-count-${issueId}`, Math.max(1, currentCount - 1).toString());
+      toast.info('Upvote removed.');
+    } else {
+      localStorage.setItem(storageKey, 'true');
+      const currentCount = parseInt(localStorage.getItem(`upvotes-count-${issueId}`) || '1');
+      localStorage.setItem(`upvotes-count-${issueId}`, (currentCount + 1).toString());
+      toast.success('Thank you! Issue upvoted to increase resolution priority.');
+    }
+    
+    onSuccess();
+    onClose();
+  };
+
   const submit = async (e) => {
     e.preventDefault();
     try {
@@ -58,7 +95,7 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
       const payload = {
         buildingId: form.buildingId ? parseInt(form.buildingId) : null,
         description: form.description,
-        locationDetails: form.locationDetails,
+        locationDetails: `[Floor: ${form.floor} | Type: ${form.locationCategory}] ${form.locationDetails}`,
         photoUrl: form.photoUrl || null
       };
       await issueService.reportIssue(payload);
@@ -82,7 +119,7 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
           </h3>
           <button onClick={onClose} className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-all"><X size={20} /></button>
         </div>
-        <form onSubmit={submit} className="p-7 space-y-5 bg-white/40">
+        <form onSubmit={submit} className="p-7 space-y-4 max-h-[80vh] overflow-y-auto bg-white/40">
           <div>
             <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Building *</label>
             <select name="buildingId" value={form.buildingId} onChange={handle} required
@@ -91,18 +128,91 @@ const ReportIssueModal = ({ onClose, onSuccess }) => {
               {buildings.map(b => <option key={b.id} value={b.id}>{b.buildingName}</option>)}
             </select>
           </div>
-          <div>
-            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Location Details *</label>
-            <input name="locationDetails" value={form.locationDetails} onChange={handle} required
-              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain"
-              placeholder="e.g. Ground floor, near main entrance" />
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Floor *</label>
+              <select name="floor" value={form.floor} onChange={handle} required
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain">
+                <option value="Ground Floor">Ground Floor</option>
+                <option value="1st Floor">1st Floor</option>
+                <option value="2nd Floor">2nd Floor</option>
+                <option value="3rd Floor">3rd Floor</option>
+                <option value="4th Floor & Above">4th Floor & Above</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Area Type *</label>
+              <select name="locationCategory" value={form.locationCategory} onChange={handle} required
+                className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain">
+                <option value="Entrance">Entrance</option>
+                <option value="Washroom">Washroom</option>
+                <option value="Lecture Hall">Lecture Hall</option>
+                <option value="Elevator">Elevator</option>
+                <option value="Corridor">Corridor</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
           </div>
+
+          {/* Potential duplicates warning */}
+          {form.buildingId && duplicates.length > 0 && (
+            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-3">
+              <div className="flex gap-2 text-amber-800">
+                <AlertCircle size={18} className="flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider">Potential Duplicate Complaints Detected</h4>
+                  <p className="text-[11px] text-amber-700 font-medium mt-0.5 leading-relaxed">
+                    Other students have already reported accessibility barriers on this floor and area. If one of these matches your issue, please upvote it to increase its priority!
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-2 max-h-36 overflow-y-auto pr-1">
+                {duplicates.map((issue) => {
+                  const issueId = issue.id;
+                  const upvoteKey = `upvoted-issue-${issueId}`;
+                  const isUpvoted = localStorage.getItem(upvoteKey) === 'true';
+                  const upvotesCount = parseInt(localStorage.getItem(`upvotes-count-${issueId}`) || '1');
+
+                  return (
+                    <div key={issueId} className="bg-white p-3 rounded-xl border border-amber-100 flex items-center justify-between gap-3 shadow-2xs">
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold text-gray-700 line-clamp-1 leading-snug">{issue.description}</p>
+                        <span className="text-[9px] text-gray-400 font-mono mt-0.5 block">Report #{issueId} • Status: {issue.status}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleUpvote(issueId)}
+                        className={`px-3 py-1.5 rounded-lg text-[10px] font-extrabold flex items-center gap-1 transition-all ${
+                          isUpvoted 
+                            ? 'bg-amber-500 text-white shadow-2xs hover:bg-amber-600' 
+                            : 'bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-250'
+                        }`}
+                      >
+                        👍 {isUpvoted ? 'Upvoted' : 'Upvote'} ({upvotesCount})
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           <div>
-            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Description *</label>
-            <textarea name="description" value={form.description} onChange={handle} required rows={4}
-              className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain resize-none"
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Specific Location details *</label>
+            <input name="locationDetails" value={form.locationDetails} onChange={handle} required
+              className="w-full bg-white/70 border border-gray-205 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain"
+              placeholder="e.g. near classroom 204 or main lobby" />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Detailed Description *</label>
+            <textarea name="description" value={form.description} onChange={handle} required rows={3}
+              className="w-full bg-white/70 border border-gray-205 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain resize-none"
               placeholder="Describe the accessibility barrier in detail. What is the problem? Who is affected?" />
           </div>
+
           <div>
             <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Photo Evidence (Optional)</label>
             
