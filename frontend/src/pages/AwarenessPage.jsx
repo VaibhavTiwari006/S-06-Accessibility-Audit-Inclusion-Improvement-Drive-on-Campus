@@ -9,6 +9,11 @@ import Button from '../components/ui/Button';
 import { toast } from 'react-toastify';
 
 
+/**
+ * Disability Etiquette & Inclusion Best Practices
+ * Structured educational list mapping inclusion categories to description copy
+ * and custom emojis/symbols for campus awareness campaigns.
+ */
 const ETIQUETTE_RULES = [
   {
     title: 'Ask Before Assisting',
