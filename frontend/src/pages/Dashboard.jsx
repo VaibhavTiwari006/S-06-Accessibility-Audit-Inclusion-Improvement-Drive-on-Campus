@@ -284,6 +284,15 @@ const StudentDashboard = ({ stats, navigate }) => (
 );
 
 // ─────────────────────────── Main ─────────────────────────────
+/**
+ * Dashboard Switcher Component
+ * 
+ * Determines user roles contextually and renders their respective dedicated dashboards:
+ * - ADMIN: Full statistics overview, leaderboards, and system settings navigation.
+ * - AUDITOR: Active buildings lists and assigned physical audit checklists.
+ * - MAINTENANCE: Pending remediation tasks, priority matrices, and resolution updates.
+ * - STUDENT: barrier reporting shortcuts, live tracking updates, and inclusion score cards.
+ */
 const Dashboard = () => {
   const { user } = useAuth();
   const [stats, setStats] = useState(null);
