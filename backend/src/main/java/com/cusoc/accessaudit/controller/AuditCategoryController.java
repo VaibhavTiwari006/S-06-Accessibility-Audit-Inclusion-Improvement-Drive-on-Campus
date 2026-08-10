@@ -21,6 +21,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Audit Categories", description = "Endpoints for managing accessibility audit categories")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * AuditCategoryController REST Controller
+ * 
+ * Exposes API endpoints for audit categories:
+ * - Querying, creating, updating, and deleting accessibility categories.
+ * - Categories group checklist questions for physical infrastructure, digital portals, etc.
+ */
 public class AuditCategoryController {
 
     private final AuditCategoryService categoryService;
