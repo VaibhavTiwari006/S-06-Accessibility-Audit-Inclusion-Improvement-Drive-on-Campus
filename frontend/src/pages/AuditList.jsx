@@ -10,6 +10,14 @@ import Button from '../components/ui/Button';
 import { useAuth } from '../context/AuthContext';
 import Badge from '../components/ui/Badge';
 
+/**
+ * AuditList Page Component
+ * 
+ * Manages active campus facility accessibility audits:
+ * - Displays active audit files, details, and completions progress.
+ * - Restricts audit creation permission logic to ADMIN and AUDITOR roles.
+ * - Links to details reports or interactive audit conduct pages.
+ */
 const AuditList = () => {
   const { user } = useAuth();
   const [audits, setAudits] = useState([]);
