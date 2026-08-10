@@ -12,6 +12,14 @@ import Badge from '../components/ui/Badge';
 import Input from '../components/ui/Input';
 import Modal from '../components/ui/Modal';
 
+/**
+ * AuditConduct Page Component
+ * 
+ * Provides the interactive field inspection form for auditors to score checklist items:
+ * - Groups checklists by categories dynamically.
+ * - Supports draft saves (updateDraft) and final submissions (submitAudit).
+ * - Integrates a floating ADA Ramp Slope Calculator utility drawer.
+ */
 const AuditConduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
