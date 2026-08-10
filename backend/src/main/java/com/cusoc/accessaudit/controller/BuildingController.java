@@ -21,6 +21,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Buildings", description = "Endpoints for managing campus buildings")
 @SecurityRequirement(name = "Bearer Authentication")
+/**
+ * BuildingController Rest Controller
+ * 
+ * Exposes REST API endpoints for building asset registers.
+ * Includes operations to query, add, edit, or delete university buildings.
+ */
 public class BuildingController {
 
     private final BuildingService buildingService;
