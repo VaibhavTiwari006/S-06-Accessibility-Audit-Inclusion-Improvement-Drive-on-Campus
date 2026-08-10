@@ -102,7 +102,7 @@ const AnimatedRoutes = () => {
         <Route path="/map" element={<ProtectedRoute><MainLayout><CampusMap /></MainLayout></ProtectedRoute>} />
         <Route path="/track/:issueId" element={<ProtectedRoute><MainLayout><PublicTrackBarrier /></MainLayout></ProtectedRoute>} />
         <Route path="/awareness" element={<ProtectedRoute><MainLayout><AwarenessPage /></MainLayout></ProtectedRoute>} />
-        <Route path="/quiz" element={<ProtectedRoute allowedRoles={['ADMIN', 'STUDENT']}><MainLayout><QuizPage /></MainLayout></ProtectedRoute>} />
+        <Route path="/quiz" element={<ProtectedRoute allowedRoles={['STUDENT']}><MainLayout><QuizPage /></MainLayout></ProtectedRoute>} />
 
         {/* Catch All */}
         <Route path="*" element={<NotFound />} />
