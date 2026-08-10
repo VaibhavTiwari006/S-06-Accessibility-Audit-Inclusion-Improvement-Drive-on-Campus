@@ -3,9 +3,19 @@ import { X, Lightbulb, MapPin, Tag, BarChart2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import pilotService from '../services/pilotService';
 
+/**
+ * Accessibility Pilot Proposal Categories
+ * List of categories matching the backend enum values for pilot project proposals.
+ */
 const CATEGORIES = ['RAMP', 'SIGNAGE', 'WASHROOM', 'DIGITAL', 'LIGHTING', 'OTHER'];
 const IMPACTS = ['LOW', 'MEDIUM', 'HIGH'];
 
+/**
+ * ProposePilotModal Component
+ * 
+ * Renders an interactive modal overlay that permits students and staff members
+ * to draft and submit new low-cost pilot inclusion proposals for facility upgrades.
+ */
 const ProposePilotModal = ({ onClose, onSuccess }) => {
   const [form, setForm] = useState({
     title: '',
