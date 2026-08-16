@@ -1,56 +1,66 @@
-# Contributing
+# Contributing to CU Access Audit Portal
 
-Thank you for your interest in the AccessAudit project.
-
-## Project Status
-
-This project is being developed as a **solo submission** for the **CUSOC (Chandigarh University Student Open Community) Hackathon** under the problem statement:
-
-**S-06: Accessibility Audit & Inclusion Improvement Drive on Campus**
-
-As this is an individual competition project, **external contributions, pull requests, and feature requests are not being accepted at this time.**
-
-## Contribution Policy
-
-This repository is maintained solely by:
-
-**Vaibhav Tiwari**
-
-To maintain consistency in architecture, implementation, and documentation, all development is performed by the project owner.
-
-The following are currently **not accepted**:
-
-- Pull Requests
-- Feature Implementations
-- Direct Code Contributions
-- Major Documentation Changes
-
-## Reporting Issues
-
-If you discover a bug or have suggestions for improving the project, you are welcome to open an Issue describing:
-
-- The problem encountered
-- Steps to reproduce
-- Expected behavior
-- Suggested improvement (optional)
-
-Constructive feedback is always appreciated.
-
-## Code Standards
-
-All code in this repository follows:
-
-- Java coding conventions
-- Layered Spring Boot Architecture
-- RESTful API principles
-- Clean and maintainable code practices
-- Meaningful commit messages
-- Consistent project documentation
-
-## License
-
-This project is licensed under the MIT License. Please refer to the `LICENSE` file for details.
+We welcome contributions from students, developers, and researchers looking to improve campus infrastructure and digital accessibility!
 
 ---
 
-Thank you for your interest in AccessAudit.
+## 🚀 Quick Setup Instructions
+
+### 1. Prerequisites
+*   **Java**: JDK 21
+*   **Node.js**: Node 20+
+*   **Database**: PostgreSQL 15+ (or run via Docker)
+
+### 2. Backend Setup
+1.  Navigate to the `backend/` directory:
+    ```bash
+    cd backend
+    ```
+2.  Start the database container:
+    ```bash
+    docker-compose up -d db
+    ```
+3.  Run application tests to verify setup:
+    ```bash
+    ./mvnw test
+    ```
+4.  Launch the Spring Boot server:
+    ```bash
+    ./mvnw spring-boot:run
+    ```
+
+### 3. Frontend Setup
+1.  Navigate to the `frontend/` directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Launch the Vite local dev server:
+    ```bash
+    npm run dev
+    ```
+4.  Open [http://localhost:5173/](http://localhost:5173/) in your browser.
+
+---
+
+## 🤝 Code Guidelines & Submissions
+
+### Branching Policy
+*   Create distinct feature branches from `main`:
+    ```bash
+    git checkout -b feat/your-feature-name
+    ```
+*   Keep PR scopes granular and clear.
+
+### Commit Guidelines
+*   Use structured semantic commit prefixes:
+    *   `feat()`: New application features.
+    *   `fix()`: Bug fixes.
+    *   `docs()`: Documentation changes.
+    *   `refactor()`: Code restructuring without feature modifications.
+
+### Testing Mandate
+*   Run backend tests (`./mvnw test`) and compile a production bundle build (`npm run build`) before making PR submissions to prevent regression builds.
