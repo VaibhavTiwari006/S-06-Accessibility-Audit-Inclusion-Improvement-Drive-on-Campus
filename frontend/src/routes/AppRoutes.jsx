@@ -22,6 +22,7 @@ const PublicTrackBarrier = lazy(() => import('../pages/PublicTrackBarrier'));
 const AwarenessPage = lazy(() => import('../pages/AwarenessPage'));
 const AuditConduct = lazy(() => import('../pages/AuditConduct'));
 const QuizPage = lazy(() => import('../pages/QuizPage'));
+const VerbalMap = lazy(() => import('../pages/VerbalMap'));
 
 /**
  * PageLoader Loading Fallback Component
@@ -108,6 +109,7 @@ const AnimatedRoutes = () => {
         <Route path="/track/:issueId" element={<ProtectedRoute><MainLayout><PublicTrackBarrier /></MainLayout></ProtectedRoute>} />
         <Route path="/awareness" element={<ProtectedRoute><MainLayout><AwarenessPage /></MainLayout></ProtectedRoute>} />
         <Route path="/quiz" element={<ProtectedRoute allowedRoles={['STUDENT']}><MainLayout><QuizPage /></MainLayout></ProtectedRoute>} />
+        <Route path="/verbal-map" element={<ProtectedRoute><MainLayout><VerbalMap /></MainLayout></ProtectedRoute>} />
 
         {/* Catch All */}
         <Route path="*" element={<NotFound />} />
