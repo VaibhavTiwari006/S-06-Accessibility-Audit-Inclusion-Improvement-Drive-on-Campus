@@ -26,3 +26,6 @@ frontend/.env.production.local
 # Docker pg data
 postgres_data/
 docker-compose.override.yml
+
+# Temporary data files
+runs.json
