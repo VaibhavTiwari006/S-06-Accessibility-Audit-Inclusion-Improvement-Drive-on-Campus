@@ -264,16 +264,20 @@ This initiative aims to create a more inclusive university ecosystem by:
 
 ---
 
-# 🤝 Contributing
+# 🛡️ CI/CD & Security Architecture
 
-Contributions are welcome.
+To support scalability and code reliability, this repository integrates:
+*   **GitHub Actions CI Workflow**: Automates Spring Boot unit tests and Node.js Vite asset compilation on every push or pull request.
+*   **BCrypt Password Encryption**: Implemented for all user credential storage.
+*   **SQL Parameterization**: Enforced via Spring Data JPA Hibernate layers to prevent SQL injections.
 
-If you'd like to improve the project, please:
+---
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Submit a Pull Request
+# 🤝 Contributing & Community
+
+We welcome community collaborations! Please review our:
+*   [**Contributing Guidelines**](file:///c:/Users/Vaibhav/Desktop/AccessAudit/CONTRIBUTING.md)
+*   [**Code of Conduct**](file:///c:/Users/Vaibhav/Desktop/AccessAudit/CODE_OF_CONDUCT.md)
 
 ---
 
