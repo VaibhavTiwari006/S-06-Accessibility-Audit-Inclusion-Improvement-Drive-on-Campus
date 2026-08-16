@@ -208,16 +208,7 @@ S-06-Accessibility-Audit/
 
 ---
 
-# 📊 Success Metrics
 
-| Metric | Target |
-|---------|--------|
-| Buildings Audited | 10+ |
-| Digital Platforms Audited | 5+ |
-| Accessibility Issues Identified | 50+ |
-| Survey Participants | 100+ |
-| Students with Disabilities Engaged | 20+ |
-| Awareness Campaign Reach | 300+ Students |
 
 ---
 

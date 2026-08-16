@@ -170,19 +170,7 @@ The platform supports the following objectives:
 
 ---
 
-# 11. Target Impact Metrics
 
-The software is designed to support measurement and tracking of the following project targets:
-
-| Metric                           | Target                                          |
-| ---------------------------------- | -------------------------------------------------- |
-| Buildings/hostels audited        | 15 (10 hostels + 5 academic buildings)          |
-| Digital assets audited           | ≥ 5 (website, LMS, portals)                     |
-| Accessibility issues identified  | ≥ 50 remediation items                          |
-| Students & staff engaged         | ≥ 20                                            |
-| Awareness campaign reach         | ≥ 300 students                                  |
-
-These figures are sourced from the CuSoC S-06 problem statement, with location counts reflecting the confirmed audit plan for this project cycle. All figures represent real-world data collection targets that the platform's audit, reporting, and roadmap modules are built to capture and track — not simulated or placeholder values.
 
 ---
 

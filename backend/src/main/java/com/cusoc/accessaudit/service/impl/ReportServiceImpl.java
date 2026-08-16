@@ -499,43 +499,7 @@ public class ReportServiceImpl implements ReportService {
             document.add(new Paragraph(summary, normalFont));
             document.add(Chunk.NEWLINE);
 
-            // ── Impact Metrics Table ───────────────────────────────────
-            Paragraph metricsHeading = new Paragraph("2. Impact Metrics vs. Project Targets", headingFont);
-            metricsHeading.setSpacingBefore(8); metricsHeading.setSpacingAfter(8);
-            document.add(metricsHeading);
 
-            PdfPTable metricsTable = new PdfPTable(4);
-            metricsTable.setWidthPercentage(100);
-            metricsTable.setWidths(new float[]{3.5f, 1.5f, 1.5f, 1.5f});
-
-            String[] mHeaders = {"Metric", "Target", "Achieved", "Status"};
-            for (String h : mHeaders) {
-                PdfPCell c = new PdfPCell(new Phrase(h, subFont));
-                c.setBackgroundColor(primaryColor); c.setHorizontalAlignment(Element.ALIGN_CENTER);
-                c.setPadding(6); c.setBorderColor(Color.WHITE);
-                c.setPhrase(new Phrase(h, new Font(Font.HELVETICA, 10, Font.BOLD, Color.WHITE)));
-                metricsTable.addCell(c);
-            }
-
-            Object[][] metrics = {
-                {"Buildings Audited",          "≥ 10",  buildings.size(),    buildings.size() >= 10},
-                {"Digital Assets Audited",     "≥ 5",   5,                   true},
-                {"Students/Staff Engaged",     "≥ 20",  totalParticipants,   totalParticipants >= 20},
-                {"Remediation Items Found",    "≥ 50",  tasks.size(),        tasks.size() >= 50},
-                {"Awareness Campaign Reach",   "≥ 300", totalReach,          totalReach >= 300},
-            };
-            boolean altRow = false;
-            for (Object[] row : metrics) {
-                Color bg = altRow ? lightGray : Color.WHITE;
-                PdfPCell mc = new PdfPCell(new Phrase(row[0].toString(), normalFont)); mc.setBackgroundColor(bg); mc.setPadding(5); metricsTable.addCell(mc);
-                PdfPCell tc = new PdfPCell(new Phrase(row[1].toString(), normalFont)); tc.setBackgroundColor(bg); tc.setPadding(5); tc.setHorizontalAlignment(Element.ALIGN_CENTER); metricsTable.addCell(tc);
-                PdfPCell ac = new PdfPCell(new Phrase(row[2].toString(), new Font(Font.HELVETICA, 10, Font.BOLD, darkGray))); ac.setBackgroundColor(bg); ac.setPadding(5); ac.setHorizontalAlignment(Element.ALIGN_CENTER); metricsTable.addCell(ac);
-                boolean met = (Boolean) row[3];
-                PdfPCell sc = new PdfPCell(new Phrase(met ? "✓ Met" : "In Progress", new Font(Font.HELVETICA, 10, Font.BOLD, met ? new Color(22, 163, 74) : new Color(217, 119, 6)))); sc.setBackgroundColor(bg); sc.setPadding(5); sc.setHorizontalAlignment(Element.ALIGN_CENTER); metricsTable.addCell(sc);
-                altRow = !altRow;
-            }
-            document.add(metricsTable);
-            document.add(Chunk.NEWLINE);
 
             // ── Pilot Improvements ─────────────────────────────────────
             Paragraph pilotHeading = new Paragraph("3. Pilot Low-Cost Accessibility Improvements", headingFont);
