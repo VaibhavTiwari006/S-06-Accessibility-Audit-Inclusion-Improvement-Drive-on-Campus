@@ -1,6 +1,39 @@
 # ♿ S-06: Accessibility Audit & Inclusion Improvement Drive
 
+[![CI Build and Verification](https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus/actions/workflows/ci.yml/badge.svg)](https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus/actions/workflows/ci.yml)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Java](https://img.shields.io/badge/Java-21-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.1-brightgreen)
+![React](https://img.shields.io/badge/React-18-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+
 > A comprehensive campus accessibility assessment platform designed to identify, document, and improve physical and digital accessibility across university campuses in accordance with the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **WCAG 2.1 AA** accessibility standards.
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus.git
+cd S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus
+
+# Start all services (Frontend + Backend + Database)
+docker-compose up -d --build
+```
+
+**Access the application:**
+- 🌐 Frontend: http://localhost:3000
+- 🔗 Backend API: http://localhost:8080/api
+- 📖 API Docs: http://localhost:8080/swagger-ui.html
+
+**Default Credentials:**
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@campus.edu | password |
+| Auditor | auditor@campus.edu | password |
+| Student | student@campus.edu | password |
+| Maintenance | maintenance@campus.edu | password |
 
 ---
 
@@ -230,13 +263,22 @@ S-06-Accessibility-Audit/
 
 Detailed project documentation is available below.
 
-- 📖 Installation Guide
-- 👤 User Guide
-- 📑 API Documentation
-- 🏗️ System Architecture
-- 🗄️ Database Schema
-- 🧪 Testing Report
-- 📝 Change Log
+| Document | Description |
+|----------|-------------|
+| [📖 Installation Guide](docs/INSTALLATION.md) | Setup and deployment instructions |
+| [👤 User Guide](docs/USER_GUIDE.md) | Role-based usage instructions |
+| [📑 API Documentation](docs/API_DOCUMENTATION.md) | REST endpoint specifications |
+| [🏗️ System Architecture](docs/architecture/system-architecture.md) | Three-tier architecture overview |
+| [🗄️ Database Schema](docs/architecture/DATABASE_SCHEMA.md) | ER diagrams and table definitions |
+| [🧪 Testing Report](docs/TESTING_REPORT.md) | Test strategy and results |
+| [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive final project report |
+| [🚀 Deployment Guide](docs/DEPLOYMENT.md) | Production deployment with Docker & Nginx |
+| [📝 Changelog](CHANGELOG.md) | Version history and release notes |
+| [🔒 Security Policy](SECURITY.md) | Vulnerability disclosure and security measures |
+| [📖 SRS](docs/requirements/software-requirement-specification.md) | Software Requirement Specification |
+| [📋 User Stories](docs/requirements/user-stories.md) | 21 user stories across 5 roles |
+| [✅ Functional Requirements](docs/requirements/functional-requirements.md) | 19 functional requirements |
+| [⚙️ Non-Functional Requirements](docs/requirements/non-functional-requirements.md) | 8 non-functional requirements |
 
 ---
 
@@ -276,8 +318,9 @@ To support scalability and code reliability, this repository integrates:
 # 🤝 Contributing & Community
 
 We welcome community collaborations! Please review our:
-*   [**Contributing Guidelines**](file:///c:/Users/Vaibhav/Desktop/AccessAudit/CONTRIBUTING.md)
-*   [**Code of Conduct**](file:///c:/Users/Vaibhav/Desktop/AccessAudit/CODE_OF_CONDUCT.md)
+*   [**Contributing Guidelines**](CONTRIBUTING.md)
+*   [**Code of Conduct**](CODE_OF_CONDUCT.md)
+*   [**Security Policy**](SECURITY.md)
 
 ---
 
