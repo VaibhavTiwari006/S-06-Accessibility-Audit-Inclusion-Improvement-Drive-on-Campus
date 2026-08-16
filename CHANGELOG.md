@@ -2,6 +2,70 @@
 
 All notable changes to the S-06: Accessibility Audit & Inclusion Improvement Drive project are documented in this file.
 
+## August 17, 2026
+
+- **12:07 AM** - Create Final Technical Report document (`docs/TECHNICAL_REPORT.md`)
+- **12:06 AM** - Create Security Policy (`SECURITY.md`) with vulnerability disclosure guidelines
+- **12:06 AM** - Create User Stories specification (`docs/requirements/user-stories.md`) — 21 stories across 5 roles
+- **12:06 AM** - Create Production Deployment Guide (`docs/DEPLOYMENT.md`) with Docker, Nginx, SSL, and backup instructions
+- **12:05 AM** - Fix CI pipeline: use system Maven instead of wrapper to eliminate CRLF issues
+- **12:04 AM** - Fix CI pipeline: add `cache-dependency-path` for Maven cache resolution
+- **12:03 AM** - Fix CI pipeline: configure `working-directory: backend` for Maven steps
+- **12:02 AM** - Fix compilation error: declare `altRow` variable in `ReportServiceImpl.java`
+- **12:01 AM** - Configure `.gitattributes` for LF line endings on shell scripts
+
+## August 16, 2026
+
+- Configure comprehensive `.gitignore` for Maven, Node, IDEs, and Docker assets
+- Document screen-reader Verbal Map design (`docs/features/VERBAL_MAP.md`)
+- Document profanity filter moderation logic (`docs/features/PROFANITY_FILTER.md`)
+- Integrate contributing, code of conduct, and CI/CD sections in `README.md`
+- Create `run_dev.ps1` PowerShell launcher script for development environment
+- Create `PULL_REQUEST_TEMPLATE.md` for standardized PR review
+- Create `bug_report.md` issue template for structured bug reporting
+- Create `CODE_OF_CONDUCT.md` with Contributor Covenant guidelines
+- Create `CONTRIBUTING.md` with project setup and branching conventions
+- Configure GitHub Actions CI workflow for backend tests and frontend builds
+- Remove hardcoded impact metric targets from README, SRS, and PDF generator
+- Remove target metrics card from Reports page; adjust layout
+
+## August 7–15, 2026
+
+- Add JavaDoc comments to 10 backend service interfaces
+- Add JavaDoc comments to 12 backend REST controllers
+- Add JSDoc comments to 10 frontend page components
+- Add JSDoc comments to feature documentation in components
+- Expand `API_DOCUMENTATION.md` with complete REST endpoint schemas
+- Update `TESTING_REPORT.md` with Leaflet map and JUnit test results
+- Expand `ARCHITECTURE_DIAGRAM.md` with proxy and security configurations
+- Expand `DATABASE_SCHEMA.md` with column data-types and foreign keys
+- Create Verbal Map page with screen-reader speech-guided navigation
+- Create Audit Scheduler Modal for recurring audit configurations
+- Build Disability Ally Network join registration and directory
+- Strengthen profanity filter for spacing, punctuation, and character replacement bypasses
+- Block duplicate barrier report submissions with uniqueness confirmation
+- Support keyword-guessing fallback for duplicate checking of pre-seeded issues
+- Replace static tactile-map download with interactive map link
+- Restrict Quiz Challenge access to STUDENT role only
+- Remove estimated cost calculations from pilot proposals
+- Remove QR Code manager, scanner, and poster generator features
+- Remove Interactive English-to-Braille Translator from Community page
+- Relocate Braille Translator to Accessibility Preferences page
+- Remove Low-Cost Improvement Calculator feature
+- Remove all estimated cost calculations and displays
+
+## July 25 – August 6, 2026
+
+- Add staggered spring entry animations to Login role selection cards
+- Add hero-gradient-text dark mode layout and color rules
+- Fix dark mode styles for scrollbars, filter pills, tables, and gradients
+- Stabilize header layout and unify pills styling for Trends Chart
+- Hide default scrollbars in Sidebar navigation menu
+- Redesign Evidence Gallery with advanced filtering and lightbox viewer
+- Rebuild issue reporting with floor/category selectors and upvoting
+- Improve dark mode support across all components
+
+
 ## July 18, 2026
 
 - **10:29 AM** - Add skip to navigation link for screen readers
