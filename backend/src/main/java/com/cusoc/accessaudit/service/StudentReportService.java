@@ -6,6 +6,13 @@ import com.cusoc.accessaudit.dto.StudentReportStatusRequest;
 
 import java.util.List;
 
+/**
+ * StudentReportService Interface
+ * 
+ * Manages student-reported barrier concerns:
+ * - Submits, compiles, and tracks reports history.
+ * - Handles admin/auditor review transitions.
+ */
 public interface StudentReportService {
     StudentReportResponse createReport(StudentReportRequest request, String reporterEmail);
     List<StudentReportResponse> getReports(Long buildingId, String status);
