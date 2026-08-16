@@ -518,7 +518,7 @@ public class ReportServiceImpl implements ReportService {
                 pilotTable.addCell(c);
             }
 
-            altRow = false;
+            boolean altRow = false;
             for (PilotImprovement p : pilots) {
                 Color bg = altRow ? lightGray : Color.WHITE;
                 PdfPCell t = new PdfPCell(new Phrase(p.getTitle(), normalFont)); t.setBackgroundColor(bg); t.setPadding(4); pilotTable.addCell(t);
