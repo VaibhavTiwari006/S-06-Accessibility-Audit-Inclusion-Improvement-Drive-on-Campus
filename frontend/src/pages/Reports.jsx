@@ -289,10 +289,10 @@ const Reports = () => {
         </motion.div>
       </div>
 
-      {/* Standards Compliance & Impact Metrics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+      {/* Standards Compliance */}
+      <div className="mt-6">
         {/* RPWD / WCAG Compliance Table */}
-        <Card className="h-full flex flex-col">
+        <Card className="w-full flex flex-col">
           <CardHeader>
             <h3 className="text-lg font-heading font-bold text-textMain flex items-center gap-2">
               <ShieldCheck size={20} className="text-primary" /> Standards Compliance
@@ -343,64 +343,6 @@ const Reports = () => {
               ))}
             </div>
             <p className="text-xs text-textLight mt-6 font-medium">Benchmarked against RPWD Act 2016 mandates and WCAG 2.1 AA standards.</p>
-          </CardContent>
-        </Card>
-
-        {/* Impact Metrics vs Targets */}
-        <Card className="h-full flex flex-col">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <div className="p-2 rounded-xl bg-secondary/10 border border-secondary/20 text-secondary">
-                <Target size={20} />
-              </div>
-              <div>
-                <h3 className="text-lg font-heading font-bold text-textMain">Impact Metrics vs. Targets</h3>
-                <p className="text-xs text-textLight mt-0.5">Physical and digital indicators against inclusion drive goals.</p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="flex-1 flex flex-col justify-between">
-            <div className="space-y-3.5">
-              {[
-                { metric: 'Buildings Audited', target: 10, achieved: stats.totalBuildings ?? 0, met: (stats.totalBuildings ?? 0) >= 10, icon: Building2, color: 'text-primary bg-primary/10 border-primary/20', colorBar: 'bg-primary' },
-                { metric: 'Digital Assets Audited', target: 5, achieved: 5, met: true, icon: Laptop, color: 'text-secondary bg-secondary/10 border-secondary/20', colorBar: 'bg-secondary' },
-                { metric: 'Students/Staff Engaged', target: 20, achieved: 43, met: true, icon: Users, color: 'text-pink-600 bg-pink-50 border-pink-100', colorBar: 'bg-pink-500' },
-                { metric: 'Remediation Items', target: 50, achieved: stats.totalMaintenanceTasks ?? 0, met: (stats.totalMaintenanceTasks ?? 0) >= 50, icon: Wrench, color: 'text-orange-600 bg-orange-50 border-orange-100', colorBar: 'bg-orange-500' },
-                { metric: 'Awareness Campaign Reach', target: 300, achieved: 450, met: true, icon: Megaphone, color: 'text-indigo-600 bg-indigo-50 border-indigo-100', colorBar: 'bg-indigo-500' },
-              ].map((row, idx) => {
-                const IconComponent = row.icon;
-                return (
-                  <div 
-                    key={row.metric}
-                    className="p-3 bg-gray-50/50 rounded-2xl border border-gray-100 hover:shadow-2xs transition-all duration-300 flex items-center justify-between gap-3"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-9 h-9 rounded-xl border flex items-center justify-center flex-shrink-0 ${row.color}`}>
-                        <IconComponent size={16} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-textMain text-sm leading-none mb-1.5">{row.metric}</h4>
-                        <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider block">
-                          Target: ≥{row.target} • Achieved: {row.achieved}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      {row.met ? (
-                        <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-100 px-2.5 py-1 rounded-full font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs">
-                          <CheckCircle2 size={10} /> Met
-                        </span>
-                      ) : (
-                        <span className="text-[10px] bg-amber-50 text-amber-700 border border-amber-100 px-2.5 py-1 rounded-full font-black uppercase tracking-wider flex items-center gap-1 shadow-2xs">
-                          In Progress
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </CardContent>
         </Card>
       </div>
