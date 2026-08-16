@@ -45,6 +45,20 @@ const Community = () => {
   const [showPilotModal, setShowPilotModal] = useState(false);
   const [updatingPilot, setUpdatingPilot] = useState(null);
   const [pilotFilter, setPilotFilter] = useState('ALL');
+  const [showAllyModal, setShowAllyModal] = useState(false);
+  const [allies, setAllies] = useState([]);
+
+  const fetchAllies = () => {
+    try {
+      const data = JSON.parse(localStorage.getItem('registered-accessibility-allies') || '[]');
+      setAllies(data);
+      if (user && data.some(a => a.email === user.email)) {
+        setPledged(true);
+      }
+    } catch {
+      setAllies([]);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -70,11 +84,44 @@ const Community = () => {
     }
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => { 
+    fetchData(); 
+    fetchAllies();
+  }, []);
 
-  const handlePledge = () => {
-    setPledged(true);
-    toast.success('Thank you for pledging to be an Accessibility Ally! 🎉');
+  const [allyForm, setAllyForm] = useState({
+    fullName: '',
+    role: 'Student',
+    department: '',
+    commitment: 'Support accessible infrastructure'
+  });
+
+  const handlePledgeSubmit = (e) => {
+    e.preventDefault();
+    if (!allyForm.fullName || !allyForm.department) {
+      toast.error('Please complete all required fields.');
+      return;
+    }
+
+    const newAlly = {
+      id: Date.now(),
+      fullName: allyForm.fullName,
+      email: user?.email || 'anonymous@campus.edu',
+      role: allyForm.role,
+      department: allyForm.department,
+      commitment: allyForm.commitment
+    };
+
+    try {
+      const existing = JSON.parse(localStorage.getItem('registered-accessibility-allies') || '[]');
+      localStorage.setItem('registered-accessibility-allies', JSON.stringify([...existing, newAlly]));
+      setPledged(true);
+      toast.success('Thank you for joining the Disability Ally Network! 🎉');
+      fetchAllies();
+      setShowAllyModal(false);
+    } catch {
+      toast.error('Failed to register.');
+    }
   };
 
   const handleStatusUpdate = async (id, newStatus) => {
@@ -404,26 +451,138 @@ const Community = () => {
         {/* Sidebar */}
         <div className="space-y-8 lg:space-y-10">
           {/* Disability Ally Pledge */}
-          <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 bg-gradient-to-br from-primary/5 to-transparent">
-            <h3 className="text-lg font-semibold text-textMain mb-2 flex items-center gap-2">
+          <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100 bg-gradient-to-br from-primary/5 to-transparent space-y-4">
+            <h3 className="text-lg font-semibold text-textMain flex items-center gap-2">
               <HeartHandshake className="text-primary" /> Disability Ally Network
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-gray-650 leading-relaxed font-medium">
               Take the pledge to support an inclusive environment and proactively advocate for accessibility at Chandigarh University.
             </p>
             {pledged ? (
-              <div className="bg-success/10 text-success-dark p-3 rounded-lg flex items-center gap-2 text-sm font-medium">
-                <CheckCircle size={16} /> You are an Ally! 🎉
+              <div className="bg-success/10 text-success-dark p-3 rounded-lg flex items-center justify-center gap-2 text-sm font-bold shadow-2xs">
+                <CheckCircle size={16} /> Certified Ally Member! 🎉
               </div>
             ) : (
               <button
-                onClick={handlePledge}
-                className="w-full bg-primary hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition-colors"
+                onClick={() => {
+                  setAllyForm({
+                    fullName: user?.fullName || '',
+                    role: user?.role === 'STUDENT' ? 'Student' : 'Faculty',
+                    department: '',
+                    commitment: 'Support accessible infrastructure'
+                  });
+                  setShowAllyModal(true);
+                }}
+                className="w-full bg-primary hover:bg-blue-700 text-white py-2.5 rounded-xl font-bold transition-all shadow-md active:scale-98"
               >
-                Sign the Pledge
+                Sign the Pledge & Join
               </button>
             )}
+
+            {/* Active Allies Directory Preview */}
+            {allies.length > 0 && (
+              <div className="pt-4 border-t border-gray-150 space-y-3">
+                <span className="text-[10px] font-extrabold text-textLight uppercase tracking-wider block">Network Directory ({allies.length} members)</span>
+                <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                  {allies.map(ally => (
+                    <div key={ally.id} className="p-2.5 bg-white border border-gray-100 rounded-xl shadow-3xs flex flex-col gap-1">
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold text-xs text-textMain">{ally.fullName}</span>
+                        <span className="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded font-bold uppercase">{ally.role}</span>
+                      </div>
+                      <span className="text-[9px] text-textLight font-semibold">{ally.department}</span>
+                      <span className="text-[9px] text-gray-400 italic mt-0.5 leading-relaxed font-medium">" {ally.commitment} "</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+
+          {/* Join Ally Registration Modal */}
+          {showAllyModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowAllyModal(false)}></div>
+              <div className="relative rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] w-full max-w-md mx-4 overflow-hidden border border-white/60 bg-white">
+                <div className="bg-gradient-to-r from-primary to-blue-700 px-6 py-5 flex justify-between items-center shadow-inner">
+                  <h3 className="text-white font-heading font-bold text-lg flex items-center gap-2">
+                    <HeartHandshake size={22} className="text-red-100" /> Join Disability Ally Network
+                  </h3>
+                  <button onClick={() => setShowAllyModal(false)} className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-all"><X size={20} /></button>
+                </div>
+
+                <form onSubmit={handlePledgeSubmit} className="p-6 space-y-4 text-left">
+                  <div>
+                    <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Full Name *</label>
+                    <input
+                      type="text"
+                      required
+                      value={allyForm.fullName}
+                      onChange={(e) => setAllyForm({ ...allyForm, fullName: e.target.value })}
+                      placeholder="e.g. Rahul Verma"
+                      className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Role *</label>
+                      <select
+                        value={allyForm.role}
+                        onChange={(e) => setAllyForm({ ...allyForm, role: e.target.value })}
+                        className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
+                      >
+                        <option value="Student">Student</option>
+                        <option value="Faculty">Faculty</option>
+                        <option value="Staff">Staff</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Department / Year *</label>
+                      <input
+                        type="text"
+                        required
+                        value={allyForm.department}
+                        onChange={(e) => setAllyForm({ ...allyForm, department: e.target.value })}
+                        placeholder="e.g. CSE 3rd Year"
+                        className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-textMain uppercase tracking-wider mb-1.5">Volunteer Commitment *</label>
+                    <select
+                      value={allyForm.commitment}
+                      onChange={(e) => setAllyForm({ ...allyForm, commitment: e.target.value })}
+                      className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all font-medium text-textMain"
+                    >
+                      <option value="Support accessible infrastructure">Support accessible infrastructure</option>
+                      <option value="Volunteer to assist disabled peers">Volunteer to assist disabled peers</option>
+                      <option value="Organize awareness and advocacy events">Organize awareness and advocacy events</option>
+                      <option value="Advocate for inclusive digital resources">Advocate for inclusive digital resources</option>
+                    </select>
+                  </div>
+
+                  <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
+                    <button
+                      type="button"
+                      onClick={() => setShowAllyModal(false)}
+                      className="px-5 py-2.5 text-sm font-bold text-textLight bg-gray-100 hover:bg-gray-200 hover:text-textMain rounded-xl transition-all"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-6 py-2.5 text-sm font-bold bg-primary text-white rounded-xl shadow-md hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                    >
+                      Pledge & Join
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
 
           {/* Impact Summary */}
           <div className="glass-panel p-6 rounded-xl shadow-sm border border-gray-100">
