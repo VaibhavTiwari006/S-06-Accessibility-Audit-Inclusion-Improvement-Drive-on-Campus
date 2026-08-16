@@ -25,16 +25,11 @@ jobs:
 
     - name: Run Backend Tests
       working-directory: backend
-      run: |
-        sed -i 's/\r$//' mvnw
-        chmod +x mvnw
-        ./mvnw test
+      run: mvn test
 
     - name: Compile Backend
       working-directory: backend
-      run: |
-        sed -i 's/\r$//' mvnw
-        ./mvnw clean package -DskipTests
+      run: mvn clean package -DskipTests
 
   frontend-build:
     name: Frontend Build
