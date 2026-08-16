@@ -23,15 +23,15 @@ jobs:
         cache: maven
 
     - name: Run Backend Tests
+      working-directory: backend
       run: |
-        cd backend
         sed -i 's/\r$//' mvnw
         chmod +x mvnw
         ./mvnw test
 
     - name: Compile Backend
+      working-directory: backend
       run: |
-        cd backend
         sed -i 's/\r$//' mvnw
         ./mvnw clean package -DskipTests
 
