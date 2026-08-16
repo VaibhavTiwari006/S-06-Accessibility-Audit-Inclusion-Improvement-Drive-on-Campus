@@ -1,60 +1,27 @@
-# Code of Conduct
+# Contributor Covenant Code of Conduct
 
-## Our Commitment
+## Our Pledge
+We as members, contributors, and leaders pledge to make participation in our community a harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.
 
-AccessAudit is a solo-developed project created as part of the Chandigarh University Summer of Code (CUSOC). The goal of this project is to build a web-based accessibility auditing platform that helps developers identify and resolve accessibility issues in accordance with recognized accessibility standards.
+We pledge to act and interact in ways that contribute to an open, welcoming, diverse, inclusive, and healthy community.
 
-Although this repository is publicly available, maintaining a respectful and professional environment for all interactions is important.
+## Our Standards
+Examples of behavior that contributes to a positive environment for our community include:
+*   Demonstrating empathy and kindness toward other people.
+*   Being respectful of differing opinions, viewpoints, and experiences.
+*   Giving and gracefully accepting constructive feedback.
+*   Accepting responsibility and apologizing to those affected by our mistakes, and learning from the experience.
+*   Focusing on what is best for the overall community.
 
----
+Examples of unacceptable behavior include:
+*   The use of sexualized language or imagery, and unwelcome sexual attention or advances.
+*   Trolling, insulting or derogatory comments, and personal or political attacks.
+*   Public or private harassment.
+*   Publishing others' private information, such as a physical or email address, without their explicit permission.
+*   Other conduct which could reasonably be considered inappropriate in a professional setting.
 
-## Expected Behavior
+## Enforcement Responsibilities
+Community leaders are responsible for clarifying and enforcing our standards of acceptable behavior and will take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
 
-All users interacting with this repository are expected to:
-
-* Communicate respectfully and professionally.
-* Provide constructive feedback and suggestions.
-* Report bugs with clear and reproducible information.
-* Respect differing opinions and technical discussions.
-* Help maintain a positive and inclusive environment.
-
----
-
-## Unacceptable Behavior
-
-The following behaviors are not tolerated:
-
-* Harassment or abusive language.
-* Personal attacks or discrimination of any kind.
-* Spam or intentionally misleading information.
-* Trolling or disruptive behavior.
-* Sharing malicious code or attempting to compromise the project.
-
----
-
-## Project Contribution Policy
-
-AccessAudit is currently developed and maintained solely by the project author as part of the CUSOC program.
-
-At this stage, external code contributions, pull requests, and direct feature implementations are **not being accepted**. However, users are welcome to:
-
-* Report bugs
-* Suggest improvements
-* Recommend accessibility features
-* Share ideas through GitHub Issues or Discussions (if enabled)
-
-Constructive feedback is always appreciated.
-
----
-
-## Enforcement
-
-The project maintainer reserves the right to moderate discussions, close inappropriate issues, or remove content that violates this Code of Conduct.
-
----
-
-## Contact
-
-For questions, suggestions, or reporting inappropriate behavior, please open a GitHub Issue describing the concern.
-
-Thank you for supporting the development of AccessAudit and helping maintain a respectful and professional community.
+## Scope
+This Code of Conduct applies within all community spaces, and also applies when an individual is officially representing the community in public spaces.
