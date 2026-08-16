@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, BookOpen, Trophy } from 'lucide-react';
+import { LayoutDashboard, Building2, ClipboardList, AlertCircle, BarChart3, Settings, HeartHandshake, Map, ChevronRight, BookOpen, Trophy, Compass } from 'lucide-react';
 import Avatar from '../components/ui/Avatar';
 
 /**
@@ -28,6 +28,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Quiz Challenge', path: '/quiz',   icon: Trophy,          roles: ['STUDENT'] },
+    { name: 'Verbal Audio Map', path: '/verbal-map', icon: Compass,   roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN'] },
     { name: 'Accessibility', path: '/accessibility', icon: Settings, roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
   ];
