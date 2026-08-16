@@ -6,6 +6,13 @@ import com.cusoc.accessaudit.dto.AuditReviewRequest;
 
 import java.util.List;
 
+/**
+ * AuditService Interface
+ * 
+ * Service contract defining operations for accessibility building audits:
+ * - Creates assignments, logs responses, compiles draft scores.
+ * - Handles reviews and final approvals of checklists.
+ */
 public interface AuditService {
     AuditResponseDto createDraft(AuditRequest request, String currentUserEmail);
     List<AuditResponseDto> getAllAudits(Long buildingId, Long auditorId, String status);
