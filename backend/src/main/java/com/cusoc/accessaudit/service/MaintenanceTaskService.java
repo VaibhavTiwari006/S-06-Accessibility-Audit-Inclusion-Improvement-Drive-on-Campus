@@ -6,6 +6,13 @@ import com.cusoc.accessaudit.dto.MaintenanceTaskUpdateRequest;
 
 import java.util.List;
 
+/**
+ * MaintenanceTaskService Interface
+ * 
+ * Handles technician remediation schedules:
+ * - Allocates task tickets to specific buildings and users.
+ * - Handles updates on repair tasks progression.
+ */
 public interface MaintenanceTaskService {
     MaintenanceTaskResponse createTask(MaintenanceTaskRequest request);
     List<MaintenanceTaskResponse> getTasks(Long buildingId, Long assigneeId, String status);
