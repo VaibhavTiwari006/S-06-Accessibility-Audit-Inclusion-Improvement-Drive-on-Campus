@@ -25,12 +25,14 @@ jobs:
     - name: Run Backend Tests
       run: |
         cd backend
+        sed -i 's/\r$//' mvnw
         chmod +x mvnw
         ./mvnw test
 
     - name: Compile Backend
       run: |
         cd backend
+        sed -i 's/\r$//' mvnw
         ./mvnw clean package -DskipTests
 
   frontend-build:
