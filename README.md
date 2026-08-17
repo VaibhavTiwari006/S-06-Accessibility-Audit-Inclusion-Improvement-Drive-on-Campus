@@ -46,6 +46,26 @@ The project combines **field audits**, **digital accessibility assessments**, **
 
 ---
 
+# 🎯 Problem Statement
+
+Despite legal accessibility requirements, many university campuses continue to contain barriers that restrict equal participation for individuals with disabilities.
+
+Common challenges include:
+
+- Inaccessible entrances and pathways
+- Missing ramps or elevators
+- Poor tactile guidance for visually impaired users
+- Lack of accessible washrooms
+- Inadequate classroom accessibility
+- Poor website accessibility
+- LMS platforms not compliant with accessibility standards
+- Insufficient disability awareness among students and staff
+
+
+These issues reduce educational accessibility and negatively impact the overall campus experience.
+
+---
+
 ## 🧠 Design Thinking & Project Strategy
 
 Our platform was built using a structured **IBM Enterprise Design Thinking** approach — from stakeholder analysis through prioritized implementation.
@@ -77,26 +97,6 @@ Our platform was built using a structured **IBM Enterprise Design Thinking** app
 
 ---
 
-# 🎯 Problem Statement
-
-Despite legal accessibility requirements, many university campuses continue to contain barriers that restrict equal participation for individuals with disabilities.
-
-Common challenges include:
-
-- Inaccessible entrances and pathways
-- Missing ramps or elevators
-- Poor tactile guidance for visually impaired users
-- Lack of accessible washrooms
-- Inadequate classroom accessibility
-- Poor website accessibility
-- LMS platforms not compliant with accessibility standards
-- Insufficient disability awareness among students and staff
-
-
-These issues reduce educational accessibility and negatively impact the overall campus experience.
-
-
----
 
 # 🚀 Project Objectives
 
