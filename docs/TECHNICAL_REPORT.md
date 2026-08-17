@@ -36,6 +36,14 @@ People with disabilities — including those with mobility, visual, and hearing 
 
 AccessAudit addresses each of these gaps through a purpose-built digital platform.
 
+### Big Idea Vignettes
+
+The following "What If" vignettes capture the core design thinking questions that drove the platform's feature development:
+
+![Big Idea Vignettes — Access Audit Project](big-idea-vignettes.jpg)
+
+Each vignette maps directly to a feature implemented in the platform — from barrier reporting and real-time building status to structured audits, accessible navigation, and administrative dashboards.
+
 ---
 
 ## 3. System Architecture
