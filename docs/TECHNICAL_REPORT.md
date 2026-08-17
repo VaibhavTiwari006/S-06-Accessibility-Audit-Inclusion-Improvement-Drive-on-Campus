@@ -56,7 +56,7 @@ These need statements directly informed the system's role-based architecture —
 
 The audit workflow was mapped across three dimensions — **Doing**, **Thinking**, and **Feeling** — to understand the complete user experience from app launch through feedback and follow-up:
 
-![User Journey Map — Access Audit](user-journey-map.jpg)
+![User Journey Map — Access Audit](user-journey-map.png)
 
 This empathy mapping ensured each step of the audit workflow (Open App → Select Audit Type → Select Location → Start Audit → Record Barriers → Rate Accessibility → Submit Report → View Status → Feedback) was designed to minimize user confusion and maximize confidence.
 
