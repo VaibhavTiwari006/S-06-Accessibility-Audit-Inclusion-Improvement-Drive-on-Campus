@@ -52,6 +52,14 @@ Each stakeholder group was analyzed to define their core needs, ensuring the pla
 
 These need statements directly informed the system's role-based architecture — with dedicated dashboards, workflows, and permissions tailored to each stakeholder group.
 
+### User Journey Map
+
+The audit workflow was mapped across three dimensions — **Doing**, **Thinking**, and **Feeling** — to understand the complete user experience from app launch through feedback and follow-up:
+
+![User Journey Map — Access Audit](user-journey-map.jpg)
+
+This empathy mapping ensured each step of the audit workflow (Open App → Select Audit Type → Select Location → Start Audit → Record Barriers → Rate Accessibility → Submit Report → View Status → Feedback) was designed to minimize user confusion and maximize confidence.
+
 ---
 
 ## 3. System Architecture
