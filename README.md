@@ -46,6 +46,37 @@ The project combines **field audits**, **digital accessibility assessments**, **
 
 ---
 
+## 🧠 Design Thinking & Project Strategy
+
+Our platform was built using a structured **IBM Enterprise Design Thinking** approach — from stakeholder analysis through prioritized implementation.
+
+### 💡 Big Idea Vignettes
+> *"What if users could report accessibility barriers in seconds?"* — The 12 "What If" questions that sparked the platform.
+
+![Big Idea Vignettes](docs/big-idea-vignettes.jpg)
+
+### 👥 Stakeholder Need Statements
+> Each stakeholder's core need mapped to a platform feature — ensuring no user group is left behind.
+
+![Need Statements](docs/need-statements.jpg)
+
+### 🗺️ User Journey Empathy Map
+> Tracking what users **Do**, **Think**, and **Feel** across every step of the audit workflow.
+
+![User Journey Map](docs/user-journey-map.png)
+
+### 🏔️ Hills Statements (Who / What / Wow)
+> Measurable outcomes for each stakeholder — connecting *who* benefits, *what* we deliver, and *wow* impact.
+
+![Hills Statements](docs/hills-statements.jpg)
+
+### 📊 Prioritization Grid
+> Mapping every initiative against **User Importance** vs **Team Feasibility** to focus on what matters most.
+
+![Prioritization Grid](docs/prioritization-grid.jpg)
+
+---
+
 # 🎯 Problem Statement
 
 Despite legal accessibility requirements, many university campuses continue to contain barriers that restrict equal participation for individuals with disabilities.
