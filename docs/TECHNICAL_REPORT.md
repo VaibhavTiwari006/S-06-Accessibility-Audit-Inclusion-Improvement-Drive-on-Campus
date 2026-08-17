@@ -282,7 +282,23 @@ Digital accessibility evaluations follow WCAG 2.1 principles:
 
 ---
 
-## 10. Future Scope
+## 10. Prioritization Strategy
+
+To guide remediation decisions, a **Prioritization Grid** was developed mapping each improvement initiative against two dimensions: **Importance to the User** (vertical axis) and **Feasibility for the Team** (horizontal axis).
+
+![Prioritization Grid — Access Audit Project](prioritization-grid.jpg)
+
+**Key takeaways from the grid:**
+- **Do First (High Impact, High Feasibility):** Conduct accessibility audits, report barriers with evidence, centralized issue tracking, prioritize critical barriers with action plans
+- **Plan Strategically (High Impact, Low Feasibility):** Major infrastructure upgrades (ramps, lifts, toilets), full WCAG 2.1 digital compliance, universal campus redesign
+- **Quick Wins (Low Impact, High Feasibility):** Awareness campaigns, success stories, accessibility information pages
+- **Defer (Low Impact, Low Feasibility):** Complete campus redevelopment, replace all infrastructure, advanced AI features
+
+This grid directly informed our platform's feature prioritization — focusing first on audit tools, barrier reporting, and issue tracking (top-right quadrant) before addressing infrastructure-level changes.
+
+---
+
+## 11. Future Scope
 
 1. **Mobile Application** — React Native companion for field auditors
 2. **Offline Sync** — Service worker-based offline audit capability
@@ -293,7 +309,7 @@ Digital accessibility evaluations follow WCAG 2.1 principles:
 
 ---
 
-## 11. Conclusion
+## 12. Conclusion
 
 AccessAudit demonstrates that campus accessibility improvement can be systematically approached through technology. By combining structured audit workflows, participatory feedback mechanisms, evidence-based scoring, and data-driven remediation planning, the platform provides university administrators with actionable insights to create more inclusive campuses.
 
