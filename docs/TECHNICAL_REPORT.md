@@ -60,6 +60,14 @@ The audit workflow was mapped across three dimensions — **Doing**, **Thinking*
 
 This empathy mapping ensured each step of the audit workflow (Open App → Select Audit Type → Select Location → Start Audit → Record Barriers → Rate Accessibility → Submit Report → View Status → Feedback) was designed to minimize user confusion and maximize confidence.
 
+### Hills Statements (IBM Enterprise Design Thinking)
+
+Using the **Who / What / Wow** framework, Hills Statements were crafted to define measurable outcomes for each stakeholder group:
+
+![Hills Statements — Access Audit](hills-statements.jpg)
+
+The Hills framework ensured every feature delivers tangible value — connecting *who* benefits (students, persons with disabilities, auditors, administrators) with *what* the platform provides (barrier reporting, structured audits, real-time tracking, data-driven insights) and *wow* outcomes (inclusive campus, transparent accountability, faster resolution, continuous improvement).
+
 ---
 
 ## 3. System Architecture
