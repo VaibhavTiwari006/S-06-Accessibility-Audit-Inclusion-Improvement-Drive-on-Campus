@@ -44,6 +44,14 @@ The following "What If" vignettes capture the core design thinking questions tha
 
 Each vignette maps directly to a feature implemented in the platform — from barrier reporting and real-time building status to structured audits, accessible navigation, and administrative dashboards.
 
+### Stakeholder Need Statements
+
+Each stakeholder group was analyzed to define their core needs, ensuring the platform addresses real requirements:
+
+![Need Statements — Access Audit](need-statements.jpg)
+
+These need statements directly informed the system's role-based architecture — with dedicated dashboards, workflows, and permissions tailored to each stakeholder group.
+
 ---
 
 ## 3. System Architecture
