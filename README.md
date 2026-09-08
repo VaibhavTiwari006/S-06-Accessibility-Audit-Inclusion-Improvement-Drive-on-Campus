@@ -1,360 +1,141 @@
-# ♿ S-06: Accessibility Audit & Inclusion Improvement Drive
+# CU Access Audit
 
 [![CI Build and Verification](https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus/actions/workflows/ci.yml/badge.svg)](https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus/actions/workflows/ci.yml)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.1-brightgreen)
-![React](https://img.shields.io/badge/React-18-blue)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![React](https://img.shields.io/badge/React-19-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-> A comprehensive campus accessibility assessment platform designed to identify, document, and improve physical and digital accessibility across university campuses in accordance with the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **WCAG 2.1 AA** accessibility standards.
+A full-stack platform for conducting campus accessibility audits, documenting physical and digital barriers, collecting evidence, and tracking remediation work.
 
----
+![CU Access Audit interface](frontend/src/assets/hero.png)
 
-## ⚡ Quick Start
+## Project Status
+
+**Status:** Functional development build  
+**Production demo:** Not currently deployed  
+**Implemented:** Authentication, role-based workflows, building and audit management, evidence handling, student reports, maintenance tasks, dashboards, PDF reports, and API documentation  
+**Planned:** Production deployment, automated frontend component tests, expanded backend test coverage, and a verified role-based screenshot gallery
+
+## Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | React 19, Vite, Tailwind CSS, Axios, React Router |
+| Backend | Java 21, Spring Boot 3.4.1, Spring Security, Spring Data JPA |
+| Database | PostgreSQL 15; H2 for automated tests |
+| Security | JWT authentication, BCrypt password hashing, role-based authorization |
+| Tooling | Docker Compose, Maven, OpenAPI/Swagger, GitHub Actions |
+
+## Key Engineering Features
+
+- Four application roles: Administrator, Auditor, Student, and Maintenance
+- Stateless JWT authentication and protected REST endpoints
+- Physical and digital audit workflows with evidence records
+- Student barrier reporting and maintenance-task tracking
+- Dashboard metrics and PDF report generation
+- Interactive campus map and accessibility-related views
+- Automated backend tests and frontend build/lint checks in CI
+- Docker Compose setup for frontend, backend, and PostgreSQL
+
+## My Contributions
+
+My work in this repository includes:
+
+- Designing and implementing the React and Spring Boot application structure
+- Building role-based screens and API integrations
+- Implementing JWT authentication and authorization
+- Modelling PostgreSQL entities and Spring Data repositories
+- Creating automated backend tests and GitHub Actions workflows
+- Producing the SRS, architecture, API, testing, deployment, and user documentation
+- Applying IBM Enterprise Design Thinking artifacts to requirements and feature prioritization
+
+## Quick Start
+
+### Requirements
+
+- Docker Desktop with Docker Compose
+
+### Run the complete application
 
 ```bash
-# Clone the repository
 git clone https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus.git
 cd S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus
-
-# Start all services (Frontend + Backend + Database)
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
-**Access the application:**
-- 🌐 Frontend: http://localhost:3000
-- 🔗 Backend API: http://localhost:8080/api
-- 📖 API Docs: http://localhost:8080/swagger-ui.html
+| Service | Local URL |
+|---|---|
+| Frontend | http://localhost:3000 |
+| Backend API | http://localhost:8080/api |
+| Swagger UI | http://localhost:8080/swagger-ui.html |
 
-**Default Credentials:**
+<details>
+<summary>Development-only sample accounts</summary>
+
+> **Security notice:** These credentials are seeded exclusively for local development and demonstration. Never reuse them in a public or production deployment.
+
 | Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@campus.edu | password |
+|---|---|---|
+| Administrator | admin@campus.edu | password |
 | Auditor | auditor@campus.edu | password |
 | Student | student@campus.edu | password |
 | Maintenance | maintenance@campus.edu | password |
 
----
+</details>
 
-## 📌 Overview
-Accessibility is a fundamental requirement for creating an inclusive educational environment. Many students and staff with disabilities continue to experience barriers while accessing classrooms, laboratories, libraries, administrative offices, campus facilities, and digital platforms.
-
-This project provides a structured framework to evaluate campus accessibility, collect stakeholder feedback, generate actionable recommendations, and assist university administrators in planning accessibility improvements.
-
-The project combines **field audits**, **digital accessibility assessments**, **student participation**, and **data-driven reporting** into a single platform.
-
----
-
-# 🎯 Problem Statement
-
-Despite legal accessibility requirements, many university campuses continue to contain barriers that restrict equal participation for individuals with disabilities.
-
-Common challenges include:
-
-- Inaccessible entrances and pathways
-- Missing ramps or elevators
-- Poor tactile guidance for visually impaired users
-- Lack of accessible washrooms
-- Inadequate classroom accessibility
-- Poor website accessibility
-- LMS platforms not compliant with accessibility standards
-- Insufficient disability awareness among students and staff
-
-
-These issues reduce educational accessibility and negatively impact the overall campus experience.
-
----
-
-## 🧠 Design Thinking & Project Strategy
-
-Our platform was built using a structured **IBM Enterprise Design Thinking** approach — from stakeholder analysis through prioritized implementation.
-
-### 💡 Big Idea Vignettes
-> *"What if users could report accessibility barriers in seconds?"* — The 12 "What If" questions that sparked the platform.
-
-![Big Idea Vignettes](docs/big-idea-vignettes.jpg)
-
-### 👥 Stakeholder Need Statements
-> Each stakeholder's core need mapped to a platform feature — ensuring no user group is left behind.
-
-![Need Statements](docs/need-statements.jpg)
-
-### 🗺️ User Journey Empathy Map
-> Tracking what users **Do**, **Think**, and **Feel** across every step of the audit workflow.
-
-![User Journey Map](docs/user-journey-map.png)
-
-### 🏔️ Hills Statements (Who / What / Wow)
-> Measurable outcomes for each stakeholder — connecting *who* benefits, *what* we deliver, and *wow* impact.
-
-![Hills Statements](docs/hills-statements.jpg)
-
-### 📊 Prioritization Grid
-> Mapping every initiative against **User Importance** vs **Team Feasibility** to focus on what matters most.
-
-![Prioritization Grid](docs/prioritization-grid.jpg)
-
----
-
-
-# 🚀 Project Objectives
-
-The primary objectives of this project are to:
-
-- Conduct comprehensive physical accessibility audits across campus
-- Evaluate digital platforms using WCAG 2.1 AA guidelines
-- Identify accessibility barriers through evidence-based assessments
-- Engage students and staff with disabilities throughout the audit process
-- Produce actionable remediation recommendations
-- Increase campus-wide awareness regarding accessibility and inclusion
-- Support university administration with data-driven decision making
-- Promote long-term accessibility improvements
-
----
-
-# ✨ Key Features
-
-## Physical Accessibility Audit
-
-- Building accessibility inspections
-- Ramp evaluation
-- Elevator accessibility
-- Washroom accessibility
-- Classroom accessibility
-- Library accessibility
-- Laboratory accessibility
-- Parking accessibility
-- Signage assessment
-- Emergency evacuation accessibility
-
----
-
-## Digital Accessibility Audit
-
-- University Website Audit
-- Learning Management System (LMS)
-- Student Portal
-- Mobile Responsiveness
-- Keyboard Navigation
-- Screen Reader Compatibility
-- Color Contrast Analysis
-- Image Alt Text Validation
-- Form Accessibility
-- ARIA Compliance
-
----
-
-## Survey & Feedback System
-
-- Student accessibility surveys
-- Faculty feedback
-- Staff feedback
-- Anonymous reporting
-- Issue categorization
-- Suggestion collection
-
----
-
-## Dashboard & Reporting
-
-- Accessibility statistics
-- Audit progress tracking
-- Barrier categorization
-- Priority-based issue management
-- Report generation
-- Visual analytics
-
----
-
-# 🏗️ Technology Stack
-
-### Frontend
-
-- React.js
-- Vite
-- HTML5
-- CSS3
-- JavaScript (ES6)
+## Testing and Quality
 
 ### Backend
 
-- Spring Boot
-- Spring Security
-- JWT Authentication
-- Spring Data JPA
-- REST APIs
-
-### Database
-
-- PostgreSQL
-
-### Documentation
-
-- OpenAPI / Swagger
-- Markdown
-- Architecture Diagrams
-
----
-
-# 📂 Project Structure
-
-```
-S-06-Accessibility-Audit/
-│
-├── frontend/
-├── backend/
-├── database/
-├── docs/
-│   ├── architecture/
-│   ├── API_DOCUMENTATION.md
-│   ├── INSTALLATION.md
-│   ├── TESTING_REPORT.md
-│   └── USER_GUIDE.md
-│
-├── CHANGELOG.md
-├── README.md
-└── LICENSE
+```bash
+cd backend
+./mvnw clean verify
 ```
 
----
+The backend test suite uses JUnit 5, Mockito, Spring Boot Test, Spring Security Test, and H2. JaCoCo generates the coverage report during `verify`.
 
-# 👥 Stakeholders
+### Frontend
 
-| Stakeholder | Responsibility |
-|------------|----------------|
-| Students with Disabilities | Primary beneficiaries and participants |
-| Faculty Members | Feedback and implementation support |
-| University Administration | Decision making and policy implementation |
-| Campus Facilities Team | Infrastructure improvements |
-| Disability Rights Organizations | Advisory support |
-| General Student Community | Awareness and participation |
+```bash
+cd frontend
+npm ci
+npm run lint
+npm run build
+```
 
----
+Lint errors fail CI. Automated React component testing remains planned and is tracked as an explicit project-status item.
 
-# 📋 Audit Scope
+## Requirements Summary
 
-## Physical Infrastructure
+- 19 functional requirements
+- 8 non-functional requirements
+- 21 user stories
+- Requirements informed by the Rights of Persons with Disabilities Act, 2016 and WCAG 2.1 AA
 
-- Academic Blocks
-- Administrative Buildings
-- Libraries
-- Laboratories
-- Hostels
-- Cafeterias
-- Parking Areas
-- Walkways
-- Entrances
-- Emergency Exits
+## Documentation
 
----
+| Document | Purpose |
+|---|---|
+| [Installation Guide](docs/INSTALLATION.md) | Local setup |
+| [User Guide](docs/USER_GUIDE.md) | Role-based workflows |
+| [API Documentation](docs/API_DOCUMENTATION.md) | REST endpoints |
+| [System Architecture](docs/architecture/system-architecture.md) | Application architecture |
+| [Database Schema](docs/architecture/DATABASE_SCHEMA.md) | Entities and relationships |
+| [Testing Report](docs/TESTING_REPORT.md) | Test scope and results |
+| [Technical Report](docs/TECHNICAL_REPORT.md) | Complete project report |
+| [Deployment Guide](docs/DEPLOYMENT.md) | Docker and Nginx deployment |
+| [Software Requirements Specification](docs/requirements/software-requirement-specification.md) | Formal requirements |
 
-## Digital Platforms
+Design-thinking canvases and extended project analysis remain available under [docs](docs/).
 
-- University Website
-- Student Portal
-- Learning Management System
-- Online Forms
-- Internal Web Applications
+## Contributing and Security
 
----
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Security Policy](SECURITY.md)
 
-# 📅 Implementation Timeline
+## License
 
-| Week | Milestone |
-|------|-----------|
-| Week 1 | Research, stakeholder analysis, audit planning |
-| Week 2 | Physical accessibility assessment |
-| Week 3 | Digital accessibility evaluation |
-| Week 4 | User surveys and participatory sessions |
-| Week 5 | Awareness campaign and remediation planning |
-| Week 6 | Final reporting and presentation |
-
----
-
-
-
----
-
-# 📦 Expected Deliverables
-
-- Comprehensive Physical Accessibility Audit
-- Digital Accessibility Compliance Report
-- Accessibility Scorecard
-- Evidence-Based Documentation
-- Student Survey Analysis
-- Priority-wise Remediation Roadmap
-- Awareness Campaign Materials
-- Administrative Policy Recommendations
-- Final Project Report
-
----
-
-# 📚 Documentation
-
-Detailed project documentation is available below.
-
-| Document | Description |
-|----------|-------------|
-| [📖 Installation Guide](docs/INSTALLATION.md) | Setup and deployment instructions |
-| [👤 User Guide](docs/USER_GUIDE.md) | Role-based usage instructions |
-| [📑 API Documentation](docs/API_DOCUMENTATION.md) | REST endpoint specifications |
-| [🏗️ System Architecture](docs/architecture/system-architecture.md) | Three-tier architecture overview |
-| [🗄️ Database Schema](docs/architecture/DATABASE_SCHEMA.md) | ER diagrams and table definitions |
-| [🧪 Testing Report](docs/TESTING_REPORT.md) | Test strategy and results |
-| [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive final project report |
-| [🚀 Deployment Guide](docs/DEPLOYMENT.md) | Production deployment with Docker & Nginx |
-| [📝 Changelog](CHANGELOG.md) | Version history and release notes |
-| [🔒 Security Policy](SECURITY.md) | Vulnerability disclosure and security measures |
-| [📖 SRS](docs/requirements/software-requirement-specification.md) | Software Requirement Specification |
-| [📋 User Stories](docs/requirements/user-stories.md) | 21 user stories across 5 roles |
-| [✅ Functional Requirements](docs/requirements/functional-requirements.md) | 19 functional requirements |
-| [⚙️ Non-Functional Requirements](docs/requirements/non-functional-requirements.md) | 8 non-functional requirements |
-
----
-
-# ⚖️ Compliance Standards
-
-This project follows internationally recognized accessibility standards, including:
-
-- Rights of Persons with Disabilities (RPWD) Act, 2016
-- Web Content Accessibility Guidelines (WCAG) 2.1 Level AA
-- Universal Design Principles
-- Inclusive Education Best Practices
-
----
-
-# 🌍 Expected Impact
-
-This initiative aims to create a more inclusive university ecosystem by:
-
-- Improving accessibility awareness
-- Supporting evidence-based infrastructure improvements
-- Encouraging participatory governance
-- Enhancing digital accessibility
-- Promoting equal educational opportunities
-- Assisting institutions in meeting legal accessibility requirements
-
----
-
-# 🛡️ CI/CD & Security Architecture
-
-To support scalability and code reliability, this repository integrates:
-*   **GitHub Actions CI Workflow**: Automates Spring Boot unit tests and Node.js Vite asset compilation on every push or pull request.
-*   **BCrypt Password Encryption**: Implemented for all user credential storage.
-*   **SQL Parameterization**: Enforced via Spring Data JPA Hibernate layers to prevent SQL injections.
-
----
-
-# 🤝 Contributing & Community
-
-We welcome community collaborations! Please review our:
-*   [**Contributing Guidelines**](CONTRIBUTING.md)
-*   [**Code of Conduct**](CODE_OF_CONDUCT.md)
-*   [**Security Policy**](SECURITY.md)
-
----
-
-# 📄 License
-
-This project is developed as part of the **CUSOC Social Innovation Initiative** for educational and research purposes.
+Licensed under the [MIT License](LICENSE).
