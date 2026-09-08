@@ -10,9 +10,9 @@ This document summarizes the testing methodologies, configurations, and results 
 *   **Execution Command**: `./mvnw test`
 *   **Test Suites Configured**:
     1.  **BuildingControllerTest**: Verifies building CRUD APIs, including registration permissions, unique building code validation constraints, and retrieval filters.
-    2.  **ReportControllerTest**: Verifies report compilation math, compliance scores, and executive summary PDF generation.
+    2.  **ReportControllerTest**: Verifies campus and building PDF report generation.\n    3.  **AuthServiceImplTest**: Verifies user registration, duplicate-email rejection, password encoding, authentication, JWT issuance, and returned user details.
 *   **Latest Test Execution Results**:
-    *   **Tests Run**: 8
+    *   **Tests Run**: 11
     *   **Failures**: 0
     *   **Errors**: 0
     *   **Skipped**: 0
