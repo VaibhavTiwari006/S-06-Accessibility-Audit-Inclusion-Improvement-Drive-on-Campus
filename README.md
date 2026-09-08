@@ -94,7 +94,7 @@ cd backend
 ./mvnw clean verify
 ```
 
-The backend test suite uses JUnit 5, Mockito, Spring Boot Test, Spring Security Test, and H2. JaCoCo generates the coverage report during `verify`.
+The backend test suite contains eleven tests using JUnit 5, Mockito, Spring Boot Test, Spring Security Test, and H2. JaCoCo generates the coverage report during `verify`.
 
 ### Frontend
 
