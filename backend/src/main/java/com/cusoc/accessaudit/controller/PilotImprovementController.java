@@ -60,7 +60,7 @@ public class PilotImprovementController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<PilotImprovementResponse>> updateStatus(
             @PathVariable Long id,
-            @RequestBody PilotStatusUpdateRequest request,
+            @Valid @RequestBody PilotStatusUpdateRequest request,
             Authentication authentication) {
         String email = authentication != null ? authentication.getName() : null;
         PilotImprovementResponse response = pilotImprovementService.updateStatus(id, request, email);
