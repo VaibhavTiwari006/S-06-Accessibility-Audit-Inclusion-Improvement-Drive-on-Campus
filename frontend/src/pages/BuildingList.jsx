@@ -34,6 +34,26 @@ const BuildingList = () => {
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedBuilding, setSelectedBuilding] = useState(null);
+  const filterRef = React.useRef(null);
+
+  // Close filter dropdown on click outside or Escape key
+  useEffect(() => {
+    if (!isFilterOpen) return;
+    const handleClickOutside = (e) => {
+      if (filterRef.current && !filterRef.current.contains(e.target)) {
+        setIsFilterOpen(false);
+      }
+    };
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setIsFilterOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isFilterOpen]);
 
   const fetchBuildings = async () => {
     try {
@@ -115,7 +135,7 @@ const BuildingList = () => {
           </div>
 
           {/* Filter Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={filterRef}>
             <Button 
               variant="outline"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
