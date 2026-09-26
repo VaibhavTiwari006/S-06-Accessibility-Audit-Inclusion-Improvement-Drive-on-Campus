@@ -1,91 +1,53 @@
-# 🎙️ Stakeholder Interviews & Participatory Research
-## Qualitative Ground Narratives from 48 Campus Students, Faculty & Facilities Personnel
+# 🗣️ Student Feedback & Campus Community Observations
+## Qualitative Ground Insights on Accessibility & Daily Campus Navigation
 
-> **Research Lead & Interviewer:** Vaibhav Tiwari  
-> **Total In-Depth Interviews Conducted:** 48 Sessions (Average 25–40 minutes per interview)  
-> **Ethics & Consent:** Full informed consent obtained; responses anonymized for privacy  
-> **Methodology:** Semi-structured qualitative enquiry combined with accompanied "walk-along" mobility audits  
-
----
-
-## 👥 Participant Cohort Demographics
-
-```
-Total Stakeholder Participants (N = 48)
-┌──────────────────────────────────────────────────────────┬────────┬──────────┐
-│ Stakeholder Group & Lived Experience Profile             │ Count  │ Percent  │
-├──────────────────────────────────────────────────────────┼────────┼──────────┤
-│ ♿ Manual & Powered Wheelchair Users (Students)           │   11   │   22.9%  │
-│ 🦯 Visually Impaired Students (White Cane & Low Vision)   │    7   │   14.6%  │
-│ 🩼 Crutch, Caliper & Ambulatory Mobility Support Students │    6   │   12.5%  │
-│ 🧏 Deaf & Hard-of-Hearing Students                       │    4   │    8.3%  │
-│ 👨‍🏫 Departmental Faculty Members & Course Coordinators    │   12   │   25.0%  │
-│ 👷 Estate Engineers, Facility Technicians & Security Staff│    8   │   16.7%  │
-└──────────────────────────────────────────────────────────┴────────┴──────────┘
-```
+> **Lead Author & Auditor:** Vaibhav Tiwari  
+> **Source:** Direct on-campus student feedback, peer interactions, and on-site observations  
+> **Purpose:** Documenting genuine lived experiences and physical navigation hurdles to complement quantitative audit scores  
 
 ---
 
-## 🗣️ Voices from the Ground: Qualitative Narratives
+## 🎯 Ground Reality & Community Feedback Overview
 
-### 1. Mobility & Wheelchair Navigation Challenges
+During the campus accessibility audit, conversations with students, campus peers, and ground staff revealed that physical accessibility is not merely a checklist requirement—it directly impacts a student's daily independence, dignity, and academic participation.
 
-> *"When the ramp at Zakir Block is slippery during monsoon rains, I literally have to wait at the bottom until two other students or security guards come by to push me up. It completely strips away my dignity. I don't want special favours — I just want a ramp designed to the proper 1:12 slope so I can roll up by myself like everyone else walks up the stairs."*  
-> — **3rd Year Computer Science Student (Manual Wheelchair User)**
-
-> *"Block DD is where our practical electrical machines lab is located on the second floor. Because there is no lift, my friends had to carry my wheelchair up two flights of concrete stairs every Tuesday. Eventually, the department head agreed to move my lab station to the ground floor storeroom, but I was isolated from the rest of my class. Installing a lift is about equal education, not just convenience."*  
-> — **2nd Year Electrical Engineering Student (Powered Wheelchair User)**
-
-> *"In the computer labs with those aluminium floor trunking channels across the door, my front caster wheels always get stuck. If I don't lean back and pop a wheelie, the chair abruptly stops and I get thrown forward. It happens almost every day."*  
-> — **4th Year IT Student (Manual Wheelchair Navigator)**
+Rather than relying on theoretical assumptions, this document consolidates the key real-world challenges observed and shared by members of the university community across academic blocks, corridors, and common facilities.
 
 ---
 
-### 2. Visual Impairment & Tactile Wayfinding
+## 🔍 Key Navigation Challenges & Observed Realities
 
-> *"Most lifts on campus don't announce which floor they have arrived at. When the lift is crowded between class changes, I have no way of knowing if the door opened at Floor 2 or Floor 4. If someone isn't there to tell me, I have to step out, touch the wall signage, and hope there is Braille on the door. More often than not, there isn't."*  
-> — **1st Year Humanities Student (Visually Impaired, White Cane User)**
+### 1. Ramp Gradients & Approach Hazards
+* **Steep Entrance Gradients:** Certain older blocks (such as the Zakir Husain Complex) feature entrance ramps that are noticeably steeper than the recommended 1:12 ratio. Students using manual wheelchairs or mobility aids often require external assistance or struggle to ascend without fatigue.
+* **Surface Slippery During Monsoon:** Outdoor ramps lacking anti-slip textured finishes or grooved tiles become hazardous during rains, posing slipping risks for crutch users and wheelchair navigators alike.
+* **Missing Handrails:** Intermediate resting landings and continuous handrails at dual heights (750mm and 900mm) are missing on several entry ramps, making safe descent difficult for individuals with limited grip or balance.
 
-> *"The tactile paving leading from the main pedestrian crossing to Nek Chand Block is really helpful, but suddenly it terminates right in front of a drainage grate with missing blister tiles. Tactile indicators need to be continuous from the gate all the way to the classroom door."*  
-> — **2nd Year Management Student (Low Vision Navigator)**
+### 2. Vertical Circulation & Elevator Gaps
+* **Absence of Lifts in Multi-Storey Wings:** In blocks without elevator infrastructure (such as older wings like Block DD), upper-floor classrooms and laboratories are completely inaccessible to students who cannot climb stairs, necessitating ad-hoc room reassignments.
+* **Lack of Audio Announcements in Elevators:** Many active lifts lack bilingual voice synthesizers announcing arrival floors. Students with visual impairments must rely on fellow passengers or step out to check floor numbers.
+* **Braille Button Wear & Legibility:** While several newer lifts (such as in Block A) feature braille control buttons, older lift panels have worn buttons or lack raised tactile indicators, making independent operation challenging.
 
----
+### 3. Restroom Accessibility & Privacy
+* **Door Swing Direction:** In several accessible restrooms, doors were observed swinging inward rather than outward or sliding. In a compact stall, an inward-swinging door leaf obstructs wheelchair footrests, preventing users from closing the door securely for privacy.
+* **Grab Bar Stability & Positioning:** A recurring observation across older restrooms was the absence of sturdy, L-shaped horizontal grab bars or fold-up side supports near the toilet pan.
+* **Floor Thresholds & Drainage:** Raised floor thresholds at restroom entryways create physical obstacles for wheelchair casters and trip hazards for students with visual or ambulatory impairments.
 
-### 3. Sanitary Facilities & Privacy Concerns
+### 4. Pathways, Tactile Paving & Wayfinding
+* **Discontinuous Tactile Paths:** Where tactile guiding tiles exist along main pedestrian crossings, they frequently end abruptly before reaching building entrances or are interrupted by drainage grates.
+* **Signage Legibility & Mounting Heights:** Classroom and facility signs are often mounted too high for comfortable reading and lack embossed tactile characters or braille translations.
+* **Lighting in Stairwells:** Certain secondary stairwells and corridors have uneven lighting or unlit corners, reducing safety for low-vision students and staff during late hours.
 
-> *"Having an accessible restroom isn't just about putting a wheelchair symbol on the door. In Block B2, the door swings inwards. Once my wheelchair is inside, my footrests physically block the door from swinging shut. I cannot close the door to use the toilet in private. I have had to hold my bladder for 6 hours until I return to my hostel room."*  
-> — **3rd Year Biotechnology Student (Wheelchair User)**
-
-> *"The grab bar in one of the central library washrooms was loose. The first time I tried to transfer from my chair, the wall screws started pulling out. If an anchor fails while someone is transferring, it could cause serious spinal injury."*  
-> — **1st Year Law Student (Mobility Impairment)**
-
----
-
-### 4. Life Safety & Emergency Evacuation Anxiety
-
-> *"During a fire alarm drill last semester, everyone rushed down the stairwells. The elevators were automatically grounded, which is standard procedure. But there was no designated refuge area or evacuation chair on the 4th floor. The wardens told me to wait in the corridor while everyone evacuated. That experience made me realize how vulnerable we are in a real disaster without an inclusive emergency plan."*  
-> — **Postgraduate Research Scholar (Crutch User)**
-
-> *"As a deaf student, audible sirens mean nothing to me. If I am in an isolated restroom stall or a library cubicle, I cannot hear the fire alarm. There must be high-intensity visual strobe flashers in every single washroom and common room on this campus."*  
-> — **2nd Year Animation Student (Deaf Navigator)**
+### 5. Campus Maintenance & Feedback Loop
+* **Need for Structured Defect Reporting:** Campus maintenance staff noted that accessibility issues reported verbally or informally often take longer to address. Having a structured, photographic checklist system helps identify exact locations and specifications for quick remediation.
+* **Maintenance Accountability:** Routine checks (e.g., verifying that ramp pathways remain unobstructed by maintenance materials or bicycles) are essential to keep accessible routes usable every day.
 
 ---
 
-### 5. Insights from Estate Maintenance & Administration
+## 💡 Core Principles for Campus Inclusive Planning
 
-> *"Our maintenance team wants to make these fixes, but previously we didn't have an itemized, building-by-building audit with exact millimeter measurements and cost estimates. Having this platform with specific engineering parameters (like 1:12 ramp gradients and 750mm grab rail heights) gives our carpenters and masons clear blueprints to execute."*  
-> — **Assistant Executive Engineer (Campus Civil Maintenance)**
+The ground observations highlight four fundamental principles:
 
-> *"When students report broken door handles or ungrounded water coolers through informal verbal complaints, they often get lost. Having a centralized platform where ground audits and student barrier reports trigger automated maintenance work orders with photo evidence has completely transformed our response cycle."*  
-> — **Campus Estate Facilities Supervisor**
-
----
-
-## 💡 Key Design Takeaways for Campus Planning
-
-The 48 interviews converged on **four foundational principles**:
-
-1. **Continuity of Route (The "Chain of Access"):** An accessible building is useless if the external pedestrian pathway connecting it to the transit stop or hostel has broken kerb ramps. Accessibility must be audited and maintained as an unbroken end-to-end chain.
-2. **Autonomous Dignity over Assisted Access:** Students universally rejected solutions requiring them to ask security staff or peers for physical lifting, demanding independent, self-directed access.
-3. **Multi-Sensory Redundancy:** Every critical piece of information (floor announcements, fire alarms, wayfinding signage) must be conveyed through at least two sensory channels simultaneously (visual + audible, or tactile + high-contrast visual).
-4. **Participatory Maintenance Feedback:** Disabled students are the ultimate experts on their built environment; continuous crowd-sourced reporting is essential for maintaining accessibility infrastructure over time.
+1. **Unbroken Chain of Access:** Accessibility cannot stop at the building entrance; the entire pathway from campus roads, pedestrian walkways, building doors, corridors, elevators, and restrooms must remain seamless and barrier-free.
+2. **Independent Dignity:** Campus design must prioritize autonomous, self-directed access rather than forcing individuals with disabilities to rely on security guards or peers for physical assistance.
+3. **Multi-Sensory Communication:** Essential wayfinding, classroom numbers, and emergency safety notifications must be provided in at least two formats (visual + audible, or tactile + high-contrast visual).
+4. **Continuous Community Input:** Empowering students and staff to report barriers directly ensures the campus remains accessible as infrastructure evolves.
