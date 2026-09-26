@@ -11,6 +11,8 @@ export const triggerVisualAlert = (type) => {
     overlay.classList.add('border-[12px]', 'border-red-500');
   } else if (type === 'success') {
     overlay.classList.add('border-[12px]', 'border-emerald-500');
+  } else if (type === 'warning') {
+    overlay.classList.add('border-[12px]', 'border-amber-500');
   } else {
     overlay.classList.add('border-[12px]', 'border-primary');
   }
@@ -39,5 +41,13 @@ export const accessibleToast = {
   info: (msg, options) => {
     triggerVisualAlert('info');
     return toast.info(msg, options);
+  },
+  warn: (msg, options) => {
+    triggerVisualAlert('warning');
+    return toast.warn(msg, options);
+  },
+  warning: (msg, options) => {
+    triggerVisualAlert('warning');
+    return toast.warn(msg, options);
   }
 };
