@@ -23,6 +23,7 @@ const AwarenessPage = lazy(() => import('../pages/AwarenessPage'));
 const AuditConduct = lazy(() => import('../pages/AuditConduct'));
 const QuizPage = lazy(() => import('../pages/QuizPage'));
 const VerbalMap = lazy(() => import('../pages/VerbalMap'));
+const ProjectPresentation = lazy(() => import('../pages/ProjectPresentation'));
 
 /**
  * PageLoader Loading Fallback Component
@@ -92,6 +93,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/presentation" element={<ProjectPresentation />} />
         
         {/* Protected Routes */}
         <Route path="/dashboard" element={<ProtectedRoute><MainLayout><Dashboard /></MainLayout></ProtectedRoute>} />
