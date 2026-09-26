@@ -34,17 +34,31 @@ const PublicTrackBarrier = () => {
     const fetchIssueDetails = async () => {
       try {
         setLoading(true);
-        const data = await issueService.getAllIssues();
-        const found = data.find((i) => String(i.id) === String(issueId)) || data[0] || {
-          id: issueId || '1',
-          buildingName: 'Computer Science Building',
-          description: 'Main entrance ramp slope gradient exceeds 1:12 standards & non-slip handrail requires replacement.',
-          locationDetails: 'Main Entrance West Wing Ramp',
-          status: 'IN_PROGRESS',
-          reporterName: 'Aarav Sharma (Student)',
-          createdAt: '2026-07-28',
-          adminNotes: 'Civil Maintenance crew dispatched. Custom stainless steel handrails being mounted.'
-        };
+        let found = null;
+        if (issueId) {
+          try {
+            found = await issueService.getIssueById(issueId);
+          } catch {
+            const data = await issueService.getAllIssues();
+            found = data.find((i) => String(i.id) === String(issueId)) || data[0];
+          }
+        } else {
+          const data = await issueService.getAllIssues();
+          found = data[0];
+        }
+
+        if (!found) {
+          found = {
+            id: issueId || '1',
+            buildingName: 'Computer Science Building',
+            description: 'Main entrance ramp slope gradient exceeds 1:12 standards & non-slip handrail requires replacement.',
+            locationDetails: 'Main Entrance West Wing Ramp',
+            status: 'IN_PROGRESS',
+            reporterName: 'Aarav Sharma (Student)',
+            createdAt: '2026-07-28',
+            adminNotes: 'Civil Maintenance crew dispatched. Custom stainless steel handrails being mounted.'
+          };
+        }
         setIssue(found);
       } catch (error) {
         toast.error('Failed to fetch barrier tracking details.');
