@@ -29,7 +29,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Quiz Challenge', path: '/quiz',   icon: Trophy,          roles: ['STUDENT'] },
     { name: 'Verbal Audio Map', path: '/verbal-map', icon: Compass,   roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
-    { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN'] },
+    { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Accessibility', path: '/accessibility', icon: Settings, roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
   ];
 
