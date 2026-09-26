@@ -1,48 +1,89 @@
-# Installation Guide
+# Installation & Deployment Guide: AccessAudit
+## Quick Start, Docker Compose & Local Development Instructions
 
-## Prerequisites
-- **Docker** and **Docker Compose** installed on your system.
-- **Git** (for cloning the repository).
-- (Optional) Java 21 and Node.js 20 if you plan to run the services outside of Docker.
+> **Project:** S-06: Accessibility Audit & Inclusion Improvement Drive on Campus  
+> **Author & Sole Contributor:** **Vaibhav Tiwari** (Chandigarh University • CUSoC 2026)  
+> **Evaluation Dossier:** [`docs/CUSOC_FINAL_EVALUATION.md`](CUSOC_FINAL_EVALUATION.md) | **Live Presentation Deck:** [`/presentation`](http://localhost:3000/presentation)  
 
-## Getting Started
+---
 
-### 1. Clone the Repository
+## 🛠️ Prerequisites
+
+* **Docker & Docker Compose** (Recommended for instant single-command evaluation)
+* **Git** (for repository cloning)
+* *(Optional for manual local run)*: Java 21 JDK, Maven 3.9+, Node.js 20+, and PostgreSQL 16
+
+---
+
+## 🚀 Recommended: 1-Command Docker Deployment
+
+The fastest way to launch the full AccessAudit platform for evaluation:
+
 ```bash
+# 1. Clone the repository
 git clone https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus.git
 cd S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus
-```
 
-### 2. Start Services with Docker Compose
-The project uses Docker Compose to easily orchestrate the Frontend, Backend, and Database containers.
-
-```bash
+# 2. Build and launch all multi-container services
 docker-compose up -d --build
 ```
-This command will:
-- Start a PostgreSQL database instance.
-- Build and start the Spring Boot backend service.
-- Build and serve the React Vite frontend via Nginx.
-- Seed the database with initial users, buildings, audits, and roadmap tasks on the first run.
 
-### 3. Access the Application
-Once the containers are running, you can access the portal at:
-- **Frontend Portal**: http://localhost:3000
-- **Backend API Base**: http://localhost:8080/api
+### What Docker Compose Automates:
+* 🗄️ **PostgreSQL 16 Database (`accessaudit_db` on port 5432):** Automatically initializes database schemas and seeds 29 real campus buildings, 42-parameter audit checklists, users, and roadmap tasks.
+* ☕ **Spring Boot 3.4.1 Backend (`accessaudit_backend` on port 8080):** Multi-stage Java 21 build with Spring Security, JWT authentication, and cybersecurity filters.
+* ⚡ **React 18 Frontend (`accessaudit_frontend` on port 3000):** Built with Vite and served via an optimized, hardened Nginx reverse proxy.
 
-### 4. Default Credentials (Seeded)
-Use the following credentials to log in:
-- **Admin**: `admin@campus.edu` (Password: `password`)
-- **Auditor**: `auditor@campus.edu` (Password: `password`)
-- **Student**: `student@campus.edu` (Password: `password`)
-- **Maintenance**: `maintenance@campus.edu` (Password: `password`)
+---
 
-## Stopping the Application
-To stop the application and keep the data:
+## 🌐 Evaluation Endpoints & Live Services
+
+Once containers are active, access the platform at:
+
+* **🏆 CUSoC 2026 Presentation Deck:** [http://localhost:3000/presentation](http://localhost:3000/presentation)
+* **🌐 Web Application Portal:** [http://localhost:3000](http://localhost:3000)
+* **🔗 Backend REST API Base:** [http://localhost:8080/api](http://localhost:8080/api)
+* **📖 Interactive Swagger API Docs:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+* **💓 Health Check & Uptime Probe:** [http://localhost:8080/api/health](http://localhost:8080/api/health)
+
+---
+
+## 🔑 Default Pre-Seeded Accounts
+
+| User Role | Email Address | Password | Permissions & Scope |
+|:---|:---|:---|:---|
+| **Administrator** | `admin@campus.edu` | `password` | Full system access, department analytics, user roles |
+| **Campus Auditor** | `auditor@campus.edu` | `password` | 42-parameter checklist conductor, draft saving, photo evidence |
+| **Student / Staff** | `student@campus.edu` | `password` | Barrier reporting, QR tracker, community voting, quiz |
+| **Maintenance** | `maintenance@campus.edu` | `password` | 5-stage Kanban remediation roadmap, work order updates |
+
+---
+
+## 💻 Manual Local Development (Without Docker)
+
+### Backend (Spring Boot + Java 21):
 ```bash
-docker-compose down
+cd backend
+# Ensure local PostgreSQL is running with database 'accessaudit'
+./mvnw spring-boot:run
+# Server starts on http://localhost:8080
 ```
-To stop the application and wipe the database volume:
+
+### Frontend (React 18 + Vite):
 ```bash
+cd frontend
+npm install
+npm run dev
+# Dev server starts on http://localhost:5173 (with automated API proxy to port 8080)
+```
+
+---
+
+## 🛑 Managing & Teardown
+
+```bash
+# Stop all running containers (preserves database data volume)
+docker-compose down
+
+# Stop containers and wipe database volume for a clean fresh re-seed
 docker-compose down -v
 ```
