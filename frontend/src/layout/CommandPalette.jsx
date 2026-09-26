@@ -19,7 +19,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
     { id: 'map', title: 'Campus Map', icon: Map, path: '/map', shortcut: 'M', roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { id: 'community', title: 'Community Forum', icon: HeartHandshake, path: '/community', shortcut: 'C', roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
     { id: 'quiz', title: 'Quiz Challenge', icon: Trophy, path: '/quiz', shortcut: 'Q', roles: ['ADMIN', 'STUDENT'] },
-    { id: 'settings', title: 'System Settings', icon: SettingsIcon, path: '/settings', shortcut: 'S', roles: ['ADMIN'] },
+    { id: 'settings', title: 'Settings & Preferences', icon: SettingsIcon, path: '/settings', shortcut: 'S', roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
   ];
 
   const roleAllowedCommands = allCommands.filter(cmd => !role || cmd.roles.includes(role));
