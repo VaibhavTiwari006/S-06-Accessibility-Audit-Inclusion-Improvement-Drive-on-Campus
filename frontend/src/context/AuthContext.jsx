@@ -12,8 +12,10 @@ const isValidJwt = (token) => {
   return parts.length === 3;
 };
 
-const clearSession = () => {
-  localStorage.clear();
+const AUTH_KEYS = ['accessToken', 'userRole', 'userFullName', 'userEmail', 'userId', 'userAvatar'];
+
+export const clearSession = () => {
+  AUTH_KEYS.forEach(key => localStorage.removeItem(key));
 };
 
 export const AuthProvider = ({ children }) => {

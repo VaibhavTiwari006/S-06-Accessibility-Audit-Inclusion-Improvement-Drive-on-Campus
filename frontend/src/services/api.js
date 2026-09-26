@@ -19,13 +19,15 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+const AUTH_KEYS = ['accessToken', 'userRole', 'userFullName', 'userEmail', 'userId', 'userAvatar'];
+
 // Response interceptor to handle global errors like 401 Unauthorized
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401 && !error.config.url.includes('/auth/login')) {
-      // Clear ALL stored session data and redirect to login
-      localStorage.clear();
+      // Clear only stored auth session data, preserving accessibility preferences
+      AUTH_KEYS.forEach(key => localStorage.removeItem(key));
       window.location.href = '/login';
     }
     return Promise.reject(error);
