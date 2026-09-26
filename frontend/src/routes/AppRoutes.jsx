@@ -103,7 +103,7 @@ const AnimatedRoutes = () => {
         <Route path="/evidence" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR', 'MAINTENANCE']}><MainLayout><EvidenceGallery /></MainLayout></ProtectedRoute>} />
         <Route path="/reports" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR']}><MainLayout><Reports /></MainLayout></ProtectedRoute>} />
         <Route path="/community" element={<ProtectedRoute><MainLayout><Community /></MainLayout></ProtectedRoute>} />
-        <Route path="/settings" element={<ProtectedRoute allowedRoles={['ADMIN']}><MainLayout><Settings /></MainLayout></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute allowedRoles={['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE']}><MainLayout><Settings /></MainLayout></ProtectedRoute>} />
         <Route path="/accessibility" element={<ProtectedRoute><MainLayout><AccessibilityPreferences /></MainLayout></ProtectedRoute>} />
         <Route path="/map" element={<ProtectedRoute><MainLayout><CampusMap /></MainLayout></ProtectedRoute>} />
         <Route path="/track/:issueId" element={<MainLayout><PublicTrackBarrier /></MainLayout>} />
