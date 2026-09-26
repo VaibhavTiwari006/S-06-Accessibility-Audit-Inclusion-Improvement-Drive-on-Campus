@@ -34,21 +34,37 @@ To help us triage and resolve the issue quickly, please include:
 
 ---
 
-## 🔒 Security Measures Already Implemented
+## 🔒 Comprehensive Multi-Layer Cyber Security Architecture
 
-AccessAudit incorporates security-by-design principles across both frontend and backend layers:
+AccessAudit adheres to rigorous defense-in-depth security principles across frontend, backend, network, and data persistence layers:
 
-- **BCrypt Password Hashing**: All user passwords are salted and hashed using Spring Security's `BCryptPasswordEncoder` before persistence. Passwords are never stored or logged in plain text.
-- **JWT Token-Based Authentication**: Secure, stateless authentication utilizing JSON Web Tokens (JWT) with configured expiration times, cryptographic signature validation, and authorization headers.
-- **Role-Based Access Control (RBAC)**: Fine-grained method-level and endpoint security enforced by Spring Security across four distinct user roles:
-  - `ADMIN`: Full administrative control, user management, and system configuration.
-  - `AUDITOR`: Conducting campus audits, logging checklist items, and submitting audit reports.
-  - `STUDENT`: Submitting accessibility feedback, reports, and participating in campus surveys.
-  - `MAINTENANCE`: Managing and resolving remediation tasks and work orders.
-- **SQL Injection Prevention**: Data persistence is implemented with Spring Data JPA and Hibernate, leveraging parameterized queries and object-relational mapping to prevent SQL injection vulnerabilities.
-- **CORS Configuration**: Restrictive Cross-Origin Resource Sharing (CORS) rules configured on backend controllers allowing only authorized origins, headers, and HTTP methods.
-- **Input Validation & Sanitization**: Comprehensive request payload validation using Jakarta Bean Validation (`@Valid`, `@NotNull`, `@NotBlank`, `@Size`, etc.) and sanitization to prevent XSS (Cross-Site Scripting) and payload tampering.
-- **Real-Time Profanity & Content Moderation Filter**: Automated scanning and filtering on user-submitted audit feedback, student reports, and comments to ensure safe and respectful discourse across campus.
+### 1. Authentication & Brute-Force Defense
+- **BCrypt Password Hashing**: All user passwords are salted and hashed using Spring Security's `BCryptPasswordEncoder` (cost factor 10) before database persistence. Passwords are never stored or logged in plain text.
+- **Brute-Force & Credential Stuffing Defense (`BruteForceProtectionService`)**: Automatic tracking of consecutive failed login attempts by username and IP address. Accounts and IP addresses are temporarily locked out for 15 minutes after 5 consecutive failed authentication attempts.
+- **Enforced Password Complexity Policy**: Public and user registrations mandate minimum 8 characters with at least one uppercase letter, one lowercase letter, and one number.
+- **JWT Cryptographic Integrity**: Stateless authentication using JSON Web Tokens (JWT) signed with HMAC-SHA256 algorithms and cryptographically verified on every inbound request.
+
+### 2. Network & Request Protection
+- **Sliding-Window Rate Limiting (`RateLimitingFilter`)**: Throttles burst requests to sensitive authentication endpoints (`/api/auth/**`) to 20 requests per minute per IP, preventing automated credential spraying and DoS floods with standardized HTTP 429 responses.
+- **Strict Cross-Origin Resource Sharing (CORS)**: Strict origin allowlisting restricted to `http://localhost:5173` and `http://localhost:3000` with explicit HTTP methods and credential permissions.
+- **Session Inactivity Watchdog**: Client-side background listener terminates sessions and clears memory storage after 30 minutes of complete inactivity on public or shared workstations.
+
+### 3. Application Security & Injection Defenses
+- **Cross-Site Scripting (XSS) Sanitization Filter (`XssSanitizationFilter` & `XssRequestWrapper`)**: Deep inspection and neutralization of incoming request parameters, headers, and query strings, stripping `<script>`, `javascript:`, and malicious event handlers (`onload`, `onerror`).
+- **SQL Injection Prevention**: 100% of database interactions leverage Spring Data JPA and Hibernate object-relational mapping with parameterized prepared statements.
+- **Input Validation & Content Moderation**: Comprehensive payload validation using Jakarta Bean Validation (`@Valid`, `@NotNull`, `@NotBlank`, `@Size`) combined with an automated profanity filter for student reports and forum proposals.
+- **PII Data Masking**: Automated masking of sensitive email addresses and confidential identifiers in logs and client UI components.
+
+### 4. Enterprise HTTP Security Headers (Backend & Nginx)
+Both the Spring Boot backend (`SecurityConfig`) and Nginx reverse proxy enforce zero-trust HTTP security headers:
+- `Content-Security-Policy (CSP)`: Enforces strict source directives for scripts, styles, fonts, and connects while disallowing unauthorized framing (`frame-ancestors 'none'`).
+- `X-Frame-Options: DENY`: Fully mitigates Clickjacking attacks.
+- `X-Content-Type-Options: nosniff`: Prevents MIME-type confusion and sniffing attacks.
+- `Strict-Transport-Security (HSTS)`: Enforces `max-age=31536000; includeSubDomains; preload` for SSL/TLS connections.
+- `Referrer-Policy: strict-origin-when-cross-origin`: Restricts sensitive URL parameter leakage in referer headers.
+- `Permissions-Policy`: Blocks unauthorized hardware access (`microphone=(), payment=()`).
+- `server_tokens off`: Conceals Nginx and server version details from reconnaissance tools.
+- **File System Shields**: Strict blocking of hidden dotfiles (`.git`, `.env`) and server artifacts (`.sql`, `.log`, `.yml`).
 
 ---
 
