@@ -58,8 +58,24 @@ const BuildingList = () => {
   const fetchBuildings = async () => {
     try {
       setLoading(true);
-      const data = await buildingService.getAllBuildings();
-      setBuildings(data);
+      const [buildingsRes, auditsRes] = await Promise.allSettled([
+        buildingService.getAllBuildings(),
+        import('../services/auditService').then(m => m.default.getAllAudits())
+      ]);
+
+      const buildingsData = buildingsRes.status === 'fulfilled' ? buildingsRes.value : [];
+      const auditsData = auditsRes.status === 'fulfilled' ? auditsRes.value : [];
+
+      const enriched = buildingsData.map(b => {
+        const matchingAudit = auditsData.find(a => a.buildingId === b.id || a.building?.id === b.id);
+        return {
+          ...b,
+          overallAccessibilityScore: matchingAudit?.overallAccessibilityScore ?? b.overallAccessibilityScore,
+          auditStatus: matchingAudit?.status
+        };
+      });
+
+      setBuildings(enriched);
     } catch (error) {
       toast.error('Failed to fetch buildings.');
     } finally {
