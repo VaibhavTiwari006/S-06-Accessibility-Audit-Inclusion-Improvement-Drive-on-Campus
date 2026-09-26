@@ -3,14 +3,17 @@ package com.cusoc.accessaudit.exception;
 import com.cusoc.accessaudit.response.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -77,6 +80,41 @@ public class GlobalExceptionHandler {
                 .data(errors)
                 .build();
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<Void>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
+        logger.warn("Malformed HTTP request body: {}", ex.getMessage());
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .success(false)
+                .message("Malformed request payload or invalid data format")
+                .data(null)
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiResponse<Void>> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        String paramName = ex.getName();
+        String message = String.format("Parameter '%s' must be of type %s", paramName, ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "valid");
+        logger.warn("Type mismatch: {}", message);
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .success(false)
+                .message(message)
+                .data(null)
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        logger.warn("Database constraint violation: {}", ex.getMessage());
+        ApiResponse<Void> response = ApiResponse.<Void>builder()
+                .success(false)
+                .message("Database constraint violation or duplicate record")
+                .data(null)
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(Exception.class)
