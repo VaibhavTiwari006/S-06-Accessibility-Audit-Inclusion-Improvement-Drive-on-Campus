@@ -284,6 +284,24 @@ Digital accessibility evaluations follow WCAG 2.1 principles:
 - **Understandable** — Readable content, predictable interfaces
 - **Robust** — Compatible with assistive technologies
 
+### 7.3 Empirical Physical Audit Results Across 29 Campus Buildings
+
+A comprehensive ground physical accessibility audit was conducted across 29 academic and administrative buildings on the Chandigarh University campus, evaluated against 38 standardized RPWD Act criteria:
+
+- **Total Buildings Assessed**: 29 buildings (7 clusters)
+- **Campus-Wide Average Accessibility Index**: **68.2%**
+- **Detailed Audit Dataset**: Documented in [`docs/Campus_Accessibility_Audit_Survey.xlsx`](Campus_Accessibility_Audit_Survey.xlsx)
+
+| Cluster / Block | Buildings Assessed | Composite Score | RPWD Rating | Structural Assessment & Key Findings |
+|---|---|---|---|---|
+| **A Block** | A1, A2, A3 | **96.7%** | 🟢 Compliant | Modern universal design compliance, full lift coverage, tactile elevators, accessible washrooms, lowered counters |
+| **C Block** | C1, C2, C3 | **73.2%** | 🟡 Partial | C1/C2 feature wide entrances and clear signage; C3 requires grab bar retrofitting in accessible washrooms |
+| **D Block** | D1, D2, D3, D4, D5, D6, D7, D8 | **74.8%** | 🟡 Partial | Standardized ramp entrance, wheelchair-friendly washrooms, priority parking bays, and audible alarms |
+| **NC Block** | NC 1, NC 2, NC 3, NC 4, NC 5 | **62.9%** | 🟡 Partial | Step-free academic entrances and high-capacity elevators; needs tactile room identifiers and visual strobe alarms |
+| **B Block** | B1, B2, B3, B4, B5 | **59.8%** | 🟡 Partial | Broad corridor clearances and accessible entrances; lacks elevator voice announcement systems |
+| **Zakir Block** | Zakir A, Zakir B, Zakir C | **57.2%** | 🟡 Partial | Core lecture complex; requires entrance ramp retrofitting and audio guidance installations |
+| **DD Block** | DD1, DD2 | **41.6%** | 🔴 Non-Compliant | Multi-floor extension without elevator provisions; designated Priority-1 in university remediation roadmap |
+
 ---
 
 ## 8. Challenges & Solutions
