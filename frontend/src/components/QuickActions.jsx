@@ -30,6 +30,7 @@ const QuickActions = () => {
           { label: 'Photo Evidence', desc: 'Inspect photo proof & RPWD', icon: Map, path: '/evidence', iconBg: 'bg-indigo-600 text-white', hoverBorder: 'hover:border-indigo-200' },
           { label: 'Campus Map', desc: 'Wheelchair barrier-free routing', icon: Map, path: '/map', iconBg: 'bg-emerald-600 text-white', hoverBorder: 'hover:border-emerald-200' },
           { label: 'Audit Reports', desc: 'Review summary statistics', icon: FileText, path: '/reports', iconBg: 'bg-purple-600 text-white', hoverBorder: 'hover:border-purple-200' },
+          { label: 'Auditor Settings', desc: 'Profile & notification preferences', icon: Settings, path: '/settings', iconBg: 'bg-slate-700 text-white', hoverBorder: 'hover:border-slate-200' },
         ];
       case 'MAINTENANCE':
         return [
@@ -38,7 +39,7 @@ const QuickActions = () => {
           { label: 'Evidence Gallery', desc: 'Inspect photos & RPWD specs', icon: Map, path: '/evidence', iconBg: 'bg-indigo-600 text-white', hoverBorder: 'hover:border-indigo-200' },
           { label: 'Campus Map', desc: 'Interactive facility layer map', icon: Map, path: '/map', iconBg: 'bg-emerald-600 text-white', hoverBorder: 'hover:border-emerald-200' },
           { label: 'Building List', desc: 'Check building repair status', icon: Building2, path: '/buildings', iconBg: 'bg-blue-600 text-white', hoverBorder: 'hover:border-blue-200' },
-          { label: 'Audit Logs', desc: 'Review resolution history', icon: FileText, path: '/audits', iconBg: 'bg-purple-600 text-white', hoverBorder: 'hover:border-purple-200' },
+          { label: 'Account Settings', desc: 'Profile & work notifications', icon: Settings, path: '/settings', iconBg: 'bg-slate-700 text-white', hoverBorder: 'hover:border-slate-200' },
         ];
       case 'STUDENT':
       default:
@@ -48,7 +49,7 @@ const QuickActions = () => {
           { label: 'Campus Map', desc: 'Find ramps & accessible washrooms', icon: Map, path: '/map', iconBg: 'bg-emerald-600 text-white', hoverBorder: 'hover:border-emerald-200' },
           { label: 'Awareness Quiz', desc: 'Take campus inclusion quiz', icon: BookOpen, path: '/awareness', iconBg: 'bg-blue-600 text-white', hoverBorder: 'hover:border-blue-200' },
           { label: 'Building Scores', desc: 'Explore campus WCAG ratings', icon: Building2, path: '/buildings', iconBg: 'bg-purple-600 text-white', hoverBorder: 'hover:border-purple-200' },
-          { label: 'Campus Audits', desc: 'View official audit logs', icon: FileText, path: '/audits', iconBg: 'bg-indigo-600 text-white', hoverBorder: 'hover:border-indigo-200' },
+          { label: 'My Settings', desc: 'Preferences & notifications', icon: Settings, path: '/settings', iconBg: 'bg-slate-700 text-white', hoverBorder: 'hover:border-slate-200' },
         ];
     }
   };
