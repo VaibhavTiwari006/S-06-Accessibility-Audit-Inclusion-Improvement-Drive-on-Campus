@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   HeartHandshake, Users, Map, Download, CheckCircle,
   Calendar, MessageSquare, Lightbulb, Plus, MapPin, Megaphone,
-  ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp, ChevronRight
+  ArrowUpCircle, CheckCircle2, Clock, XCircle, ThumbsUp, ChevronRight, X
 } from 'lucide-react';
 import api from '../services/api';
 import pilotService from '../services/pilotService';
@@ -510,7 +510,7 @@ const Community = () => {
                   <h3 className="text-white font-heading font-bold text-lg flex items-center gap-2">
                     <HeartHandshake size={22} className="text-red-100" /> Join Disability Ally Network
                   </h3>
-                  <button onClick={() => setShowAllyModal(false)} className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-all"><X size={20} /></button>
+                  <button onClick={() => setShowAllyModal(false)} aria-label="Close modal" className="text-white/70 hover:text-white hover:bg-white/10 p-1.5 rounded-full transition-all"><X size={20} /></button>
                 </div>
 
                 <form onSubmit={handlePledgeSubmit} className="p-6 space-y-4 text-left">
