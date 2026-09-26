@@ -176,8 +176,8 @@ const Reports = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <ScoreCard 
           title="Overall Compliance" 
-          value={`${stats.averageAccessibilityScore.toFixed(1)}%`} 
-          colorClass={stats.averageAccessibilityScore >= 80 ? 'text-success bg-success-50' : 'text-primary bg-primary-50'}
+          value={stats.averageAccessibilityScore != null ? `${Number(stats.averageAccessibilityScore).toFixed(1)}%` : '0.0%'} 
+          colorClass={stats.averageAccessibilityScore != null && stats.averageAccessibilityScore >= 80 ? 'text-success bg-success-50' : 'text-primary bg-primary-50'}
           icon={<BarChart3 size={24} />} 
         />
         <ScoreCard 
