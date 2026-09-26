@@ -379,11 +379,21 @@ public class DatabaseInitializer implements CommandLineRunner {
             LocalDate.of(2026, 9, 26)  // A3
         };
 
+        String[] statuses = {
+            "PENDING", "PENDING", "PENDING", // Zakir A, B, C
+            "APPROVED", "PENDING", "APPROVED", "APPROVED", "APPROVED", // NC 1..5
+            "APPROVED", "APPROVED", "APPROVED", "APPROVED", "APPROVED", "APPROVED", "APPROVED", "APPROVED", // D1..D8
+            "REJECTED", "REJECTED", // DD1..DD2
+            "APPROVED", "APPROVED", "APPROVED", // C1..C3
+            "IN_PROGRESS", "IN_PROGRESS", "IN_PROGRESS", "IN_PROGRESS", "IN_PROGRESS", // B1..B5
+            "APPROVED", "APPROVED", "APPROVED"  // A1..A3
+        };
+
         for (int i = 0; i < buildings.size(); i++) {
             Building b = buildings.get(i);
             double score = i < scores.length ? scores[i] : 68.0;
             LocalDate auditDate = i < auditDates.length ? auditDates[i] : LocalDate.of(2026, 8, 15);
-            String status = score >= 50.0 ? "APPROVED" : "PENDING";
+            String status = i < statuses.length ? statuses[i] : (score >= 50.0 ? "APPROVED" : "PENDING");
             String remarks = String.format("RPWD Act 2016 compliance audit for %s (%s). Evaluated compliance: %.1f%%.",
                     b.getBuildingName(), b.getLocation(), score);
 
