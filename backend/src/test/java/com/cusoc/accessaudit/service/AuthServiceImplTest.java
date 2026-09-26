@@ -30,6 +30,7 @@ class AuthServiceImplTest {
     @Mock private PasswordEncoder passwordEncoder;
     @Mock private JwtUtils jwtUtils;
     @Mock private AuthenticationManager authenticationManager;
+    @Mock private com.cusoc.accessaudit.security.BruteForceProtectionService bruteForceService;
     @Mock private Authentication authentication;
 
     private AuthServiceImpl authService;
@@ -40,7 +41,8 @@ class AuthServiceImplTest {
                 userRepository,
                 passwordEncoder,
                 jwtUtils,
-                authenticationManager
+                authenticationManager,
+                bruteForceService
         );
     }
 
@@ -49,7 +51,7 @@ class AuthServiceImplTest {
         RegisterRequest request = RegisterRequest.builder()
                 .fullName("Test Student")
                 .email("student@example.com")
-                .password("plain-password")
+                .password("SecurePass123")
                 .role(Role.STUDENT)
                 .build();
 
@@ -80,7 +82,7 @@ class AuthServiceImplTest {
         RegisterRequest request = RegisterRequest.builder()
                 .fullName("Existing User")
                 .email("existing@example.com")
-                .password("password")
+                .password("SecurePass123")
                 .role(Role.STUDENT)
                 .build();
 
