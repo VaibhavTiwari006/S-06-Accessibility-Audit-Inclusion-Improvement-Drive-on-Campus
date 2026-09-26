@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { 
   HeartHandshake, BookOpen, PlayCircle, ShieldCheck, 
@@ -65,6 +66,7 @@ const EDUCATIONAL_VIDEOS = [
 ];
 
 const AwarenessPage = () => {
+  usePageTitle('Awareness');
   const [activeQuizAnswer, setActiveQuizAnswer] = useState(null);
 
   const handleQuizSubmit = (optionIdx) => {

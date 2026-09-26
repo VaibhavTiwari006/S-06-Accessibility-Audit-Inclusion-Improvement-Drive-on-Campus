@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { useParams, useNavigate } from 'react-router-dom';
 import auditService from '../services/auditService';
 import { 
@@ -21,6 +22,7 @@ import Modal from '../components/ui/Modal';
  * - Integrates a floating ADA Ramp Slope Calculator utility drawer.
  */
 const AuditConduct = () => {
+  usePageTitle('Conduct Audit');
   const { id } = useParams();
   const navigate = useNavigate();
 

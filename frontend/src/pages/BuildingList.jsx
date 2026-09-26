@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import buildingService from '../services/buildingService';
 import { Building2, Plus, MapPin, Layers, Search, Filter, X } from 'lucide-react';
 import { accessibleToast as toast } from '../utils/accessibleToast';
@@ -21,6 +22,7 @@ import { useAuth } from '../context/AuthContext';
  * - Add new building details triggers for administrators and auditors.
  */
 const BuildingList = () => {
+  usePageTitle('Buildings');
   const { user } = useAuth();
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);

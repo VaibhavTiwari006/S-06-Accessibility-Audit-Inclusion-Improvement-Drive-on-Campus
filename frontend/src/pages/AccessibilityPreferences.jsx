@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { accessibleToast as toast } from '../utils/accessibleToast';
 import { useAccessibility } from '../context/AccessibilityContext';
 import { motion } from 'framer-motion';
@@ -21,6 +22,7 @@ const BRAILLE_MAP = {
  * and cognitive accessibility features, including an interactive English-to-Braille translator.
  */
 const AccessibilityPreferences = () => {
+  usePageTitle('Accessibility Preferences');
   const { 
     highContrast, toggleHighContrast, 
     fontSize, changeFontSize, 

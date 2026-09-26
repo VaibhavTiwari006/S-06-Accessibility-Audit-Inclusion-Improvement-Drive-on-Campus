@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera, Accessibility, Volume2, Eye, IndianRupee } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { accessibleToast as toast } from '../utils/accessibleToast';
@@ -16,6 +17,7 @@ import userService from '../services/userService';
  * - System controls and user details modifications.
  */
 const Settings = () => {
+  usePageTitle('Settings');
   const { user, logout, updateUser } = useAuth();
   const { 
     darkMode, setDarkMode, 

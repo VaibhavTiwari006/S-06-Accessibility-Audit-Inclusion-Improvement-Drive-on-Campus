@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import maintenanceService from '../services/maintenanceService';
 import { useAuth } from '../context/AuthContext';
 import { 
@@ -25,6 +26,7 @@ const WORKFLOW_STAGES = [
 const CARDS_PER_PAGE = 6;
 
 const Roadmap = () => {
+  usePageTitle('Roadmap');
   const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);

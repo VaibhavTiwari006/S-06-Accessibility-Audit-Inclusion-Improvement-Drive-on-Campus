@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Trophy, BookOpen, CheckCircle2, XCircle, ArrowRight, HelpCircle, 
@@ -120,6 +121,7 @@ const INITIAL_LEADERBOARD = [
  * - Score summaries, leaderboard rankings, and daily knowledge fact cards.
  */
 const QuizPage = () => {
+  usePageTitle('Quiz');
   const { user } = useAuth();
   
   // Daily Knowledge Fact

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { Volume2, VolumeX, Compass, MapPin, Search, ChevronRight, HelpCircle, CornerDownRight } from 'lucide-react';
 import buildingService from '../services/buildingService';
@@ -27,6 +28,7 @@ const getVerbalProfile = (name = '') => {
 };
 
 const VerbalMap = () => {
+  usePageTitle('Verbal Map');
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');

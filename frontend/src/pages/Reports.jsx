@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { motion } from 'framer-motion';
 import { 
   BarChart3, Download, Building2, ClipboardCheck, AlertTriangle, 
@@ -24,6 +25,7 @@ import Button from '../components/ui/Button';
  * - Displays interactive pie and bar charts depicting barrier breakdowns.
  */
 const Reports = () => {
+  usePageTitle('Reports');
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);

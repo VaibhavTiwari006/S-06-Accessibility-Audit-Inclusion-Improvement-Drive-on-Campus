@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import issueService from '../services/issueService';
 import { AlertCircle, Plus, MapPin, Clock, CheckCircle, Search, Filter, Printer, X, IndianRupee } from 'lucide-react';
 import { accessibleToast as toast } from '../utils/accessibleToast';
@@ -177,6 +178,7 @@ const parseLocation = (details = '') => {
  * Supports upvoting, sorting, filtration, and specific building/barrier reviews.
  */
 const IssueList = () => {
+  usePageTitle('Issues');
   const { user } = useAuth();
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);

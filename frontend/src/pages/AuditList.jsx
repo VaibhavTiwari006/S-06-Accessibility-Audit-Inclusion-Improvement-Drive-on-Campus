@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { useNavigate } from 'react-router-dom';
 import auditService from '../services/auditService';
 import { ClipboardList, Play, FileText, Calendar, User, Clock, Trash2, ShieldCheck } from 'lucide-react';
@@ -20,6 +21,7 @@ import Badge from '../components/ui/Badge';
  * - Links to details reports or interactive audit conduct pages.
  */
 const AuditList = () => {
+  usePageTitle('Audits');
   const { user } = useAuth();
   const [audits, setAudits] = useState([]);
   const [scheduledAudits, setScheduledAudits] = useState([]);

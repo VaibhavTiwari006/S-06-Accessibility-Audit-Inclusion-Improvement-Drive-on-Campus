@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import PageTransition from '../components/PageTransition';
 import { 
   Map, Maximize, Minimize, Navigation, CheckCircle2, 
@@ -24,6 +25,7 @@ import Button from '../components/ui/Button';
  * - Real-time wheelchair barrier-free routing simulations.
  */
 const CampusMapPage = () => {
+  usePageTitle('Campus Map');
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [buildings, setBuildings] = useState([]);
   const [loading, setLoading] = useState(true);

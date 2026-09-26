@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import usePageTitle from '../hooks/usePageTitle';
 import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
 import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, Camera, Trophy, BookOpen } from 'lucide-react';
@@ -298,6 +299,8 @@ const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  usePageTitle('Dashboard');
 
   useEffect(() => {
     const fetchStats = async () => {

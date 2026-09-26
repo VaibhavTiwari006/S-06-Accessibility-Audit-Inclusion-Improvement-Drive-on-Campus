@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { useNavigate } from 'react-router-dom';
 import {
   HeartHandshake, Users, Map, Download, CheckCircle,
@@ -35,6 +36,7 @@ const categoryIcon = {
 };
 
 const Community = () => {
+  usePageTitle('Community');
   const { user } = useAuth();
   const navigate = useNavigate();
   const [feedbackSessions, setFeedbackSessions] = useState([]);

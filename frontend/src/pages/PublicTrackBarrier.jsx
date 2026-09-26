@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -21,6 +22,7 @@ import { accessibleToast as toast } from '../utils/accessibleToast';
  * - Dynamic route linking, back navigation, and admin note logs.
  */
 const PublicTrackBarrier = () => {
+  usePageTitle('Track Barrier');
   const { issueId } = useParams();
   const navigate = useNavigate();
 

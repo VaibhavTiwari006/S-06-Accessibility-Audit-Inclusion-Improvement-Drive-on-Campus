@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import usePageTitle from '../hooks/usePageTitle';
 import { 
   Camera, Search, Filter, X, MapPin, User, CheckCircle, 
   AlertCircle, Sparkles, Upload, Eye, IndianRupee, Clock, ShieldCheck, Plus 
@@ -20,6 +21,7 @@ const generateDummyPhotos = (issues) => {
 };
 
 const EvidenceGallery = () => {
+  usePageTitle('Evidence Gallery');
   const [evidenceItems, setEvidenceItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
