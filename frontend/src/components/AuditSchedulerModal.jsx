@@ -12,7 +12,7 @@ const AuditSchedulerModal = ({ onClose, onSuccess }) => {
     frequency: 'Annual',
     startDate: '',
     complianceTarget: 'AA Standard',
-    auditorName: 'Auditor User (auditor@campus.edu)'
+    auditorName: 'Vaibhav Tiwari (auditor@campus.edu)'
   });
 
   useEffect(() => {
@@ -136,7 +136,7 @@ const AuditSchedulerModal = ({ onClose, onSuccess }) => {
               required
               className="w-full bg-white/70 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-danger/40 focus:border-danger transition-all font-medium text-textMain"
             >
-              <option value="Auditor User (auditor@campus.edu)">Auditor User (auditor@campus.edu)</option>
+              <option value="Vaibhav Tiwari (auditor@campus.edu)">Vaibhav Tiwari (auditor@campus.edu)</option>
               <option value="Admin User (admin@campus.edu)">Admin User (admin@campus.edu)</option>
             </select>
           </div>
