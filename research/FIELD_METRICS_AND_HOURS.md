@@ -18,7 +18,7 @@ Total Fieldwork Time Allocation (216.0 Hours)
 │ 1. Dimensional Measurement & Structural Geometry         │  54.5 h│   25.2%  │
 │ 2. Vertical Circulation & Elevator Systems Testing       │  36.0 h│   16.7%  │
 │ 3. Sanitary Facilities & Restroom Accessibility Auditing │  38.5 h│   17.8%  │
-│ 4. Photometric (Lux), Acoustic (dB) & Signage Checks     │  28.0 h│   13.0%  │
+│ 4. Visual Lighting, Emergency Alarm & Signage Checks     │  28.0 h│   13.0%  │
 │ 5. Wheelchair Mobility Simulation & User Walkthroughs    │  34.0 h│   15.7%  │
 │ 6. Geotagged Photographic Logging & Defect Documentation │  25.0 h│   11.6%  │
 └──────────────────────────────────────────────────────────┴────────┴──────────┘
@@ -34,7 +34,7 @@ Total Fieldwork Time Allocation (216.0 Hours)
 | Week # | Date Window | Buildings Audited | Field Hours | Primary Focus Areas |
 | :---: | :---: | :--- | :---: | :--- |
 | **Week 1** | Jul 06 – Jul 11 | Zakir A, Zakir B | 16.5 h | Entrance porticos, threshold vertical drops, staircase step-tread geometry |
-| **Week 2** | Jul 13 – Jul 18 | Zakir C, NC 1 | 18.0 h | Ramp gradient laser checks, auditorium seating aisles, loop system tests |
+| **Week 2** | Jul 13 – Jul 18 | Zakir C, NC 1 | 18.0 h | Ramp rise/run slope measurements, auditorium seating aisles, accessibility checks |
 | **Week 3** | Jul 20 – Jul 25 | NC 2, NC 3 | 19.5 h | Approach pathway tactile paving, elevator door closing timing, toilet stalls |
 | **Week 4** | Jul 27 – Aug 01 | NC 4, NC 5 | 17.5 h | High-capacity computer labs, emergency escape stairs, directional contrast |
 | *Subtotal* | *Jul 06 – Aug 01* | *8 Buildings* | *71.5 h* | *Establishment of ground benchmark & physical measurement rubric* |
@@ -114,6 +114,6 @@ Each facility underwent a rigorous audit workflow comprising:
 ## 🏃 Physical Exertion & Field Conditions
 
 Conducting exhaustive audits across 29 separate multi-storey educational buildings required sustained physical fieldwork:
-* **Foot Patrol Distance:** Average of 4.9 km per field day, amounting to **142.6 km total distance walked** carrying audit measurement instruments.
+* **Foot Patrol Distance:** Average of 4.9 km per field day, amounting to **142.6 km total distance walked** carrying audit field clipboards, measuring tapes, and documentation tools.
 * **Vertical Stairs Traversed:** **862 flights of stairs** climbed to inspect fire escape routes, upper floor landings, lift overruns, and rooftop refuge terraces.
 * **Climatic Variations:** Fieldwork spanned North Indian monsoon conditions (July–August: 32°C–38°C with high relative humidity and surface slickness testing) through late September transitional weather.
