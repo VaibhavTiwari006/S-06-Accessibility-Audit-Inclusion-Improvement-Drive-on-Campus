@@ -142,11 +142,16 @@ const Landing = () => {
         </div>
 
         <div className="flex items-center gap-3">
-            <Link to="/login">
-              <Button variant="primary" icon={LogIn}>
-                Select Role & Sign In
-              </Button>
-            </Link>
+          <Link to="/presentation">
+            <Button variant="secondary" size="sm" icon={Award} className="border-primary/30 text-primary hover:bg-primary/5">
+              🏆 CUSoC '26 Presentation
+            </Button>
+          </Link>
+          <Link to="/login">
+            <Button variant="primary" icon={LogIn}>
+              Select Role & Sign In
+            </Button>
+          </Link>
         </div>
       </nav>
 
@@ -162,8 +167,8 @@ const Landing = () => {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="relative z-10 max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-xs mb-6 border border-primary/20 uppercase tracking-wider">
-              <ShieldCheck size={14} /> Chandigarh University &bull; Inclusion Improvement Drive
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-xs mb-6 border border-primary/20 uppercase tracking-wider">
+              <Award size={14} /> CUSoC 2026 Finalist &bull; Track S-06 &bull; Chandigarh University
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-secondary tracking-tight leading-tight mb-6">
@@ -178,12 +183,17 @@ const Landing = () => {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link to="/presentation">
+                <Button size="lg" className="px-8 shadow-xl bg-gradient-to-r from-primary to-primary-light text-white" icon={Award}>
+                  🏆 CUSoC '26 Presentation Deck
+                </Button>
+              </Link>
               <Link to="/login">
-                <Button size="lg" className="px-8 shadow-lg" icon={ArrowRight}>
+                <Button variant="secondary" size="lg" className="px-8 shadow-sm" icon={ArrowRight}>
                   Select Campus Role & Sign In
                 </Button>
               </Link>
-              <Button variant="secondary" size="lg" className="px-8" icon={Sparkles} onClick={() => document.getElementById('impact-features-section')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button variant="ghost" size="lg" className="px-8 text-textLight hover:text-textMain" icon={Sparkles} onClick={() => document.getElementById('impact-features-section')?.scrollIntoView({ behavior: 'smooth' })}>
                 Explore 5 Impactful Features
               </Button>
             </div>
