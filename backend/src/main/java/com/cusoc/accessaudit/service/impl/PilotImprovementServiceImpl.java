@@ -26,6 +26,7 @@ public class PilotImprovementServiceImpl implements PilotImprovementService {
     private final PilotImprovementMapper pilotImprovementMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<PilotImprovementResponse> getAll(String currentUserEmail) {
         return pilotImprovementRepository.findAllByOrderByCreatedAtDesc()
                 .stream()
@@ -38,6 +39,7 @@ public class PilotImprovementServiceImpl implements PilotImprovementService {
     }
 
     @Override
+    @Transactional
     public PilotImprovementResponse create(PilotImprovementRequest request, String userEmail, String userName) {
         PilotImprovement pilot = PilotImprovement.builder()
                 .title(request.getTitle())
@@ -56,6 +58,7 @@ public class PilotImprovementServiceImpl implements PilotImprovementService {
     }
 
     @Override
+    @Transactional
     public PilotImprovementResponse updateStatus(Long id, PilotStatusUpdateRequest request, String currentUserEmail) {
         PilotImprovement pilot = pilotImprovementRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pilot improvement not found with id: " + id));
@@ -70,6 +73,7 @@ public class PilotImprovementServiceImpl implements PilotImprovementService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PilotImprovementResponse> getMyProposals(String email) {
         return pilotImprovementRepository.findByProposerEmailOrderByCreatedAtDesc(email)
                 .stream()
@@ -91,14 +95,19 @@ public class PilotImprovementServiceImpl implements PilotImprovementService {
         if (exists) {
             pilotUpvoteRepository.deleteByPilotImprovementAndUserEmail(pilot, userEmail);
         } else {
-            PilotUpvote upvote = PilotUpvote.builder()
-                    .pilotImprovement(pilot)
-                    .userEmail(userEmail)
-                    .build();
-            pilotUpvoteRepository.save(upvote);
+            try {
+                PilotUpvote upvote = PilotUpvote.builder()
+                        .pilotImprovement(pilot)
+                        .userEmail(userEmail)
+                        .build();
+                pilotUpvoteRepository.save(upvote);
+            } catch (org.springframework.dao.DataIntegrityViolationException ignored) {
+                // Idempotent concurrent click already persisted upvote
+            }
         }
 
         long upvotes = pilotUpvoteRepository.countByPilotImprovement(pilot);
-        return pilotImprovementMapper.toResponse(pilot, upvotes, !exists);
+        boolean currentUpvoted = pilotUpvoteRepository.existsByPilotImprovementAndUserEmail(pilot, userEmail);
+        return pilotImprovementMapper.toResponse(pilot, upvotes, currentUpvoted);
     }
 }
