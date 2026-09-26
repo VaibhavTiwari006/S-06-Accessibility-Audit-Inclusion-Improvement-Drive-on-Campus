@@ -19,7 +19,7 @@ Only the latest active release versions of AccessAudit receive security patches 
 
 If you discover a security vulnerability in AccessAudit, we appreciate your prompt and confidential disclosure.
 
-- **Security Contact Email**: [vaibhavtiwari@cusoc.edu](mailto:vaibhavtiwari@cusoc.edu)
+- **Security Contact Email**: [vaibhav.cse006@gmail.com](mailto:vaibhav.cse006@gmail.com)
 - **Initial Response SLA**: Within **48 hours**
 - **Public Disclosure**: Please **do not** open public GitHub issues, discussions, or pull requests disclosing vulnerabilities until we have analyzed, addressed, and patched the vulnerability.
 
