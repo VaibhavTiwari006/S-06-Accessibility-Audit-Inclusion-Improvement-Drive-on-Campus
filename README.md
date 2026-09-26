@@ -144,7 +144,7 @@ Based on comprehensive ground accessibility audits evaluated under the **Rights 
   - 📋 [**Executive Research Dossier**](research/README.md)
   - ⏱️ [**Fieldwork Metrics & 216 Hours Log**](research/FIELD_METRICS_AND_HOURS.md)
   - 📖 [**Comprehensive 29-Building Audit Logbook**](research/BUILDING_AUDIT_LOGBOOK.md)
-  - 🔬 [**Scientific Methodology & Toolchain**](research/FIELDWORK_METHODOLOGY.md)
+  - 🔬 [**Manual Fieldwork Inspection Protocol**](research/FIELDWORK_METHODOLOGY.md)
   - 🚧 [**Barrier Taxonomy & 187 Field Findings**](research/BARRIER_TAXONOMY_AND_FINDINGS.md)
   - 🎙️ [**Stakeholder Narratives & 48 Interviews**](research/STAKEHOLDER_INTERVIEWS.md)
   - 📊 [**Raw Excel Survey Dataset**](docs/Campus_Accessibility_Audit_Survey.xlsx)
@@ -262,7 +262,7 @@ S-06-Accessibility-Audit/
 │   ├── README.md               # Executive research summary & regulatory framework
 │   ├── FIELD_METRICS_AND_HOURS.md # 216-Hour operational log & 12-week schedule
 │   ├── BUILDING_AUDIT_LOGBOOK.md  # Detailed 29-building inspection ledger
-│   ├── FIELDWORK_METHODOLOGY.md   # Scientific instrumentation & 42-parameter protocol
+│   ├── FIELDWORK_METHODOLOGY.md   # Manual inspection toolkit & 42-parameter protocol
 │   ├── BARRIER_TAXONOMY_AND_FINDINGS.md # 187 Classified barriers & case studies
 │   └── STAKEHOLDER_INTERVIEWS.md  # Qualitative ground narratives from 48 participants
 ├── docs/                       # Architectural, requirements, and compliance specs
@@ -365,7 +365,7 @@ Detailed project documentation is available below.
 | [🔬 Research Overview](research/README.md) | Executive research summary & regulatory framework |
 | [⏱️ Field Hours & Schedule](research/FIELD_METRICS_AND_HOURS.md) | 216-Hour operational log & 12-week schedule |
 | [📖 29-Building Audit Logbook](research/BUILDING_AUDIT_LOGBOOK.md) | Detailed building inspection & defect ledger |
-| [📐 Fieldwork Methodology](research/FIELDWORK_METHODOLOGY.md) | Scientific instrumentation & 42-parameter protocol |
+| [📐 Fieldwork Methodology](research/FIELDWORK_METHODOLOGY.md) | Manual inspection toolkit & 42-parameter protocol |
 | [🚧 Barrier Taxonomy](research/BARRIER_TAXONOMY_AND_FINDINGS.md) | 187 Classified barriers & case studies |
 | [🎙️ Stakeholder Narratives](research/STAKEHOLDER_INTERVIEWS.md) | Qualitative ground narratives from 48 participants |
 | [📊 Excel Audit Dataset](docs/Campus_Accessibility_Audit_Survey.xlsx) | Complete quantitative Excel audit dataset |
