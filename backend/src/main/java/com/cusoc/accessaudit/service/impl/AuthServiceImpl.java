@@ -4,6 +4,7 @@ import com.cusoc.accessaudit.dto.AuthResponse;
 import com.cusoc.accessaudit.dto.LoginRequest;
 import com.cusoc.accessaudit.dto.RegisterRequest;
 import com.cusoc.accessaudit.entity.User;
+import com.cusoc.accessaudit.entity.Role;
 import com.cusoc.accessaudit.repository.UserRepository;
 import com.cusoc.accessaudit.security.JwtUtils;
 import com.cusoc.accessaudit.service.AuthService;
