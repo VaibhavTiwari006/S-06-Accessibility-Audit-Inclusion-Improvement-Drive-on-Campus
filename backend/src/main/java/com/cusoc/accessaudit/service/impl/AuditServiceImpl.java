@@ -67,8 +67,8 @@ public class AuditServiceImpl implements AuditService {
     @Transactional(readOnly = true)
     public List<AuditResponseDto> getAllAudits(Long buildingId, Long auditorId, String status) {
         return auditRepository.findAll().stream()
-                .filter(audit -> buildingId == null || Objects.equals(audit.getBuilding().getId(), buildingId))
-                .filter(audit -> auditorId == null || Objects.equals(audit.getAuditor().getId(), auditorId))
+                .filter(audit -> buildingId == null || (audit.getBuilding() != null && Objects.equals(audit.getBuilding().getId(), buildingId)))
+                .filter(audit -> auditorId == null || (audit.getAuditor() != null && Objects.equals(audit.getAuditor().getId(), auditorId)))
                 .filter(audit -> status == null || audit.getStatus().equalsIgnoreCase(status))
                 .map(auditMapper::toResponse)
                 .collect(Collectors.toList());
