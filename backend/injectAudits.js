@@ -30,15 +30,28 @@ async function injectAudits() {
       'A1': 96.7, 'A2': 96.7, 'A3': 96.7
     };
 
+    // Ground accessibility audit dates between July 2026 and September 2026
+    const datesMap = {
+      'Zakir A': '2026-07-06', 'Zakir B': '2026-07-09', 'Zakir C': '2026-07-14',
+      'NC 1': '2026-07-18', 'NC 2': '2026-07-23', 'NC 3': '2026-07-28', 'NC 4': '2026-08-02', 'NC 5': '2026-08-06',
+      'D1': '2026-08-10', 'D2': '2026-08-12', 'D3': '2026-08-14', 'D4': '2026-08-17',
+      'D5': '2026-08-19', 'D6': '2026-08-21', 'D7': '2026-08-24', 'D8': '2026-08-26',
+      'DD1': '2026-08-28', 'DD2': '2026-08-31',
+      'C1': '2026-09-03', 'C2': '2026-09-07', 'C3': '2026-09-10',
+      'B1': '2026-09-12', 'B2': '2026-09-15', 'B3': '2026-09-17', 'B4': '2026-09-19', 'B5': '2026-09-21',
+      'A1': '2026-09-22', 'A2': '2026-09-24', 'A3': '2026-09-26'
+    };
+
     console.log(`Starting audit injection for ${buildings.length} campus buildings...`);
 
     for (const b of buildings) {
       const score = scoresMap[b.buildingName] || 68.0;
       const status = score >= 50.0 ? 'APPROVED' : 'PENDING';
+      const auditDate = datesMap[b.buildingName] || '2026-08-15';
       const audit = {
         buildingId: b.id,
         auditorId: auditorId,
-        auditDate: '2026-09-26',
+        auditDate: auditDate,
         overallAccessibilityScore: score,
         status: status,
         remarks: `RPWD Act 2016 physical accessibility audit for ${b.buildingName} (${b.location}). Evaluated compliance score: ${score}%.`
