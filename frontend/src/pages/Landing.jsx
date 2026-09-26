@@ -184,7 +184,7 @@ const Landing = () => {
                 </Button>
               </Link>
               <Button variant="secondary" size="lg" className="px-8" icon={Sparkles} onClick={() => document.getElementById('impact-features-section')?.scrollIntoView({ behavior: 'smooth' })}>
-                Explore 8 Impactful Features
+                Explore 5 Impactful Features
               </Button>
             </div>
           </motion.div>
@@ -331,7 +331,7 @@ const Landing = () => {
                 Platform Demonstrations
               </span>
               <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary">
-                8 Impactful Features of AccessAudit
+                5 Impactful Features of AccessAudit
               </h2>
               <p className="text-textLight text-base font-medium">
                 Click any feature below to inspect how it transforms accessibility management on campus.
@@ -339,7 +339,7 @@ const Landing = () => {
             </motion.div>
 
             {/* Feature Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
               {IMPACTFUL_FEATURES.map((feat, index) => {
                 const Icon = feat.icon;
                 return (
