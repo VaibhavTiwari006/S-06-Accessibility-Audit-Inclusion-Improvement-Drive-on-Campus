@@ -63,6 +63,7 @@ const Reports = () => {
       document.body.appendChild(link);
       link.click();
       link.remove();
+      window.URL.revokeObjectURL(url);
       
       toast.success('Report downloaded successfully!');
     } catch (error) {
@@ -85,6 +86,7 @@ const Reports = () => {
       document.body.appendChild(link);
       link.click();
       link.remove();
+      window.URL.revokeObjectURL(url);
       
       toast.success('Advocacy Letter downloaded successfully!');
     } catch (error) {
@@ -106,6 +108,7 @@ const Reports = () => {
       document.body.appendChild(link);
       link.click();
       link.remove();
+      window.URL.revokeObjectURL(url);
       toast.success('Final Project Report downloaded!');
     } catch (error) {
       toast.error('Failed to generate Final Report.');
