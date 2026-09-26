@@ -2,6 +2,28 @@
 
 All notable changes to the S-06: Accessibility Audit & Inclusion Improvement Drive project are documented in this file.
 
+## September 26, 2026 — Version 1.2.0 (CUSoC 2026 Grand Final Evaluation)
+
+- **Presentation & Evaluation Suite**:
+  - Build interactive CUSoC 2026 Presentation Deck (`frontend/src/pages/ProjectPresentation.jsx`) at route `/presentation` with 8 comprehensive slides, slide counter, and keyboard navigation.
+  - Create formal 1000-mark evaluation dossier (`docs/CUSOC_FINAL_EVALUATION.md`) mapping all CUSoC rubric milestones.
+  - Add 1-click CUSoC Presentation launcher buttons to Navbar, Sidebar, and Landing page hero.
+  - Update `README.md` and `docs/TECHNICAL_REPORT.md` to highlight solo student research and development by Vaibhav Tiwari.
+
+- **Cybersecurity & Enterprise Hardening**:
+  - Implement in-memory sliding-window IP rate limiting (`RateLimitingFilter.java`).
+  - Implement progressive brute-force login attack protection (`BruteForceProtectionService.java`).
+  - Implement server-side XSS request wrapping and HTML input sanitization (`XssSanitizationFilter.java`).
+  - Configure hardened HTTP security headers (CSP, HSTS, X-Frame-Options DENY, X-Content-Type-Options nosniff).
+  - Add client-side 30-minute idle session timeout watchdog in React `MainLayout`.
+  - Add unauthenticated `/api/health` container uptime probe endpoint.
+
+- **Geospatial & Fieldwork Enhancements**:
+  - Spatially disperse all 29 building coordinates across 7 campus clusters with real Leaflet map markers.
+  - Enable dynamic RPWD compliance score pills on campus map markers.
+  - Expand Settings page access across all 4 user roles (`ADMIN`, `AUDITOR`, `STUDENT`, `MAINTENANCE`).
+  - Streamline research documentation to reflect 100% genuine manual on-foot physical audits without fictional machinery.
+
 ## August 17, 2026
 
 - **12:07 AM** - Create Final Technical Report document (`docs/TECHNICAL_REPORT.md`)
