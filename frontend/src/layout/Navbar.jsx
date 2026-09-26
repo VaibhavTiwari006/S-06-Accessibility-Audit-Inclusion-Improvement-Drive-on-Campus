@@ -117,18 +117,16 @@ const Navbar = ({ toggleSidebar }) => {
               </Badge>
             </div>
 
-            {/* Settings shortcut - admin only */}
-            {user.role?.toUpperCase() === 'ADMIN' && (
-              <button
-                onClick={() => navigate('/settings')}
-                className="group p-2 rounded-xl text-gray-500 hover:text-primary hover:bg-primary/5 transition-all"
-                title="Settings"
-              >
-                <div className="transition-all duration-700 ease-in-out group-hover:rotate-[360deg] group-hover:scale-125">
-                  <Settings size={18} />
-                </div>
-              </button>
-            )}
+            {/* Settings shortcut - available for all users */}
+            <button
+              onClick={() => navigate('/settings')}
+              className="group p-2 rounded-xl text-gray-500 hover:text-primary hover:bg-primary/5 transition-all"
+              title="Settings"
+            >
+              <div className="transition-all duration-700 ease-in-out group-hover:rotate-[360deg] group-hover:scale-125">
+                <Settings size={18} />
+              </div>
+            </button>
 
             {/* User avatar / menu */}
             <div className="relative">
@@ -148,6 +146,12 @@ const Navbar = ({ toggleSidebar }) => {
                     <p className="text-sm font-semibold text-textMain truncate">{user.fullName}</p>
                     <p className="text-xs text-textLight truncate">{user.email}</p>
                   </div>
+                  <button
+                    onClick={() => { setShowUserMenu(false); navigate('/settings'); }}
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-textMain hover:bg-gray-50 font-medium transition-all group mb-1"
+                  >
+                    <Settings size={16} className="text-gray-400 group-hover:text-primary transition-colors" /> Settings
+                  </button>
                   <button
                     onClick={() => { setShowUserMenu(false); logout(); }}
                     className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-danger hover:bg-danger-50 font-medium transition-all group"
