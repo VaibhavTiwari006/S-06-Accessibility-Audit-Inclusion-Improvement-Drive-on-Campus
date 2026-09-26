@@ -9,7 +9,7 @@
 
 ## 🛠️ Field Toolkit & Manual Inspection Methods
 
-Every single measurement and assessment across the 216 hours of fieldwork was carried out manually and directly on site. No automated laboratory machinery, electronic lasers, or expensive specialized sensors were used. The audit was conducted using standard, accessible, physical measurement tools, direct visual inspection, and structured field tally sheets:
+Every single measurement and assessment throughout the on-foot campus fieldwork was carried out manually and directly on site. No automated laboratory machinery, electronic lasers, or expensive specialized sensors were used. The audit was conducted using standard, accessible, physical measurement tools, direct visual inspection, and structured field tally sheets:
 
 | Inspection Tool | Practical Technique & Specifications | Primary Measurement Application | Statutory RPWD Benchmark |
 | :--- | :--- | :--- | :--- |
@@ -18,7 +18,7 @@ Every single measurement and assessment across the 216 hours of fieldwork was ca
 | **Smartphone Camera & Geo-Tagging** | High-resolution mobile camera with localized timestamps and building wing notes | Direct photographic evidence of architectural barriers, broken tactile tiles, missing handrails, step barriers, and contrast issues | High-resolution visual proof for estate maintenance work orders |
 | **Standardized Audit Checklist & Clipboard** | Physical printout & digital spreadsheet checklist (42 parameters based on Harmonised Guidelines 2021) | Systematic step-by-step scoring of entrances, corridors, staircases, lifts, toilets, and classrooms | Objective 3-tier scoring rubric (Compliant, Deficient, Non-Compliant) |
 | **Physical Navigation & Manual Verification** | On-foot walkthrough, step counting, door handle push/pull testing, tactile surface fingertip/sole checks | Checking door opening stiffness, floor surface slipperiness, tactile guiding continuity, threshold obstructions | Unobstructed route of travel; doors operable with single hand/closed fist |
-| **Participatory User & Staff Consultations** | Structured in-person interviews and accompanied walkthroughs with students and staff | Ground-truth user experience validation for students with visual, mobility, and hearing impairments | Section 16 & Section 40 of RPWD Act 2016 |
+| **Participatory Student & Staff Consultations** | Student interactions, peer feedback, and accompanied walkthroughs with campus members | Ground-truth user experience validation for students with visual, mobility, and hearing impairments | Section 16 & Section 40 of RPWD Act 2016 |
 
 ---
 
