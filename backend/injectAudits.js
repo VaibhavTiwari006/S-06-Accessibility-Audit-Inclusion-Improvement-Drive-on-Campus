@@ -42,11 +42,23 @@ async function injectAudits() {
       'A1': '2026-09-22', 'A2': '2026-09-24', 'A3': '2026-09-26'
     };
 
+    // Audit lifecycle statuses (APPROVED, IN_PROGRESS, PENDING, REJECTED)
+    const statusesMap = {
+      'Zakir A': 'PENDING', 'Zakir B': 'PENDING', 'Zakir C': 'PENDING',
+      'NC 1': 'APPROVED', 'NC 2': 'PENDING', 'NC 3': 'APPROVED', 'NC 4': 'APPROVED', 'NC 5': 'APPROVED',
+      'D1': 'APPROVED', 'D2': 'APPROVED', 'D3': 'APPROVED', 'D4': 'APPROVED',
+      'D5': 'APPROVED', 'D6': 'APPROVED', 'D7': 'APPROVED', 'D8': 'APPROVED',
+      'DD1': 'REJECTED', 'DD2': 'REJECTED',
+      'C1': 'APPROVED', 'C2': 'APPROVED', 'C3': 'APPROVED',
+      'B1': 'IN_PROGRESS', 'B2': 'IN_PROGRESS', 'B3': 'IN_PROGRESS', 'B4': 'IN_PROGRESS', 'B5': 'IN_PROGRESS',
+      'A1': 'APPROVED', 'A2': 'APPROVED', 'A3': 'APPROVED'
+    };
+
     console.log(`Starting audit injection for ${buildings.length} campus buildings...`);
 
     for (const b of buildings) {
       const score = scoresMap[b.buildingName] || 68.0;
-      const status = score >= 50.0 ? 'APPROVED' : 'PENDING';
+      const status = statusesMap[b.buildingName] || (score >= 50.0 ? 'APPROVED' : 'PENDING');
       const auditDate = datesMap[b.buildingName] || '2026-08-15';
       const audit = {
         buildingId: b.id,
