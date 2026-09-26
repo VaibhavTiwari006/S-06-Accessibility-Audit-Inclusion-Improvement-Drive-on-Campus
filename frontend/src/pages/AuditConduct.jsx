@@ -123,8 +123,8 @@ const AuditConduct = () => {
     const riseVal = parseFloat(rise);
     const runVal = parseFloat(run);
 
-    if (isNaN(riseVal) || isNaN(runVal) || runVal <= 0) {
-      toast.error('Please enter valid positive dimensions.');
+    if (isNaN(riseVal) || isNaN(runVal) || riseVal <= 0 || runVal <= 0) {
+      toast.error('Please enter valid positive dimensions for both rise and run.');
       return;
     }
 
@@ -292,6 +292,7 @@ const AuditConduct = () => {
                         type="number" 
                         min="0"
                         max={item.maximumScore}
+                        aria-label={`Score for ${item.question}`}
                         value={resp.score}
                         onChange={(e) => handleScoreChange(item.id, e.target.value, item.maximumScore)}
                         className="w-12 h-8 rounded-lg border border-gray-200 bg-white text-center font-bold text-sm text-textMain focus:outline-none focus:ring-1 focus:ring-primary"
@@ -304,6 +305,7 @@ const AuditConduct = () => {
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Comments / Observations</span>
                     <textarea 
                       placeholder="Add observations, defects, or remediations required..."
+                      aria-label={`Comments for ${item.question}`}
                       value={resp.comments}
                       onChange={(e) => handleCommentsChange(item.id, e.target.value)}
                       className="w-full h-16 rounded-xl border border-gray-150 p-3 text-xs text-textMain focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent placeholder-gray-300 resize-none leading-relaxed"
@@ -325,6 +327,7 @@ const AuditConduct = () => {
           </div>
           <textarea 
             placeholder="Add general remarks about this building's accessibility audit..."
+            aria-label="General audit remarks"
             value={remarks}
             onChange={(e) => setRemarks(e.target.value)}
             className="w-full h-24 rounded-2xl border border-gray-150 p-4 text-xs text-textMain focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent placeholder-gray-300 resize-none leading-relaxed"
