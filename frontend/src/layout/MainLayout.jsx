@@ -6,10 +6,25 @@ import QuickReportFAB from '../components/QuickReportFAB';
 import PageTransition from '../components/PageTransition';
 
 import { useAccessibility } from '../context/AccessibilityContext';
+import { useAuth } from '../context/AuthContext';
+import { initInactivityWatchdog } from '../utils/securityUtils';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 
 const MainLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { distractionFree } = useAccessibility();
+  const { user, logout } = useAuth();
+
+  // Cyber Security: Automated Session Inactivity Watchdog (30-Minute Idle Timeout)
+  useEffect(() => {
+    if (!user) return;
+    const cleanup = initInactivityWatchdog(() => {
+      logout();
+      toast.warn('Session terminated due to 30 minutes of inactivity to protect your account.');
+    }, 30 * 60 * 1000);
+
+    return cleanup;
+  }, [user, logout]);
 
   return (
     <div className={`flex flex-col min-h-screen bg-transparent text-textMain font-sans relative ${distractionFree ? 'bg-white' : ''}`}>
