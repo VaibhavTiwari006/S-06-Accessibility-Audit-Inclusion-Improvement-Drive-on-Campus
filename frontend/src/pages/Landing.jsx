@@ -195,19 +195,19 @@ const Landing = () => {
           <div className="w-full px-6 md:px-12 lg:px-16">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100">
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-primary mb-1 text-shine">45+</p>
+                <p className="text-4xl font-heading font-extrabold text-primary mb-1 text-shine">29</p>
                 <p className="text-xs font-bold text-textLight uppercase tracking-wider">Buildings Audited</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-emerald-600 mb-1 text-shine" style={{ animationDelay: '1s' }}>1,200+</p>
-                <p className="text-xs font-bold text-textLight uppercase tracking-wider">Barriers Resolved</p>
+                <p className="text-4xl font-heading font-extrabold text-emerald-600 mb-1 text-shine" style={{ animationDelay: '1s' }}>1,102</p>
+                <p className="text-xs font-bold text-textLight uppercase tracking-wider">Checkpoints Evaluated</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-blue-600 mb-1 text-shine" style={{ animationDelay: '2s' }}>150+</p>
-                <p className="text-xs font-bold text-textLight uppercase tracking-wider">Active Auditors</p>
+                <p className="text-4xl font-heading font-extrabold text-blue-600 mb-1 text-shine" style={{ animationDelay: '2s' }}>7</p>
+                <p className="text-xs font-bold text-textLight uppercase tracking-wider">Campus Blocks</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-indigo-600 mb-1 text-shine" style={{ animationDelay: '3s' }}>92%</p>
+                <p className="text-4xl font-heading font-extrabold text-indigo-600 mb-1 text-shine" style={{ animationDelay: '3s' }}>68.2%</p>
                 <p className="text-xs font-bold text-textLight uppercase tracking-wider">RPWD Compliance</p>
               </div>
             </div>
