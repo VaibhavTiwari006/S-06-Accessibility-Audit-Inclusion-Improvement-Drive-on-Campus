@@ -126,7 +126,14 @@ const Reports = () => {
   }
 
   // Transform Map objects into Recharts-friendly arrays
-  const COLORS = ['#0056D2', '#28A745', '#FFC107', '#DC3545', '#6F42C1'];
+  const COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6'];
+  const STATUS_COLORS = {
+    APPROVED: '#10B981',
+    IN_PROGRESS: '#3B82F6',
+    PENDING: '#F59E0B',
+    REJECTED: '#EF4444',
+    DRAFT: '#6B7280',
+  };
   
   const transformMapToArray = (mapObj) => {
     if (!mapObj) return [];
@@ -230,14 +237,19 @@ const Reports = () => {
                       animationBegin={200}
                       animationDuration={1500}
                       animationEasing="ease-out"
-                      label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      label={({name, percent}) => `${name.replace(/_/g, ' ')} ${(percent * 100).toFixed(0)}%`}
                     >
                       {auditsData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        <Cell key={`cell-${index}`} fill={STATUS_COLORS[entry.name] || COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value) => [value, 'Count']} contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ bottom: 0 }} />
+                    <Tooltip formatter={(value, name) => [value, name.replace(/_/g, ' ')]} contentStyle={{ borderRadius: '12px', border: '1px solid #f3f4f6', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Legend 
+                      verticalAlign="bottom" 
+                      height={36} 
+                      wrapperStyle={{ bottom: 0 }} 
+                      formatter={(value) => <span className="text-xs font-semibold text-textMain capitalize">{value.toLowerCase().replace(/_/g, ' ')}</span>}
+                    />
                   </PieChart>
                 </ResponsiveContainer>
               ) : (
