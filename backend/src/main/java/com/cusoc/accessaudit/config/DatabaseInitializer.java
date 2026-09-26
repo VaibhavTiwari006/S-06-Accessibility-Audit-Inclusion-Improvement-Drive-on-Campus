@@ -149,118 +149,53 @@ public class DatabaseInitializer implements CommandLineRunner {
     }
 
     // ═══════════════════════════════════════════════════════════
-    // BUILDINGS — 12 CU-themed campus buildings
+    // BUILDINGS — 29 Real Chandigarh University Campus Buildings
     // ═══════════════════════════════════════════════════════════
     private List<Building> initializeBuildings() {
-        Building b1 = buildingRepository.save(Building.builder()
-                .buildingName("Main Academic Block")
-                .buildingCode("MAB01")
-                .description("Primary academic building housing lecture halls, seminar rooms, and faculty offices")
-                .location("Central Campus")
-                .numberOfFloors(4)
-                .status("ACTIVE")
-                .build());
+        String[][] buildingData = {
+            {"Zakir A", "ZakirA", "Zakir Husain Block A - Academic & lecture halls", "South-West Campus, Zakir Zone", "5"},
+            {"Zakir B", "ZakirB", "Zakir Husain Block B - Academic & lecture halls", "South-West Campus, Zakir Zone", "5"},
+            {"Zakir C", "ZakirC", "Zakir Husain Block C - Academic & lecture halls", "South-West Campus, Zakir Zone", "5"},
+            {"NC 1", "NC1", "Nek Chand Block 1 - Academic complex & labs", "North Campus, Academic Complex", "6"},
+            {"NC 2", "NC2", "Nek Chand Block 2 - Academic complex & labs", "North Campus, Academic Complex", "6"},
+            {"NC 3", "NC3", "Nek Chand Block 3 - Academic complex & labs", "North Campus, Academic Complex", "6"},
+            {"NC 4", "NC4", "Nek Chand Block 4 - Academic complex & labs", "North Campus, Academic Complex", "6"},
+            {"NC 5", "NC5", "Nek Chand Block 5 - Academic complex & labs", "North Campus, Academic Complex", "6"},
+            {"D1", "D1", "D Block 1 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"D2", "D2", "D Block 2 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"D3", "D3", "D Block 3 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"D4", "D4", "D Block 4 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"D5", "D5", "D Block 5 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"D6", "D6", "D Block 6 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"D7", "D7", "D Block 7 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"D8", "D8", "D Block 8 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
+            {"DD1", "DD1", "DD Block 1 - East Campus Extension Wing", "East Campus, Extension Wing", "3"},
+            {"DD2", "DD2", "DD Block 2 - East Campus Extension Wing", "East Campus, Extension Wing", "3"},
+            {"C1", "C1", "C Block 1 - Central Academic Ring", "Central Academic Ring, Block C", "4"},
+            {"C2", "C2", "C Block 2 - Central Academic Ring", "Central Academic Ring, Block C", "4"},
+            {"C3", "C3", "C Block 3 - Central Academic Ring", "Central Academic Ring, Block C", "4"},
+            {"B1", "B1", "B Block 1 - West Academic Ring", "West Academic Ring, Block B", "4"},
+            {"B2", "B2", "B Block 2 - West Academic Ring", "West Academic Ring, Block B", "4"},
+            {"B3", "B3", "B Block 3 - West Academic Ring", "West Academic Ring, Block B", "4"},
+            {"B4", "B4", "B Block 4 - West Academic Ring", "West Academic Ring, Block B", "4"},
+            {"B5", "B5", "B Block 5 - West Academic Ring", "West Academic Ring, Block B", "4"},
+            {"A1", "A1", "A Block 1 - Main Administrative & Academic Wing", "Main Administrative & Academic Wing, Block A", "5"},
+            {"A2", "A2", "A Block 2 - Main Administrative & Academic Wing", "Main Administrative & Academic Wing, Block A", "5"},
+            {"A3", "A3", "A Block 3 - Main Administrative & Academic Wing", "Main Administrative & Academic Wing, Block A", "5"}
+        };
 
-        Building b2 = buildingRepository.save(Building.builder()
-                .buildingName("Central Library")
-                .buildingCode("LIB02")
-                .description("Multi-story central university library with reading halls, digital resource centre, and group study rooms")
-                .location("North Campus")
-                .numberOfFloors(3)
-                .status("ACTIVE")
-                .build());
-
-        Building b3 = buildingRepository.save(Building.builder()
-                .buildingName("Student Activity Centre")
-                .buildingCode("SAC03")
-                .description("Recreational centre for student activities, clubs, indoor sports, and cultural events")
-                .location("South Campus")
-                .numberOfFloors(2)
-                .status("ACTIVE")
-                .build());
-
-        Building b4 = buildingRepository.save(Building.builder()
-                .buildingName("Engineering Block - A")
-                .buildingCode("ENG04")
-                .description("Houses CSE, IT, and ECE departments with computer labs and project rooms")
-                .location("West Campus, Block A")
-                .numberOfFloors(5)
-                .status("ACTIVE")
-                .build());
-
-        Building b5 = buildingRepository.save(Building.builder()
-                .buildingName("Engineering Block - B")
-                .buildingCode("ENG05")
-                .description("Houses Mechanical, Civil, and EEE departments with workshops and design studios")
-                .location("West Campus, Block B")
-                .numberOfFloors(5)
-                .status("ACTIVE")
-                .build());
-
-        Building b6 = buildingRepository.save(Building.builder()
-                .buildingName("Management Block")
-                .buildingCode("MBA06")
-                .description("School of Business with case study rooms, Bloomberg terminal lab, and conference halls")
-                .location("East Campus")
-                .numberOfFloors(3)
-                .status("ACTIVE")
-                .build());
-
-        Building b7 = buildingRepository.save(Building.builder()
-                .buildingName("University Health Centre")
-                .buildingCode("UHC07")
-                .description("Campus medical facility with consultation rooms, pharmacy, and emergency care")
-                .location("Central Campus, Near Gate 1")
-                .numberOfFloors(2)
-                .status("ACTIVE")
-                .build());
-
-        Building b8 = buildingRepository.save(Building.builder()
-                .buildingName("Boys Hostel Block - H1")
-                .buildingCode("BH108")
-                .description("Residential hostel for male students with common rooms and laundry facilities")
-                .location("Hostel Zone, East")
-                .numberOfFloors(6)
-                .status("ACTIVE")
-                .build());
-
-        Building b9 = buildingRepository.save(Building.builder()
-                .buildingName("Girls Hostel Block - H3")
-                .buildingCode("GH309")
-                .description("Residential hostel for female students with study lounges and recreation area")
-                .location("Hostel Zone, West")
-                .numberOfFloors(6)
-                .status("ACTIVE")
-                .build());
-
-        Building b10 = buildingRepository.save(Building.builder()
-                .buildingName("Central Cafeteria")
-                .buildingCode("CAF10")
-                .description("Main campus dining hall serving North Indian, South Indian, and continental cuisine")
-                .location("Central Campus, Food Court Area")
-                .numberOfFloors(1)
-                .status("ACTIVE")
-                .build());
-
-        Building b11 = buildingRepository.save(Building.builder()
-                .buildingName("Sports Complex")
-                .buildingCode("SPT11")
-                .description("Olympic-size swimming pool, indoor badminton and basketball courts, gym, and athletics track")
-                .location("South Campus, Sports Zone")
-                .numberOfFloors(2)
-                .status("UNDER_MAINTENANCE")
-                .build());
-
-        Building b12 = buildingRepository.save(Building.builder()
-                .buildingName("Research & Innovation Centre")
-                .buildingCode("RIC12")
-                .description("State-of-the-art research labs, incubation centre, and patent office")
-                .location("North Campus, Innovation Park")
-                .numberOfFloors(4)
-                .status("ACTIVE")
-                .build());
-
-        return List.of(b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12);
+        List<Building> buildings = new java.util.ArrayList<>();
+        for (String[] data : buildingData) {
+            buildings.add(buildingRepository.save(Building.builder()
+                    .buildingName(data[0])
+                    .buildingCode(data[1])
+                    .description(data[2])
+                    .location(data[3])
+                    .numberOfFloors(Integer.parseInt(data[4]))
+                    .status("ACTIVE")
+                    .build()));
+        }
+        return buildings;
     }
 
     // ═══════════════════════════════════════════════════════════
