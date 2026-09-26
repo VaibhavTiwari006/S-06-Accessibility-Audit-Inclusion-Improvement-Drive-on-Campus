@@ -51,7 +51,7 @@
 * **Field Time:** 24.5 Hours total  
 * **Overall Score:** 57.2% | **Status:** PENDING  
 * **Architectural Overview:** Historic academic wing housing lecture theatres, tutorial rooms, and faculty offices across 5 storeys.
-* **Positive Findings:** Broad ground floor corridors (1800mm clear width), non-slip ceramic flooring throughout main lobbies, adequate daytime natural illumination (320 lux average).
+* **Positive Findings:** Broad ground floor corridors (1800mm clear width), non-slip ceramic flooring throughout main lobbies, adequate daytime natural illumination and visual visibility across primary corridors.
 * **Key Deficiencies Documented:**
   - *Main Portico Ramp:* Gradient measured at 1:9.4, substantially steeper than the statutory 1:12 RPWD mandate. Lacks intermediate landing.
   - *Vertical Circulation:* Elevators lack audible speech synthesis announcing arrival floors. Car operating panel lacks embossed braille indicators.
