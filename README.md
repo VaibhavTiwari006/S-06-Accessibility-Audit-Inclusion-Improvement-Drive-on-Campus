@@ -132,26 +132,28 @@ The primary objectives of this project are to:
 - Signage assessment
 - Emergency evacuation accessibility
 
-### 🏛️ Real Campus Physical Audit Findings (29 Buildings Audited)
+### 🔬 Solo Empirical Ground Research & Physical Audit Drive
 
-Based on comprehensive ground accessibility audits evaluated under the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **Harmonised Guidelines and Standards for Universal Accessibility in India (2021)**:
+AccessAudit is grounded in extensive on-site physical field research conceived, planned, and executed individually by **Vaibhav Tiwari** across 29 academic and departmental buildings at Chandigarh University. The audit evaluates campus infrastructure against statutory benchmarks defined in the **Rights of Persons with Disabilities (RPWD) Act, 2016** and the **Harmonised Guidelines and Standards for Universal Accessibility in India (2021)**.
 
-- **Lead Accessibility Auditor & Field Researcher**: **Vaibhav Tiwari**
-- **Audit Campaign Window**: **July – September 2026**
-- **Fieldwork Methodology**: **In-situ on-foot manual physical audit** (steel measuring tapes, rise/run slope calculations, photo evidence)
-- **Total Buildings Audited**: **29 buildings** across 7 campus blocks (100% campus academic infrastructure)
-- **Metric Checkpoints**: 42 standardized parameters across 8 architectural domains (1,218 total evaluations)
-- **Identified Barriers**: **187 discrete physical and environmental barriers** (categorized by severity)
-- **Community Feedback**: **Student & peer consultations** on real navigation challenges across campus
-- **Campus-Wide Average Accessibility Score**: **68.2%**
-- **Complete Research Dossier**: See the dedicated [**`research/`**](research/) repository folder:
-  - 📋 [**Executive Research Dossier**](research/README.md)
-  - ⏱️ [**Fieldwork Inspection Schedule & Log**](research/FIELD_METRICS_AND_HOURS.md)
-  - 📖 [**Comprehensive 29-Building Audit Logbook**](research/BUILDING_AUDIT_LOGBOOK.md)
-  - 🔬 [**Manual Fieldwork Inspection Protocol**](research/FIELDWORK_METHODOLOGY.md)
-  - 🚧 [**Barrier Taxonomy & 187 Field Findings**](research/BARRIER_TAXONOMY_AND_FINDINGS.md)
-  - 🎙️ [**Student Feedback & Campus Observations**](research/STAKEHOLDER_INTERVIEWS.md)
-  - 📊 [**Raw Excel Survey Dataset**](docs/Campus_Accessibility_Audit_Survey.xlsx)
+#### 🛠️ Manual Fieldwork Methodology & Tools
+Rather than relying on theoretical estimates, the entire audit was conducted manually and directly on-site:
+* **Standard Steel Measuring Tape:** Measured clear door opening widths ($\ge 900\text{ mm}$), corridor clearances ($\ge 1500\text{ mm}$), step risers ($\le 150\text{ mm}$) and tread depths, grab rail heights ($750\text{ mm} / 900\text{ mm}$), and washroom interior clearances.
+* **Manual Rise & Run Slope Calculations:** Verified exterior ramp gradients and threshold transitions by measuring vertical rise ($\Delta h$) and horizontal run ($\Delta d$) to calculate exact slope ratios against the statutory $1:12$ ($8.33\%$) maximum limit.
+* **In-Situ Photographic Defect Logging:** Documented physical barriers, missing handrails, broken tactile ground tiles, and threshold step obstacles with localized building notes.
+* **42-Parameter Statutory Checklist:** Evaluated 42 specific parameters across 8 architectural domains (Entrances, Vertical Circulation, Corridors, Restrooms, Signage, Emergency Egress, Instructional Spaces, Amenities).
+* **Direct Student & Peer Interactions:** Captured real-world navigation challenges directly from campus peers navigating physical barriers on a daily basis.
+
+#### 📊 Ground Survey Summary & Empirical Findings
+* **Total Buildings Audited:** **29 buildings** across 7 campus clusters (100% academic blocks surveyed)
+* **Checkpoints Evaluated:** **1,218 distinct checkpoints** (42 standardized criteria per building)
+* **Identified Physical Barriers:** **187 discrete barriers** classified into 4 severity tiers:
+  * 🔴 **24 Critical (Tier 1):** Complete access blockades (e.g., upper floors of Block DD lacking any elevator, steep entrance ramps exceeding $1:9$, inward-swinging washroom doors).
+  * 🟠 **61 High (Tier 2):** Severe loss of independence (e.g., elevators lacking braille keys/audio voice synthesizers, tall floor cable threshold channels).
+  * 🟡 **73 Medium (Tier 3):** Sub-optimal standards (e.g., missing tactile warning tiles at stair landings, high drinking water coolers).
+  * 🟢 **29 Low (Tier 4):** Minor maintenance deficits (e.g., faded parking paint, signage glare).
+* **Campus-Wide Weighted Accessibility Score:** **68.2%**
+* **Primary Quantitative Dataset:** Complete 29-building survey matrix with raw scores and checkpoint ratings is maintained in [`docs/Campus_Accessibility_Audit_Survey.xlsx`](docs/Campus_Accessibility_Audit_Survey.xlsx), with full analysis in [`docs/TECHNICAL_REPORT.md`](docs/TECHNICAL_REPORT.md).
 
 | Block | Buildings Audited | Overall Score | RPWD Compliance Status | Key Findings & Ground Assessment |
 |---|---|---|---|---|
