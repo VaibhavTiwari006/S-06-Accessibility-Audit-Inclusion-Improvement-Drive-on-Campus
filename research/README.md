@@ -65,7 +65,7 @@ Chandigarh University Ground Survey Map
 This research repository contains exhaustive documentation detailing every facet of the fieldwork:
 
 1. [**`FIELDWORK_METHODOLOGY.md`**](./FIELDWORK_METHODOLOGY.md)  
-   *Instruments, physical testing protocols, wheelchair simulation methodology, lux & sound level calibration, and scoring rubrics.*
+   *Field toolkit, manual measurement techniques (steel tape measurements, rise/run slope calculations), on-site photographic evidence, student consultations, and 42-parameter scoring rubrics.*
 
 2. [**`FIELD_METRICS_AND_HOURS.md`**](./FIELD_METRICS_AND_HOURS.md)  
    *Hour-by-hour field logs, 12-week survey calendar, on-site time allocation breakdowns, and weather/operational factors.*
