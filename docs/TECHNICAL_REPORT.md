@@ -284,24 +284,24 @@ Digital accessibility evaluations follow WCAG 2.1 principles:
 - **Understandable** — Readable content, predictable interfaces
 - **Robust** — Compatible with assistive technologies
 
-### 7.3 Empirical Physical Audit Results Across 29 Campus Buildings (216 Fieldwork Hours)
+### 7.3 Empirical Physical Audit Results Across 29 Campus Buildings
 
 A comprehensive ground physical accessibility audit was conducted across 29 academic and administrative buildings on the Chandigarh University campus, evaluated against 42 standardized RPWD Act / Harmonised Guidelines criteria:
 
 - **Lead Accessibility Auditor & Principal Investigator**: **Vaibhav Tiwari**
-- **Audit Field Campaign Period**: **July 6, 2026 – September 26, 2026 (12 Weeks / 84 Calendar Days)**
-- **Total On-Site Fieldwork Logged**: **216.0 Hours** (Average 7.45 hrs/building across 142.6 km of on-foot campus patrol)
+- **Audit Field Campaign Period**: **July – September 2026**
+- **Fieldwork Methodology**: **In-situ on-foot manual physical audit** (steel measuring tapes, rise/run slope calculations, photo evidence)
 - **Total Buildings Assessed**: 29 buildings (7 clusters, 1,218 metric checkpoints evaluated)
 - **Discovered Physical Barriers**: **187 discrete barriers** (24 Critical Tier 1, 61 High Tier 2, 73 Medium Tier 3, 29 Low Tier 4)
-- **Participatory Stakeholder Consultations**: **48 in-depth interviews** (28 students with mobility/sensory disabilities, 12 faculty, 8 estate engineers)
+- **Community Engagement**: Direct peer feedback and ground observations from students and campus staff
 - **Campus-Wide Average Accessibility Index**: **68.2%**
 - **Comprehensive Research Dossier**: Documented in the dedicated [`research/`](../research/) directory:
   - [`research/README.md`](../research/README.md) — Executive Dossier & Field Campaign Overview
-  - [`research/FIELD_METRICS_AND_HOURS.md`](../research/FIELD_METRICS_AND_HOURS.md) — Complete 216-Hour Operational Log & 12-Week Time Accounting
+  - [`research/FIELD_METRICS_AND_HOURS.md`](../research/FIELD_METRICS_AND_HOURS.md) — Phased Operational Inspection Log & Building Walkthroughs
   - [`research/BUILDING_AUDIT_LOGBOOK.md`](../research/BUILDING_AUDIT_LOGBOOK.md) — Detailed 29-Building Architectural Inspection Ledger
   - [`research/FIELDWORK_METHODOLOGY.md`](../research/FIELDWORK_METHODOLOGY.md) — Manual Fieldwork Inspection Protocol & 42-Parameter Statutory Checklist
-  - [`research/BARRIER_TAXONOMY_AND_FINDINGS.md`](../research/BARRIER_TAXONOMY_AND_FINDINGS.md) — 187 Classified Barriers with Engineering Case Studies
-  - [`research/STAKEHOLDER_INTERVIEWS.md`](../research/STAKEHOLDER_INTERVIEWS.md) — Qualitative Ground Narratives from 48 Campus Participants
+  - [`research/BARRIER_TAXONOMY_AND_FINDINGS.md`](../research/BARRIER_TAXONOMY_AND_FINDINGS.md) — 187 Classified Barriers with Practical Remediation Recommendations
+  - [`research/STAKEHOLDER_INTERVIEWS.md`](../research/STAKEHOLDER_INTERVIEWS.md) — Qualitative Ground Insights & Student Navigation Feedback
   - [`docs/Campus_Accessibility_Audit_Survey.xlsx`](Campus_Accessibility_Audit_Survey.xlsx) — Complete Quantitative Survey Spreadsheet
 
 | Cluster / Block | Buildings Assessed | Composite Score | RPWD Rating | Structural Assessment & Key Findings |
