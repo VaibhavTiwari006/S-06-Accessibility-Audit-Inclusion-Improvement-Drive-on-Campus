@@ -13,12 +13,11 @@
 | Metric | Ground Figure | Context / Details |
 | :--- | :---: | :--- |
 | **Total Buildings Audited** | **29 Buildings** | 100% of campus academic blocks, labs, and departmental complexes surveyed |
-| **Total Fieldwork Hours** | **216 Hours** | Direct on-site physical measurement, barrier testing, and stakeholder engagement |
-| **Average Time per Building** | **7.45 Hours** | Multi-session protocol (daytime audit, evening lighting check, mobility trial) |
-| **Walking Distance on Field** | **142.6 km** | On-foot perimeter and internal circulation mapping via pedometer logging |
+| **Field Campaign Period** | **July – September 2026** | Phased on-foot inspection walkthroughs across 7 campus clusters |
+| **Audit Methodology** | **Manual In-Situ Audit** | Direct physical measurement (steel tape, rise/run slope, spirit level), photo-documentation |
 | **Checkpoints Evaluated** | **1,218 Points** | 42 standardized RPWD/NBC metrics evaluated across each of the 29 buildings |
-| **Identified Physical Barriers** | **187 Barriers** | Geotagged, photographed, and categorized by severity (Critical, High, Medium, Low) |
-| **Student & Staff Interviews** | **48 Interviews** | 28 disabled students, 12 faculty members, 8 estate maintenance personnel |
+| **Identified Physical Barriers** | **187 Barriers** | Photographed, localized, and categorized by severity (Critical, High, Medium, Low) |
+| **Community Feedback** | **Student & Peer Consultations** | Ground insights on daily navigation hurdles from disabled students, peers, and staff |
 | **Campus Compliance Index** | **68.2%** | Campus-wide weighted average across all 29 facilities |
 | **Audit Status Breakdown** | **18 Approved / 5 In Progress / 4 Pending / 2 Rejected** | 62% Approved, 17% Retrofit Active, 14% Pending, 7% Critical Non-Compliant |
 
@@ -68,16 +67,16 @@ This research repository contains exhaustive documentation detailing every facet
    *Field toolkit, manual measurement techniques (steel tape measurements, rise/run slope calculations), on-site photographic evidence, student consultations, and 42-parameter scoring rubrics.*
 
 2. [**`FIELD_METRICS_AND_HOURS.md`**](./FIELD_METRICS_AND_HOURS.md)  
-   *Hour-by-hour field logs, 12-week survey calendar, on-site time allocation breakdowns, and weather/operational factors.*
+   *Phased audit schedule across 7 campus clusters, on-site inspection walkthrough logs, and evaluation focus areas.*
 
 3. [**`BUILDING_AUDIT_LOGBOOK.md`**](./BUILDING_AUDIT_LOGBOOK.md)  
    *Full 29-building ledger with audit dates, individual scores, lifecycle status, exact coordinates, and architectural observations.*
 
 4. [**`BARRIER_TAXONOMY_AND_FINDINGS.md`**](./BARRIER_TAXONOMY_AND_FINDINGS.md)  
-   *Categorization of all 187 discovered barriers by severity (Critical, High, Medium, Low) and infrastructure domain.*
+   *Categorization of all 187 discovered barriers by severity (Critical, High, Medium, Low) and architectural domain.*
 
 5. [**`STAKEHOLDER_INTERVIEWS.md`**](./STAKEHOLDER_INTERVIEWS.md)  
-   *Qualitative insights, interview transcripts, and participatory feedback from 48 students, faculty members, and campus workers.*
+   *Qualitative insights, peer feedback, and community observations on daily campus navigation challenges.*
 
 ---
 
