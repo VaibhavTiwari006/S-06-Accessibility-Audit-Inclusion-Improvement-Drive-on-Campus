@@ -80,8 +80,11 @@ const BuildingList = () => {
 
   const filteredBuildings = useMemo(() => {
     return buildings.filter(b => {
-      const matchesSearch = b.buildingName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                            b.buildingCode.toLowerCase().includes(searchTerm.toLowerCase());
+      const term = searchTerm.toLowerCase().trim();
+      const matchesSearch = !term ||
+        (b.buildingName && b.buildingName.toLowerCase().includes(term)) || 
+        (b.buildingCode && b.buildingCode.toLowerCase().includes(term)) ||
+        (b.location && b.location.toLowerCase().includes(term));
       const matchesStatus = statusFilter === 'ALL' || b.status === statusFilter;
       return matchesSearch && matchesStatus;
     });
