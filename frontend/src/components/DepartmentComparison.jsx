@@ -6,44 +6,59 @@ import { Card, CardHeader, CardContent } from './ui/Card';
 const departmentsData = [
   {
     name: 'Computer Science & Engineering',
+    block: 'Block A (A1–A3)',
     code: 'CSE',
-    score: 88.5,
-    resolvedBarriers: 24,
-    pendingBarriers: 2,
-    trend: '+6.2%',
+    score: 96.7,
+    resolvedBarriers: 26,
+    pendingBarriers: 1,
+    trend: '+8.2%',
     color: 'bg-emerald-500',
     accent: '#10b981',
     isWinner: true
   },
   {
     name: 'University Institute of Computing',
+    block: 'Block C (C1–C3)',
     code: 'UIC',
-    score: 82.0,
-    resolvedBarriers: 18,
-    pendingBarriers: 4,
-    trend: '+4.1%',
+    score: 79.7,
+    resolvedBarriers: 21,
+    pendingBarriers: 3,
+    trend: '+4.8%',
     color: 'bg-emerald-500',
     accent: '#10b981'
   },
   {
     name: 'Chandigarh Business School',
+    block: 'Block D (D1–D8)',
     code: 'CBS',
-    score: 76.4,
-    resolvedBarriers: 14,
-    pendingBarriers: 6,
-    trend: '+2.8%',
+    score: 74.8,
+    resolvedBarriers: 18,
+    pendingBarriers: 5,
+    trend: '+3.8%',
     color: 'bg-amber-500',
     accent: '#f59e0b'
   },
   {
     name: 'Pharmaceutical Sciences',
+    block: 'Nek Chand (NC 1–5)',
     code: 'UIPS',
-    score: 64.2,
-    resolvedBarriers: 9,
-    pendingBarriers: 11,
-    trend: '+5.0%',
-    color: 'bg-rose-500',
-    accent: '#f43f5e'
+    score: 62.9,
+    resolvedBarriers: 13,
+    pendingBarriers: 8,
+    trend: '+5.2%',
+    color: 'bg-amber-500',
+    accent: '#f59e0b'
+  },
+  {
+    name: 'Engineering & Technology',
+    block: 'Block B (B1–B5)',
+    code: 'UIET',
+    score: 59.8,
+    resolvedBarriers: 11,
+    pendingBarriers: 9,
+    trend: '+3.4%',
+    color: 'bg-blue-500',
+    accent: '#3b82f6'
   },
 ];
 
@@ -59,11 +74,11 @@ const DepartmentComparison = () => {
               <Building className="text-primary" size={24} /> Departmental Accessibility Comparison
             </h3>
             <p className="text-sm text-textLight mt-1">
-              Compare WCAG & RPWD compliance metrics across university departments.
+              Compare WCAG & RPWD compliance metrics across university departments based on real ground survey data.
             </p>
           </div>
           <span className="flex items-center gap-1 text-xs font-extrabold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-full">
-            <TrendingUp size={14} /> +4.5% Avg Growth
+            <TrendingUp size={14} /> +5.1% Avg Growth
           </span>
         </div>
       </CardHeader>
@@ -86,8 +101,13 @@ const DepartmentComparison = () => {
                   {dept.code}
                 </div>
                 <div>
-                  <h4 className="font-bold text-textMain text-sm leading-tight flex items-center gap-2">
+                  <h4 className="font-bold text-textMain text-sm leading-tight flex items-center gap-2 flex-wrap">
                     {dept.name}
+                    {dept.block && (
+                      <span className="text-[10px] font-semibold text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200/50">
+                        {dept.block}
+                      </span>
+                    )}
                     {dept.isWinner && (
                       <span className="inline-flex items-center gap-1 text-[10px] font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
                         <Trophy size={11} className="text-amber-500" /> #1 Winner
