@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Settings as SettingsIcon, User, Bell, Shield, Paintbrush, LogOut, CheckCircle, Camera, Accessibility, Volume2, Eye, IndianRupee } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { useAccessibility } from '../context/AccessibilityContext';

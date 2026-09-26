@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import api from '../services/api';
 import pilotService from '../services/pilotService';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import { useAuth } from '../context/AuthContext';
 import ProposePilotModal from '../components/ProposePilotModal';
 

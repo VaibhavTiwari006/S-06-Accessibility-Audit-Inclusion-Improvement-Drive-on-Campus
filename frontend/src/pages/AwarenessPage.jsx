@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 
 
 /**

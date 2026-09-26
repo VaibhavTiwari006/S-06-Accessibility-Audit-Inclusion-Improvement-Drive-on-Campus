@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Volume2, VolumeX, Compass, MapPin, Search, ChevronRight, HelpCircle, CornerDownRight } from 'lucide-react';
 import buildingService from '../services/buildingService';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import { Card, CardContent } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 

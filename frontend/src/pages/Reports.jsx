@@ -8,7 +8,7 @@ import {
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend, 
   BarChart, Bar, XAxis, YAxis, CartesianGrid
 } from 'recharts';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import dashboardService from '../services/dashboardService';
 import reportService from '../services/reportService';
 import ScoreCard from '../components/ScoreCard';

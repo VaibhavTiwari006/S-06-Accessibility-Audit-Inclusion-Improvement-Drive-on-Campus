@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import buildingService from '../services/buildingService';
 import { Building2, Plus, MapPin, Layers, Search, Filter, X } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import { motion, AnimatePresence } from 'framer-motion';
 import AddBuildingModal from '../components/AddBuildingModal';
 import CampusMap from '../components/CampusMap';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import issueService from '../services/issueService';
 import { AlertCircle, Plus, MapPin, Clock, CheckCircle, Search, Filter, Printer, X, IndianRupee } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReportIssueModal from '../components/ReportIssueModal';
 import { useAuth } from '../context/AuthContext';

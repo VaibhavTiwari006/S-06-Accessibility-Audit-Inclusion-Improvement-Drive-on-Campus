@@ -10,7 +10,7 @@ import {
   getCampusFeatures, 
   calculateWheelchairRoute 
 } from '../services/mapService';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import LeafletMap from '../components/CampusMap';
 import Button from '../components/ui/Button';
 

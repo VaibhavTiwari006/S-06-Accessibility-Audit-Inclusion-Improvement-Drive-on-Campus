@@ -5,7 +5,7 @@ import {
   CheckCircle, AlertCircle, Clock, MapPin, IndianRupee, Wrench, 
   ChevronLeft, ChevronRight, UserCheck, ShieldCheck, ArrowRight, CheckCircle2 
 } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import { Card } from '../components/ui/Card';
 import Button from '../components/ui/Button';
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 import { useAccessibility } from '../context/AccessibilityContext';
 import { motion } from 'framer-motion';
 import { Eye, Type, Palette, Maximize, Activity, Focus, Bell, Type as TextIcon, Volume2, Sparkles } from 'lucide-react';

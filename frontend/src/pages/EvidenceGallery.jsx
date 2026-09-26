@@ -10,7 +10,7 @@ import { Card, CardContent } from '../components/ui/Card';
 import Badge from '../components/ui/Badge';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
-import { toast } from 'react-toastify';
+import { accessibleToast as toast } from '../utils/accessibleToast';
 
 const generateDummyPhotos = (issues) => {
   return issues.map((issue, index) => ({
