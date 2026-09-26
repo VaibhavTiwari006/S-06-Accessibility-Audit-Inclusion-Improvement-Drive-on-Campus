@@ -5,6 +5,9 @@ import com.cusoc.accessaudit.dto.PilotImprovementResponse;
 import com.cusoc.accessaudit.dto.PilotStatusUpdateRequest;
 import com.cusoc.accessaudit.response.ApiResponse;
 import com.cusoc.accessaudit.service.PilotImprovementService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pilot-improvements")
 @RequiredArgsConstructor
+@Tag(name = "Pilot Improvements", description = "Endpoints for community accessibility proposals and voting")
+@SecurityRequirement(name = "Bearer Authentication")
 /**
  * PilotImprovementController REST Controller
  * 
@@ -30,6 +35,7 @@ public class PilotImprovementController {
     private final PilotImprovementService pilotImprovementService;
 
     @GetMapping
+    @Operation(summary = "Get all pilot proposals", description = "Fetches all community pilot proposals with live upvote counters")
     public ResponseEntity<ApiResponse<List<PilotImprovementResponse>>> getAll(Authentication authentication) {
         String email = authentication != null ? authentication.getName() : null;
         List<PilotImprovementResponse> pilots = pilotImprovementService.getAll(email);
@@ -38,6 +44,7 @@ public class PilotImprovementController {
     }
 
     @GetMapping("/mine")
+    @Operation(summary = "Get my pilot proposals", description = "Fetches pilot proposals submitted by the currently authenticated user")
     public ResponseEntity<ApiResponse<List<PilotImprovementResponse>>> getMyProposals(Authentication authentication) {
         String email = authentication.getName();
         List<PilotImprovementResponse> pilots = pilotImprovementService.getMyProposals(email);
@@ -46,6 +53,7 @@ public class PilotImprovementController {
     }
 
     @PostMapping
+    @Operation(summary = "Propose a pilot improvement", description = "Submits a new community accessibility pilot improvement proposal")
     public ResponseEntity<ApiResponse<PilotImprovementResponse>> create(
             @Valid @RequestBody PilotImprovementRequest request,
             Authentication authentication) {
@@ -58,6 +66,7 @@ public class PilotImprovementController {
 
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasRole('ADMIN')")
+    @Operation(summary = "Update proposal status", description = "Updates pilot proposal workflow status and administrator review notes. Admin access only.")
     public ResponseEntity<ApiResponse<PilotImprovementResponse>> updateStatus(
             @PathVariable Long id,
             @Valid @RequestBody PilotStatusUpdateRequest request,
@@ -69,6 +78,7 @@ public class PilotImprovementController {
     }
 
     @PostMapping("/{id}/upvote")
+    @Operation(summary = "Toggle proposal upvote", description = "Toggles the authenticated user's upvote on a community pilot proposal")
     public ResponseEntity<ApiResponse<PilotImprovementResponse>> toggleUpvote(
             @PathVariable Long id,
             Authentication authentication) {
