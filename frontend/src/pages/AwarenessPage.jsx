@@ -124,6 +124,7 @@ const AwarenessPage = () => {
               onClick={() => window.open(vid.url, '_blank', 'noopener,noreferrer')}
               role="link"
               tabIndex={0}
+              aria-label={`Watch educational video: ${vid.title} (${vid.duration})`}
               onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.open(vid.url, '_blank', 'noopener,noreferrer'); } }}
             >
               <div className="relative h-44 overflow-hidden bg-slate-900">
@@ -173,6 +174,9 @@ const AwarenessPage = () => {
             {['1:5 Slope (Very Steep)', '1:12 Slope (Mandatory Standard)', '1:25 Slope (Too Flat)'].map((opt, idx) => (
               <button
                 key={opt}
+                type="button"
+                aria-pressed={activeQuizAnswer === idx}
+                aria-label={`Select quiz option: ${opt}`}
                 onClick={() => handleQuizSubmit(idx)}
                 className={`p-3 rounded-xl border text-xs font-bold transition-all ${
                   activeQuizAnswer === idx
