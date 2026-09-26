@@ -64,7 +64,7 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .build());
 
         User auditor1 = userRepository.save(User.builder()
-                .fullName("Jane Doe (Auditor)")
+                .fullName("Vaibhav Tiwari")
                 .email("auditor@campus.edu")
                 .password(passwordEncoder.encode("auditor123"))
                 .role(Role.AUDITOR)
@@ -335,10 +335,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     // AUDITS — Comprehensive RPWD Act 2016 audits for all 29 buildings
     // ═══════════════════════════════════════════════════════════
     private void initializeAudits(List<User> users, List<Building> buildings, List<AuditChecklist> checklists) {
-        User auditor1 = users.get(2);
-        User auditor2 = users.get(3);
-        User auditor3 = users.get(4);
-        User[] auditors = {auditor1, auditor2, auditor3};
+        User auditor = users.get(2); // Vaibhav Tiwari
 
         double[] scores = {
             57.2, 57.2, 57.2, // Zakir A, B, C
@@ -350,10 +347,42 @@ public class DatabaseInitializer implements CommandLineRunner {
             96.7, 96.7, 96.7  // A1..A3
         };
 
+        LocalDate[] auditDates = {
+            LocalDate.of(2026, 7, 6),  // Zakir A
+            LocalDate.of(2026, 7, 9),  // Zakir B
+            LocalDate.of(2026, 7, 14), // Zakir C
+            LocalDate.of(2026, 7, 18), // NC 1
+            LocalDate.of(2026, 7, 23), // NC 2
+            LocalDate.of(2026, 7, 28), // NC 3
+            LocalDate.of(2026, 8, 2),  // NC 4
+            LocalDate.of(2026, 8, 6),  // NC 5
+            LocalDate.of(2026, 8, 10), // D1
+            LocalDate.of(2026, 8, 12), // D2
+            LocalDate.of(2026, 8, 14), // D3
+            LocalDate.of(2026, 8, 17), // D4
+            LocalDate.of(2026, 8, 19), // D5
+            LocalDate.of(2026, 8, 21), // D6
+            LocalDate.of(2026, 8, 24), // D7
+            LocalDate.of(2026, 8, 26), // D8
+            LocalDate.of(2026, 8, 28), // DD1
+            LocalDate.of(2026, 8, 31), // DD2
+            LocalDate.of(2026, 9, 3),  // C1
+            LocalDate.of(2026, 9, 7),  // C2
+            LocalDate.of(2026, 9, 10), // C3
+            LocalDate.of(2026, 9, 12), // B1
+            LocalDate.of(2026, 9, 15), // B2
+            LocalDate.of(2026, 9, 17), // B3
+            LocalDate.of(2026, 9, 19), // B4
+            LocalDate.of(2026, 9, 21), // B5
+            LocalDate.of(2026, 9, 22), // A1
+            LocalDate.of(2026, 9, 24), // A2
+            LocalDate.of(2026, 9, 26)  // A3
+        };
+
         for (int i = 0; i < buildings.size(); i++) {
             Building b = buildings.get(i);
             double score = i < scores.length ? scores[i] : 68.0;
-            User auditor = auditors[i % auditors.length];
+            LocalDate auditDate = i < auditDates.length ? auditDates[i] : LocalDate.of(2026, 8, 15);
             String status = score >= 50.0 ? "APPROVED" : "PENDING";
             String remarks = String.format("RPWD Act 2016 compliance audit for %s (%s). Evaluated compliance: %.1f%%.",
                     b.getBuildingName(), b.getLocation(), score);
@@ -361,7 +390,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             Audit audit = auditRepository.save(Audit.builder()
                     .building(b)
                     .auditor(auditor)
-                    .auditDate(LocalDate.of(2026, 9, 26))
+                    .auditDate(auditDate)
                     .status(status)
                     .overallAccessibilityScore(score)
                     .remarks(remarks)
