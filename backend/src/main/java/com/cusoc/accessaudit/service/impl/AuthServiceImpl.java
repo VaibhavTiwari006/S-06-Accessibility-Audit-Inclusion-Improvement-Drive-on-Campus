@@ -32,11 +32,14 @@ public class AuthServiceImpl implements AuthService {
             throw new IllegalArgumentException("Email is already registered!");
         }
 
+        // Public registration always assigns STUDENT role to prevent privilege escalation
+        Role assignedRole = Role.STUDENT;
+
         User user = User.builder()
                 .fullName(request.getFullName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
+                .role(assignedRole)
                 .enabled(true)
                 .build();
 
