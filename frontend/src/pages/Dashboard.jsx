@@ -180,10 +180,10 @@ const StudentDashboard = ({ stats, navigate }) => (
         <ScoreCard title="Track My Issues" value={stats?.totalStudentReports ?? '0'} icon={<AlertCircle size={24} />} colorClass="text-amber-600 bg-amber-500/10" onClick={() => navigate('/issues')} trend={0} trendLabel="Click to track status" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Campus Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '92%'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-500/10" />
+        <ScoreCard title="Campus Accessibility" value={stats?.averageAccessibilityScore != null ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '68.2%'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-500/10" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Remediated Barriers" value={stats?.totalMaintenanceTasks ? `${stats.totalMaintenanceTasks}` : '1,200+'} icon={<Wrench size={24} />} colorClass="text-blue-600 bg-blue-500/10" onClick={() => navigate('/community')} />
+        <ScoreCard title="Buildings Audited" value={stats?.totalBuildings != null ? `${stats.totalBuildings}` : '29'} icon={<Wrench size={24} />} colorClass="text-blue-600 bg-blue-500/10" onClick={() => navigate('/buildings')} />
       </motion.div>
     </motion.div>
 
