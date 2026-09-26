@@ -214,6 +214,8 @@ const Community = () => {
           </h3>
           <div className="flex gap-2 text-xs font-bold bg-gray-50 p-1 rounded-xl border border-gray-150">
             <button
+              type="button"
+              aria-pressed={pilotFilter === 'ALL'}
               onClick={() => setPilotFilter('ALL')}
               className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
                 pilotFilter === 'ALL'
@@ -224,6 +226,8 @@ const Community = () => {
               {pilotStats.total} Total
             </button>
             <button
+              type="button"
+              aria-pressed={pilotFilter === 'DONE'}
               onClick={() => setPilotFilter('DONE')}
               className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
                 pilotFilter === 'DONE'
@@ -234,6 +238,8 @@ const Community = () => {
               {pilotStats.completed} Done
             </button>
             <button
+              type="button"
+              aria-pressed={pilotFilter === 'ACTIVE'}
               onClick={() => setPilotFilter('ACTIVE')}
               className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
                 pilotFilter === 'ACTIVE'
@@ -269,6 +275,9 @@ const Community = () => {
                     <div className="flex gap-3 w-full">
                       <div className="flex flex-col items-center gap-1 pt-1">
                         <button 
+                          type="button"
+                          aria-pressed={pilot.hasUpvoted}
+                          aria-label={`Upvote ${pilot.title} (${pilot.upvotes || 0} upvotes)`}
                           onClick={() => handleUpvote(pilot.id)}
                           className={`flex flex-col items-center p-1.5 rounded-lg transition-all ${
                             pilot.hasUpvoted 
