@@ -158,8 +158,8 @@ const AuditList = () => {
               <div className="mt-2 flex justify-between items-center">
                 <div>
                   <span className="text-xs text-textLight font-semibold uppercase tracking-wider">Compliance Score</span>
-                  <p className={`text-2xl font-bold ${audit.overallAccessibilityScore >= 80 ? 'text-success-dark' : audit.overallAccessibilityScore >= 50 ? 'text-warning-dark' : 'text-danger-dark'}`}>
-                    {audit.overallAccessibilityScore ? `${audit.overallAccessibilityScore.toFixed(1)}%` : '—'}
+                  <p className={`text-2xl font-bold ${audit.overallAccessibilityScore == null ? 'text-gray-400' : audit.overallAccessibilityScore >= 80 ? 'text-success-dark' : audit.overallAccessibilityScore >= 50 ? 'text-warning-dark' : 'text-danger-dark'}`}>
+                    {audit.overallAccessibilityScore != null ? `${Number(audit.overallAccessibilityScore).toFixed(1)}%` : '—'}
                   </p>
                 </div>
                 <Button 
@@ -229,6 +229,7 @@ const AuditList = () => {
                         onClick={() => deleteSchedule(item.id)}
                         className="text-gray-400 hover:text-danger p-1 rounded transition-colors"
                         title="Cancel Scheduled Audit"
+                        aria-label={`Cancel scheduled audit for ${item.buildingName}`}
                       >
                         <Trash2 size={14} />
                       </button>
