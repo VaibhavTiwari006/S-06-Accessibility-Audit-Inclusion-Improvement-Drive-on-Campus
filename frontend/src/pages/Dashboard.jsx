@@ -109,7 +109,7 @@ const AdminDashboard = ({ stats, navigate }) => (
 
 // ─────────────────────────── Auditor ──────────────────────────
 const AuditorDashboard = ({ stats, navigate }) => (
-  <motion.div variants={containerVariants} initial="hidden" animate="show" className="w-full">
+  <motion.div variants={containerVariants} initial="hidden" animate="show" className="w-full" role="region" aria-label="Auditor Dashboard">
     <DashboardHero 
       title="Auditor Dashboard" 
       subtitle="Manage your assigned buildings and accessibility audit progress at Chandigarh University." 
@@ -140,7 +140,7 @@ const AuditorDashboard = ({ stats, navigate }) => (
 
 // ─────────────────────────── Maintenance ──────────────────────
 const MaintenanceDashboard = ({ stats, navigate }) => (
-  <motion.div variants={containerVariants} initial="hidden" animate="show" className="w-full">
+  <motion.div variants={containerVariants} initial="hidden" animate="show" className="w-full" role="region" aria-label="Maintenance Dashboard">
     <DashboardHero 
       title="Maintenance Dashboard" 
       subtitle="Track assigned repair tasks and facility improvements across the CU campus." 
@@ -168,7 +168,7 @@ const MaintenanceDashboard = ({ stats, navigate }) => (
 
 // ─────────────────────────── Student ──────────────────────────
 const StudentDashboard = ({ stats, navigate }) => (
-  <motion.div variants={containerVariants} initial="hidden" animate="show" className="w-full">
+  <motion.div variants={containerVariants} initial="hidden" animate="show" className="w-full" role="region" aria-label="Student Dashboard">
     <DashboardHero 
       title="CU Student & Staff Inclusion Portal" 
       subtitle="Report campus barriers, track resolution progress in real time, and explore accessible navigation maps." 
