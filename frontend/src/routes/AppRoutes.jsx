@@ -106,9 +106,9 @@ const AnimatedRoutes = () => {
         <Route path="/settings" element={<ProtectedRoute allowedRoles={['ADMIN']}><MainLayout><Settings /></MainLayout></ProtectedRoute>} />
         <Route path="/accessibility" element={<ProtectedRoute><MainLayout><AccessibilityPreferences /></MainLayout></ProtectedRoute>} />
         <Route path="/map" element={<ProtectedRoute><MainLayout><CampusMap /></MainLayout></ProtectedRoute>} />
-        <Route path="/track/:issueId" element={<ProtectedRoute><MainLayout><PublicTrackBarrier /></MainLayout></ProtectedRoute>} />
+        <Route path="/track/:issueId" element={<MainLayout><PublicTrackBarrier /></MainLayout>} />
         <Route path="/awareness" element={<ProtectedRoute><MainLayout><AwarenessPage /></MainLayout></ProtectedRoute>} />
-        <Route path="/quiz" element={<ProtectedRoute allowedRoles={['STUDENT']}><MainLayout><QuizPage /></MainLayout></ProtectedRoute>} />
+        <Route path="/quiz" element={<ProtectedRoute allowedRoles={['ADMIN', 'STUDENT']}><MainLayout><QuizPage /></MainLayout></ProtectedRoute>} />
         <Route path="/verbal-map" element={<ProtectedRoute><MainLayout><VerbalMap /></MainLayout></ProtectedRoute>} />
 
         {/* Catch All */}
