@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Menu, Bell, Settings, Search } from 'lucide-react';
+import { LogOut, User, Menu, Bell, Settings, Search, Award } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
@@ -116,6 +116,16 @@ const Navbar = ({ toggleSidebar }) => {
                 {user.role}
               </Badge>
             </div>
+
+            {/* CUSoC '26 Presentation shortcut */}
+            <button
+              onClick={() => navigate('/presentation')}
+              className="p-1.5 px-2.5 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm"
+              title="Launch CUSoC 2026 Presentation Deck"
+            >
+              <Award size={15} />
+              <span className="hidden xl:inline">CUSoC '26</span>
+            </button>
 
             {/* Settings shortcut - available for all users */}
             <button
