@@ -132,8 +132,10 @@ The primary objectives of this project are to:
 
 Based on comprehensive ground accessibility audits evaluated under the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **Harmonised Guidelines and Standards for Universal Accessibility in India (2021)**:
 
-- **Total Buildings Audited**: 29 buildings across 7 blocks
-- **Audit Metrics**: 38 standardized questions across 8 infrastructure categories
+- **Lead Accessibility Auditor**: **Vaibhav Tiwari**
+- **Audit Campaign Window**: **July 2026 – September 2026**
+- **Total Buildings Audited**: 29 buildings across 7 campus blocks
+- **Audit Metrics**: 38 standardized questions across 8 infrastructure categories (1,102 checkpoints evaluated)
 - **Campus-Wide Average Accessibility Score**: **68.2%**
 - **Complete Audit Survey Dataset**: [`docs/Campus_Accessibility_Audit_Survey.xlsx`](docs/Campus_Accessibility_Audit_Survey.xlsx)
 
