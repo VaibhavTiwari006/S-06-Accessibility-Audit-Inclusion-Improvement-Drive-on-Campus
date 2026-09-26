@@ -4,7 +4,7 @@
 > **Investigation Lead:** Vaibhav Tiwari  
 > **Total Barriers Documented:** 187 Discrete Physical & Environmental Infractions  
 > **Data Scope:** 29 Chandigarh University Campus Buildings  
-> **Classification Framework:** ISO 21542 / RPWD Act 2016 Severity Matrix  
+> **Classification Framework:** Harmonised Guidelines 2021 / RPWD Act 2016 Severity Matrix  
 
 ---
 
@@ -44,45 +44,45 @@ Critical barriers represent absolute physical blockades where a student or facul
 
 ### Case 1.1: Complete Vertical Exclusion in East Campus Block DD (DD1 & DD2)
 * **Location:** DD Block Wings 1 & 2, East Campus
-* **Defect:** 3-storey instructional complex completely devoid of any elevator, platform lift, or mechanical vertical transportation. Upper floors house 14 specialized electrical and fluid engineering laboratories.
-* **Impact:** Wheelchair-using students enrolled in these courses cannot reach mandatory curriculum lab practicals.
-* **Remediation Cost Estimate:** ₹18,00,000 (External prefabricated glass-shaft traction lift).
+* **Defect:** 3-storey instructional complex completely devoid of any elevator, platform lift, or mechanical vertical transportation. Upper floors house specialized engineering laboratories.
+* **Impact:** Wheelchair-using students enrolled in these courses cannot reach upper-floor labs without being carried up stairs.
+* **Remediation Recommendation:** Prioritize installation of an external mechanical elevator or vertical platform lift to service upper instructional floors.
 
 ### Case 1.2: Excessive Portico Ramp Gradients at Zakir Husain Complex
 * **Location:** Main Entrance Portico, Zakir A & Zakir B
-* **Defect:** Entrance ramp gradient measured at $1:9.4$ ($10.6\%$ slope), exceeding the safe $1:12$ ($8.33\%$) statutory limit by $27\%$. The ramp lacks intermediate resting landings over a $12\text{ m}$ continuous run.
-* **Impact:** Tipping hazard for manual wheelchair operators; severe muscle strain causing complete reliance on campus security guards to push chairs up the incline.
-* **Remediation Cost Estimate:** ₹1,20,000 (Reconstruction to $1:14$ gradient with $1500\text{ mm}$ intermediate landing).
+* **Defect:** Entrance ramp gradient measured steeper than the safe $1:12$ ($8.33\%$) statutory limit. The ramp also lacks intermediate resting landings over an extended continuous run.
+* **Impact:** Tipping hazard for manual wheelchair operators; severe muscle strain causing complete reliance on campus peers or security guards to push chairs up the incline.
+* **Remediation Recommendation:** Reconstruct portico ramp to statutory $1:12$ slope (or gentler $1:14$) with a $1500\text{ mm}$ intermediate level landing and continuous dual-tier handrails.
 
 ### Case 1.3: Inward-Swinging Restroom Doors Blocking Wheelchair Egress
 * **Location:** Ground Floor Accessible Restroom, Zakir B & B2 Block
-* **Defect:** The stall door was installed swinging inwards rather than outwards. Once a wheelchair enters the $1600\text{ mm} \times 1700\text{ mm}$ cubicle, the door leaf hits the footrests, preventing the user from closing the door for privacy or opening it to exit.
+* **Defect:** Stall doors installed swinging inwards rather than outwards. Once a wheelchair enters the cubicle, the door leaf hits the footrests, preventing the user from closing the door for privacy or opening it to exit.
 * **Impact:** Total loss of dignified and autonomous restroom usage.
-* **Remediation Cost Estimate:** ₹15,000 per unit (Rehanging door leaf to swing outwards with lever handle).
+* **Remediation Recommendation:** Re-hang stall door leaf to swing outwards with lever-style handles or install a smooth-sliding accessible door.
 
 ---
 
 ## 🟠 Tier 2: High Severity Barriers (61 Documented Cases)
 
-High-severity barriers do not completely bar access but impose extreme physical hardship, require undignified manual intervention, or fail to inform users with sensory disabilities.
+High-severity barriers do not completely bar access but impose physical hardship, require manual intervention, or fail to inform users with sensory disabilities.
 
 ### Case 2.1: Lack of Braille Indicators and Floor Speech Synthesis in Lifts
-* **Location:** Central Passenger Elevators, Blocks D1–D6 & Zakir Complex (12 Lift Cars)
-* **Defect:** Car operating panels feature smooth stainless-steel buttons with printed ink numerals rather than raised tactile/braille characters. Furthermore, audio chime/speech synthesizers announcing floor arrival are non-operational.
+* **Location:** Central Passenger Elevators, Blocks D1–D6 & Zakir Complex
+* **Defect:** Car operating panels feature smooth buttons with printed numerals rather than raised tactile/braille characters. Furthermore, audio speech synthesizers announcing floor arrival are absent or non-operational.
 * **Impact:** Visually impaired students are unable to determine which floor they have arrived at without repeatedly asking fellow passengers for assistance.
-* **Remediation Cost Estimate:** ₹35,000 per elevator car (Replacement with tactile braille COP and multilingual speech unit).
+* **Remediation Recommendation:** Retrofit car operating panels with raised tactile and braille buttons, and install/activate bilingual floor voice annunciators.
 
 ### Case 2.2: Lab Door Threshold Vertical Obstructions
-* **Location:** Floor 2 & 3 Computer Laboratories, Block NC 2, NC 4 & D4 (18 Doorways)
-* **Defect:** Raised aluminium wiring channels or weather seals measuring $28\text{ mm to }38\text{ mm}$ in height run across doorways. Statutory maximum vertical rise is $6\text{ mm}$.
-* **Impact:** Small front caster wheels of manual wheelchairs become lodged against the threshold, causing sudden stops and risk of forward ejection.
-* **Remediation Cost Estimate:** ₹4,500 per doorway (Machined rubber/aluminium bevelled transition ramp).
+* **Location:** Floor 2 & 3 Computer Laboratories, Block NC 2, NC 4 & D4
+* **Defect:** Raised surface wiring channels and tall floor doorstops measuring over $25\text{ mm}$ in height run across doorways (statutory limit is $\le 6\text{ mm}$ flush or $13\text{ mm}$ bevelled).
+* **Impact:** Small front caster wheels of wheelchairs become lodged against the threshold, causing sudden stops.
+* **Remediation Recommendation:** Install low-profile bevelled threshold transition plates or re-route floor wiring channels below surface conduits.
 
 ### Case 2.3: Non-Compliant Grab Rail Mounting Heights & Inadequate Wall Anchors
-* **Location:** Accessible Washroom Stalls, Blocks NC 1, NC 3 & B4 (9 Restrooms)
-* **Defect:** Horizontal grab rails mounted at $950\text{ mm}$ (statutory limit: $750\text{–}800\text{ mm}$). Anchoring drywall plugs showed physical loosening when tested with a $500\text{ N}$ pull force.
-* **Impact:** PwDs transferring from wheelchair to toilet seat cannot leverage upper body strength at excessive heights and risk structural anchor failure.
-* **Remediation Cost Estimate:** ₹8,000 per stall (Re-anchoring into masonry backing plates at compliant $750\text{ mm}$ elevation).
+* **Location:** Accessible Washroom Stalls, Blocks NC 1, NC 3 & B4
+* **Defect:** Horizontal grab rails mounted higher than statutory guidelines ($750\text{–}800\text{ mm}$), and wall anchors showed noticeable looseness and physical play under manual inspection.
+* **Impact:** Individuals transferring from a wheelchair to the toilet seat cannot leverage upper body strength at excessive heights and face safety risks from loose fittings.
+* **Remediation Recommendation:** Re-mount grab rails firmly into solid masonry backing plates at the standard $750\text{ mm}$ elevation.
 
 ---
 
@@ -91,39 +91,42 @@ High-severity barriers do not completely bar access but impose extreme physical 
 Medium-severity barriers represent sub-optimal architectural executions that introduce navigational friction, fatigue, or communication deficiencies.
 
 ### Case 3.1: Missing Tactile Warning Paving at Staircases
-* **Location:** Staircase Landings, Block C3, NC 5 & D7 (22 Staircases)
+* **Location:** Staircase Landings, Block C3, NC 5 & D7
 * **Defect:** Top landings of interior stairwells lack hazard warning blister tiles ($300\text{ mm}$ depth).
 * **Impact:** White cane users cannot detect the impending drop-off of the descending stair flight prior to reaching the first step edge.
+* **Remediation Recommendation:** Install yellow high-contrast blister tactile warning tiles $300\text{ mm}$ in advance of top stair nosings.
 
-### Case 3.2: High Drinking Water Dispensers Without Secondary Low-Level Taps
-* **Location:** Corridors across Block D, NC, and Zakir Complexes (26 Stations)
-* **Defect:** Water cooler dispense spouts installed at $1050\text{ mm to }1150\text{ mm}$ above finished floor level with deep knee aprons.
-* **Impact:** Wheelchair-seated students cannot reach the dispense lever or place a water bottle beneath the nozzle.
+### Case 3.2: High Drinking Water Dispensers Without Lowered Outlets
+* **Location:** Corridors across Block D, NC, and Zakir Complexes
+* **Defect:** Water cooler dispense spouts installed at heights over $1000\text{ mm}$ above finished floor level without lower-level taps.
+* **Impact:** Wheelchair-seated students cannot reach the dispense controls or place a water bottle beneath the nozzle independently.
+* **Remediation Recommendation:** Retrofit a secondary lowered tap or cup dispenser at $\le 800\text{ mm}$ height with lever-action controls.
 
-### Case 3.3: Excessive Door Opening Force on Fire and Smoke Doors
-* **Location:** Internal Fire Separation Doors, Block NC 1–5 & C1–C3 (16 Doors)
-* **Defect:** Overhead hydraulic door closers adjusted with heavy spring tensions requiring $45\text{ N to }62\text{ N}$ opening force (statutory maximum: $22.2\text{ N}$).
+### Case 3.3: Excessive Door Opening Force on Fire and Corridor Doors
+* **Location:** Internal Fire Separation Doors, Block NC 1–5 & C1–C3
+* **Defect:** Overhead hydraulic door closers set with heavy spring tensions requiring excessive manual pulling force.
 * **Impact:** Crutch users and individuals with reduced upper-body strength cannot open doors independently while balancing mobility aids.
+* **Remediation Recommendation:** Adjust hydraulic door closer spring tension to allow effortless opening with a closed fist.
 
 ---
 
 ## 🟢 Tier 4: Low Severity Barriers (29 Documented Cases)
 
-Minor maintenance defects, worn paint markings, or sub-optimal contrast levels that can be rapidly resolved through routine facilities maintenance:
-* Faded blue-and-white paint on designated accessible parking bays.
-* Glossy acrylic signage causing high glare under daylight conditions.
-* Loose rubber nosings on two basement service steps.
-* Missing signage directing visitors from non-accessible side doors to the main accessible ramp portico.
+Minor maintenance defects, worn paint markings, or sub-optimal contrast levels that can be resolved through routine facilities maintenance:
+* Faded painted markings on designated accessible parking bays.
+* Glossy acrylic signage causing reflections under direct sunlight.
+* Worn non-slip adhesive strips on basement entry steps.
+* Missing directional signage guiding visitors from secondary doors to the main ramp portico.
 
 ---
 
 ## 🛠️ Prioritized Remediation Roadmap
 
-Based on the empirical findings, remediation has been structured into three operational phases:
+Based on the empirical findings, remediation is structured into three operational phases:
 
 ```mermaid
 flowchart LR
-    A["Immediate Quick-Wins (Month 1-2)<br/>Cost: ₹2.4 Lakh<br/>Threshold bevels, grab rail re-anchors, outward door re-hangs"] 
-    --> B["Medium-Term Capital Retrofits (Month 3-6)<br/>Cost: ₹8.5 Lakh<br/>Portico ramp rebuilds, elevator braille COP retrofits, tactile paving"]
-    --> C["Long-Term Structural Engineering (Month 6-12)<br/>Cost: ₹22.0 Lakh<br/>Block DD external glass elevator installation & skywalk connections"]
+    A["Immediate Maintenance Adjustments<br/>(Phase 1)<br/>Threshold bevels, grab rail re-anchors, outward door re-hangs"] 
+    --> B["Medium-Term Architectural Retrofits<br/>(Phase 2)<br/>Portico ramp rebuilds, elevator braille & voice units, tactile paving"]
+    --> C["Major Capital Upgrades<br/>(Phase 3)<br/>Block DD vertical elevator installation & skywalk connections"]
 ```
