@@ -159,6 +159,28 @@ Based on comprehensive ground accessibility audits evaluated under the **Rights 
 | **Zakir Husain** | Zakir A, Zakir B, Zakir C | **57.2%** | 🟡 Partial | High-capacity lecture complex; requires portico entrance ramp reconstruction and elevator auditory floor voice units |
 | **DD Block** | DD1, DD2 | **41.6%** | 🔴 Non-Compliant | Multi-story wing lacking elevator infrastructure; upper floor access restricted to stairs (priority 1 remediation) |
 
+#### 📊 Audits by Lifecycle Status (29 Total Audits)
+* 🟢 **APPROVED (18 Audits · 62%)**: A1–A3, C1–C3, D1–D8, NC 1, NC 3, NC 4, NC 5 meeting statutory thresholds.
+* 🔵 **IN PROGRESS (5 Audits · 17%)**: B1–B5 undergoing active on-site physical accessibility retrofits.
+* 🟡 **PENDING (4 Audits · 14%)**: Zakir A–C & NC 2 awaiting tactile signage verification and final sign-off.
+* 🔴 **REJECTED (2 Audits · 7%)**: DD1 & DD2 non-compliant due to lack of multi-storey elevator vertical circulation.
+
+---
+
+### 🏆 Departmental Accessibility Comparison (Ground Survey Benchmarks)
+
+Empirical WCAG 2.1 & RPWD compliance metrics across university academic departments:
+
+| Department Code | Academic Department Name | Campus Block Location | Compliance Score | Status Rating | Barriers Fixed / Pending | 12-Wk Growth |
+|:---:|:---|:---|:---:|:---:|:---:|:---:|
+| **CSE** | **Computer Science & Engineering** | **Block A (A1–A3)** | **96.7%** 🏆 | 🟢 Compliant (Universal Design) | 26 Fixed • 1 Pending | **+8.2%** |
+| **UIC** | **University Institute of Computing** | **Block C (C1–C3)** | **79.7%** | 🟢 Substantially Compliant | 21 Fixed • 3 Pending | **+4.8%** |
+| **CBS** | **Chandigarh Business School** | **Block D (D1–D8)** | **74.8%** | 🟡 Partial Compliance | 18 Fixed • 5 Pending | **+3.8%** |
+| **UIPS** | **Pharmaceutical Sciences** | **Nek Chand (NC 1–5)** | **62.9%** | 🟡 Partial Compliance | 13 Fixed • 8 Pending | **+5.2%** |
+| **UIET** | **Engineering & Technology** | **Block B (B1–B5)** | **59.8%** | 🔵 In Progress (Retrofit Drive) | 11 Fixed • 9 Pending | **+3.4%** |
+
+> **Campus Average Departmental Growth:** **+5.1%** progress across academic complexes.
+
 ---
 
 ## Digital Accessibility Audit
@@ -233,19 +255,32 @@ Based on comprehensive ground accessibility audits evaluated under the **Rights 
 ```
 S-06-Accessibility-Audit/
 │
-├── frontend/
-├── backend/
-├── database/
-├── docs/
-│   ├── architecture/
-│   ├── API_DOCUMENTATION.md
-│   ├── INSTALLATION.md
-│   ├── TESTING_REPORT.md
-│   └── USER_GUIDE.md
+├── frontend/                   # React 18 + Vite + Tailwind CSS + Framer Motion UI
+├── backend/                    # Spring Boot 3.4.1 (Java 21) REST API + Spring Security
+├── database/                   # PostgreSQL schemas and seed initialization
+├── research/                   # Fieldwork dossier & ground empirical data
+│   ├── README.md               # Executive research summary & regulatory framework
+│   ├── FIELD_METRICS_AND_HOURS.md # 216-Hour operational log & 12-week schedule
+│   ├── BUILDING_AUDIT_LOGBOOK.md  # Detailed 29-building inspection ledger
+│   ├── FIELDWORK_METHODOLOGY.md   # Scientific instrumentation & 42-parameter protocol
+│   ├── BARRIER_TAXONOMY_AND_FINDINGS.md # 187 Classified barriers & case studies
+│   └── STAKEHOLDER_INTERVIEWS.md  # Qualitative ground narratives from 48 participants
+├── docs/                       # Architectural, requirements, and compliance specs
+│   ├── architecture/           # System architecture, DB schema & component diagrams
+│   ├── requirements/           # SRS, user stories & functional requirements
+│   ├── Campus_Accessibility_Audit_Survey.xlsx # Complete quantitative Excel audit dataset
+│   ├── TECHNICAL_REPORT.md     # Comprehensive project technical report
+│   ├── API_DOCUMENTATION.md    # REST API endpoints & Swagger schemas
+│   ├── INSTALLATION.md         # Local & Docker installation guide
+│   ├── DEPLOYMENT.md           # Production deployment & Nginx guide
+│   └── TESTING_REPORT.md       # JUnit test suite & coverage documentation
 │
-├── CHANGELOG.md
-├── README.md
-└── LICENSE
+├── CHANGELOG.md                # Detailed version release notes
+├── SECURITY.md                 # Security policy & vulnerability reporting
+├── CONTRIBUTING.md             # Open source contribution guidelines
+├── CODE_OF_CONDUCT.md          # Contributor code of conduct
+├── README.md                   # Project overview & quick start
+└── LICENSE                     # MIT License
 ```
 
 ---
@@ -327,13 +362,20 @@ Detailed project documentation is available below.
 
 | Document | Description |
 |----------|-------------|
+| [🔬 Research Overview](research/README.md) | Executive research summary & regulatory framework |
+| [⏱️ Field Hours & Schedule](research/FIELD_METRICS_AND_HOURS.md) | 216-Hour operational log & 12-week schedule |
+| [📖 29-Building Audit Logbook](research/BUILDING_AUDIT_LOGBOOK.md) | Detailed building inspection & defect ledger |
+| [📐 Fieldwork Methodology](research/FIELDWORK_METHODOLOGY.md) | Scientific instrumentation & 42-parameter protocol |
+| [🚧 Barrier Taxonomy](research/BARRIER_TAXONOMY_AND_FINDINGS.md) | 187 Classified barriers & case studies |
+| [🎙️ Stakeholder Narratives](research/STAKEHOLDER_INTERVIEWS.md) | Qualitative ground narratives from 48 participants |
+| [📊 Excel Audit Dataset](docs/Campus_Accessibility_Audit_Survey.xlsx) | Complete quantitative Excel audit dataset |
+| [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive final project report |
 | [📖 Installation Guide](docs/INSTALLATION.md) | Setup and deployment instructions |
 | [👤 User Guide](docs/USER_GUIDE.md) | Role-based usage instructions |
 | [📑 API Documentation](docs/API_DOCUMENTATION.md) | REST endpoint specifications |
 | [🏗️ System Architecture](docs/architecture/system-architecture.md) | Three-tier architecture overview |
 | [🗄️ Database Schema](docs/architecture/DATABASE_SCHEMA.md) | ER diagrams and table definitions |
 | [🧪 Testing Report](docs/TESTING_REPORT.md) | Test strategy and results |
-| [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive final project report |
 | [🚀 Deployment Guide](docs/DEPLOYMENT.md) | Production deployment with Docker & Nginx |
 | [📝 Changelog](CHANGELOG.md) | Version history and release notes |
 | [🔒 Security Policy](SECURITY.md) | Vulnerability disclosure and security measures |
