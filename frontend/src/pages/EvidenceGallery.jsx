@@ -203,6 +203,15 @@ const EvidenceGallery = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 key={item.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`View evidence details for ${item.buildingName}: ${item.description}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleSelectImage(item);
+                  }
+                }}
                 className="break-inside-avoid relative group cursor-pointer rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 bg-white"
                 onClick={() => handleSelectImage(item)}
               >
