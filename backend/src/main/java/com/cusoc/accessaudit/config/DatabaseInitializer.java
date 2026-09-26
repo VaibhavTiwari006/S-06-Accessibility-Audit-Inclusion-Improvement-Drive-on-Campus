@@ -332,101 +332,48 @@ public class DatabaseInitializer implements CommandLineRunner {
     }
 
     // ═══════════════════════════════════════════════════════════
-    // AUDITS — 8 audits with responses across different buildings
+    // AUDITS — Comprehensive RPWD Act 2016 audits for all 29 buildings
     // ═══════════════════════════════════════════════════════════
     private void initializeAudits(List<User> users, List<Building> buildings, List<AuditChecklist> checklists) {
-        // Users: index 2=auditor1, 3=auditor2, 4=auditor3
         User auditor1 = users.get(2);
         User auditor2 = users.get(3);
         User auditor3 = users.get(4);
+        User[] auditors = {auditor1, auditor2, auditor3};
 
-        // Audit 1 — Main Academic Block (APPROVED, high score)
-        Audit a1 = auditRepository.save(Audit.builder()
-                .building(buildings.get(0))
-                .auditor(auditor1)
-                .auditDate(LocalDate.of(2026, 3, 15))
-                .status("APPROVED")
-                .overallAccessibilityScore(82.5)
-                .remarks("Good overall accessibility. Ramps installed recently. Lift buttons need braille upgrade.")
-                .build());
-        createResponses(a1, checklists, new int[]{9, 8, 6, 7, 8, 9, 7, 8, 6, 9, 7, 8, 6, 7, 9, 8, 7, 8});
+        double[] scores = {
+            57.2, 57.2, 57.2, // Zakir A, B, C
+            63.3, 61.2, 63.3, 63.3, 63.3, // NC 1..5
+            74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, 74.8, // D1..D8
+            41.6, 41.6, // DD1..DD2
+            79.7, 79.7, 60.3, // C1..C3
+            59.8, 59.8, 59.8, 59.8, 59.8, // B1..B5
+            96.7, 96.7, 96.7  // A1..A3
+        };
 
-        // Audit 2 — Central Library (APPROVED, medium score)
-        Audit a2 = auditRepository.save(Audit.builder()
-                .building(buildings.get(1))
-                .auditor(auditor2)
-                .auditDate(LocalDate.of(2026, 4, 2))
-                .status("APPROVED")
-                .overallAccessibilityScore(68.3)
-                .remarks("Library has good digital resources but physical accessibility needs improvement. No tactile paths.")
-                .build());
-        createResponses(a2, checklists, new int[]{7, 6, 5, 3, 9, 8, 8, 7, 4, 6, 5, 7, 4, 6, 7, 5, 6, 7});
+        for (int i = 0; i < buildings.size(); i++) {
+            Building b = buildings.get(i);
+            double score = i < scores.length ? scores[i] : 68.0;
+            User auditor = auditors[i % auditors.length];
+            String status = score >= 50.0 ? "APPROVED" : "PENDING";
+            String remarks = String.format("RPWD Act 2016 compliance audit for %s (%s). Evaluated compliance: %.1f%%.",
+                    b.getBuildingName(), b.getLocation(), score);
 
-        // Audit 3 — Engineering Block A (IN_PROGRESS)
-        Audit a3 = auditRepository.save(Audit.builder()
-                .building(buildings.get(3))
-                .auditor(auditor1)
-                .auditDate(LocalDate.of(2026, 6, 10))
-                .status("IN_PROGRESS")
-                .overallAccessibilityScore(45.0)
-                .remarks("Audit in progress. Multiple labs on upper floors lack elevator access.")
-                .build());
-        createResponses(a3, checklists, new int[]{5, 4, 3, 2, 6, 5, 4, 5, 3, 4, 3, 5, 2, 4, 5, 3, 4, 5});
+            Audit audit = auditRepository.save(Audit.builder()
+                    .building(b)
+                    .auditor(auditor)
+                    .auditDate(LocalDate.of(2026, 9, 26))
+                    .status(status)
+                    .overallAccessibilityScore(score)
+                    .remarks(remarks)
+                    .build());
 
-        // Audit 4 — Student Activity Centre (APPROVED, good score)
-        Audit a4 = auditRepository.save(Audit.builder()
-                .building(buildings.get(2))
-                .auditor(auditor3)
-                .auditDate(LocalDate.of(2026, 2, 20))
-                .status("APPROVED")
-                .overallAccessibilityScore(75.0)
-                .remarks("Generally accessible. Indoor sports area needs wheelchair-friendly modifications.")
-                .build());
-        createResponses(a4, checklists, new int[]{8, 7, 8, 6, 7, 7, 6, 8, 5, 7, 7, 8, 5, 7, 8, 7, 6, 7});
-
-        // Audit 5 — University Health Centre (APPROVED, excellent score)
-        Audit a5 = auditRepository.save(Audit.builder()
-                .building(buildings.get(6))
-                .auditor(auditor2)
-                .auditDate(LocalDate.of(2026, 1, 10))
-                .status("APPROVED")
-                .overallAccessibilityScore(91.0)
-                .remarks("Health Centre is the most accessible building on campus. Exemplary standards.")
-                .build());
-        createResponses(a5, checklists, new int[]{10, 9, 9, 8, 9, 9, 8, 10, 9, 9, 8, 9, 8, 9, 10, 9, 8, 9});
-
-        // Audit 6 — Boys Hostel H1 (PENDING, low score)
-        Audit a6 = auditRepository.save(Audit.builder()
-                .building(buildings.get(7))
-                .auditor(auditor3)
-                .auditDate(LocalDate.of(2026, 5, 5))
-                .status("PENDING")
-                .overallAccessibilityScore(35.0)
-                .remarks("Major accessibility gaps. No ramps, no elevator, communal bathrooms not accessible.")
-                .build());
-        createResponses(a6, checklists, new int[]{3, 2, 1, 2, 4, 3, 3, 4, 2, 3, 2, 4, 1, 3, 4, 3, 2, 3});
-
-        // Audit 7 — Central Cafeteria (APPROVED)
-        Audit a7 = auditRepository.save(Audit.builder()
-                .building(buildings.get(9))
-                .auditor(auditor1)
-                .auditDate(LocalDate.of(2026, 4, 18))
-                .status("APPROVED")
-                .overallAccessibilityScore(72.0)
-                .remarks("Single floor — no elevator issues. Food counters need height adjustment for wheelchair users.")
-                .build());
-        createResponses(a7, checklists, new int[]{8, 7, 10, 6, 5, 6, 5, 8, 6, 7, 6, 7, 7, 6, 8, 7, 6, 7});
-
-        // Audit 8 — Research & Innovation Centre (IN_PROGRESS)
-        Audit a8 = auditRepository.save(Audit.builder()
-                .building(buildings.get(11))
-                .auditor(auditor2)
-                .auditDate(LocalDate.of(2026, 7, 1))
-                .status("IN_PROGRESS")
-                .overallAccessibilityScore(55.0)
-                .remarks("New building — mostly compliant but some lab workbenches are not height-adjustable.")
-                .build());
-        createResponses(a8, checklists, new int[]{6, 5, 7, 5, 6, 5, 4, 6, 4, 5, 5, 6, 4, 5, 6, 5, 5, 6});
+            int base = (int) Math.round(score / 10.0);
+            int[] checklistScores = new int[checklists.size()];
+            for (int k = 0; k < checklists.size(); k++) {
+                checklistScores[k] = Math.min(10, Math.max(1, base + ((k % 3) - 1)));
+            }
+            createResponses(audit, checklists, checklistScores);
+        }
     }
 
     /** Helper to create AuditResponse entries for every checklist item in an audit. */
