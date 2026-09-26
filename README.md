@@ -8,6 +8,10 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
 
 > A comprehensive campus accessibility assessment platform designed to identify, document, and improve physical and digital accessibility across university campuses in accordance with the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **WCAG 2.1 AA** accessibility standards.
+> 
+> **👤 Lead Researcher, Field Auditor & Sole Developer:** **Vaibhav Tiwari**  
+> **Institution:** Chandigarh University, Gharuan, Mohali, Punjab  
+> **Project Scope:** Independent solo initiative combining hands-on physical accessibility field audits across 29 campus buildings with end-to-end full-stack software engineering.
 
 ---
 
