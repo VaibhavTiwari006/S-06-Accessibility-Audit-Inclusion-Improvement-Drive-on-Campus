@@ -45,11 +45,13 @@ const Roadmap = () => {
     try {
       setLoading(true);
       const data = await maintenanceService.getAllTasks();
-      const mapped = data.map((t, idx) => ({
+      const mapped = data.map((t) => ({
         ...t,
         workflowStatus: t.status === 'COMPLETED' ? 'COMPLETED' : 
                         t.status === 'IN_PROGRESS' ? 'IN_PROGRESS' : 
-                        (idx % 4 === 1 ? 'ASSIGNED' : idx % 4 === 3 ? 'FIXED' : 'OPEN'),
+                        t.status === 'ASSIGNED' ? 'ASSIGNED' :
+                        t.status === 'FIXED' ? 'FIXED' :
+                        (t.status || 'OPEN'),
         assignedTo: t.assignedTo || 'Facility Eng. Team A',
       }));
       setTasks(mapped);
@@ -67,14 +69,12 @@ const Roadmap = () => {
       const nextStatus = stageOrder[currentIdx + 1];
       
       try {
-        if (nextStatus === 'IN_PROGRESS') {
-          await maintenanceService.updateTaskStatus(taskId, 'IN_PROGRESS');
-        } else if (nextStatus === 'COMPLETED') {
+        if (nextStatus === 'COMPLETED') {
           await maintenanceService.updateTaskStatus(taskId, 'COMPLETED', 'Remediation completed and verified.');
-        } else if (nextStatus === 'ASSIGNED') {
-          await maintenanceService.updateTaskStatus(taskId, 'OPEN');
-        } else if (nextStatus === 'FIXED') {
+        } else if (nextStatus === 'IN_PROGRESS' || nextStatus === 'FIXED') {
           await maintenanceService.updateTaskStatus(taskId, 'IN_PROGRESS');
+        } else {
+          await maintenanceService.updateTaskStatus(taskId, nextStatus);
         }
 
         setTasks((prev) =>
