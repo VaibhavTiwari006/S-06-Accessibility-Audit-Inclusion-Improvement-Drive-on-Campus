@@ -41,15 +41,32 @@ const CampusMapPage = () => {
   const [activeRoute, setActiveRoute] = useState(null);
 
   useEffect(() => {
-    const fetchBuildings = async () => {
+    const fetchBuildingsAndAudits = async () => {
       try {
         setLoading(true);
-        const data = await buildingService.getAllBuildings();
-        setBuildings(data);
+        const [buildingsRes, auditsRes] = await Promise.allSettled([
+          buildingService.getAllBuildings(),
+          import('../services/auditService').then(m => m.default.getAllAudits())
+        ]);
 
-        if (data.length >= 2) {
-          setStartBuildingId(String(data[0].id));
-          setEndBuildingId(String(data[1].id));
+        const buildingsData = buildingsRes.status === 'fulfilled' ? buildingsRes.value : [];
+        const auditsData = auditsRes.status === 'fulfilled' ? auditsRes.value : [];
+
+        // Enrich building objects with their audit scores and status if available
+        const enriched = buildingsData.map(b => {
+          const matchingAudit = auditsData.find(a => a.buildingId === b.id || a.building?.id === b.id);
+          return {
+            ...b,
+            overallAccessibilityScore: matchingAudit?.overallAccessibilityScore ?? b.overallAccessibilityScore,
+            status: matchingAudit?.status ?? b.status
+          };
+        });
+
+        setBuildings(enriched);
+
+        if (enriched.length >= 2) {
+          setStartBuildingId(String(enriched[0].id));
+          setEndBuildingId(String(enriched[1].id));
         }
       } catch (error) {
         toast.error('Failed to fetch campus buildings.');
@@ -57,7 +74,7 @@ const CampusMapPage = () => {
         setLoading(false);
       }
     };
-    fetchBuildings();
+    fetchBuildingsAndAudits();
   }, []);
 
   const toggleFeatureLayer = (typeId) => {
