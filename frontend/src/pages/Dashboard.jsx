@@ -60,7 +60,7 @@ const AdminDashboard = ({ stats, navigate }) => (
         <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} aria-hidden="true" />} colorClass="text-warning-dark bg-warning/10" onClick={() => navigate('/audits')} bgImage="/card_audits.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Avg. Accessibility" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} aria-hidden="true" />} colorClass="text-success-dark bg-success/10" onClick={() => navigate('/reports')} trend={2.4} trendLabel="vs last month" bgImage="/card_accessibility.jpg" />
+        <ScoreCard title="Avg. Accessibility" value={stats?.averageAccessibilityScore != null ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} aria-hidden="true" />} colorClass="text-success-dark bg-success/10" onClick={() => navigate('/reports')} trend={2.4} trendLabel="vs last month" bgImage="/card_accessibility.jpg" />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
         <ScoreCard title="Student Reports" value={stats?.totalStudentReports ?? '—'} icon={<AlertCircle size={24} aria-hidden="true" />} colorClass="text-danger-dark bg-danger/10" onClick={() => navigate('/issues')} trend={-5} trendLabel="fewer issues" bgImage="/card_reports.jpg" />
@@ -123,7 +123,7 @@ const AuditorDashboard = ({ stats, navigate }) => (
         <ScoreCard title="Total Audits" value={stats?.totalAudits ?? '—'} icon={<ClipboardList size={24} />} colorClass="text-amber-600 bg-amber-50" onClick={() => navigate('/audits')} />
       </motion.div>
       <motion.div variants={itemVariants} className="h-full">
-        <ScoreCard title="Avg. Score" value={stats ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" onClick={() => navigate('/reports')} />
+        <ScoreCard title="Avg. Score" value={stats?.averageAccessibilityScore != null ? `${stats.averageAccessibilityScore.toFixed(1)}%` : '—'} icon={<CheckCircle size={24} />} colorClass="text-emerald-600 bg-emerald-50" onClick={() => navigate('/reports')} />
       </motion.div>
     </motion.div>
     
