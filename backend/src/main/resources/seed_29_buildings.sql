@@ -70,3 +70,37 @@ INSERT INTO audits (id, building_id, auditor_id, audit_date, overall_accessibili
 INSERT INTO audits (id, building_id, auditor_id, audit_date, overall_accessibility_score, status, remarks) VALUES (28, 28, 3, '2026-09-24', 96.7, 'APPROVED', 'RPWD Act 2016 physical accessibility audit conducted for A2 (A Block). Approved - exemplary universal design compliance (96.7%).');
 INSERT INTO audits (id, building_id, auditor_id, audit_date, overall_accessibility_score, status, remarks) VALUES (29, 29, 3, '2026-09-26', 96.7, 'APPROVED', 'RPWD Act 2016 physical accessibility audit conducted for A3 (A Block). Approved - exemplary universal design compliance (96.7%).');
 SELECT setval('audits_id_seq', (SELECT MAX(id) FROM audits));
+
+-- Realistic Student Reports across campus buildings
+INSERT INTO student_reports (id, building_id, reporter_id, description, location_details, status, admin_notes, created_at, updated_at) VALUES 
+(1, 1, 6, 'Entrance ramp slope exceeds 1:12 RPWD Act guideline near main portico. Wheelchair users require assistance.', 'Ground floor, main entrance portico', 'SUBMITTED', NULL, '2026-07-15 10:30:00', '2026-07-15 10:30:00'),
+(2, 2, 7, 'Ground floor unisex accessible washroom door lock is jammed and grab bar is loose.', 'Ground floor, East Wing washroom', 'IN_PROGRESS', 'Work order issued to plumbing and fixtures team.', '2026-07-20 14:15:00', '2026-07-22 09:00:00'),
+(3, 4, 8, 'Auditorium acoustic loop system is intermittently dropping signal during lectures.', '1st Floor, Main Lecture Auditorium', 'RESOLVED', 'Receiver and loop amplifier replaced and calibrated.', '2026-08-01 09:45:00', '2026-08-11 16:30:00'),
+(4, 5, 9, 'Tactile paving leading to academic complex entrance has missing guiding tiles.', 'Pathway between Parking Lot 2 and Entrance', 'SUBMITTED', NULL, '2026-08-05 11:20:00', '2026-08-05 11:20:00'),
+(5, 9, 6, 'Lift buttons lack braille embossment and audible speech floor indicators.', 'Central Lift Lobby, Cars A & B', 'IN_PROGRESS', 'Braille elevator control panel on backorder.', '2026-08-15 16:00:00', '2026-08-18 10:30:00'),
+(6, 12, 7, 'Wheelchair ramp threshold at computer lab has a 2-inch step causing obstruction.', 'Floor 2, Computer Lab 204', 'RESOLVED', 'Rubber threshold transition bevel installed.', '2026-08-20 13:10:00', '2026-08-26 14:00:00'),
+(7, 17, 8, 'No elevator available to reach second floor classrooms; stairs have no contrasting edge strips.', 'Main staircase between Ground and 2nd Floor', 'SUBMITTED', NULL, '2026-08-29 10:05:00', '2026-08-29 10:05:00'),
+(8, 18, 9, 'Drinking water fountain height is 42 inches, inaccessible for seated students.', 'Floor 1, Corridor adjacent to Room 112', 'IN_PROGRESS', 'Dual-height accessible water dispenser requested.', '2026-09-02 15:30:00', '2026-09-04 11:15:00'),
+(9, 19, 6, 'Classroom C102 desk rows are too narrow for standard wheelchair clearance (under 900mm).', 'Ground Floor, Lecture Hall C102', 'RESOLVED', 'Desks rearranged to provide dedicated 1000mm accessible aisle.', '2026-09-08 11:00:00', '2026-09-13 17:00:00'),
+(10, 23, 7, 'Staircase handrail is missing on the left descending side between 2nd and 3rd floors.', 'Staircase B, North Wing', 'SUBMITTED', NULL, '2026-09-18 14:40:00', '2026-09-18 14:40:00'),
+(11, 27, 8, 'Automatic sliding entrance door timing sensor closes too fast for slow-walking students.', 'Main Atrium Entrance Gate', 'RESOLVED', 'Motion sensor hold-open delay adjusted from 3s to 8s.', '2026-09-23 09:15:00', '2026-09-24 15:30:00'),
+(12, 28, 9, 'High-contrast directional signage needed for low-vision visitors navigating to Dean''s office.', 'Floor 1, Administrative Wing Entrance', 'IN_PROGRESS', 'High-contrast yellow on charcoal signage scheduled for install.', '2026-09-25 12:00:00', '2026-09-25 17:00:00');
+
+SELECT setval('student_reports_id_seq', (SELECT MAX(id) FROM student_reports));
+
+-- Realistic Maintenance Tasks mapped to accessibility reports and audits
+INSERT INTO maintenance_tasks (id, building_id, assignee_id, source_report_id, title, description, status, severity, priority, due_date, estimated_cost, created_at, updated_at) VALUES
+(1, 1, 10, 1, 'Ramp gradient reconstruction at Zakir A', 'Re-engineer entrance ramp to 1:12 RPWD slope with dual continuous handrails at 750mm and 900mm.', 'OPEN', 'HIGH', 'HIGH', '2026-10-15', 45000.0, '2026-07-16 11:00:00', '2026-07-16 11:00:00'),
+(2, 2, 11, 2, 'Accessible washroom hardware overhaul in Zakir B', 'Replace lock cylinder and reinforce wall anchor mounts for 35mm stainless steel grab rails.', 'IN_PROGRESS', 'MEDIUM', 'HIGH', '2026-10-05', 8500.0, '2026-07-21 15:00:00', '2026-07-23 10:00:00'),
+(3, 4, 12, 3, 'Acoustic induction loop amplifier upgrade in NC 1', 'Calibrate hearing loop field strength to IEC 60118-4 standard across NC 1 auditorium.', 'RESOLVED', 'LOW', 'MEDIUM', '2026-08-10', 15000.0, '2026-08-02 10:00:00', '2026-08-11 16:30:00'),
+(4, 5, 10, 4, 'Tactile guiding tile repair along NC 2 pathway', 'Replace damaged warning and directional blister paving on main approach route to NC 2.', 'OPEN', 'MEDIUM', 'MEDIUM', '2026-10-20', 12000.0, '2026-08-06 12:00:00', '2026-08-06 12:00:00'),
+(5, 9, 11, 5, 'Braille elevator car operation panel for D1', 'Install COP with raised tactile numbers, braille code, and two-way visual/audible emergency intercom.', 'IN_PROGRESS', 'HIGH', 'HIGH', '2026-10-10', 65000.0, '2026-08-16 17:00:00', '2026-08-19 11:00:00'),
+(6, 12, 12, 6, 'Threshold ramp bevel installation at D4 lab', 'Fit chamfered aluminum transition strip to eliminate vertical trip hazard at lab doorway.', 'RESOLVED', 'LOW', 'LOW', '2026-08-25', 3500.0, '2026-08-21 14:00:00', '2026-08-26 14:00:00'),
+(7, 17, 10, 7, 'Staircase contrast strip application in DD1', 'Apply 50mm non-slip yellow photoluminescent contrast strips to all step nosings.', 'OPEN', 'CRITICAL', 'HIGH', '2026-10-08', 18000.0, '2026-08-30 11:00:00', '2026-08-30 11:00:00'),
+(8, 18, 11, 8, 'Dual-height drinking water cooler retrofit for DD2', 'Install barrier-free drinking water unit with push-pad actuation at 800mm operating height.', 'IN_PROGRESS', 'HIGH', 'MEDIUM', '2026-10-18', 32000.0, '2026-09-03 16:00:00', '2026-09-05 12:00:00'),
+(9, 19, 12, 9, 'Classroom accessible seating arrangement at C1', 'Configure designated 1000mm clear aisle and wheelchair companion seating in lecture hall C102.', 'RESOLVED', 'LOW', 'LOW', '2026-09-12', 2000.0, '2026-09-09 12:00:00', '2026-09-13 17:00:00'),
+(10, 23, 10, 10, 'Dual handrail installation on B2 stairwell', 'Mount continuous 45mm circular brushed stainless steel handrails with 300mm wall extensions.', 'OPEN', 'MEDIUM', 'MEDIUM', '2026-10-25', 24000.0, '2026-09-19 15:00:00', '2026-09-19 15:00:00'),
+(11, 27, 11, 11, 'Automatic sliding door radar sensor retiming at A1', 'Recalibrate microprocessor controller for 8-second dwell time and obstacle detection sensor.', 'VERIFIED', 'LOW', 'LOW', '2026-09-24', 1500.0, '2026-09-23 10:00:00', '2026-09-24 16:00:00'),
+(12, 28, 12, 12, 'High-contrast tactile directory board for A2', 'Fabricate matte-finish acrylic wayfinding map with raised braille Grade 2 characters.', 'IN_PROGRESS', 'MEDIUM', 'MEDIUM', '2026-10-12', 16500.0, '2026-09-25 13:00:00', '2026-09-25 17:30:00');
+
+SELECT setval('maintenance_tasks_id_seq', (SELECT MAX(id) FROM maintenance_tasks));
