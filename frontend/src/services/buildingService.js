@@ -15,6 +15,16 @@ const buildingService = {
   createBuilding: async (data) => {
     const response = await api.post('/buildings', data);
     return response.data.data;
+  },
+
+  updateBuilding: async (id, data) => {
+    const response = await api.put(`/buildings/${id}`, data);
+    return response.data.data;
+  },
+
+  deleteBuilding: async (id) => {
+    const response = await api.delete(`/buildings/${id}`);
+    return response.data;
   }
 };
 
