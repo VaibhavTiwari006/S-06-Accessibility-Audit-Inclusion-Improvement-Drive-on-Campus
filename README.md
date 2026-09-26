@@ -374,6 +374,7 @@ To support scalability and code reliability, this repository integrates:
 *   **GitHub Actions CI Workflow**: Automates Spring Boot unit tests and Node.js Vite asset compilation on every push or pull request.
 *   **BCrypt Password Encryption**: Implemented for all user credential storage.
 *   **SQL Parameterization**: Enforced via Spring Data JPA Hibernate layers to prevent SQL injections.
+*   **Security Contact Email**: [vaibhav.cse006@gmail.com](mailto:vaibhav.cse006@gmail.com) (48-hour SLA for confidential vulnerability disclosure)
 
 ---
 
@@ -382,7 +383,7 @@ To support scalability and code reliability, this repository integrates:
 We welcome community collaborations! Please review our:
 *   [**Contributing Guidelines**](CONTRIBUTING.md)
 *   [**Code of Conduct**](CODE_OF_CONDUCT.md)
-*   [**Security Policy**](SECURITY.md)
+*   [**Security Policy**](SECURITY.md) — Security Contact: [vaibhav.cse006@gmail.com](mailto:vaibhav.cse006@gmail.com)
 
 ---
 
