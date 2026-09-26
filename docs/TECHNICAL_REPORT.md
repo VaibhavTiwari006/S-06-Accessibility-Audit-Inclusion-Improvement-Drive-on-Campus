@@ -288,7 +288,9 @@ Digital accessibility evaluations follow WCAG 2.1 principles:
 
 A comprehensive ground physical accessibility audit was conducted across 29 academic and administrative buildings on the Chandigarh University campus, evaluated against 38 standardized RPWD Act criteria:
 
-- **Total Buildings Assessed**: 29 buildings (7 clusters)
+- **Lead Accessibility Auditor**: **Vaibhav Tiwari**
+- **Audit Field Campaign Period**: **July 2026 – September 2026**
+- **Total Buildings Assessed**: 29 buildings (7 clusters, 1,102 checkpoints evaluated)
 - **Campus-Wide Average Accessibility Index**: **68.2%**
 - **Detailed Audit Dataset**: Documented in [`docs/Campus_Accessibility_Audit_Survey.xlsx`](Campus_Accessibility_Audit_Survey.xlsx)
 
