@@ -11,6 +11,11 @@ const issueService = {
     return response.data.data ?? [];
   },
 
+  getIssueById: async (id) => {
+    const response = await api.get(`/student-reports/${id}`);
+    return response.data.data;
+  },
+
   reportIssue: async (data) => {
     const response = await api.post('/student-reports', data);
     return response.data.data;
@@ -19,6 +24,16 @@ const issueService = {
   updateIssueStatus: async (id, status) => {
     const response = await api.patch(`/student-reports/${id}/status`, { status });
     return response.data.data;
+  },
+
+  addAdminNotes: async (id, notes) => {
+    const response = await api.patch(`/student-reports/${id}/notes`, { adminNotes: notes });
+    return response.data.data;
+  },
+
+  deleteIssue: async (id) => {
+    const response = await api.delete(`/student-reports/${id}`);
+    return response.data;
   }
 };
 
