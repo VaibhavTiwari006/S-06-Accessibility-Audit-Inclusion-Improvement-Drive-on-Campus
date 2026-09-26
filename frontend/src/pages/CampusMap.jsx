@@ -112,9 +112,11 @@ const CampusMapPage = () => {
 
           <div className="flex items-center gap-3">
             <button
+              type="button"
               onClick={() => setIsFullscreen(!isFullscreen)}
               className="p-2.5 bg-white border border-gray-200 hover:bg-gray-50 rounded-xl text-textMain transition-all shadow-xs"
               title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
+              aria-label={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
             >
               {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
             </button>
@@ -131,6 +133,9 @@ const CampusMapPage = () => {
             return (
               <button
                 key={feat.id}
+                type="button"
+                aria-pressed={isVisible}
+                aria-label={`Toggle ${feat.label} feature layer`}
                 onClick={() => toggleFeatureLayer(feat.id)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   isVisible
