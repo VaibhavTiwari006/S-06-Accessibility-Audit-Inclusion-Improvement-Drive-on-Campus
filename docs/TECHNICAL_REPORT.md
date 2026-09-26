@@ -5,7 +5,7 @@
 > **Author & Sole Contributor:** **Vaibhav Tiwari** (100% Individual Authorship)  
 > **Evaluation Track:** CUSoC 2026 (C Square Club & Chandigarh University — QS Rank #575, NIRF Ranked #19)  
 > **Target Band:** Grade A+ (Elite Contributor, 1000 Marks Evaluation Framework)  
-> **Evaluation Dossier:** [`docs/CUSOC_FINAL_EVALUATION.md`](CUSOC_FINAL_EVALUATION.md) | **Interactive Deck:** `/presentation`  
+> **Evaluation Suite:** [`docs/CUSOC_FINAL_EVALUATION.md`](CUSOC_FINAL_EVALUATION.md) &bull; [`docs/EVALUATION_SCORECARD.md`](EVALUATION_SCORECARD.md) &bull; [`docs/VIVA_VOCE_DEFENSE.md`](VIVA_VOCE_DEFENSE.md) &bull; **Interactive Deck:** `/presentation`  
 > **Version:** 1.2.0 | **Date:** September 2026  
 
 ---
