@@ -308,8 +308,6 @@ const Dashboard = () => {
         const res = await dashboardService.getStats();
         if (res.success) setStats(res.data);
       } catch (error) {
-        const status = error?.response?.status;
-        if (status === 401) throw error; 
         console.warn('Could not load dashboard stats', error);
       } finally {
         setLoading(false);
