@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { ACCESSIBILITY_FEATURE_TYPES } from '../services/mapService';
+import { ACCESSIBILITY_FEATURE_TYPES, getBuildingCoordinates } from '../services/mapService';
 
 // Fix for default leaflet marker icons in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -28,7 +28,7 @@ const MapBounds = ({ buildings, activeRoute }) => {
       const bounds = L.latLngBounds(activeRoute.pathCoordinates);
       map.fitBounds(bounds, { padding: [60, 60] });
     } else if (buildings.length > 0) {
-      const bounds = L.latLngBounds(buildings.map(b => [b.lat || 30.7699, b.lng || 76.5754]));
+      const bounds = L.latLngBounds(buildings.map((b, idx) => getBuildingCoordinates(b, idx)));
       map.fitBounds(bounds, { padding: [50, 50] });
     }
   }, [buildings, activeRoute, map]);
@@ -75,8 +75,7 @@ const CampusMap = ({
 
         {/* Building Markers */}
         {buildings.map((building, index) => {
-          const lat = building.lat || defaultCenter[0] + (Math.sin(building.id || index) * 0.005);
-          const lng = building.lng || defaultCenter[1] + (Math.cos(building.id || index) * 0.005);
+          const [lat, lng] = getBuildingCoordinates(building, index);
           const mockScore = building.overallAccessibilityScore || (50 + ((building.id || index) * 17) % 50);
 
           let markerColor = 'bg-gray-400';

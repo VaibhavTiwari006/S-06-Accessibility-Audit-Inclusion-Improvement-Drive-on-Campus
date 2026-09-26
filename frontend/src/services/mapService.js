@@ -8,14 +8,57 @@ export const ACCESSIBILITY_FEATURE_TYPES = {
   PARKING: { id: 'PARKING', label: 'Accessible Parking', icon: '🅿️', color: '#6366F1' },
 };
 
+// Chandigarh University Campus Block Geospatial Coordinates
+export const getBuildingCoordinates = (b = {}, idx = 0) => {
+  if (b.lat && b.lng) return [b.lat, b.lng];
+  const name = (b.buildingName || '').toUpperCase();
+  const code = (b.buildingCode || '').toUpperCase();
+
+  // Zakir Husain Block Cluster (South-West)
+  if (name.includes('ZAKIR')) {
+    const offset = (b.id || idx) % 3;
+    return [30.7672 + offset * 0.0004, 76.5728 + offset * 0.0003];
+  }
+  // Nek Chand Block Cluster (North Campus)
+  if (name.includes('NC') || code.includes('NC')) {
+    const num = parseInt(name.replace(/\D/g, '') || idx) % 5;
+    return [30.7732 + num * 0.0003, 76.5748 + num * 0.0004];
+  }
+  // DD Block Cluster (East Extension)
+  if (name.startsWith('DD') || code.startsWith('DD')) {
+    const num = parseInt(name.replace(/\D/g, '') || idx) % 2;
+    return [30.7722 + num * 0.0004, 76.5772 + num * 0.0003];
+  }
+  // D Block Cluster (Central Academic Ring)
+  if (name.startsWith('D') || code.startsWith('D')) {
+    const num = parseInt(name.replace(/\D/g, '') || idx) % 8;
+    return [30.7708 + (num % 4) * 0.0004, 76.5760 + Math.floor(num / 4) * 0.0005];
+  }
+  // C Block Cluster (Central Academic Ring)
+  if (name.startsWith('C') || code.startsWith('C')) {
+    const num = parseInt(name.replace(/\D/g, '') || idx) % 3;
+    return [30.7700 + num * 0.0004, 76.5752 + num * 0.0003];
+  }
+  // B Block Cluster (West Academic Ring)
+  if (name.startsWith('B') || code.startsWith('B')) {
+    const num = parseInt(name.replace(/\D/g, '') || idx) % 5;
+    return [30.7686 + num * 0.0003, 76.5736 + num * 0.0003];
+  }
+  // A Block Cluster (Administrative & Main Academic)
+  if (name.startsWith('A') || code.startsWith('A')) {
+    const num = parseInt(name.replace(/\D/g, '') || idx) % 3;
+    return [30.7694 + num * 0.0003, 76.5744 + num * 0.0003];
+  }
+
+  return [30.7699 + (Math.sin(b.id || idx) * 0.003), 76.5754 + (Math.cos(b.id || idx) * 0.003)];
+};
+
 // Generate realistic mock accessibility features around campus buildings
 export const getCampusFeatures = (buildings = []) => {
   const features = [];
-  const defaultCenter = [30.7699, 76.5754];
 
   buildings.forEach((b, idx) => {
-    const lat = b.lat || defaultCenter[0] + (Math.sin(b.id || idx) * 0.004);
-    const lng = b.lng || defaultCenter[1] + (Math.cos(b.id || idx) * 0.004);
+    const [lat, lng] = getBuildingCoordinates(b, idx);
 
     // Ramp near building entrance
     features.push({
@@ -65,13 +108,8 @@ export const getCampusFeatures = (buildings = []) => {
 export const calculateWheelchairRoute = (startBuilding, endBuilding) => {
   if (!startBuilding || !endBuilding) return null;
 
-  const defaultCenter = [30.7699, 76.5754];
-
-  const startLat = startBuilding.lat || defaultCenter[0] + (Math.sin(startBuilding.id || 1) * 0.004);
-  const startLng = startBuilding.lng || defaultCenter[1] + (Math.cos(startBuilding.id || 1) * 0.004);
-
-  const endLat = endBuilding.lat || defaultCenter[0] + (Math.sin(endBuilding.id || 2) * 0.004);
-  const endLng = endBuilding.lng || defaultCenter[1] + (Math.cos(endBuilding.id || 2) * 0.004);
+  const [startLat, startLng] = getBuildingCoordinates(startBuilding, 1);
+  const [endLat, endLng] = getBuildingCoordinates(endBuilding, 2);
 
   // Generate intermediate waypoint nodes to create a realistic barrier-free path around campus blocks
   const midLat = (startLat + endLat) / 2 + 0.0005;
