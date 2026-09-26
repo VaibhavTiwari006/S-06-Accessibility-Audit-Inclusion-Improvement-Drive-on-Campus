@@ -128,25 +128,25 @@ The primary objectives of this project are to:
 - Signage assessment
 - Emergency evacuation accessibility
 
-### 🏛️ Real Campus Physical Audit Findings (29 Buildings Audited · 216 Fieldwork Hours)
+### 🏛️ Real Campus Physical Audit Findings (29 Buildings Audited)
 
 Based on comprehensive ground accessibility audits evaluated under the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **Harmonised Guidelines and Standards for Universal Accessibility in India (2021)**:
 
 - **Lead Accessibility Auditor & Field Researcher**: **Vaibhav Tiwari**
-- **Audit Campaign Window**: **July 6, 2026 – September 26, 2026 (12 Weeks)**
-- **Total Logged Fieldwork**: **216.0 Hours on field** (~7.5 hrs/building across 142.6 km of on-foot campus patrol)
+- **Audit Campaign Window**: **July – September 2026**
+- **Fieldwork Methodology**: **In-situ on-foot manual physical audit** (steel measuring tapes, rise/run slope calculations, photo evidence)
 - **Total Buildings Audited**: **29 buildings** across 7 campus blocks (100% campus academic infrastructure)
 - **Metric Checkpoints**: 42 standardized parameters across 8 architectural domains (1,218 total evaluations)
 - **Identified Barriers**: **187 discrete physical and environmental barriers** (categorized by severity)
-- **Stakeholder Consultation**: **48 in-depth participatory interviews** (28 disabled students, 12 faculty, 8 staff)
+- **Community Feedback**: **Student & peer consultations** on real navigation challenges across campus
 - **Campus-Wide Average Accessibility Score**: **68.2%**
 - **Complete Research Dossier**: See the dedicated [**`research/`**](research/) repository folder:
   - 📋 [**Executive Research Dossier**](research/README.md)
-  - ⏱️ [**Fieldwork Metrics & 216 Hours Log**](research/FIELD_METRICS_AND_HOURS.md)
+  - ⏱️ [**Fieldwork Inspection Schedule & Log**](research/FIELD_METRICS_AND_HOURS.md)
   - 📖 [**Comprehensive 29-Building Audit Logbook**](research/BUILDING_AUDIT_LOGBOOK.md)
   - 🔬 [**Manual Fieldwork Inspection Protocol**](research/FIELDWORK_METHODOLOGY.md)
   - 🚧 [**Barrier Taxonomy & 187 Field Findings**](research/BARRIER_TAXONOMY_AND_FINDINGS.md)
-  - 🎙️ [**Stakeholder Narratives & 48 Interviews**](research/STAKEHOLDER_INTERVIEWS.md)
+  - 🎙️ [**Student Feedback & Campus Observations**](research/STAKEHOLDER_INTERVIEWS.md)
   - 📊 [**Raw Excel Survey Dataset**](docs/Campus_Accessibility_Audit_Survey.xlsx)
 
 | Block | Buildings Audited | Overall Score | RPWD Compliance Status | Key Findings & Ground Assessment |
@@ -260,11 +260,11 @@ S-06-Accessibility-Audit/
 ├── database/                   # PostgreSQL schemas and seed initialization
 ├── research/                   # Fieldwork dossier & ground empirical data
 │   ├── README.md               # Executive research summary & regulatory framework
-│   ├── FIELD_METRICS_AND_HOURS.md # 216-Hour operational log & 12-week schedule
+│   ├── FIELD_METRICS_AND_HOURS.md # Phased inspection log & walkthrough schedule
 │   ├── BUILDING_AUDIT_LOGBOOK.md  # Detailed 29-building inspection ledger
 │   ├── FIELDWORK_METHODOLOGY.md   # Manual inspection toolkit & 42-parameter protocol
-│   ├── BARRIER_TAXONOMY_AND_FINDINGS.md # 187 Classified barriers & case studies
-│   └── STAKEHOLDER_INTERVIEWS.md  # Qualitative ground narratives from 48 participants
+│   ├── BARRIER_TAXONOMY_AND_FINDINGS.md # 187 Classified barriers & remediation guide
+│   └── STAKEHOLDER_INTERVIEWS.md  # Student feedback & campus community observations
 ├── docs/                       # Architectural, requirements, and compliance specs
 │   ├── architecture/           # System architecture, DB schema & component diagrams
 │   ├── requirements/           # SRS, user stories & functional requirements
@@ -363,11 +363,11 @@ Detailed project documentation is available below.
 | Document | Description |
 |----------|-------------|
 | [🔬 Research Overview](research/README.md) | Executive research summary & regulatory framework |
-| [⏱️ Field Hours & Schedule](research/FIELD_METRICS_AND_HOURS.md) | 216-Hour operational log & 12-week schedule |
+| [⏱️ Field Inspection Log](research/FIELD_METRICS_AND_HOURS.md) | Phased inspection log & walkthrough schedule |
 | [📖 29-Building Audit Logbook](research/BUILDING_AUDIT_LOGBOOK.md) | Detailed building inspection & defect ledger |
 | [📐 Fieldwork Methodology](research/FIELDWORK_METHODOLOGY.md) | Manual inspection toolkit & 42-parameter protocol |
-| [🚧 Barrier Taxonomy](research/BARRIER_TAXONOMY_AND_FINDINGS.md) | 187 Classified barriers & case studies |
-| [🎙️ Stakeholder Narratives](research/STAKEHOLDER_INTERVIEWS.md) | Qualitative ground narratives from 48 participants |
+| [🚧 Barrier Taxonomy](research/BARRIER_TAXONOMY_AND_FINDINGS.md) | 187 Classified barriers & remediation guide |
+| [🎙️ Student Feedback & Observations](research/STAKEHOLDER_INTERVIEWS.md) | Student feedback & campus community observations |
 | [📊 Excel Audit Dataset](docs/Campus_Accessibility_Audit_Survey.xlsx) | Complete quantitative Excel audit dataset |
 | [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive final project report |
 | [📖 Installation Guide](docs/INSTALLATION.md) | Setup and deployment instructions |
