@@ -264,13 +264,6 @@ S-06-Accessibility-Audit/
 ├── frontend/                   # React 18 + Vite + Tailwind CSS + Framer Motion UI
 ├── backend/                    # Spring Boot 3.4.1 (Java 21) REST API + Spring Security
 ├── database/                   # PostgreSQL schemas and seed initialization
-├── research/                   # Fieldwork dossier & ground empirical data
-│   ├── README.md               # Executive research summary & regulatory framework
-│   ├── FIELD_METRICS_AND_HOURS.md # Phased inspection log & walkthrough schedule
-│   ├── BUILDING_AUDIT_LOGBOOK.md  # Detailed 29-building inspection ledger
-│   ├── FIELDWORK_METHODOLOGY.md   # Manual inspection toolkit & 42-parameter protocol
-│   ├── BARRIER_TAXONOMY_AND_FINDINGS.md # 187 Classified barriers & remediation guide
-│   └── STAKEHOLDER_INTERVIEWS.md  # Student feedback & campus community observations
 ├── docs/                       # Architectural, requirements, and compliance specs
 │   ├── architecture/           # System architecture, DB schema & component diagrams
 │   ├── requirements/           # SRS, user stories & functional requirements
@@ -368,14 +361,8 @@ Detailed project documentation is available below.
 
 | Document | Description |
 |----------|-------------|
-| [🔬 Research Overview](research/README.md) | Executive research summary & regulatory framework |
-| [⏱️ Field Inspection Log](research/FIELD_METRICS_AND_HOURS.md) | Phased inspection log & walkthrough schedule |
-| [📖 29-Building Audit Logbook](research/BUILDING_AUDIT_LOGBOOK.md) | Detailed building inspection & defect ledger |
-| [📐 Fieldwork Methodology](research/FIELDWORK_METHODOLOGY.md) | Manual inspection toolkit & 42-parameter protocol |
-| [🚧 Barrier Taxonomy](research/BARRIER_TAXONOMY_AND_FINDINGS.md) | 187 Classified barriers & remediation guide |
-| [🎙️ Student Feedback & Observations](research/STAKEHOLDER_INTERVIEWS.md) | Student feedback & campus community observations |
-| [📊 Excel Audit Dataset](docs/Campus_Accessibility_Audit_Survey.xlsx) | Complete quantitative Excel audit dataset |
-| [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive final project report |
+| [📊 Campus Audit Survey Dataset](docs/Campus_Accessibility_Audit_Survey.xlsx) | Complete quantitative Excel audit dataset across 29 buildings |
+| [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive project report with empirical field research analysis |
 | [📖 Installation Guide](docs/INSTALLATION.md) | Setup and deployment instructions |
 | [👤 User Guide](docs/USER_GUIDE.md) | Role-based usage instructions |
 | [📑 API Documentation](docs/API_DOCUMENTATION.md) | REST endpoint specifications |
