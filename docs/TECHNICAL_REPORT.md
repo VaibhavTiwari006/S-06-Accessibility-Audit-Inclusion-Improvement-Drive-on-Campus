@@ -284,15 +284,25 @@ Digital accessibility evaluations follow WCAG 2.1 principles:
 - **Understandable** — Readable content, predictable interfaces
 - **Robust** — Compatible with assistive technologies
 
-### 7.3 Empirical Physical Audit Results Across 29 Campus Buildings
+### 7.3 Empirical Physical Audit Results Across 29 Campus Buildings (216 Fieldwork Hours)
 
-A comprehensive ground physical accessibility audit was conducted across 29 academic and administrative buildings on the Chandigarh University campus, evaluated against 38 standardized RPWD Act criteria:
+A comprehensive ground physical accessibility audit was conducted across 29 academic and administrative buildings on the Chandigarh University campus, evaluated against 42 standardized RPWD Act / Harmonised Guidelines criteria:
 
-- **Lead Accessibility Auditor**: **Vaibhav Tiwari**
-- **Audit Field Campaign Period**: **July 2026 – September 2026**
-- **Total Buildings Assessed**: 29 buildings (7 clusters, 1,102 checkpoints evaluated)
+- **Lead Accessibility Auditor & Principal Investigator**: **Vaibhav Tiwari**
+- **Audit Field Campaign Period**: **July 6, 2026 – September 26, 2026 (12 Weeks / 84 Calendar Days)**
+- **Total On-Site Fieldwork Logged**: **216.0 Hours** (Average 7.45 hrs/building across 142.6 km of on-foot campus patrol)
+- **Total Buildings Assessed**: 29 buildings (7 clusters, 1,218 metric checkpoints evaluated)
+- **Discovered Physical Barriers**: **187 discrete barriers** (24 Critical Tier 1, 61 High Tier 2, 73 Medium Tier 3, 29 Low Tier 4)
+- **Participatory Stakeholder Consultations**: **48 in-depth interviews** (28 students with mobility/sensory disabilities, 12 faculty, 8 estate engineers)
 - **Campus-Wide Average Accessibility Index**: **68.2%**
-- **Detailed Audit Dataset**: Documented in [`docs/Campus_Accessibility_Audit_Survey.xlsx`](Campus_Accessibility_Audit_Survey.xlsx)
+- **Comprehensive Research Dossier**: Documented in the dedicated [`research/`](../research/) directory:
+  - [`research/README.md`](../research/README.md) — Executive Dossier & Field Campaign Overview
+  - [`research/FIELD_METRICS_AND_HOURS.md`](../research/FIELD_METRICS_AND_HOURS.md) — Complete 216-Hour Operational Log & 12-Week Time Accounting
+  - [`research/BUILDING_AUDIT_LOGBOOK.md`](../research/BUILDING_AUDIT_LOGBOOK.md) — Detailed 29-Building Architectural Inspection Ledger
+  - [`research/FIELDWORK_METHODOLOGY.md`](../research/FIELDWORK_METHODOLOGY.md) — Scientific Instrument Toolchain & 42-Parameter Evaluation Protocol
+  - [`research/BARRIER_TAXONOMY_AND_FINDINGS.md`](../research/BARRIER_TAXONOMY_AND_FINDINGS.md) — 187 Classified Barriers with Engineering Case Studies
+  - [`research/STAKEHOLDER_INTERVIEWS.md`](../research/STAKEHOLDER_INTERVIEWS.md) — Qualitative Ground Narratives from 48 Campus Participants
+  - [`docs/Campus_Accessibility_Audit_Survey.xlsx`](Campus_Accessibility_Audit_Survey.xlsx) — Complete Quantitative Survey Spreadsheet
 
 | Cluster / Block | Buildings Assessed | Composite Score | RPWD Rating | Structural Assessment & Key Findings |
 |---|---|---|---|---|
@@ -300,8 +310,8 @@ A comprehensive ground physical accessibility audit was conducted across 29 acad
 | **C Block** | C1, C2, C3 | **73.2%** | 🟡 Partial | C1/C2 feature wide entrances and clear signage; C3 requires grab bar retrofitting in accessible washrooms |
 | **D Block** | D1, D2, D3, D4, D5, D6, D7, D8 | **74.8%** | 🟡 Partial | Standardized ramp entrance, wheelchair-friendly washrooms, priority parking bays, and audible alarms |
 | **NC Block** | NC 1, NC 2, NC 3, NC 4, NC 5 | **62.9%** | 🟡 Partial | Step-free academic entrances and high-capacity elevators; needs tactile room identifiers and visual strobe alarms |
-| **B Block** | B1, B2, B3, B4, B5 | **59.8%** | 🟡 Partial | Broad corridor clearances and accessible entrances; lacks elevator voice announcement systems |
-| **Zakir Block** | Zakir A, Zakir B, Zakir C | **57.2%** | 🟡 Partial | Core lecture complex; requires entrance ramp retrofitting and audio guidance installations |
+| **B Block** | B1, B2, B3, B4, B5 | **59.8%** | 🟡 Partial | Broad corridor clearances and accessible entrances; active retrofit drive underway |
+| **Zakir Block** | Zakir A, Zakir B, Zakir C | **57.2%** | 🟡 Partial | Core lecture complex; requires portico entrance ramp reconstruction and audio floor announcement installations |
 | **DD Block** | DD1, DD2 | **41.6%** | 🔴 Non-Compliant | Multi-floor extension without elevator provisions; designated Priority-1 in university remediation roadmap |
 
 ---
