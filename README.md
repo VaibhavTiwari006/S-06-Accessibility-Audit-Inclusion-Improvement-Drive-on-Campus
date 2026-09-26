@@ -128,16 +128,26 @@ The primary objectives of this project are to:
 - Signage assessment
 - Emergency evacuation accessibility
 
-### 🏛️ Real Campus Physical Audit Findings (29 Buildings Audited)
+### 🏛️ Real Campus Physical Audit Findings (29 Buildings Audited · 216 Fieldwork Hours)
 
 Based on comprehensive ground accessibility audits evaluated under the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **Harmonised Guidelines and Standards for Universal Accessibility in India (2021)**:
 
-- **Lead Accessibility Auditor**: **Vaibhav Tiwari**
-- **Audit Campaign Window**: **July 2026 – September 2026**
-- **Total Buildings Audited**: 29 buildings across 7 campus blocks
-- **Audit Metrics**: 38 standardized questions across 8 infrastructure categories (1,102 checkpoints evaluated)
+- **Lead Accessibility Auditor & Field Researcher**: **Vaibhav Tiwari**
+- **Audit Campaign Window**: **July 6, 2026 – September 26, 2026 (12 Weeks)**
+- **Total Logged Fieldwork**: **216.0 Hours on field** (~7.5 hrs/building across 142.6 km of on-foot campus patrol)
+- **Total Buildings Audited**: **29 buildings** across 7 campus blocks (100% campus academic infrastructure)
+- **Metric Checkpoints**: 42 standardized parameters across 8 architectural domains (1,218 total evaluations)
+- **Identified Barriers**: **187 discrete physical and environmental barriers** (categorized by severity)
+- **Stakeholder Consultation**: **48 in-depth participatory interviews** (28 disabled students, 12 faculty, 8 staff)
 - **Campus-Wide Average Accessibility Score**: **68.2%**
-- **Complete Audit Survey Dataset**: [`docs/Campus_Accessibility_Audit_Survey.xlsx`](docs/Campus_Accessibility_Audit_Survey.xlsx)
+- **Complete Research Dossier**: See the dedicated [**`research/`**](research/) repository folder:
+  - 📋 [**Executive Research Dossier**](research/README.md)
+  - ⏱️ [**Fieldwork Metrics & 216 Hours Log**](research/FIELD_METRICS_AND_HOURS.md)
+  - 📖 [**Comprehensive 29-Building Audit Logbook**](research/BUILDING_AUDIT_LOGBOOK.md)
+  - 🔬 [**Scientific Methodology & Toolchain**](research/FIELDWORK_METHODOLOGY.md)
+  - 🚧 [**Barrier Taxonomy & 187 Field Findings**](research/BARRIER_TAXONOMY_AND_FINDINGS.md)
+  - 🎙️ [**Stakeholder Narratives & 48 Interviews**](research/STAKEHOLDER_INTERVIEWS.md)
+  - 📊 [**Raw Excel Survey Dataset**](docs/Campus_Accessibility_Audit_Survey.xlsx)
 
 | Block | Buildings Audited | Overall Score | RPWD Compliance Status | Key Findings & Ground Assessment |
 |---|---|---|---|---|
@@ -145,8 +155,8 @@ Based on comprehensive ground accessibility audits evaluated under the **Rights 
 | **C Block** | C1, C2, C3 | **73.2%** | 🟡 Partial | C1/C2 (79.7%) feature excellent signage & wide doors; C3 (60.3%) requires washroom grab bar upgrades |
 | **D Block** | D1, D2, D3, D4, D5, D6, D7, D8 | **74.8%** | 🟡 Partial | Step-free ramp entrances, broad corridors, accessible parking bays, and accessible washroom stalls |
 | **Nek Chand (NC)** | NC 1, NC 2, NC 3, NC 4, NC 5 | **62.9%** | 🟡 Partial | Modern academic complex with step-free entrances & spacious lifts; lacks tactile room numbering and visual alarms |
-| **B Block** | B1, B2, B3, B4, B5 | **59.8%** | 🟡 Partial | Wide double-door entrances and obstruction-free pathways; lacks elevator audio cues and tactile guidance tiles |
-| **Zakir Husain** | Zakir A, Zakir B, Zakir C | **57.2%** | 🟡 Partial | High-capacity lecture complex; requires dedicated entrance ramp and elevator auditory floor announcement system |
+| **B Block** | B1, B2, B3, B4, B5 | **59.8%** | 🟡 Partial | Wide double-door entrances and obstruction-free pathways; active retrofit drive underway |
+| **Zakir Husain** | Zakir A, Zakir B, Zakir C | **57.2%** | 🟡 Partial | High-capacity lecture complex; requires portico entrance ramp reconstruction and elevator auditory floor voice units |
 | **DD Block** | DD1, DD2 | **41.6%** | 🔴 Non-Compliant | Multi-story wing lacking elevator infrastructure; upper floor access restricted to stairs (priority 1 remediation) |
 
 ---
