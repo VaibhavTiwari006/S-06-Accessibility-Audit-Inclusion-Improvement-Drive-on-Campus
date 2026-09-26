@@ -456,7 +456,10 @@ const QuizPage = () => {
                       return (
                         <button
                           key={idx}
+                          type="button"
                           disabled={answersSubmitted}
+                          aria-pressed={isSelected}
+                          aria-label={`Option ${String.fromCharCode(65 + idx)}: ${option}`}
                           onClick={() => handleOptionSelect(idx)}
                           className={`w-full flex items-center justify-between p-4 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer ${btnStyle}`}
                         >
@@ -479,6 +482,8 @@ const QuizPage = () => {
                   {/* Explanation feedback block */}
                   {answersSubmitted && (
                     <motion.div 
+                      role="region"
+                      aria-live="polite"
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       className={`p-4 rounded-2xl border text-xs leading-relaxed ${
