@@ -299,7 +299,7 @@ A comprehensive ground physical accessibility audit was conducted across 29 acad
   - [`research/README.md`](../research/README.md) — Executive Dossier & Field Campaign Overview
   - [`research/FIELD_METRICS_AND_HOURS.md`](../research/FIELD_METRICS_AND_HOURS.md) — Complete 216-Hour Operational Log & 12-Week Time Accounting
   - [`research/BUILDING_AUDIT_LOGBOOK.md`](../research/BUILDING_AUDIT_LOGBOOK.md) — Detailed 29-Building Architectural Inspection Ledger
-  - [`research/FIELDWORK_METHODOLOGY.md`](../research/FIELDWORK_METHODOLOGY.md) — Scientific Instrument Toolchain & 42-Parameter Evaluation Protocol
+  - [`research/FIELDWORK_METHODOLOGY.md`](../research/FIELDWORK_METHODOLOGY.md) — Manual Fieldwork Inspection Protocol & 42-Parameter Statutory Checklist
   - [`research/BARRIER_TAXONOMY_AND_FINDINGS.md`](../research/BARRIER_TAXONOMY_AND_FINDINGS.md) — 187 Classified Barriers with Engineering Case Studies
   - [`research/STAKEHOLDER_INTERVIEWS.md`](../research/STAKEHOLDER_INTERVIEWS.md) — Qualitative Ground Narratives from 48 Campus Participants
   - [`docs/Campus_Accessibility_Audit_Survey.xlsx`](Campus_Accessibility_Audit_Survey.xlsx) — Complete Quantitative Survey Spreadsheet
