@@ -514,45 +514,21 @@
     border-color: rgba(16, 185, 129, 0.25) !important;
   }
 
-  /* Transparent and Gradient Text Visibility Dark Mode Overrides - FULL HIGH-CONTRAST CLIPPING */
-  body.dark-mode .hero-gradient-text,
-  body.dark-mode .gradient-text,
-  body.dark-mode .bg-clip-text,
-  body.dark-mode [class*="bg-clip-text"],
-  .dark .hero-gradient-text,
-  .dark .gradient-text,
-  .dark .bg-clip-text,
-  .dark [class*="bg-clip-text"],
-  html.dark .hero-gradient-text,
-  html.dark .gradient-text,
-  html.dark [class*="bg-clip-text"] {
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
-    display: inline-block;
-  }
-
-  /* Hero Gradient Text: vibrant, high-contrast rose-red to pastel glow in Dark Mode */
+  /* High-Contrast Hero & Subtitle Text Visibility in Dark Mode */
   body.dark-mode .hero-gradient-text,
   .dark .hero-gradient-text,
   html.dark .hero-gradient-text {
-    background-image: linear-gradient(135deg, #f87171 0%, #fb7185 45%, #fecdd3 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
+    color: #f87171 !important;
+    -webkit-text-fill-color: #f87171 !important;
     display: inline-block !important;
   }
   
   body.dark-mode .gradient-text,
   .dark .gradient-text,
   html.dark .gradient-text {
-    background-image: linear-gradient(135deg, #f87171 0%, #fb7185 50%, #fca5a5 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
+    color: #f87171 !important;
+    -webkit-text-fill-color: #f87171 !important;
+    display: inline-block !important;
   }
 
   /* Brand Primary High-Contrast Visibility in Dark Mode */

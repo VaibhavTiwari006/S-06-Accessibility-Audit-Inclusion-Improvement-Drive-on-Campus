@@ -174,16 +174,13 @@ const Landing = () => {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="relative z-10 max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary dark:bg-rose-500/15 dark:text-rose-300 dark:border-rose-500/30 font-bold text-xs mb-6 border border-primary/20 uppercase tracking-wider">
-              <Award size={14} /> CUSoC 2026 Finalist &bull; Track S-06 &bull; Chandigarh University
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/70 dark:text-rose-300 dark:border-rose-800/80 font-bold text-xs mb-6 border uppercase tracking-wider shadow-xs">
+              <Award size={14} className="text-rose-600 dark:text-rose-300" /> CUSoC 2026 Finalist &bull; Track S-06 &bull; Chandigarh University
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-secondary dark:text-slate-100 tracking-tight leading-tight mb-6">
               Building Inclusive Campuses <br />
-              <span 
-                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-rose-400 dark:from-rose-400 dark:via-rose-300 dark:to-rose-200 hero-gradient-text"
-                style={{ WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
-              >
+              <span className="text-rose-600 dark:text-rose-400 font-extrabold inline-block mt-2">
                 Through Intelligent Accessibility
               </span>
             </h1>

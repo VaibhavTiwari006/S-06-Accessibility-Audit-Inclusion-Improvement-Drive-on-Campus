@@ -33,10 +33,10 @@ const SLIDES = [
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black text-slate-900 tracking-tight leading-tight"
+          className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black text-slate-900 dark:text-slate-100 tracking-tight leading-tight"
         >
           Empowering Universal Campus Accessibility <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-600 to-red-500">
+          <span className="text-rose-600 dark:text-rose-400 font-black inline-block mt-2">
             Through Empirical Audits & Intelligent Systems
           </span>
         </motion.h1>
