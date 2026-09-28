@@ -46,9 +46,9 @@ const SLIDES = [
             <p className="text-xs text-textLight mt-1">Chandigarh University (QS #575 &bull; NIRF #19)</p>
           </div>
           <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mb-1">Evaluation Target</p>
-            <p className="text-lg font-bold text-emerald-600">Grade A+ (Elite Contributor)</p>
-            <p className="text-xs text-emerald-700 font-medium mt-1">1000 Marks Framework Alignment</p>
+            <p className="text-xs font-bold text-textLight uppercase tracking-wider mb-1">Deployment Status</p>
+            <p className="text-lg font-bold text-emerald-600">Production Ready & Deployed</p>
+            <p className="text-xs text-emerald-700 font-medium mt-1">Render Cloud &bull; Vercel CDN &bull; Neon DB</p>
           </div>
         </div>
       </div>
@@ -425,42 +425,42 @@ const SLIDES = [
   },
   {
     id: 8,
-    category: 'Final Evaluation & Viva Voce',
-    title: 'CUSoC 1000-Mark Rubric Alignment',
-    subtitle: 'Targeting Grade A+ (Elite Contributor Band • 950–1000 Marks / 95–100%)',
+    category: 'Requirements & Milestone Verification',
+    title: 'CUSoC Deliverable & Verification Matrix',
+    subtitle: 'Comprehensive Fulfillment of Foundation, Product Engineering & Production Milestones',
     content: (
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
           <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Bi-Weekly</p>
-            <p className="text-2xl font-bold text-primary my-1">250<span className="text-xs text-textLight">/250</span></p>
-            <p className="text-[11px] text-textLight">615+ Git commits & CI/CD</p>
+            <p className="text-xs font-bold text-textLight uppercase">Engineering Velocity</p>
+            <p className="text-xl font-bold text-primary my-1">640+ Commits</p>
+            <p className="text-[11px] text-textLight">Granular Git history & CI/CD pipeline</p>
           </div>
           <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Mid-Term</p>
-            <p className="text-2xl font-bold text-primary my-1">250<span className="text-xs text-textLight">/250</span></p>
-            <p className="text-[11px] text-textLight">API & schema milestones</p>
+            <p className="text-xs font-bold text-textLight uppercase">Product Engineering</p>
+            <p className="text-xl font-bold text-primary my-1">Full-Stack Core</p>
+            <p className="text-[11px] text-textLight">Spring Boot 3, Neon DB, React 18 & RBAC</p>
           </div>
           <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Quarterly</p>
-            <p className="text-2xl font-bold text-primary my-1">250<span className="text-xs text-textLight">/250</span></p>
-            <p className="text-[11px] text-textLight">Q1, Q2, Q3 completion</p>
+            <p className="text-xs font-bold text-textLight uppercase">Quarterly Milestones</p>
+            <p className="text-xl font-bold text-primary my-1">Q1 • Q2 • Q3</p>
+            <p className="text-[11px] text-textLight">Statutory audit, platform & deployment</p>
           </div>
           <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Final Demo</p>
-            <p className="text-2xl font-bold text-primary my-1">150<span className="text-xs text-textLight">/150</span></p>
-            <p className="text-[11px] text-textLight">Live platform & tech report</p>
+            <p className="text-xs font-bold text-textLight uppercase">Ground Research</p>
+            <p className="text-xl font-bold text-primary my-1">29 Buildings</p>
+            <p className="text-[11px] text-textLight">1,218 checkpoints & 187 barriers audited</p>
           </div>
           <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Viva Voce</p>
-            <p className="text-2xl font-bold text-primary my-1">100<span className="text-xs text-textLight">/100</span></p>
-            <p className="text-[11px] text-textLight">100% Solo authenticity</p>
+            <p className="text-xs font-bold text-textLight uppercase">Authorship & Viva</p>
+            <p className="text-xl font-bold text-primary my-1">100% Solo</p>
+            <p className="text-[11px] text-textLight">Authentic field research & full codebase</p>
           </div>
         </div>
 
         <div className="p-6 rounded-3xl bg-gradient-to-r from-red-600 to-rose-700 text-white shadow-xl text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white font-bold text-xs uppercase tracking-wider">
-            <Award size={14} /> Resulting Band: Elite Contributor (Grade A+)
+            <Award size={14} /> Evaluation Ready: Complete CUSoC Deliverable Suite
           </div>
           <h3 className="text-2xl sm:text-3xl font-heading font-extrabold">
             Ready for Live Evaluation & Demonstration
