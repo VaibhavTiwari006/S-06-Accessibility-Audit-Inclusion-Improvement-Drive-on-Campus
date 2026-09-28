@@ -1,4 +1,6 @@
-# ♿ S-06: Accessibility Audit & Inclusion Improvement Drive
+# ♿ AccessAudit (Track S-06)
+### Campus Accessibility Audit & Inclusion Improvement Platform
+#### Comprehensive Empirical Ground Research & Full-Stack Cloud Engineering Suite for CUSoC 2026
 
 [![CI Build and Verification](https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus/actions/workflows/ci.yml/badge.svg)](https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus/actions/workflows/ci.yml)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
@@ -6,25 +8,45 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.1-brightgreen)
 ![React](https://img.shields.io/badge/React-18-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![Deployment: Multi-Cloud](https://img.shields.io/badge/Deployment-Vercel%20%7C%20Render%20%7C%20Neon-success)
 
-> A comprehensive campus accessibility assessment platform designed to identify, document, and improve physical and digital accessibility across university campuses in accordance with the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **WCAG 2.1 AA** accessibility standards.
+> A comprehensive campus accessibility assessment platform designed to identify, document, and remediate physical and digital barriers across university campuses in accordance with the **Rights of Persons with Disabilities (RPWD) Act, 2016** and **WCAG 2.1 AA** standards.
 > 
 > **👤 Lead Researcher, Field Auditor & Sole Developer:** **Vaibhav Tiwari**  
-> **Institution:** Chandigarh University, Gharuan, Mohali, Punjab  
-> **Project Scope:** Independent solo initiative combining hands-on physical accessibility field audits across 29 campus buildings with end-to-end full-stack software engineering.
+> **Institution:** Chandigarh University, Gharuan, Mohali, Punjab (QS World Rank #575, NIRF Ranked #19)  
+> **Project Scope:** Independent solo capstone combining in-situ physical accessibility field audits across 29 campus buildings with end-to-end full-stack cloud software engineering.
 
 ---
 
-## 🏆 CUSoC 2026 Grand Final Showcase & Verification Matrix
+## 🌐 Live Production Platform & Evaluator Access
 
-> **Track S-06:** Accessibility Audit & Inclusion Improvement Drive on Campus  
-> **Host Organization:** C Square Club & Chandigarh University  
-> **Institutional Standing:** QS World University Rankings 2026 Global Rank **#575** | NIRF Ranked **#19** in India  
-> **Sole Contributor & Researcher:** **Vaibhav Tiwari** (100% Individual Authorship & Engineering)  
-> **Production Status:** Production Ready & Live Deployed &bull; Multi-Cloud Serverless Architecture  
-> **Executive Suite:** [**Launch Live Web Platform**](https://frontend-six-sigma-33.vercel.app) &bull; [**Interactive Presentation Deck**](https://frontend-six-sigma-33.vercel.app/presentation) &bull; [**Final Dossier**](docs/CUSOC_FINAL_EVALUATION.md) &bull; [**Viva Voce Defense Guide**](docs/VIVA_VOCE_DEFENSE.md)
+| Resource | Direct Access Link | Description & Usage |
+|:---|:---|:---|
+| 🚀 **Live Web Platform** | **[👉 Click Here to Access the Live Website (https://frontend-six-sigma-33.vercel.app)](https://frontend-six-sigma-33.vercel.app)** | Production frontend deployed on Vercel Global Edge CDN with sub-second response times. |
+| 🏆 **CUSoC Presentation Deck** | **[👉 Click Here to View Interactive Presentation Deck](https://frontend-six-sigma-33.vercel.app/presentation)** | In-app 8-slide presentation detailing methodology, field survey findings, and architecture. |
+| 🔗 **Production Backend API** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/api`](https://s-06-accessibility-audit-inclusion.onrender.com/api)** | Spring Boot 3.4.1 (Java 21) REST microservice container hosted on Render Cloud. |
+| 📖 **Swagger / OpenAPI Specs** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html`](https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html)** | Interactive API documentation and testing sandbox for all 38 endpoints. |
+| 📋 **Evaluation Dossier** | [**`docs/CUSOC_FINAL_EVALUATION.md`**](docs/CUSOC_FINAL_EVALUATION.md) | Official CUSoC milestone verification framework, delivery evidence, and 5-min demo script. |
+| 🎓 **Viva Voce Defense Guide** | [**`docs/VIVA_VOCE_DEFENSE.md`**](docs/VIVA_VOCE_DEFENSE.md) | 25 in-depth technical Q&A defense answers covering architecture, RPWD law, and cybersecurity. |
 
-### 📋 CUSoC Milestone & Deliverable Verification Matrix
+---
+
+### 🔑 Instant Demonstration Credentials & Role Access
+
+The platform features Role-Based Access Control (RBAC) across 4 operational roles. Evaluators and visitors can **[Create a New Account](https://frontend-six-sigma-33.vercel.app/login)** via the in-app Sign Up tab or use the pre-configured credentials below:
+
+| Role | Email | Password | Primary Capabilities & What to Test |
+|:---|:---|:---:|:---|
+| **System Administrator** | `admin@campus.edu` | `admin123` | Institutional radar analytics, departmental compliance, building registry, user management |
+| **Campus Auditor** | `auditor@campus.edu` | `auditor123` | Conduct live 42-parameter audits, score sliders, draft autosaving, evidence photo logger |
+| **Student / Campus Citizen** | `student@campus.edu` | `student123` | Geotagged barrier reporting, community proposals & upvoting, accessibility quiz, public QR tracking |
+| **Maintenance Engineer** | `maintenance@campus.edu` | `maintenance123` | 5-stage interactive remediation Kanban roadmap (`REPORTED` → `ASSIGNED` → `IN_PROGRESS` → `FIXED` → `VERIFIED`) |
+
+> 💡 **Quick Login Feature:** On the [Sign In Page](https://frontend-six-sigma-33.vercel.app/login), click any of the 4 role cards at the top for instant 1-click credential auto-fill!
+
+---
+
+## 🏆 CUSoC 2026 Milestone & Deliverable Verification Matrix
 
 | Milestone & Deliverable Pillar | Scope & Technical Focus | Verification & Proof Artifact |
 |:---|:---|:---|
@@ -36,31 +58,23 @@
 
 ---
 
-## ⚡ Quick Start
+## ⚡ Local Quick Start (Docker Compose)
+
+For local development and testing, run the full stack locally via Docker Compose:
 
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus.git
 cd S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus
 
-# Start all services (Frontend + Backend + Database)
+# Launch all 3 services (PostgreSQL 16 + Spring Boot API + React Vite Nginx)
 docker-compose up -d --build
 ```
 
-**Access the application:**
-- 🌐 Frontend: http://localhost:3000
-- 🔗 Backend API: http://localhost:8080/api
-- 📖 API Docs: http://localhost:8080/swagger-ui.html
-
-**Default Demonstration Credentials:**
-| Role | Email | Password | Access Scope |
-|------|-------|----------|--------------|
-| **Admin** | `admin@campus.edu` | `admin123` | System settings, analytics radar, user permissions |
-| **Auditor** | `auditor@campus.edu` | `auditor123` | Checklist conduct, campus mapping, evidence logging |
-| **Student** | `student@campus.edu` | `student123` | Barrier reporting, community feedback, awareness quiz |
-| **Maintenance** | `maintenance@campus.edu` | `maintenance123` | 5-stage Kanban remediation board, ticket updates |
-
-> 💡 **Public Self-Registration Available:** Any student or faculty member can create an account directly via the in-app **Sign Up** tab on the authentication portal. Single-click demo role switching is also available on the login page for rapid review.
+- 🌐 **Local Web App:** `http://localhost:3000`
+- 🔗 **Local API:** `http://localhost:8080/api`
+- 📖 **Local Swagger Docs:** `http://localhost:8080/swagger-ui.html`
+*(Use the demonstration credentials listed in the table above to log in)*
 
 ---
 
@@ -77,14 +91,48 @@ Deploy AccessAudit to the live public web completely free of cost with zero cred
 Or deploy directly via Render Blueprint:  
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 
----
+## 🛠️ Comprehensive Overview of Work Done
 
-## 📌 Overview
-Accessibility is a fundamental requirement for creating an inclusive educational environment. Many students and staff with disabilities continue to experience barriers while accessing classrooms, laboratories, libraries, administrative offices, campus facilities, and digital platforms.
+AccessAudit (S-06) is an end-to-end, production-grade initiative designed, researched, and engineered independently by **Vaibhav Tiwari**. The project bridges empirical on-ground disability research across Chandigarh University campus with enterprise full-stack cloud software engineering.
 
-This project provides a structured framework to evaluate campus accessibility, collect stakeholder feedback, generate actionable recommendations, and assist university administrators in planning accessibility improvements.
+### 1. 🔬 Empirical On-Ground Fieldwork & Campus Audit Drive
+* **29 Academic Buildings Surveyed In-Situ:** Conducted comprehensive physical audits across 100% of campus academic blocks (Blocks A, B, C, D, NC, Zakir Husain, DD).
+* **1,218 Quantitative Checkpoints:** Manually evaluated 42 standardized criteria per building spanning building approaches, entrance ramps, corridor clearances, elevator accessibility, tactile ground surface indicators (TGSI), accessible washrooms, and emergency evacuation routes.
+* **Rigorous Physical Measurement Protocol:**
+  - Steel measuring tape utilized for doorway widths ($\ge 900\text{ mm}$), corridor clearances ($\ge 1500\text{ mm}$), and handrail heights ($750\text{ mm} / 900\text{ mm}$).
+  - Exact slope ratio calculations ($\Delta h / \Delta d$) for ramp gradients against the statutory $1:12$ ($8.33\%$) maximum limit under the CPWD Harmonised Guidelines (2021).
+* **187 Physical Barriers Discovered & Geotagged:** Cataloged into 4 severity tiers (24 Critical Tier 1 blockades, 61 High Tier 2 barriers, 73 Medium Tier 3 deficiencies, and 29 Low Tier 4 maintenance defects).
+* **Open Quantitative Dataset:** Published the complete raw evaluation matrix in [`docs/Campus_Accessibility_Audit_Survey.xlsx`](docs/Campus_Accessibility_Audit_Survey.xlsx) with extensive analysis in [`docs/TECHNICAL_REPORT.md`](docs/TECHNICAL_REPORT.md).
 
-The project combines **field audits**, **digital accessibility assessments**, **student participation**, and **data-driven reporting** into a single platform.
+### 2. 💻 Full-Stack Enterprise Software Architecture
+* **High-Performance Spring Boot 3.4.1 (Java 21) Backend:**
+  - Engineered 38 RESTful API endpoints across 8 dedicated resource controllers (`BuildingController`, `AuditController`, `IssueController`, `EvidenceController`, `CommunityController`, `ReportController`, `AnalyticsController`, `AuthController`).
+  - Stateless JWT token-based authentication with expiration handling and BCrypt password encryption.
+  - Strict 4-Role RBAC authorization enforced via Spring Security 6 filter chains.
+  - Layered enterprise architecture: Controller → Service → Repository → PostgreSQL Entity.
+  - Database schema in Third Normal Form (3NF) with 12 relational entities, composite unique indexes, and audit logging.
+* **Modern React 18 + Vite SPA Frontend:**
+  - Custom design system styled with Tailwind CSS, glassmorphic surfaces, and Radix UI accessible primitives.
+  - Staggered page transitions and fluid micro-interactions powered by Framer Motion.
+  - Interactive Leaflet campus geospatial map with 29 building pins, dynamic RPWD score pills, and accessible wheelchair routing.
+  - Interactive 42-parameter audit conductor with score sliders, autosave draft persistence, category grouping, and submission confetti.
+  - 5-stage maintenance remediation Kanban board supporting ticket lifecycle management from reporting to auditor verification.
+  - WCAG Accessibility Preferences toolbar: High Contrast Mode, OpenDyslexic typography, Web Speech API text-to-speech, and reduced motion toggles.
+* **Multi-Layer Cybersecurity Hardening:**
+  - Sliding-window in-memory IP rate limiting (`RateLimitingFilter.java`) to prevent Denial of Service.
+  - Automated brute-force login attack protection with progressive lockouts (`BruteForceProtectionService.java`).
+  - Strict input sanitization and XSS protection filters (`XssSanitizationFilter.java`).
+  - Hardened HTTP security headers: Content-Security-Policy (CSP), Strict-Transport-Security (HSTS), X-Frame-Options (DENY), and X-Content-Type-Options (nosniff).
+  - Automated 30-minute client inactivity session timeout watchdog.
+
+### 3. 🌐 Cloud Production Deployment & DevOps
+* **Zero-Cost Multi-Cloud Production Architecture:**
+  - **Global Edge CDN:** Frontend built with Vite and distributed globally via Vercel Edge CDN with sub-second page loads.
+  - **Serverless PostgreSQL 16:** Database hosted on Neon with automated connection pooling and serverless compute scaling.
+  - **Containerized Backend:** Spring Boot 3.4.1 microservice containerized with multi-stage Docker and deployed on Render cloud.
+* **Engineering Velocity & CI/CD:**
+  - Over 650 atomic commits following Conventional Commits syntax (`feat`, `fix`, `docs`, `chore`, `security`, `refactor`).
+  - Automated GitHub Actions workflow compiling Java 21, running JUnit 5 test suites, and validating frontend builds on every commit.
 
 ---
 
@@ -264,33 +312,19 @@ Empirical WCAG 2.1 & RPWD compliance metrics across university academic departme
 
 ---
 
-# 🏗️ Technology Stack
+# 🏗️ Technology Stack & Cloud Infrastructure
 
-### Frontend
-
-- React.js
-- Vite
-- HTML5
-- CSS3
-- JavaScript (ES6)
-
-### Backend
-
-- Spring Boot
-- Spring Security
-- JWT Authentication
-- Spring Data JPA
-- REST APIs
-
-### Database
-
-- PostgreSQL
-
-### Documentation
-
-- OpenAPI / Swagger
-- Markdown
-- Architecture Diagrams
+| Layer / Domain | Technologies & Libraries | Key Highlights & Architectural Role |
+|:---|:---|:---|
+| **Frontend Framework** | **React 18.3**, **Vite 6** | Fast HMR, component tree virtualization, lazy code-splitting chunks |
+| **UI & Styling System** | **Tailwind CSS 3.4**, **Radix UI Primitives** | Custom glassmorphic design system, accessible WAI-ARIA modals & menus |
+| **Motion & Micro-interactions** | **Framer Motion 11**, **Canvas-Confetti** | Spring-animated layout transitions, celebratory submission feedback |
+| **Geospatial & Mapping** | **Leaflet**, **React-Leaflet**, **OpenStreetMap** | Interactive 29-building campus map, dynamic barrier overlays & route guidance |
+| **Backend Framework** | **Spring Boot 3.4.1**, **Java 21 (LTS)** | Production REST controllers, unified exception handler, DTO validation |
+| **Security & Cryptography** | **Spring Security 6**, **JJWT**, **BCrypt** | Stateless JWT tokens, 4-role RBAC, IP rate limiting, XSS sanitization |
+| **Persistence & Database** | **PostgreSQL 16**, **Spring Data JPA / Hibernate** | 3NF normalized schema, criteria builder queries, automated database seeder |
+| **Cloud Hosting & CDN** | **Vercel Edge**, **Render Cloud**, **Neon Serverless** | Multi-cloud global edge delivery, serverless PostgreSQL with autoscaling |
+| **Containerization & CI/CD** | **Docker**, **Docker Compose**, **GitHub Actions** | Multi-stage container builds, automated build verification & JUnit 5 testing |
 
 ---
 
