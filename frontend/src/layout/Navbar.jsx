@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Menu, Bell, Settings, Search, Award, Zap } from 'lucide-react';
+import { LogOut, User, Menu, Bell, Settings, Search, Award } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import Avatar from '../components/ui/Avatar';
 import CommandPalette from './CommandPalette';
-import EvaluatorRoleSwitcher from '../components/EvaluatorRoleSwitcher';
 import { motion } from 'framer-motion';
 
 const roleColors = {
@@ -21,7 +20,6 @@ const Navbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isCmdOpen, setIsCmdOpen] = useState(false);
-  const [showRoleSwitcher, setShowRoleSwitcher] = useState(false);
 
   React.useEffect(() => {
     const handleKeyDown = (e) => {
@@ -129,16 +127,6 @@ const Navbar = ({ toggleSidebar }) => {
               <span className="hidden xl:inline">CUSoC '26</span>
             </button>
 
-            {/* Quick Role Switcher for Evaluators */}
-            <button
-              onClick={() => setShowRoleSwitcher(true)}
-              className="p-1.5 px-2.5 rounded-xl bg-amber-500/10 text-amber-700 hover:bg-amber-500 hover:text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm border border-amber-200/50"
-              title="1-Click Role Switcher (For Evaluators)"
-            >
-              <Zap size={14} className="fill-current text-amber-500" />
-              <span className="hidden xl:inline">Switch Role</span>
-            </button>
-
             {/* Settings shortcut - available for all users */}
             <button
               onClick={() => navigate('/settings')}
@@ -194,9 +182,6 @@ const Navbar = ({ toggleSidebar }) => {
       
       {/* Command Palette */}
       <CommandPalette isOpen={isCmdOpen} onClose={() => setIsCmdOpen(false)} />
-
-      {/* 1-Click Evaluator Role Switcher */}
-      <EvaluatorRoleSwitcher isOpen={showRoleSwitcher} onClose={() => setShowRoleSwitcher(false)} />
     </nav>
   );
 };

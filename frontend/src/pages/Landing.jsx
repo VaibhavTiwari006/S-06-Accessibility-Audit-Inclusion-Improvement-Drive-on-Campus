@@ -5,11 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, ShieldCheck, Map, Users, BarChart3, ChevronRight, 
   Sparkles, BookOpen, Wrench, Camera, CheckCircle2, 
-  UserCheck, Lock, LogIn, Award, Building2, HelpCircle, Zap
+  UserCheck, Lock, LogIn, Award, Building2, HelpCircle
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
-import EvaluatorRoleSwitcher from '../components/EvaluatorRoleSwitcher';
 
 const IMPACTFUL_FEATURES = [
   {
@@ -119,7 +118,6 @@ const ROLES = [
 const Landing = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [showRoleSwitcher, setShowRoleSwitcher] = useState(false);
   const scrollToRoles = () => {
     document.getElementById('role-selector-section')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -144,15 +142,6 @@ const Landing = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button 
-            onClick={() => setShowRoleSwitcher(true)}
-            variant="secondary" 
-            size="sm" 
-            icon={Zap} 
-            className="border-amber-300 text-amber-800 bg-amber-50 hover:bg-amber-100 font-bold"
-          >
-            ⚡ Quick Role Switch
-          </Button>
           <Link to="/presentation">
             <Button variant="secondary" size="sm" icon={Award} className="border-primary/30 text-primary hover:bg-primary/5">
               🏆 CUSoC '26 Presentation
@@ -409,23 +398,6 @@ const Landing = () => {
       <footer className="py-8 text-center text-gray-500 text-sm border-t border-gray-200 bg-white">
         <p>© 2026 Chandigarh University. Accessibility Audit & Inclusion Improvement Drive (S-06).</p>
       </footer>
-
-      {/* Floating 1-Click Role Switcher for CUSoC Evaluators */}
-      <div className="fixed bottom-6 right-6 z-40">
-        <button
-          onClick={() => setShowRoleSwitcher(true)}
-          className="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-slate-900 text-white shadow-2xl hover:bg-black hover:scale-105 active:scale-95 transition-all border border-slate-700/60 font-medium text-xs group cursor-pointer"
-          title="1-Click Evaluator Role Switcher"
-        >
-          <div className="w-5 h-5 rounded-full bg-amber-400 flex items-center justify-center text-slate-950 font-black text-[10px]">
-            ⚡
-          </div>
-          <span>CUSoC Evaluator Mode</span>
-          <span className="px-1.5 py-0.5 rounded-md bg-amber-400/20 text-amber-300 text-[10px] font-bold">1-Click</span>
-        </button>
-      </div>
-
-      <EvaluatorRoleSwitcher isOpen={showRoleSwitcher} onClose={() => setShowRoleSwitcher(false)} />
     </div>
   );
 };
