@@ -469,15 +469,23 @@ const SLIDES = [
             All code is fully tested, containerized with Docker, covered by CI/CD, and live in this deployment.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <Link to="/dashboard">
-              <Button size="lg" className="bg-white text-primary hover:bg-gray-100 shadow-lg font-bold" icon={ArrowRight}>
-                Launch Dashboard Demo
-              </Button>
+            <Link to="/login">
+              <button
+                type="button"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl font-bold text-base bg-white text-primary hover:bg-gray-100 shadow-xl transition-all duration-200 active:scale-95 cursor-pointer"
+              >
+                <span>Go to Live Platform (Login)</span>
+                <ArrowRight size={20} className="text-primary" />
+              </button>
             </Link>
             <Link to="/map">
-              <Button variant="secondary" size="lg" className="bg-white/10 text-white border-white/20 hover:bg-white/20" icon={Map}>
-                Explore Campus Map
-              </Button>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl font-bold text-base bg-white/15 text-white border border-white/30 hover:bg-white/25 shadow-lg transition-all duration-200 active:scale-95 cursor-pointer"
+              >
+                <Map size={20} className="text-white" />
+                <span>Explore Campus Map</span>
+              </button>
             </Link>
           </div>
         </div>
@@ -622,9 +630,9 @@ const ProjectPresentation = () => {
             Next Slide
           </Button>
         ) : (
-          <Link to="/dashboard">
+          <Link to="/login">
             <Button variant="primary" size="sm" icon={ArrowRight} iconPosition="right">
-              Explore Live Demo
+              Go to Live Platform (Login)
             </Button>
           </Link>
         )}
