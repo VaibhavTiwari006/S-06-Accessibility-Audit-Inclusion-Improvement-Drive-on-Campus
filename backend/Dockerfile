@@ -4,13 +4,13 @@ WORKDIR /app
 # Install Maven
 RUN apk add --no-cache maven
 
-# Copy pom.xml (when context is ./backend)
-COPY pom.xml ./
+# Copy pom.xml from backend directory (matches Render root context)
+COPY backend/pom.xml ./
 ENV MAVEN_OPTS="-Xmx512m -XX:+UseG1GC"
 RUN mvn dependency:go-offline -B
 
-# Copy source code
-COPY src ./src
+# Copy backend source code (matches Render root context)
+COPY backend/src ./src
 RUN mvn package -DskipTests -B
 
 FROM eclipse-temurin:21-jre-alpine
