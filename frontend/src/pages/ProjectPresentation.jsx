@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronLeft, ChevronRight, Award, ShieldCheck, Map, Wrench, 
   BarChart3, CheckCircle2, Lock, Users, ArrowRight, ExternalLink,
-  BookOpen, Sparkles, Building2, HelpCircle, Layers, Home, Eye
+  BookOpen, Sparkles, Building2, HelpCircle, Layers, Home, Eye,
+  Maximize, Minimize, Compass, ClipboardCheck, AlertTriangle, FileText
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
@@ -15,43 +16,68 @@ const SLIDES = [
   {
     id: 1,
     category: 'Project Showcase & Overview',
-    title: 'S-06: Accessibility Audit & Inclusion Drive',
+    title: 'S-06: Accessibility Audit & Inclusion Improvement Drive',
     subtitle: 'CUSoC 2026 Grand Final Evaluation • C Square Club, Chandigarh University',
     content: (
-      <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-xs border border-primary/20 uppercase tracking-widest">
-          <Award size={16} /> CUSoC 2026 Final Demonstration • Track S-06
-        </div>
+      <div className="flex flex-col items-center text-center max-w-5xl mx-auto space-y-6">
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 text-primary font-bold text-xs sm:text-sm border border-primary/20 uppercase tracking-widest shadow-sm"
+        >
+          <Award size={18} /> CUSoC 2026 Final Demonstration • Track S-06
+        </motion.div>
         
-        <h1 className="text-4xl sm:text-5xl font-heading font-extrabold text-textMain tracking-tight leading-tight">
+        <motion.h1 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black text-slate-900 tracking-tight leading-tight"
+        >
           Empowering Universal Campus Accessibility <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-primary-light">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-600 to-red-500">
             Through Empirical Audits & Intelligent Systems
           </span>
-        </h1>
+        </motion.h1>
 
-        <p className="text-lg text-textLight max-w-2xl leading-relaxed">
-          An enterprise full-stack platform bridging on-ground physical accessibility research across 29 university buildings with automated RPWD compliance scoring, interactive maps, and maintenance remediation.
-        </p>
+        <motion.p 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-base sm:text-lg text-slate-700 max-w-3xl leading-relaxed font-medium"
+        >
+          A production-grade full-stack accessibility platform bridging in-situ physical research across 29 Chandigarh University buildings with automated RPWD compliance scoring, interactive geospatial maps, and maintenance remediation.
+        </motion.p>
 
-        {/* Solo Author & Institution Card */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 text-left">
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mb-1">Sole Contributor & Researcher</p>
-            <p className="text-lg font-bold text-textMain">Vaibhav Tiwari</p>
-            <p className="text-xs text-primary font-medium mt-1">Research, Fieldwork & Full-Stack Engineering</p>
+        {/* Solo Author & Institution Showcase Cards */}
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 pt-4 text-left"
+        >
+          <div className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Sole Contributor & Researcher</p>
+            <p className="text-xl font-extrabold text-slate-900 font-heading">Vaibhav Tiwari</p>
+            <p className="text-xs text-primary font-semibold mt-1">Conceived, Researched & Built Solo</p>
+            <p className="text-[11px] text-slate-600 mt-1">100% Individual Authorship & Engineering</p>
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mb-1">Host Organization</p>
-            <p className="text-lg font-bold text-textMain">C Square Club &bull; CUSoC</p>
-            <p className="text-xs text-textLight mt-1">Chandigarh University (QS #575 &bull; NIRF #19)</p>
+          
+          <div className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Host Organization</p>
+            <p className="text-xl font-extrabold text-slate-900 font-heading">C Square Club &bull; CUSoC</p>
+            <p className="text-xs text-slate-700 font-semibold mt-1">Chandigarh University, Gharuan, Mohali</p>
+            <p className="text-[11px] text-slate-600 mt-1">QS World Rank #575 &bull; NIRF Ranked #19</p>
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mb-1">Deployment Status</p>
-            <p className="text-lg font-bold text-emerald-600">Production Ready & Deployed</p>
-            <p className="text-xs text-emerald-700 font-medium mt-1">Render Cloud &bull; Vercel CDN &bull; Neon DB</p>
+          
+          <div className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow">
+            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Production Architecture</p>
+            <p className="text-xl font-extrabold text-emerald-600 font-heading">Live Multi-Cloud Deployed</p>
+            <p className="text-xs text-slate-700 font-semibold mt-1">Vercel CDN &bull; Render API &bull; Neon DB</p>
+            <p className="text-[11px] text-slate-600 mt-1">Zero-Cost Production-Hardened Cloud</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     )
   },
@@ -59,118 +85,158 @@ const SLIDES = [
     id: 2,
     category: 'The Problem & Statutory Imperative',
     title: 'The Campus Accessibility Challenge',
-    subtitle: 'Bridging the Statutory Mandate of RPWD Act 2016 with Campus Reality',
+    subtitle: 'Bridging the Statutory Mandate of RPWD Act 2016 with University Ground Reality',
     content: (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
-        <div className="space-y-4">
-          <div className="p-4 rounded-2xl bg-red-50/70 border border-red-100">
-            <h3 className="font-bold text-primary flex items-center gap-2 mb-1">
-              <Lock size={18} /> Statutory RPWD Act 2016 Mandate
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto">
+        <motion.div 
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="p-6 rounded-3xl bg-white border border-rose-200/80 shadow-sm flex flex-col justify-between space-y-4"
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-primary font-bold text-xs border border-rose-200 mb-3">
+              <Lock size={14} /> Statutory Legal Mandate
+            </div>
+            <h3 className="text-xl font-bold font-heading text-slate-900 mb-2">
+              RPWD Act 2016 & Harmonised Guidelines
             </h3>
-            <p className="text-sm text-textMain leading-relaxed">
-              Section 45 of the Rights of Persons with Disabilities Act, 2016 establishes mandatory accessibility of all public educational infrastructure. Failure to comply restricts equal participation in higher education.
+            <p className="text-sm text-slate-700 leading-relaxed">
+              Section 45 of the <strong>Rights of Persons with Disabilities (RPWD) Act, 2016</strong> and the <strong>CPWD Harmonised Guidelines (2021)</strong> legally mandate universal accessibility across all public educational institutions.
+            </p>
+          </div>
+          
+          <div className="p-4 rounded-2xl bg-rose-50/60 border border-rose-100 text-xs text-slate-800 space-y-2">
+            <p className="font-bold text-rose-900 flex items-center gap-1.5">
+              <AlertTriangle size={14} className="text-rose-600" /> Mandatory Compliance Areas:
+            </p>
+            <ul className="space-y-1 list-disc list-inside text-slate-700">
+              <li>Step-free building approaches and standardized 1:12 ramp gradients</li>
+              <li>Tactile ground surface indicators (TGSI) for blind students</li>
+              <li>Accessible washrooms with grab bars and outward-swinging doors</li>
+              <li>Multi-story elevator access with bilingual voice announcement</li>
+            </ul>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="p-6 rounded-3xl bg-white border border-amber-200/80 shadow-sm flex flex-col justify-between space-y-4"
+        >
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 font-bold text-xs border border-amber-200 mb-3">
+              <HelpCircle size={14} /> Empirical Ground Reality
+            </div>
+            <h3 className="text-xl font-bold font-heading text-slate-900 mb-2">
+              Barriers Identified Across Academic Blocks
+            </h3>
+            <p className="text-sm text-slate-700 leading-relaxed">
+              Before this platform, university accessibility auditing faced severe structural and operational hurdles:
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-100">
-            <h3 className="font-bold text-amber-800 flex items-center gap-2 mb-1">
-              <HelpCircle size={18} /> The Ground Reality on Campus
-            </h3>
-            <ul className="text-sm text-amber-950 space-y-1.5 list-disc list-inside">
-              <li>Fragmented, paper-based or non-existent accessibility records.</li>
-              <li>Hidden architectural barriers (steep ramps, inaccessible upper floors).</li>
-              <li>No real-time channel for students with disabilities to report hurdles.</li>
-              <li>Maintenance teams lack prioritized, engineering-grade blueprints.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="p-6 rounded-3xl bg-gradient-to-br from-gray-900 to-gray-800 text-white shadow-xl space-y-4">
-          <p className="text-xs font-bold text-primary-light uppercase tracking-wider">AccessAudit Solution Blueprint</p>
-          <h4 className="text-2xl font-bold font-heading">Closing the Institutional Loop</h4>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            AccessAudit transforms subjective complaints into an evidence-based institutional operating system:
-          </p>
-          <div className="space-y-2.5 pt-2">
-            <div className="flex items-center gap-3 text-sm">
-              <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">1</span>
-              <span><strong>Ground Audit:</strong> 42-parameter standardized inspection</span>
+          <div className="space-y-2.5 text-xs text-slate-700">
+            <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-100 flex items-start gap-2.5">
+              <span className="font-bold text-amber-800">•</span>
+              <span><strong>Fragmented Data:</strong> No centralized digital repository of campus accessibility audits or barrier logs.</span>
             </div>
-            <div className="flex items-center gap-3 text-sm">
-              <span className="w-6 h-6 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs">2</span>
-              <span><strong>Automated Scoring:</strong> Instant building RPWD compliance %</span>
+            <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-100 flex items-start gap-2.5">
+              <span className="font-bold text-amber-800">•</span>
+              <span><strong>Hidden Bottlenecks:</strong> Multi-story wings lacking elevator access, steep entrance ramps, and missing tactile markers.</span>
             </div>
-            <div className="flex items-center gap-3 text-sm">
-              <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs">3</span>
-              <span><strong>Actionable Remediation:</strong> 5-stage maintenance roadmap</span>
+            <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-100 flex items-start gap-2.5">
+              <span className="font-bold text-amber-800">•</span>
+              <span><strong>No Student Channel:</strong> Students with disabilities lacked a fast, geotagged way to report hurdles from their phones.</span>
+            </div>
+            <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-100 flex items-start gap-2.5">
+              <span className="font-bold text-amber-800">•</span>
+              <span><strong>Unassigned Repairs:</strong> Facilities teams lacked a structured Kanban workflow to resolve barriers systematically.</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     )
   },
   {
     id: 3,
     category: 'Empirical Field Research',
-    title: 'Solo On-Ground Physical Campus Audit',
-    subtitle: '29 Buildings Surveyed • 1,218 Checkpoints • 187 Discrete Barriers Documented',
+    title: 'Solo On-Ground Physical Campus Audit Drive',
+    subtitle: 'In-Situ Fieldwork by Vaibhav Tiwari Across 29 Chandigarh University Academic Buildings',
     content: (
       <div className="max-w-5xl mx-auto space-y-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-3xl font-bold text-primary font-heading">29</p>
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mt-1">Buildings Audited</p>
-          </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-3xl font-bold text-emerald-600 font-heading">1,218</p>
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mt-1">Checkpoints Evaluated</p>
-          </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-3xl font-bold text-amber-600 font-heading">187</p>
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mt-1">Barriers Identified</p>
-          </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-3xl font-bold text-blue-600 font-heading">68.2%</p>
-            <p className="text-xs font-bold text-textLight uppercase tracking-wider mt-1">Campus RPWD Index</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm space-y-3">
-            <h4 className="font-bold text-textMain flex items-center gap-2">
-              <CheckCircle2 size={18} className="text-primary" /> Genuine Manual Fieldwork Toolchain
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-4"
+          >
+            <h4 className="text-lg font-bold text-slate-900 font-heading flex items-center gap-2">
+              <CheckCircle2 size={20} className="text-primary" /> Hands-On Field Research & Physical Measurements
             </h4>
-            <ul className="text-xs text-textLight space-y-2">
-              <li><strong>Steel Measuring Tapes:</strong> Door widths (&ge;900mm), corridor clear paths (&ge;1500mm), step risers (&le;150mm), grab rails (750/900mm).</li>
-              <li><strong>Rise & Run Slope Calculations:</strong> Measured vertical height and horizontal distance to compute exact slope ratios (&le;1:12).</li>
-              <li><strong>In-Situ Photo Defect Logging:</strong> Captured photographic evidence of barrier locations with wing/floor tags.</li>
-              <li><strong>Direct Peer Consultations:</strong> Real feedback from campus peers navigating mobility and sensory hurdles.</li>
-            </ul>
-          </div>
-
-          <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm space-y-3">
-            <h4 className="font-bold text-textMain flex items-center gap-2">
-              <Layers size={18} className="text-primary" /> Discovered Barriers by Severity
-            </h4>
-            <div className="space-y-2 text-xs">
-              <div className="flex justify-between items-center p-2 rounded-lg bg-red-50 text-red-800">
-                <span className="font-bold">🔴 24 Critical (Tier 1)</span>
-                <span>Upper floors lacking lifts (Block DD), steep entrance ramps</span>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              Rather than using simulated numbers, all measurements were conducted manually in-situ across 29 academic buildings:
+            </p>
+            <div className="space-y-3 text-xs text-slate-700">
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <p className="font-bold text-slate-900 mb-1">Standard Steel Tape Measurements</p>
+                <p className="text-slate-600">Doorway clear openings (&ge;900mm), corridor pathways (&ge;1500mm), step risers (&le;150mm), and grab bar heights (750mm & 900mm).</p>
               </div>
-              <div className="flex justify-between items-center p-2 rounded-lg bg-amber-50 text-amber-800">
-                <span className="font-bold">🟠 61 High (Tier 2)</span>
-                <span>Lifts lacking braille/audio units, inward-swinging WC doors</span>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <p className="font-bold text-slate-900 mb-1">Rise & Run Slope Calculations (&Delta;h / &Delta;d)</p>
+                <p className="text-slate-600">Calculated precise ramp slope ratios against the statutory 1:12 (8.33%) limit defined in CPWD Harmonised Guidelines.</p>
               </div>
-              <div className="flex justify-between items-center p-2 rounded-lg bg-blue-50 text-blue-800">
-                <span className="font-bold">🟡 73 Medium (Tier 3)</span>
-                <span>Missing tactile warning pavers at stairs, high water coolers</span>
-              </div>
-              <div className="flex justify-between items-center p-2 rounded-lg bg-gray-50 text-gray-700">
-                <span className="font-bold">🟢 29 Low (Tier 4)</span>
-                <span>Worn parking bay paint, signage reflections</span>
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <p className="font-bold text-slate-900 mb-1">In-Situ Photo Defect Documentation</p>
+                <p className="text-slate-600">Captured high-resolution photographs of physical barriers, missing handrails, and threshold step obstacles.</p>
               </div>
             </div>
-          </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-4"
+          >
+            <h4 className="text-lg font-bold text-slate-900 font-heading flex items-center gap-2">
+              <Layers size={20} className="text-primary" /> Discovered Barriers by Severity Classification
+            </h4>
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
+              Physical defects cataloged across campus categorized by urgency and impact on independent mobility:
+            </p>
+            <div className="space-y-2.5 text-xs">
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200/80 text-rose-900">
+                <p className="font-bold flex items-center gap-1.5 mb-0.5">
+                  <span className="w-2 h-2 rounded-full bg-rose-600"></span> Tier 1 - Critical (Immediate Hazard)
+                </p>
+                <p className="text-rose-800 text-[11px]">Multi-story wings lacking lifts (Block DD), steep entrance ramps steeper than 1:9, inward-swinging washroom doors.</p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/80 text-amber-900">
+                <p className="font-bold flex items-center gap-1.5 mb-0.5">
+                  <span className="w-2 h-2 rounded-full bg-amber-600"></span> Tier 2 - High (Severe Inconvenience)
+                </p>
+                <p className="text-amber-800 text-[11px]">Elevators lacking braille control plates or auditory voice announcements; floor threshold transitions &gt; 25mm.</p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-blue-50 border border-blue-200/80 text-blue-900">
+                <p className="font-bold flex items-center gap-1.5 mb-0.5">
+                  <span className="w-2 h-2 rounded-full bg-blue-600"></span> Tier 3 - Medium (Partial Barrier)
+                </p>
+                <p className="text-blue-800 text-[11px]">Missing tactile warning pavers at top and bottom stair landings, high drinking water coolers lacking wheelchair approach.</p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-800">
+                <p className="font-bold flex items-center gap-1.5 mb-0.5">
+                  <span className="w-2 h-2 rounded-full bg-slate-500"></span> Tier 4 - Low (Maintenance Deficit)
+                </p>
+                <p className="text-slate-700 text-[11px]">Faded accessible parking bay demarcations, signage glare, or minor paint maintenance needs.</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     )
@@ -178,113 +244,153 @@ const SLIDES = [
   {
     id: 4,
     category: 'Engineering Architecture',
-    title: 'Enterprise Full-Stack Architecture',
-    subtitle: 'Spring Boot 3.4.1 (Java 21) • React 18 & Vite • PostgreSQL 16 • Multi-Layer Security',
+    title: 'Clean Full-Stack Architecture & Security Hardening',
+    subtitle: 'Spring Boot 3.4.1 (Java 21) • React 18 & Vite • PostgreSQL 16 • Multi-Cloud Production',
     content: (
       <div className="max-w-5xl mx-auto space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-green-50 text-green-700 flex items-center justify-center font-bold mb-3">API</div>
-            <h4 className="font-bold text-textMain text-sm mb-1">Spring Boot 3.4.1 + Java 21</h4>
-            <p className="text-xs text-textLight leading-relaxed">
-              RESTful architecture with DTO validation, service layer abstraction, Spring Data JPA, and JWT role-based access control.
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-base mb-3 border border-emerald-100">API</div>
+            <h4 className="font-extrabold text-slate-900 text-base mb-1 font-heading">Spring Boot 3.4.1 + Java 21</h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Clean 3-tier REST architecture: Controllers, Service abstraction, Repository layer, DTO validation, and unified exception handling.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold mb-3">UI</div>
-            <h4 className="font-bold text-textMain text-sm mb-1">React 18 + Vite + Tailwind</h4>
-            <p className="text-xs text-textLight leading-relaxed">
-              Fast responsive SPA, Framer Motion spring physics, Radix UI accessible primitives, and WCAG AA contrast compliance.
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold text-base mb-3 border border-blue-100">UI</div>
+            <h4 className="font-extrabold text-slate-900 text-base mb-1 font-heading">React 18 + Vite + Tailwind</h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Accessible design system built with Radix UI primitives, Framer Motion fluid animations, Leaflet geospatial mapping, and WCAG AA contrast.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center font-bold mb-3">DB</div>
-            <h4 className="font-bold text-textMain text-sm mb-1">PostgreSQL 16 Relational</h4>
-            <p className="text-xs text-textLight leading-relaxed">
-              Normalized schema modeling 29 buildings, 42-parameter checklists, audits, issues, proposals, and automated seed migrations.
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-700 flex items-center justify-center font-bold text-base mb-3 border border-purple-100">DB</div>
+            <h4 className="font-extrabold text-slate-900 text-base mb-1 font-heading">PostgreSQL 16 on Neon</h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Normalized 3NF relational schema with 12 entities, composite indexes, foreign key constraints, automated seeder, and connection pooling.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Security Highlight Box */}
-        <div className="p-5 rounded-2xl bg-gradient-to-r from-gray-900 to-slate-900 text-white shadow-md">
-          <div className="flex items-center gap-2 mb-2 text-primary-light font-bold text-xs uppercase tracking-wider">
-            <ShieldCheck size={16} /> Multi-Layer Cybersecurity Architecture
+        <motion.div 
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="p-6 rounded-3xl bg-slate-900 text-white shadow-lg space-y-3"
+        >
+          <div className="flex items-center gap-2 text-rose-400 font-bold text-xs uppercase tracking-wider">
+            <ShieldCheck size={18} /> Multi-Layer Cybersecurity Architecture
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-gray-300 pt-1">
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
-              <p className="font-bold text-white mb-0.5">Rate Limiting</p>
-              <p className="text-[11px] text-gray-400">Sliding-window IP request throttling</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-slate-300 pt-1">
+            <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700">
+              <p className="font-bold text-white mb-0.5">IP Rate Limiting</p>
+              <p className="text-[11px] text-slate-400">Sliding-window IP request throttling to prevent DoS attacks</p>
             </div>
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+            <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700">
               <p className="font-bold text-white mb-0.5">Brute Force Guard</p>
-              <p className="text-[11px] text-gray-400">5-attempt threshold with progressive lock</p>
+              <p className="text-[11px] text-slate-400">5-attempt failed login threshold with progressive lockout</p>
             </div>
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+            <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700">
               <p className="font-bold text-white mb-0.5">XSS Sanitization</p>
-              <p className="text-[11px] text-gray-400">Client & server-side HTML tag cleaning</p>
+              <p className="text-[11px] text-slate-400">HTML character filtering and sanitization on all text inputs</p>
             </div>
-            <div className="p-2.5 rounded-xl bg-white/5 border border-white/10">
+            <div className="p-3 rounded-2xl bg-slate-800/80 border border-slate-700">
               <p className="font-bold text-white mb-0.5">Security Headers</p>
-              <p className="text-[11px] text-gray-400">Strict CSP, HSTS, X-Frame-Options DENY</p>
+              <p className="text-[11px] text-slate-400">Strict CSP, HSTS, X-Frame-Options DENY, nosniff</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     )
   },
   {
     id: 5,
     category: 'Role-Based Workflows',
-    title: '4-Role Unified Operating Model',
-    subtitle: 'Purpose-Built Interfaces for Admin, Auditor, Student, and Maintenance Roles',
+    title: '4-Role Unified Operational Model',
+    subtitle: 'Tailored Workflows for Administrator, Campus Auditor, Student, and Maintenance Roles',
     content: (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
-        <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm space-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+          className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-3"
+        >
           <div className="flex items-center justify-between">
-            <Badge variant="primary">ADMIN</Badge>
-            <span className="text-xs text-textLight font-mono">admin@campus.edu</span>
+            <span className="px-3 py-1 rounded-full bg-rose-100 text-rose-800 font-bold text-xs">ADMINISTRATOR</span>
+            <span className="text-xs text-slate-500 font-mono">admin@campus.edu</span>
           </div>
-          <h4 className="font-bold text-textMain">Executive Intelligence & Comparisons</h4>
-          <p className="text-xs text-textLight leading-relaxed">
-            Monitor real-time compliance indices across all 29 facilities, benchmark department performance (CSE vs. UIC vs. CBS), manage user roles, and export audit PDF reports.
+          <h4 className="text-base font-extrabold text-slate-900 font-heading">Campus Intelligence & Department Radar</h4>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Monitor real-time compliance indices across all 29 facilities, benchmark department performance, manage building records, configure user permissions, and export official PDF reports.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm space-y-2">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+          className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-3"
+        >
           <div className="flex items-center justify-between">
-            <Badge variant="info">AUDITOR</Badge>
-            <span className="text-xs text-textLight font-mono">auditor@campus.edu</span>
+            <span className="px-3 py-1 rounded-full bg-purple-100 text-purple-800 font-bold text-xs">CAMPUS AUDITOR</span>
+            <span className="text-xs text-slate-500 font-mono">auditor@campus.edu</span>
           </div>
-          <h4 className="font-bold text-textMain">Interactive 42-Parameter Audit Conductor</h4>
-          <p className="text-xs text-textLight leading-relaxed">
-            Conduct step-by-step physical inspections with grouped category sliders, save in-progress drafts, input comments, and submit for automated compliance calculation with confetti celebration.
+          <h4 className="text-base font-extrabold text-slate-900 font-heading">Digitized 42-Parameter Audit Conductor</h4>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Conduct standardized in-situ inspections with grouped category score sliders, save in-progress drafts, input comments, and submit for automated weighted compliance calculation with confetti feedback.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm space-y-2">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-3"
+        >
           <div className="flex items-center justify-between">
-            <Badge variant="warning">STUDENT / STAFF</Badge>
-            <span className="text-xs text-textLight font-mono">student@campus.edu</span>
+            <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs">STUDENT / STAFF</span>
+            <span className="text-xs text-slate-500 font-mono">student@campus.edu</span>
           </div>
-          <h4 className="font-bold text-textMain">Participatory Barrier Reporting & Awareness</h4>
-          <p className="text-xs text-textLight leading-relaxed">
-            Report physical barriers with photo evidence in under 60 seconds, track resolution progress via public QR codes (`/track/:id`), participate in community voting, and take interactive etiquette quizzes.
+          <h4 className="text-base font-extrabold text-slate-900 font-heading">Participatory Barrier Reporting & Awareness</h4>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            Report physical barriers with photo evidence in under 60 seconds, track resolution progress via public QR codes without logging in, vote on community proposals, and take awareness quizzes.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm space-y-2">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
+          className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-3"
+        >
           <div className="flex items-center justify-between">
-            <Badge variant="success">MAINTENANCE</Badge>
-            <span className="text-xs text-textLight font-mono">maintenance@campus.edu</span>
+            <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-bold text-xs">MAINTENANCE ENGINEER</span>
+            <span className="text-xs text-slate-500 font-mono">maintenance@campus.edu</span>
           </div>
-          <h4 className="font-bold text-textMain">5-Stage Remediation Kanban Roadmap</h4>
-          <p className="text-xs text-textLight leading-relaxed">
+          <h4 className="text-base font-extrabold text-slate-900 font-heading">5-Stage Remediation Kanban Roadmap</h4>
+          <p className="text-xs text-slate-600 leading-relaxed">
             Action items transition seamlessly across 5 lifecycle stages: Reported &rarr; Assigned &rarr; In Progress &rarr; Fixed &rarr; Verified, ensuring zero unaddressed accessibility deficiencies.
           </p>
-        </div>
+        </motion.div>
       </div>
     )
   },
@@ -294,149 +400,148 @@ const SLIDES = [
     title: 'CUSoC Documentation Standards Checklist',
     subtitle: '100% Compliance with Section 4 of CUSoC Contributor Guidelines',
     content: (
-      <div className="max-w-5xl mx-auto space-y-4">
-        <p className="text-sm text-textLight text-center mb-2">
-          Every single document mandated under the CUSoC Documentation Standards is published, versioned, and hyperlinked in the repository:
+      <div className="max-w-5xl mx-auto space-y-5">
+        <p className="text-sm text-slate-700 text-center font-medium max-w-2xl mx-auto">
+          Every required document mandated under the CUSoC Documentation Standards is authored, versioned, and hyperlinked in the repository:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">README.md</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">README.md</span>
             </div>
-            <span className="text-textLight">Comprehensive overview & benchmarks</span>
+            <span className="text-slate-600 font-medium">Overview, live access links & demo guides</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">Installation Guide</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">Installation Guide</span>
             </div>
-            <span className="text-textLight">`docs/INSTALLATION.md` (Local & Docker)</span>
+            <span className="text-slate-600 font-medium">`docs/INSTALLATION.md` (Local & Docker)</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">User Guide</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">User Guide</span>
             </div>
-            <span className="text-textLight">`docs/USER_GUIDE.md` (4 user roles)</span>
+            <span className="text-slate-600 font-medium">`docs/USER_GUIDE.md` (Role workflows)</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">API Documentation</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">API Documentation</span>
             </div>
-            <span className="text-textLight">`docs/API_DOCUMENTATION.md` (REST & Swagger)</span>
+            <span className="text-slate-600 font-medium">`docs/API_DOCUMENTATION.md` (38 REST endpoints)</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">Architecture Diagram</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">Architecture Diagram</span>
             </div>
-            <span className="text-textLight">`docs/architecture/system-architecture.md`</span>
+            <span className="text-slate-600 font-medium">`docs/architecture/system-architecture.md`</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">Database Schema</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">Database Schema</span>
             </div>
-            <span className="text-textLight">`docs/architecture/DATABASE_SCHEMA.md`</span>
+            <span className="text-slate-600 font-medium">`docs/architecture/DATABASE_SCHEMA.md`</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">Testing Report</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">Testing Report</span>
             </div>
-            <span className="text-textLight">`docs/TESTING_REPORT.md` (JUnit & coverage)</span>
+            <span className="text-slate-600 font-medium">`docs/TESTING_REPORT.md` (JUnit & coverage)</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-[10px]">&check;</span>
-              <span className="font-bold text-textMain">Change Log</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs">&check;</span>
+              <span className="font-extrabold text-slate-900">Change Log</span>
             </div>
-            <span className="text-textLight">`CHANGELOG.md` (Semantic versioning)</span>
+            <span className="text-slate-600 font-medium">`CHANGELOG.md` (Semantic versioning)</span>
           </div>
         </div>
 
         <div className="p-4 rounded-2xl bg-primary/5 border border-primary/20 text-center text-xs text-primary font-bold">
-          ⭐ Bonus Deliverables: `docs/CUSOC_FINAL_EVALUATION.md` • `docs/Campus_Accessibility_Audit_Survey.xlsx` • `docs/DEPLOYMENT.md` • `SECURITY.md`
+          ⭐ Additional Deliverables: `docs/VPAT_ACCESSIBILITY_CONFORMANCE.md` • `docs/Campus_Accessibility_Audit_Survey.xlsx` • `docs/CAMPUS_INCLUSION_POLICY_RECOMMENDATIONS.md`
         </div>
       </div>
     )
   },
   {
     id: 7,
-    category: 'Requirements & Milestone Verification',
-    title: 'CUSoC Deliverable & Verification Matrix',
-    subtitle: 'Comprehensive Fulfillment of Foundation, Product Engineering & Production Milestones',
+    category: 'Evaluation & Live Platform Access',
+    title: 'Ready for Live Evaluation & Demonstration',
+    subtitle: 'Production-Hardened, Fully Tested, and Ready for Review by the CUSoC Panel',
     content: (
-      <div className="max-w-5xl mx-auto space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Engineering Velocity</p>
-            <p className="text-xl font-bold text-primary my-1">640+ Commits</p>
-            <p className="text-[11px] text-textLight">Granular Git history & CI/CD pipeline</p>
+      <div className="max-w-4xl mx-auto space-y-6">
+        <motion.div 
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="p-8 rounded-3xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white shadow-2xl text-center space-y-5"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 text-white font-bold text-xs uppercase tracking-wider">
+            <Award size={16} /> Evaluation Ready: Complete CUSoC Deliverable Suite
           </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Product Engineering</p>
-            <p className="text-xl font-bold text-primary my-1">Full-Stack Core</p>
-            <p className="text-[11px] text-textLight">Spring Boot 3, Neon DB, React 18 & RBAC</p>
-          </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Quarterly Milestones</p>
-            <p className="text-xl font-bold text-primary my-1">Q1 • Q2 • Q3</p>
-            <p className="text-[11px] text-textLight">Statutory audit, platform & deployment</p>
-          </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Ground Research</p>
-            <p className="text-xl font-bold text-primary my-1">29 Buildings</p>
-            <p className="text-[11px] text-textLight">1,218 checkpoints & 187 barriers audited</p>
-          </div>
-          <div className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm text-center">
-            <p className="text-xs font-bold text-textLight uppercase">Authorship & Viva</p>
-            <p className="text-xl font-bold text-primary my-1">100% Solo</p>
-            <p className="text-[11px] text-textLight">Authentic field research & full codebase</p>
-          </div>
-        </div>
-
-        <div className="p-6 rounded-3xl bg-gradient-to-r from-red-600 to-rose-700 text-white shadow-xl text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white font-bold text-xs uppercase tracking-wider">
-            <Award size={14} /> Evaluation Ready: Complete CUSoC Deliverable Suite
-          </div>
-          <h3 className="text-2xl sm:text-3xl font-heading font-extrabold">
-            Ready for Live Evaluation & Demonstration
+          <h3 className="text-3xl sm:text-4xl font-heading font-black">
+            Experience the Live Web Application
           </h3>
-          <p className="text-sm text-white/90 max-w-2xl mx-auto leading-relaxed">
-            All code is fully tested, containerized with Docker, covered by CI/CD, and live in this deployment.
+          <p className="text-sm sm:text-base text-white/95 max-w-2xl mx-auto leading-relaxed font-medium">
+            Explore the 29 campus building benchmarks, conduct live audits, test wheelchair navigation routing, or review the 5-stage maintenance roadmap.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <Link to="/login">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl font-bold text-base bg-white text-primary hover:bg-gray-100 shadow-xl transition-all duration-200 active:scale-95 cursor-pointer"
-              >
-                <span>Go to Live Platform (Login)</span>
-                <ArrowRight size={20} className="text-primary" />
-              </button>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 max-w-xl mx-auto text-left">
+            <Link to="/login" className="block">
+              <div className="p-4 rounded-2xl bg-white text-slate-900 hover:bg-slate-50 transition-all shadow-md active:scale-98">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm font-heading">Sign In / Demo Roles</span>
+                  <ArrowRight size={18} className="text-primary" />
+                </div>
+                <p className="text-[11px] text-slate-600 mt-1">Pre-configured 1-click login for all 4 roles</p>
+              </div>
             </Link>
-            <Link to="/map">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl font-bold text-base bg-white/15 text-white border border-white/30 hover:bg-white/25 shadow-lg transition-all duration-200 active:scale-95 cursor-pointer"
-              >
-                <Map size={20} className="text-white" />
-                <span>Explore Campus Map</span>
-              </button>
+
+            <Link to="/map" className="block">
+              <div className="p-4 rounded-2xl bg-white/15 border border-white/30 text-white hover:bg-white/25 transition-all shadow-md active:scale-98">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm font-heading">Interactive Campus Map</span>
+                  <Map size={18} className="text-white" />
+                </div>
+                <p className="text-[11px] text-white/80 mt-1">29 building pins & accessible routing</p>
+              </div>
+            </Link>
+
+            <Link to="/audits" className="block">
+              <div className="p-4 rounded-2xl bg-white/15 border border-white/30 text-white hover:bg-white/25 transition-all shadow-md active:scale-98">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm font-heading">Audit Conductor</span>
+                  <ClipboardCheck size={18} className="text-white" />
+                </div>
+                <p className="text-[11px] text-white/80 mt-1">42-parameter checklist with autosave</p>
+              </div>
+            </Link>
+
+            <Link to="/dashboard" className="block">
+              <div className="p-4 rounded-2xl bg-white/15 border border-white/30 text-white hover:bg-white/25 transition-all shadow-md active:scale-98">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm font-heading">Executive Dashboard</span>
+                  <BarChart3 size={18} className="text-white" />
+                </div>
+                <p className="text-[11px] text-white/80 mt-1">Real-time compliance analytics & charts</p>
+              </div>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     )
   }
@@ -444,6 +549,7 @@ const SLIDES = [
 
 const ProjectPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const navigate = useNavigate();
 
   const handleNext = () => {
@@ -458,6 +564,26 @@ const ProjectPresentation = () => {
     }
   };
 
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+        setIsFullscreen(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const handleFsChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', handleFsChange);
+    return () => document.removeEventListener('fullscreenchange', handleFsChange);
+  }, []);
+
   useEffect(() => {
     // Proactively warm up backend service on Render
     api.get('/health').catch(() => {});
@@ -471,7 +597,11 @@ const ProjectPresentation = () => {
       } else if (e.key === 'ArrowLeft') {
         handlePrev();
       } else if (e.key === 'Escape') {
-        navigate('/');
+        if (!document.fullscreenElement) {
+          navigate('/');
+        }
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -479,18 +609,18 @@ const ProjectPresentation = () => {
   }, [currentSlide]);
 
   return (
-    <div className="min-h-screen bg-background text-textMain flex flex-col font-sans select-text">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans select-text">
       {/* Top Presentation Bar */}
-      <header className="glass sticky top-0 z-50 border-b border-gray-100/50 px-6 py-3.5 flex justify-between items-center">
+      <header className="glass sticky top-0 z-50 border-b border-slate-200/80 px-6 py-3.5 flex justify-between items-center backdrop-blur-md bg-white/85">
         <div className="flex items-center gap-3">
-          <Link to="/" className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white font-bold font-heading hover:scale-105 transition-transform">
+          <Link to="/" className="w-10 h-10 rounded-2xl bg-primary flex items-center justify-center text-white font-black font-heading hover:scale-105 transition-transform shadow-md shadow-primary/20">
             CU
           </Link>
           <div>
-            <span className="font-heading font-bold text-sm tracking-tight text-textMain">
-              CUSoC '26 <span className="text-primary">Evaluation Deck</span>
+            <span className="font-heading font-extrabold text-sm sm:text-base tracking-tight text-slate-900">
+              CUSoC '26 <span className="text-primary font-black">Evaluation Deck</span>
             </span>
-            <span className="hidden sm:inline-block ml-2 text-xs text-textLight font-medium">
+            <span className="hidden sm:inline-block ml-2 text-xs text-slate-500 font-semibold">
               &bull; S-06 Accessibility Drive
             </span>
           </div>
@@ -502,22 +632,33 @@ const ProjectPresentation = () => {
             <button
               key={slide.id}
               onClick={() => setCurrentSlide(index)}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              className={`h-2.5 rounded-full transition-all duration-300 ${
                 index === currentSlide 
-                  ? 'w-7 bg-primary' 
-                  : 'w-2 bg-gray-200 hover:bg-gray-300'
+                  ? 'w-8 bg-primary shadow-sm' 
+                  : 'w-2.5 bg-slate-200 hover:bg-slate-300'
               }`}
               title={`Slide ${index + 1}: ${slide.category}`}
             />
           ))}
-          <span className="ml-3 text-xs font-bold text-textLight font-mono">
+          <span className="ml-3 text-xs font-bold text-slate-600 font-mono">
             {currentSlide + 1} / {SLIDES.length}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
+          <Button 
+            variant="outline" 
+            size="xs" 
+            icon={isFullscreen ? Minimize : Maximize}
+            onClick={toggleFullscreen}
+            className="hidden sm:inline-flex border-slate-200 hover:bg-slate-100 text-slate-700"
+            title="Toggle Fullscreen (F)"
+          >
+            {isFullscreen ? 'Exit Full' : 'Fullscreen'}
+          </Button>
+
           <Link to="/">
-            <Button variant="secondary" size="xs" icon={Home}>
+            <Button variant="secondary" size="xs" icon={Home} className="bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800">
               Exit Deck
             </Button>
           </Link>
@@ -525,31 +666,31 @@ const ProjectPresentation = () => {
       </header>
 
       {/* Main Slide Content Canvas */}
-      <main className="flex-1 flex flex-col justify-center px-6 py-8 max-w-6xl w-full mx-auto">
+      <main className="flex-1 flex flex-col justify-center px-4 sm:px-8 py-8 max-w-7xl w-full mx-auto">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
             className="flex flex-col space-y-6"
           >
             {/* Slide Header */}
-            <div className="text-center space-y-1">
-              <span className="text-xs font-bold text-primary uppercase tracking-widest">
+            <div className="text-center space-y-1.5 max-w-3xl mx-auto">
+              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs uppercase tracking-widest">
                 {SLIDES[currentSlide].category}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-textMain tracking-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-slate-900 tracking-tight">
                 {SLIDES[currentSlide].title}
               </h2>
-              <p className="text-xs sm:text-sm text-textLight font-medium">
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
                 {SLIDES[currentSlide].subtitle}
               </p>
             </div>
 
             {/* Slide Body */}
-            <div className="py-2">
+            <div className="py-2 w-full">
               {SLIDES[currentSlide].content}
             </div>
           </motion.div>
@@ -557,19 +698,26 @@ const ProjectPresentation = () => {
       </main>
 
       {/* Bottom Navigation Dock */}
-      <footer className="glass sticky bottom-0 z-50 border-t border-gray-100/50 px-6 py-3.5 flex justify-between items-center">
+      <footer className="glass sticky bottom-0 z-50 border-t border-slate-200/80 px-6 py-3.5 flex justify-between items-center backdrop-blur-md bg-white/85">
         <Button 
           variant="secondary" 
           size="sm" 
           icon={ChevronLeft} 
           onClick={handlePrev} 
           disabled={currentSlide === 0}
+          className="bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800"
         >
           Previous
         </Button>
 
-        <div className="text-xs text-textLight hidden sm:block">
-          Use <kbd className="px-2 py-0.5 rounded bg-gray-100 border text-gray-700 font-mono text-[11px]">Left</kbd> and <kbd className="px-2 py-0.5 rounded bg-gray-100 border text-gray-700 font-mono text-[11px]">Right</kbd> arrow keys to navigate
+        <div className="text-xs text-slate-500 font-medium hidden sm:flex items-center gap-2">
+          <span>Navigate with</span>
+          <kbd className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px]">Left</kbd>
+          <kbd className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px]">Right</kbd>
+          <kbd className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px]">Space</kbd>
+          <span>&bull;</span>
+          <kbd className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px]">F</kbd>
+          <span>Fullscreen</span>
         </div>
 
         {currentSlide < SLIDES.length - 1 ? (
