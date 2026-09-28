@@ -29,3 +29,6 @@ docker-compose.override.yml
 
 # Temporary data files
 runs.json
+.neon
+.env.local
+node_modules/
