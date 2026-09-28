@@ -1,0 +1,274 @@
+{
+  "info": {
+    "name": "AccessAudit Enterprise REST API (Track S-06)",
+    "description": "Comprehensive Postman Collection covering all 38 RESTful endpoints of the AccessAudit Spring Boot 3.4.1 backend platform.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://s-06-accessibility-audit-inclusion.onrender.com/api",
+      "type": "string"
+    },
+    {
+      "key": "jwtToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication & Authorization",
+      "item": [
+        {
+          "name": "User Sign In (JWT Login)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@campus.edu\",\n  \"password\": \"admin123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "User Registration (Sign Up)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Jane Doe\",\n  \"email\": \"jane.doe@campus.edu\",\n  \"password\": \"Password123!\",\n  \"role\": \"STUDENT\",\n  \"department\": \"CSE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Get Authenticated User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Building Management",
+      "item": [
+        {
+          "name": "Get All Buildings (with Filters)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/buildings",
+              "host": ["{{baseUrl}}"],
+              "path": ["buildings"]
+            }
+          }
+        },
+        {
+          "name": "Get Building by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/buildings/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["buildings", "1"]
+            }
+          }
+        },
+        {
+          "name": "Create New Campus Building (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"buildingName\": \"Biotechnology Innovation Block\",\n  \"buildingCode\": \"BIO-01\",\n  \"description\": \"Research and advanced laboratory block\",\n  \"location\": \"North Campus Cluster\",\n  \"numberOfFloors\": 4,\n  \"status\": \"ACTIVE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/buildings",
+              "host": ["{{baseUrl}}"],
+              "path": ["buildings"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Audit & Checklist Operations",
+      "item": [
+        {
+          "name": "Get All Audits",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/audits",
+              "host": ["{{baseUrl}}"],
+              "path": ["audits"]
+            }
+          }
+        },
+        {
+          "name": "Get Audit by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/audits/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["audits", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Audit Checklist Parameters",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/audit-checklists",
+              "host": ["{{baseUrl}}"],
+              "path": ["audit-checklists"]
+            }
+          }
+        },
+        {
+          "name": "Save Audit Draft Responses",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"buildingId\": 1,\n  \"auditorId\": 2,\n  \"remarks\": \"Ramp gradient exceeds 1:12; recommended for immediate retrofit.\",\n  \"responses\": [\n    { \"checklistId\": 1, \"score\": 4, \"comments\": \"Step-free entrance installed\" },\n    { \"checklistId\": 2, \"score\": 2, \"comments\": \"Ramp slope too steep\" }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/audits/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["audits", "1"]
+            }
+          }
+        },
+        {
+          "name": "Submit Completed Audit",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/audits/1/submit",
+              "host": ["{{baseUrl}}"],
+              "path": ["audits", "1", "submit"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Barrier Issue Reporting & Remediation",
+      "item": [
+        {
+          "name": "Get All Reported Barriers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/issues",
+              "host": ["{{baseUrl}}"],
+              "path": ["issues"]
+            }
+          }
+        },
+        {
+          "name": "Report New Accessibility Barrier",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Damaged tactile ground tiles near Block D elevator\",\n  \"description\": \"Warning tactile studs broken and loose, creating a tripping hazard.\",\n  \"buildingId\": 4,\n  \"location\": \"Ground Floor Lift Lobby\",\n  \"severity\": \"MEDIUM\",\n  \"category\": \"Tactile Paths\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues",
+              "host": ["{{baseUrl}}"],
+              "path": ["issues"]
+            }
+          }
+        },
+        {
+          "name": "Update Remediation Status (Kanban)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwtToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"IN_PROGRESS\",\n  \"remarks\": \"Maintenance team dispatched for tile replacement.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/issues/1/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["issues", "1", "status"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics & Compliance Radar",
+      "item": [
+        {
+          "name": "Get Executive Dashboard Statistics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/analytics/dashboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["analytics", "dashboard"]
+            }
+          }
+        },
+        {
+          "name": "Get Departmental Compliance Radar",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/analytics/departments",
+              "host": ["{{baseUrl}}"],
+              "path": ["analytics", "departments"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
