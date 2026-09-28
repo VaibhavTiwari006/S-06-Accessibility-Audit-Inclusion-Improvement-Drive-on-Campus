@@ -8,6 +8,7 @@ import {
   Mail, Lock, Eye, EyeOff
 } from 'lucide-react';
 import Alert from '../components/ui/Alert';
+import api from '../services/api';
 
 const ROLE_OPTIONS = [
   {
@@ -68,6 +69,7 @@ const Login = () => {
   const [selectedRole, setSelectedRole] = useState(initialRole);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittingStatus, setSubmittingStatus] = useState('');
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -79,11 +81,16 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
+    // Proactively warm up backend service on Render to eliminate cold-start delay
+    api.get('/health').catch(() => {});
+  }, []);
+
+  useEffect(() => {
     if (selectedRole) {
       const opt = ROLE_OPTIONS.find(r => r.role === selectedRole);
       if (opt) {
         setEmail(opt.email);
-        setPassword(opt.password);
+        setPassword(''); // Password must NOT be prefilled - user inputs manually
       }
     } else {
       setEmail('');
@@ -93,14 +100,28 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!password) {
+      setError('Please enter your password.');
+      return;
+    }
     setError('');
     setIsSubmitting(true);
+    setSubmittingStatus('Verifying credentials...');
+
+    // If server cold start is taking time, update status message
+    const timer = setTimeout(() => {
+      setSubmittingStatus('Connecting to cloud server... (waking up instance)');
+    }, 2500);
+
     const result = await login(email, password);
+    clearTimeout(timer);
+
     if (result.success) {
       navigate('/dashboard');
     } else {
-      setError('Wrong login credentials, please try again.');
+      setError(result.message || 'Wrong login credentials, please try again.');
       setIsSubmitting(false);
+      setSubmittingStatus('');
     }
   };
 
@@ -269,27 +290,34 @@ const Login = () => {
                       </div>
 
                       {/* Password Field */}
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
-                          <Lock size={18} />
+                      <div className="space-y-1.5">
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400">
+                            <Lock size={18} />
+                          </div>
+                          <input
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            autoComplete="new-password"
+                            className="w-full pl-11 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
+                            placeholder="Enter password"
+                            aria-label="Password"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+                            aria-label={showPassword ? 'Hide password' : 'Show password'}
+                          >
+                            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                          </button>
                         </div>
-                        <input
-                          type={showPassword ? "text" : "password"}
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
-                          className="w-full pl-11 pr-12 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-rose-500/50 focus:border-rose-500 font-medium transition-shadow shadow-sm"
-                          placeholder="Password"
-                          aria-label="Password"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
-                          aria-label={showPassword ? 'Hide password' : 'Show password'}
-                        >
-                          {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                        </button>
+                        <p className="text-xs text-gray-500 font-medium pl-1 flex items-center gap-1.5">
+                          <span>Demo password:</span>
+                          <code className="bg-gray-100 text-rose-600 px-1.5 py-0.5 rounded font-mono font-bold text-xs">{currentRole.password}</code>
+                        </p>
                       </div>
                     </div>
 
@@ -301,7 +329,7 @@ const Login = () => {
                       {isSubmitting ? (
                         <span className="flex items-center gap-2">
                           <span className="animate-spin w-4 h-4 border-2 border-white/40 border-t-white rounded-full" />
-                          Signing in...
+                          {submittingStatus || 'Signing in...'}
                         </span>
                       ) : (
                         <>
