@@ -1,0 +1,54 @@
+services:
+  # Spring Boot 3.4.1 (Java 21) Backend Web Service
+  - type: web
+    name: accessaudit-backend
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    region: oregon
+    healthCheckPath: /api/buildings
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: accessaudit-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: accessaudit-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: accessaudit-db
+          property: password
+      - key: APP_JWT_SECRET
+        generateValue: true
+
+  # React 18 + Vite Frontend Static Site
+  - type: web
+    name: accessaudit-frontend
+    env: static
+    plan: free
+    region: oregon
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: accessaudit-backend
+          property: host
+
+databases:
+  # PostgreSQL 16 Free Database
+  - name: accessaudit-db
+    databaseName: accessaudit
+    user: postgres
+    plan: free
+    region: oregon
