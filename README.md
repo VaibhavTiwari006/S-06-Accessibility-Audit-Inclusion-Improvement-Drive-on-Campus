@@ -15,25 +15,24 @@
 
 ---
 
-## 🏆 CUSoC 2026 Finalist Project & Evaluation Showcase
+## 🏆 CUSoC 2026 Grand Final Showcase & Verification Matrix
 
 > **Track S-06:** Accessibility Audit & Inclusion Improvement Drive on Campus  
 > **Host Organization:** C Square Club & Chandigarh University  
 > **Institutional Standing:** QS World University Rankings 2026 Global Rank **#575** | NIRF Ranked **#19** in India  
-> **Sole Contributor & Researcher:** **Vaibhav Tiwari** (100% Individual Authorship)  
-> **Target Evaluation Band:** **Grade A+ (Elite Contributor, 950–1000 Marks / 95–100%)**  
-> **Evaluator Suite:** [**Launch Live Deck (`/presentation`)**](http://localhost:3000/presentation) &bull; [**Final Dossier**](docs/CUSOC_FINAL_EVALUATION.md) &bull; [**1000-Mark Scorecard**](docs/EVALUATION_SCORECARD.md) &bull; [**Viva Voce Defense Guide**](docs/VIVA_VOCE_DEFENSE.md)
+> **Sole Contributor & Researcher:** **Vaibhav Tiwari** (100% Individual Authorship & Engineering)  
+> **Production Status:** Production Ready & Live Deployed &bull; Multi-Cloud Serverless Architecture  
+> **Executive Suite:** [**Launch Live Web Platform**](https://frontend-six-sigma-33.vercel.app) &bull; [**Interactive Presentation Deck**](https://frontend-six-sigma-33.vercel.app/presentation) &bull; [**Final Dossier**](docs/CUSOC_FINAL_EVALUATION.md) &bull; [**Viva Voce Defense Guide**](docs/VIVA_VOCE_DEFENSE.md)
 
-### 📊 CUSoC 1000-Mark Evaluation Framework Alignment
+### 📋 CUSoC Milestone & Deliverable Verification Matrix
 
-| Evaluation Component | Marks | Weightage | Target | Status & Key Verifications |
-|:---|:---:|:---:|:---:|:---|
-| **Bi-Weekly Evaluation Aggregate** | 250 | 25% | **250** | ✅ **630+ Git Commits**; continuous atomic push history; automated GitHub Actions CI/CD build passing. |
-| **Monthly / Mid-Term Engineering Reviews** | 250 | 25% | **250** | ✅ Production Spring Boot 3.4.1 REST API, PostgreSQL relational schema, React 18 UI components, and RBAC. |
-| **Quarterly Evaluations (Q1, Q2, Q3)** | 250 | 25% | **250** | ✅ Foundation (Q1) &rarr; Product Engineering & Cyber Security (Q2) &rarr; Production Deployment & Real Map (Q3). |
-| **Final Project Demo & Technical Report** | 150 | 15% | **150** | ✅ Interactive slide deck at [`/presentation`](http://localhost:3000/presentation) & 400-line [`docs/TECHNICAL_REPORT.md`](docs/TECHNICAL_REPORT.md). |
-| **Mentor Evaluation & Viva Voce** | 100 | 10% | **100** | ✅ 100% original solo contribution by Vaibhav Tiwari; [`docs/VIVA_VOCE_DEFENSE.md`](docs/VIVA_VOCE_DEFENSE.md) preparation. |
-| **TOTAL SCORE** | **1000** | **100%** | **1000 (A+)** | 🏆 **Elite Contributor Band (95–100%)** |
+| Milestone & Deliverable Pillar | Scope & Technical Focus | Verification & Proof Artifact |
+|:---|:---|:---|
+| **Engineering Velocity & CI/CD** | Continuous atomic version control, test-driven rigor, and build automation | ✅ **650+ Git Commits** with granular atomic commit hygiene; passing GitHub Actions automated CI/CD pipeline. |
+| **Full-Stack Enterprise Architecture** | Production-grade Spring Boot 3.4.1 backend, PostgreSQL 16 relational model, React 18 SPA | ✅ Production REST API, normalized schema (29 buildings, 42-parameter checklists), JWT authentication & 4-role RBAC. |
+| **Quarterly Milestone Completion (Q1–Q3)** | Statutory research (Q1) &rarr; Product engineering & cybersecurity (Q2) &rarr; Cloud deployment & GIS routing (Q3) | ✅ Foundation, cybersecurity hardening (rate limiting, brute-force guard, XSS sanitize, CSP), and serverless cloud deployment complete. |
+| **Empirical Ground Research** | Comprehensive on-site physical auditing of Chandigarh University infrastructure | ✅ **29 campus buildings surveyed**, 1,218 audited checkpoints, 187 discovered physical barriers, and 400-line empirical technical report. |
+| **Live Production Cloud Deployment** | Zero-downtime, fully accessible web service deployed on modern cloud infrastructure | ✅ Live on Render (Java 21 container) + Neon Serverless PostgreSQL 16 + Vercel Edge CDN with responsive UX. |
 
 ---
 
@@ -53,13 +52,15 @@ docker-compose up -d --build
 - 🔗 Backend API: http://localhost:8080/api
 - 📖 API Docs: http://localhost:8080/swagger-ui.html
 
-**Default Credentials:**
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@campus.edu | password |
-| Auditor | auditor@campus.edu | password |
-| Student | student@campus.edu | password |
-| Maintenance | maintenance@campus.edu | password |
+**Default Demonstration Credentials:**
+| Role | Email | Password | Access Scope |
+|------|-------|----------|--------------|
+| **Admin** | `admin@campus.edu` | `admin123` | System settings, analytics radar, user permissions |
+| **Auditor** | `auditor@campus.edu` | `auditor123` | Checklist conduct, campus mapping, evidence logging |
+| **Student** | `student@campus.edu` | `student123` | Barrier reporting, community feedback, awareness quiz |
+| **Maintenance** | `maintenance@campus.edu` | `maintenance123` | 5-stage Kanban remediation board, ticket updates |
+
+> 💡 **Public Self-Registration Available:** Any student or faculty member can create an account directly via the in-app **Sign Up** tab on the authentication portal. Single-click demo role switching is also available on the login page for rapid review.
 
 ---
 
@@ -398,8 +399,8 @@ Detailed project documentation is available below.
 
 | Document | Description |
 |----------|-------------|
-| [🏆 CUSoC Final Evaluation Dossier](docs/CUSOC_FINAL_EVALUATION.md) | Official 1000-mark evaluation framework mapping and live demo script |
-| [💯 1000-Mark Evaluation Scorecard](docs/EVALUATION_SCORECARD.md) | Verifiable proof matrix and repository audit trail for CUSoC evaluators |
+| [🏆 CUSoC Final Evaluation Dossier](docs/CUSOC_FINAL_EVALUATION.md) | Official CUSoC milestone evaluation framework mapping and live demo script |
+| [📋 CUSoC Milestone Verification Matrix](docs/EVALUATION_SCORECARD.md) | Verifiable deliverable matrix and repository audit trail for CUSoC evaluators |
 | [🎓 Viva Voce & Technical Defense](docs/VIVA_VOCE_DEFENSE.md) | 25 in-depth technical Q&A defense answers covering architecture, law, and security |
 | [📊 Campus Audit Survey Dataset](docs/Campus_Accessibility_Audit_Survey.xlsx) | Complete quantitative Excel audit dataset across 29 buildings |
 | [📋 Technical Report](docs/TECHNICAL_REPORT.md) | Comprehensive project report with empirical field research analysis |
