@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import usePageTitle from '../hooks/usePageTitle';
 import { useAuth } from '../context/AuthContext';
 import ScoreCard from '../components/ScoreCard';
-import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, Camera, Trophy, BookOpen } from 'lucide-react';
+import { Building2, ClipboardList, AlertCircle, CheckCircle, Wrench, Users, Info, HeartHandshake, FileText, Camera, Trophy, BookOpen, Award, ArrowRight } from 'lucide-react';
 import dashboardService from '../services/dashboardService';
 import InclusionLeaderboard from '../components/InclusionLeaderboard';
 import AccessibilityTrendsChart from '../components/AccessibilityTrendsChart';
@@ -26,24 +26,37 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
 };
 
-const DashboardHero = ({ title, subtitle, bgClass = 'bg-primary' }) => (
-  <motion.div 
-    initial={{ opacity: 0, scale: 0.98 }} 
-    animate={{ opacity: 1, scale: 1 }} 
-    transition={{ duration: 0.4, ease: 'easeOut' }} 
-    className="relative w-full rounded-2xl overflow-hidden mb-6 p-6 md:p-8 shadow-sm group border border-white/10"
-  >
-    <div 
-      className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay transition-transform duration-700 group-hover:scale-105"
-      style={{ backgroundImage: "url('/campus_bg.jpg')" }}
-    ></div>
-    <div className={`absolute inset-0 ${bgClass}`}></div>
-    <div className="relative z-10 flex flex-col justify-start">
-      <h1 className="text-3xl md:text-4xl font-heading font-black text-white tracking-tight mb-2 drop-shadow-xs">{title}</h1>
-      <p className="text-white/95 font-bold max-w-2xl text-sm md:text-base leading-snug drop-shadow-xs">{subtitle}</p>
-    </div>
-  </motion.div>
-);
+const DashboardHero = ({ title, subtitle, bgClass = 'bg-primary' }) => {
+  const navigate = useNavigate();
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.98 }} 
+      animate={{ opacity: 1, scale: 1 }} 
+      transition={{ duration: 0.4, ease: 'easeOut' }} 
+      className="relative w-full rounded-2xl overflow-hidden mb-6 p-6 md:p-8 shadow-sm group border border-white/10"
+    >
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay transition-transform duration-700 group-hover:scale-105"
+        style={{ backgroundImage: "url('/campus_bg.jpg')" }}
+      ></div>
+      <div className={`absolute inset-0 ${bgClass}`}></div>
+      <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl md:text-4xl font-heading font-black text-white tracking-tight mb-2 drop-shadow-xs">{title}</h1>
+          <p className="text-white/95 font-bold max-w-2xl text-sm md:text-base leading-snug drop-shadow-xs">{subtitle}</p>
+        </div>
+        <button
+          onClick={() => navigate('/presentation')}
+          className="self-start md:self-center px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white text-white hover:text-primary font-bold text-xs sm:text-sm border border-white/30 hover:border-white transition-all shadow-md flex items-center gap-2 cursor-pointer shrink-0"
+        >
+          <Award size={16} />
+          <span>CUSoC Presentation Deck</span>
+          <ArrowRight size={14} />
+        </button>
+      </div>
+    </motion.div>
+  );
+};
 
 // ─────────────────────────── Admin ────────────────────────────
 const AdminDashboard = ({ stats, navigate }) => (
