@@ -27,7 +27,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Reports',    path: '/reports',   icon: BarChart3,       roles: ['ADMIN', 'AUDITOR'] },
     { name: 'Awareness',  path: '/awareness', icon: BookOpen,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Community',  path: '/community', icon: HeartHandshake,  roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
-    { name: 'CUSoC Presentation', path: '/presentation', icon: Award, roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
     { name: 'Quiz Challenge', path: '/quiz',   icon: Trophy,          roles: ['STUDENT'] },
     { name: 'Verbal Audio Map', path: '/verbal-map', icon: Compass,   roles: ['ADMIN', 'STUDENT', 'AUDITOR', 'MAINTENANCE'] },
     { name: 'Settings',   path: '/settings',  icon: Settings,        roles: ['ADMIN', 'AUDITOR', 'STUDENT', 'MAINTENANCE'] },
