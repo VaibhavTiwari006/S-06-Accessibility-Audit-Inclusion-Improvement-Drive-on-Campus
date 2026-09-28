@@ -514,21 +514,134 @@
     border-color: rgba(16, 185, 129, 0.25) !important;
   }
 
-  /* Transparent and Gradient Text Visibility Dark Mode Overrides */
-  body.dark-mode .text-transparent,
-  body.dark-mode .gradient-text {
-    color: transparent !important;
+  /* Transparent and Gradient Text Visibility Dark Mode Overrides - FULL HIGH-CONTRAST CLIPPING */
+  body.dark-mode .hero-gradient-text,
+  body.dark-mode .gradient-text,
+  body.dark-mode .bg-clip-text,
+  body.dark-mode [class*="bg-clip-text"] {
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+    display: inline-block;
   }
 
-  /* Hero Gradient Text visibility and color in Dark Mode */
+  /* Hero Gradient Text: vibrant, high-contrast rose-red to pastel glow in Dark Mode */
   body.dark-mode .hero-gradient-text {
-    color: transparent !important;
+    background-image: linear-gradient(135deg, #f87171 0%, #fb7185 45%, #fecdd3 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
-    background-image: linear-gradient(to right, #ef4444, #f87171, #fca5a5) !important;
+    color: transparent !important;
     display: inline-block !important;
   }
   
+  body.dark-mode .gradient-text {
+    background-image: linear-gradient(135deg, #f87171 0%, #fb7185 50%, #fca5a5 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+
+  /* Brand Primary High-Contrast Visibility in Dark Mode */
+  body.dark-mode .text-primary {
+    color: #f87171 !important;
+  }
+  body.dark-mode .border-primary {
+    border-color: #f87171 !important;
+  }
+  body.dark-mode .border-primary\/20 {
+    border-color: rgba(248, 113, 113, 0.35) !important;
+  }
+  body.dark-mode .border-primary\/30 {
+    border-color: rgba(248, 113, 113, 0.45) !important;
+  }
+  body.dark-mode .border-primary\/40 {
+    border-color: rgba(248, 113, 113, 0.55) !important;
+  }
+  body.dark-mode .bg-primary\/10 {
+    background-color: rgba(248, 113, 113, 0.15) !important;
+  }
+  body.dark-mode .bg-primary\/20 {
+    background-color: rgba(248, 113, 113, 0.25) !important;
+  }
+
+  /* High Contrast Dark Mode Text Color Adaptations */
+  body.dark-mode .text-slate-900 { color: #f8fafc !important; }
+  body.dark-mode .text-slate-800 { color: #f1f5f9 !important; }
+  body.dark-mode .text-slate-700 { color: #e2e8f0 !important; }
+  body.dark-mode .text-slate-600 { color: #cbd5e1 !important; }
+  body.dark-mode .text-slate-500 { color: #94a3b8 !important; }
+
+  body.dark-mode .text-rose-900,
+  body.dark-mode .text-rose-800 { color: #fecdd3 !important; }
+  body.dark-mode .text-rose-700,
+  body.dark-mode .text-rose-600 { color: #fda4af !important; }
+
+  body.dark-mode .text-red-900,
+  body.dark-mode .text-red-800 { color: #fee2e2 !important; }
+  body.dark-mode .text-red-700,
+  body.dark-mode .text-red-600 { color: #fca5a5 !important; }
+
+  body.dark-mode .text-blue-900,
+  body.dark-mode .text-blue-800 { color: #dbeafe !important; }
+  body.dark-mode .text-blue-700,
+  body.dark-mode .text-blue-600 { color: #93c5fd !important; }
+
+  body.dark-mode .text-emerald-900,
+  body.dark-mode .text-emerald-800 { color: #d1fae5 !important; }
+  body.dark-mode .text-emerald-700,
+  body.dark-mode .text-emerald-600 { color: #6ee7b7 !important; }
+
+  body.dark-mode .text-amber-900,
+  body.dark-mode .text-amber-800 { color: #fef3c7 !important; }
+  body.dark-mode .text-amber-700,
+  body.dark-mode .text-amber-800,
+  body.dark-mode .text-amber-600 { color: #fcd34d !important; }
+
+  body.dark-mode .text-orange-900,
+  body.dark-mode .text-orange-800 { color: #ffedd5 !important; }
+  body.dark-mode .text-orange-700,
+  body.dark-mode .text-orange-600 { color: #fdba74 !important; }
+
+  body.dark-mode .text-purple-900,
+  body.dark-mode .text-purple-800 { color: #f3e8ff !important; }
+  body.dark-mode .text-purple-700,
+  body.dark-mode .text-purple-600 { color: #d8b4fe !important; }
+
+  body.dark-mode .text-sky-900,
+  body.dark-mode .text-sky-800 { color: #e0f2fe !important; }
+  body.dark-mode .text-sky-700,
+  body.dark-mode .text-sky-600 { color: #7dd3fc !important; }
+
+  /* Pill, Badge and Alert Containers in Dark Mode */
+  body.dark-mode .bg-rose-50 { background-color: rgba(244, 63, 94, 0.16) !important; color: #fda4af !important; border-color: rgba(244, 63, 94, 0.35) !important; }
+  body.dark-mode .bg-rose-100 { background-color: rgba(244, 63, 94, 0.25) !important; color: #fda4af !important; border-color: rgba(244, 63, 94, 0.45) !important; }
+  body.dark-mode .bg-red-50 { background-color: rgba(239, 68, 68, 0.16) !important; color: #fca5a5 !important; border-color: rgba(239, 68, 68, 0.35) !important; }
+  body.dark-mode .bg-red-100 { background-color: rgba(239, 68, 68, 0.25) !important; color: #fca5a5 !important; border-color: rgba(239, 68, 68, 0.45) !important; }
+  body.dark-mode .bg-blue-50 { background-color: rgba(59, 130, 246, 0.16) !important; color: #93c5fd !important; border-color: rgba(59, 130, 246, 0.35) !important; }
+  body.dark-mode .bg-blue-100 { background-color: rgba(59, 130, 246, 0.25) !important; color: #93c5fd !important; border-color: rgba(59, 130, 246, 0.45) !important; }
+  body.dark-mode .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.16) !important; color: #6ee7b7 !important; border-color: rgba(16, 185, 129, 0.35) !important; }
+  body.dark-mode .bg-emerald-100 { background-color: rgba(16, 185, 129, 0.25) !important; color: #6ee7b7 !important; border-color: rgba(16, 185, 129, 0.45) !important; }
+  body.dark-mode .bg-amber-50 { background-color: rgba(245, 158, 11, 0.16) !important; color: #fcd34d !important; border-color: rgba(245, 158, 11, 0.35) !important; }
+  body.dark-mode .bg-amber-100 { background-color: rgba(245, 158, 11, 0.25) !important; color: #fcd34d !important; border-color: rgba(245, 158, 11, 0.45) !important; }
+  body.dark-mode .bg-orange-50 { background-color: rgba(249, 115, 22, 0.16) !important; color: #fdba74 !important; border-color: rgba(249, 115, 22, 0.35) !important; }
+  body.dark-mode .bg-orange-100 { background-color: rgba(249, 115, 22, 0.25) !important; color: #fdba74 !important; border-color: rgba(249, 115, 22, 0.45) !important; }
+  body.dark-mode .bg-purple-50 { background-color: rgba(168, 85, 247, 0.16) !important; color: #d8b4fe !important; border-color: rgba(168, 85, 247, 0.35) !important; }
+  body.dark-mode .bg-purple-100 { background-color: rgba(168, 85, 247, 0.25) !important; color: #d8b4fe !important; border-color: rgba(168, 85, 247, 0.45) !important; }
+  body.dark-mode .bg-sky-50 { background-color: rgba(14, 165, 233, 0.16) !important; color: #7dd3fc !important; border-color: rgba(14, 165, 233, 0.35) !important; }
+  body.dark-mode .bg-sky-100 { background-color: rgba(14, 165, 233, 0.25) !important; color: #7dd3fc !important; border-color: rgba(14, 165, 233, 0.45) !important; }
+
+  /* Light Border Overrides in Dark Mode */
+  body.dark-mode .border-rose-100, body.dark-mode .border-rose-200 { border-color: rgba(244, 63, 94, 0.3) !important; }
+  body.dark-mode .border-blue-100, body.dark-mode .border-blue-200 { border-color: rgba(59, 130, 246, 0.3) !important; }
+  body.dark-mode .border-emerald-100, body.dark-mode .border-emerald-200 { border-color: rgba(16, 185, 129, 0.3) !important; }
+  body.dark-mode .border-amber-100, body.dark-mode .border-amber-200 { border-color: rgba(245, 158, 11, 0.3) !important; }
+  body.dark-mode .border-orange-100, body.dark-mode .border-orange-200 { border-color: rgba(249, 115, 22, 0.3) !important; }
+  body.dark-mode .border-purple-100, body.dark-mode .border-purple-200 { border-color: rgba(168, 85, 247, 0.3) !important; }
+  body.dark-mode .border-sky-100, body.dark-mode .border-sky-200 { border-color: rgba(14, 165, 233, 0.3) !important; }
+
   /* Stage Button Overrides */
   body.dark-mode .bg-blue-50 { background-color: rgba(37, 99, 235, 0.15) !important; color: #60a5fa !important; border-color: rgba(37, 99, 235, 0.3) !important; }
   body.dark-mode .bg-purple-50 { background-color: rgba(147, 51, 234, 0.15) !important; color: #c084fc !important; border-color: rgba(147, 51, 234, 0.3) !important; }
