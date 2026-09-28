@@ -63,6 +63,21 @@ docker-compose up -d --build
 
 ---
 
+## 🌐 100% Free Cloud Deployment ($0.00 / month)
+
+Deploy AccessAudit to the live public web completely free of cost with zero credit card required:
+
+- **Database:** [Neon.tech](https://neon.tech) (Free Serverless PostgreSQL 16)
+- **Backend API:** [Render.com](https://render.com) (Free Spring Boot Java 21 Web Service)
+- **Frontend SPA:** [Vercel](https://vercel.com) (Free React 18 Vite Global Edge CDN)
+
+👉 **Follow the step-by-step [100% Free Cloud Deployment Guide (`docs/FREE_DEPLOYMENT_GUIDE.md`)](docs/FREE_DEPLOYMENT_GUIDE.md)** for a 7-minute setup walkthrough!
+
+Or deploy directly via Render Blueprint:  
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+---
+
 ## 📌 Overview
 Accessibility is a fundamental requirement for creating an inclusive educational environment. Many students and staff with disabilities continue to experience barriers while accessing classrooms, laboratories, libraries, administrative offices, campus facilities, and digital platforms.
 
@@ -395,6 +410,7 @@ Detailed project documentation is available below.
 | [🗄️ Database Schema](docs/architecture/DATABASE_SCHEMA.md) | ER diagrams and table definitions |
 | [🧪 Testing Report](docs/TESTING_REPORT.md) | Test strategy and results |
 | [🚀 Deployment Guide](docs/DEPLOYMENT.md) | Production deployment with Docker & Nginx |
+| [🌐 Free Cloud Deployment Guide](docs/FREE_DEPLOYMENT_GUIDE.md) | 100% Free deployment walkthrough (Neon + Render + Vercel) |
 | [📝 Changelog](CHANGELOG.md) | Version history and release notes |
 | [🔒 Security Policy](SECURITY.md) | Vulnerability disclosure and security measures |
 | [📖 SRS](docs/requirements/software-requirement-specification.md) | Software Requirement Specification |
