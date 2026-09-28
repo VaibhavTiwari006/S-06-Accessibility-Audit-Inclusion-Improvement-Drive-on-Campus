@@ -180,7 +180,10 @@ const Landing = () => {
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-secondary dark:text-slate-100 tracking-tight leading-tight mb-6">
               Building Inclusive Campuses <br />
-              <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-primary-light dark:from-rose-400 dark:via-rose-300 dark:to-rose-200 hero-gradient-text">
+              <span 
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-500 to-rose-400 dark:from-rose-400 dark:via-rose-300 dark:to-rose-200 hero-gradient-text"
+                style={{ WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+              >
                 Through Intelligent Accessibility
               </span>
             </h1>
