@@ -5,7 +5,7 @@
 > **Host Organization:** C Square Club & Chandigarh University  
 > **Institutional Standing:** QS World University Rankings 2026 Global Rank #575 | NIRF Ranked #19 in India  
 > **Sole Contributor & Researcher:** **Vaibhav Tiwari**  
-> **Evaluation Band Target:** **Grade A+ (Elite Contributor, 950–1000 Marks / 95–100%)**  
+> **Evaluation Scope:** Full-Stack Enterprise Implementation, Empirical Ground Research & Multi-Cloud Production  
 > **Project Repository:** [`VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus`](https://github.com/VaibhavTiwari006/S-06-Accessibility-Audit-Inclusion-Improvement-Drive-on-Campus)  
 > **Live Presentation Deck:** Accessible within the running web application at [`/presentation`](http://localhost:3000/presentation)  
 
@@ -39,30 +39,30 @@ Unlike conventional academic prototypes that rely on mock data, AccessAudit brid
 
 ---
 
-## 🎯 CUSoC Final Evaluation Framework (1000 Marks Mapping)
+## 🎯 CUSoC Milestone & Deliverable Verification Framework
 
 This project has been structured and documented to satisfy 100% of the CUSoC Final Evaluation Criteria outlined in Section 14 of the CUSoC Contributor Guidelines:
 
-| Evaluation Component | Maximum Marks | Weightage | Target Marks | Key Evidence & Repository Deliverables |
-|:---|:---:|:---:|:---:|:---|
-| **1. Bi-Weekly Evaluation Aggregate** | 250 | 25% | **250** | 615+ atomic Git commits demonstrating continuous technical progress; automated CI/CD pipeline with 100% passing tests. |
-| **2. Monthly / Mid-Term Engineering Reviews** | 250 | 25% | **250** | Iterative sprint deliverables spanning database schema design, Spring Boot REST API, React 18 UI components, and authentication. |
-| **3. Quarterly Evaluations (Q1, Q2, Q3)** | 250 | 25% | **250** | Milestone completion across Engineering Foundation (Q1), Product Engineering (Q2), and Production & Leadership (Q3). |
-| **4. Final Project Demonstration & Technical Report** | 150 | 15% | **150** | Live multi-role application demonstration, interactive `/presentation` deck, and comprehensive 400-line `docs/TECHNICAL_REPORT.md`. |
-| **5. Mentor Evaluation & Viva Voce** | 100 | 10% | **100** | 100% original solo contribution, rigorous academic integrity, defense script, and architectural mastery. |
-| **TOTAL** | **1000** | **100%** | **1000 (A+)** | **Qualifies for Elite Contributor Band (95–100%)** |
+| Evaluation Component | Weightage | Verification Status | Key Evidence & Repository Deliverables |
+|:---|:---:|:---:|:---|
+| **1. Bi-Weekly Evaluation Aggregate** | 25% | **Delivered** | 650+ atomic Git commits demonstrating continuous technical progress; automated CI/CD pipeline with 100% passing tests. |
+| **2. Monthly / Mid-Term Engineering Reviews** | 25% | **Delivered** | Iterative sprint deliverables spanning database schema design, Spring Boot REST API, React 18 UI components, and authentication. |
+| **3. Quarterly Evaluations (Q1, Q2, Q3)** | 25% | **Delivered** | Milestone completion across Engineering Foundation (Q1), Product Engineering (Q2), and Production & Leadership (Q3). |
+| **4. Final Project Demonstration & Technical Report** | 15% | **Delivered** | Live multi-role application demonstration, interactive `/presentation` deck, and comprehensive 400-line `docs/TECHNICAL_REPORT.md`. |
+| **5. Mentor Evaluation & Viva Voce** | 10% | **Delivered** | 100% original solo contribution, rigorous academic integrity, defense script, and architectural mastery. |
+| **TOTAL EVALUATION SCOPE** | **100%** | **Ready for Review** | **Complete end-to-end full-stack platform, empirical survey dataset, and deployment** |
 
 ---
 
 ## 🏛️ Quarterly Evaluation Framework Breakdown
 
-### Quarter I — Engineering Foundation (200 Marks)
+### Quarter I — Engineering Foundation
 * **Problem Analysis & Regulatory Benchmarking:** Thorough analysis of the RPWD Act 2016 (§§ 8, 16, 40, 42, 45), CPWD Harmonised Guidelines (2021), and NBC 2016 standards.
 * **Solo Ground Fieldwork Protocol:** Conceived and executed on-foot physical accessibility audits across 29 academic blocks using standard manual steel measuring tape, rise-over-run slope calculations ($\Delta h / \Delta d$), and in-situ photographic defect capture.
 * **Project Planning & GitHub Workflow:** Structured repository setup with `.github/workflows/ci.yml`, branch protection rules, clear Git conventions, and continuous automated build verification.
 * **Early Architecture:** Initial PostgreSQL database schema with relational models for Buildings, Audits, Checklists, Barriers, and Users.
 
-### Quarter II — Product Engineering (250 Marks)
+### Quarter II — Product Engineering
 * **Backend API Quality & Scalability:** Engineered robust Spring Boot 3.4.1 (Java 21) REST controllers with DTO validation, service abstraction, and Spring Data JPA queries.
 * **Comprehensive 4-Role RBAC:** Role-Based Access Control enforcing granular authorization across `ADMIN`, `AUDITOR`, `STUDENT`, and `MAINTENANCE`.
 * **Frontend Component Architecture:** Rebuilt with React 18, Vite, Tailwind CSS, Framer Motion, and Radix UI primitives.
@@ -74,7 +74,7 @@ This project has been structured and documented to satisfy 100% of the CUSoC Fin
   - Hardened HTTP security headers: Content-Security-Policy (CSP), Strict-Transport-Security (HSTS), X-Frame-Options (DENY), and X-Content-Type-Options (nosniff).
   - 30-minute automated client inactivity session logout watchdog.
 
-### Quarter III — Production, Leadership & Real-World Impact (300 Marks)
+### Quarter III — Production, Leadership & Real-World Impact
 * **Interactive Campus Geospatial Map:** Custom Leaflet-based interactive campus map displaying 29 real building coordinates with dynamic RPWD compliance score pills, barrier layers, and accessible wheelchair navigation routing.
 * **Interactive Audit Conductor:** Digitized 42-parameter audit checklist allowing auditors to adjust score sliders, save drafts, write commentary, and celebrate completed audits with celebratory confetti.
 * **5-Stage Maintenance Kanban Board:** Drag-and-drop / column-based remediation roadmap tracking tasks through `REPORTED` → `ASSIGNED` → `IN_PROGRESS` → `FIXED` → `VERIFIED`.
