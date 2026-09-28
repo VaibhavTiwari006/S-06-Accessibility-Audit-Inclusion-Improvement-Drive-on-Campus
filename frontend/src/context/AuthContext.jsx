@@ -71,6 +71,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (fullName, email, password) => {
+    try {
+      const data = await authService.register(fullName, email, password);
+      if (!isValidJwt(data.token)) {
+        return { success: false, message: 'Invalid token received from server.' };
+      }
+      localStorage.setItem('accessToken', data.token);
+      localStorage.setItem('userRole', data.role);
+      localStorage.setItem('userFullName', data.fullName);
+      localStorage.setItem('userEmail', data.email);
+      localStorage.setItem('userId', data.userId);
+      setUser({ id: data.userId, role: data.role, fullName: data.fullName, email: data.email });
+      return { success: true };
+    } catch (error) {
+      return { success: false, message: error.response?.data?.message || 'Registration failed' };
+    }
+  };
+
   const logout = () => {
     clearSession();
     setUser(null);
@@ -92,7 +110,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading, updateUser }}>
+    <AuthContext.Provider value={{ user, login, register, logout, loading, updateUser }}>
       {!loading && children}
     </AuthContext.Provider>
   );
