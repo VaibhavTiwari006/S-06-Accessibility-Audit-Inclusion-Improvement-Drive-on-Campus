@@ -4,12 +4,13 @@ WORKDIR /app
 # Install Maven
 RUN apk add --no-cache maven
 
-COPY pom.xml ./
-# Cache dependencies with memory limit for free-tier cloud builders
+# Copy pom.xml from backend directory
+COPY backend/pom.xml ./
 ENV MAVEN_OPTS="-Xmx512m -XX:+UseG1GC"
 RUN mvn dependency:go-offline -B
 
-COPY src ./src
+# Copy backend source code
+COPY backend/src ./src
 RUN mvn package -DskipTests -B
 
 FROM eclipse-temurin:21-jre-alpine
@@ -17,6 +18,6 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 
-# Configure memory limits optimized for 512MB free-tier containers (Render, Railway, Koyeb)
+# Configure memory limits optimized for 512MB free-tier containers
 ENV JAVA_TOOL_OPTIONS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:+ExitOnOutOfMemoryError"
 ENTRYPOINT ["java", "-jar", "app.jar"]
