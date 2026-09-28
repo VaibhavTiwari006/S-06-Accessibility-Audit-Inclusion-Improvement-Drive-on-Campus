@@ -13,7 +13,7 @@
 
 | Evaluation Phase / Criteria | Weightage | Delivery Status | Primary Verification Artefact |
 |:---|:---:|:---:|:---|
-| **1. Bi-Weekly Evaluation Aggregate** | 25% | **Delivered** | 650+ Git commits, automated CI/CD pipeline, continuous PRs & releases |
+| **1. Bi-Weekly Evaluation Aggregate** | 25% | **Delivered** | 675+ Git commits, automated CI/CD pipeline, continuous PRs & releases |
 | **2. Monthly / Mid-Term Engineering Reviews** | 25% | **Delivered** | Sprints 1–6 architectural delivery, Spring Boot + React + Postgres |
 | **3. Quarterly Evaluations (Q1, Q2, Q3)** | 25% | **Delivered** | Milestone milestones across Foundation, Engineering, and Production |
 | **4. Final Demonstration & Technical Report** | 15% | **Delivered** | Live multi-cloud deployment, in-app `/presentation` deck, 400-line Technical Report |

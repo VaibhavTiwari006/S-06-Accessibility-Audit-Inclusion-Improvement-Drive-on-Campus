@@ -50,7 +50,7 @@ The platform features Role-Based Access Control (RBAC) across 4 operational role
 
 | Milestone & Deliverable Pillar | Scope & Technical Focus | Verification & Proof Artifact |
 |:---|:---|:---|
-| **Engineering Velocity & CI/CD** | Continuous atomic version control, test-driven rigor, and build automation | ✅ **650+ Git Commits** with granular atomic commit hygiene; passing GitHub Actions automated CI/CD pipeline. |
+| **Engineering Velocity & CI/CD** | Continuous atomic version control, test-driven rigor, and build automation | ✅ **675+ Git Commits** with granular atomic commit hygiene; passing GitHub Actions automated CI/CD pipeline. |
 | **Full-Stack Enterprise Architecture** | Production-grade Spring Boot 3.4.1 backend, PostgreSQL 16 relational model, React 18 SPA | ✅ Production REST API, normalized schema (29 buildings, 42-parameter checklists), JWT authentication & 4-role RBAC. |
 | **Quarterly Milestone Completion (Q1–Q3)** | Statutory research (Q1) &rarr; Product engineering & cybersecurity (Q2) &rarr; Cloud deployment & GIS routing (Q3) | ✅ Foundation, cybersecurity hardening (rate limiting, brute-force guard, XSS sanitize, CSP), and serverless cloud deployment complete. |
 | **Empirical Ground Research** | Comprehensive on-site physical auditing of Chandigarh University infrastructure | ✅ **29 campus buildings surveyed**, 1,218 audited checkpoints, 187 discovered physical barriers, and 400-line empirical technical report. |

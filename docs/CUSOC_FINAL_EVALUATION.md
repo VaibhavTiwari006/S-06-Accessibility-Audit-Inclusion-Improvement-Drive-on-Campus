@@ -45,7 +45,7 @@ This project has been structured and documented to satisfy 100% of the CUSoC Fin
 
 | Evaluation Component | Weightage | Verification Status | Key Evidence & Repository Deliverables |
 |:---|:---:|:---:|:---|
-| **1. Bi-Weekly Evaluation Aggregate** | 25% | **Delivered** | 650+ atomic Git commits demonstrating continuous technical progress; automated CI/CD pipeline with 100% passing tests. |
+| **1. Bi-Weekly Evaluation Aggregate** | 25% | **Delivered** | 675+ atomic Git commits demonstrating continuous technical progress; automated CI/CD pipeline with 100% passing tests. |
 | **2. Monthly / Mid-Term Engineering Reviews** | 25% | **Delivered** | Iterative sprint deliverables spanning database schema design, Spring Boot REST API, React 18 UI components, and authentication. |
 | **3. Quarterly Evaluations (Q1, Q2, Q3)** | 25% | **Delivered** | Milestone completion across Engineering Foundation (Q1), Product Engineering (Q2), and Production & Leadership (Q3). |
 | **4. Final Project Demonstration & Technical Report** | 15% | **Delivered** | Live multi-role application demonstration, interactive `/presentation` deck, and comprehensive 400-line `docs/TECHNICAL_REPORT.md`. |
