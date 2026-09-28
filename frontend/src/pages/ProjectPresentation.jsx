@@ -289,59 +289,6 @@ const SLIDES = [
   },
   {
     id: 6,
-    category: 'Interactive Map & Geospatial Features',
-    title: 'Interactive Campus Accessibility Map',
-    subtitle: 'Real Coordinates for 29 Buildings • Dynamic Compliance Markers • Step-Free Route Planner',
-    content: (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center max-w-5xl mx-auto">
-        <div className="space-y-4">
-          <div className="p-4 rounded-2xl bg-blue-50/70 border border-blue-100">
-            <h4 className="font-bold text-blue-900 flex items-center gap-2 mb-1">
-              <Map size={18} /> Real Geospatial Campus Placement
-            </h4>
-            <p className="text-xs text-blue-950 leading-relaxed">
-              Every building marker is mapped to actual spatial campus clusters (North Complex, Central Ring, South-West Zone, East Extension, Academic Complex).
-            </p>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-100">
-            <h4 className="font-bold text-emerald-900 flex items-center gap-2 mb-1">
-              <CheckCircle2 size={18} /> Dynamic RPWD Compliance Badges
-            </h4>
-            <p className="text-xs text-emerald-950 leading-relaxed">
-              Markers dynamically reflect empirical audit scores with color-coded pills (Green &ge;75% Compliant, Yellow 50–74% Partial, Red &lt;50% Critical).
-            </p>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-purple-50/70 border border-purple-100">
-            <h4 className="font-bold text-purple-900 flex items-center gap-2 mb-1">
-              <Sparkles size={18} /> Step-Free Wheelchair Routing Engine
-            </h4>
-            <p className="text-xs text-purple-950 leading-relaxed">
-              Calculates navigation paths prioritizing verified ramps, accessible entry porticos, and elevator corridors over stairwells.
-            </p>
-          </div>
-        </div>
-
-        <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-xl flex flex-col items-center text-center space-y-4">
-          <div className="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
-            <Map size={32} />
-          </div>
-          <h4 className="text-xl font-bold font-heading text-textMain">Live Campus Navigation</h4>
-          <p className="text-xs text-textLight leading-relaxed max-w-sm">
-            Experience the interactive map directly inside the running application with full layer toggles for ramps, elevators, and accessible washrooms.
-          </p>
-          <Link to="/map">
-            <Button variant="primary" icon={ExternalLink}>
-              Launch Interactive Campus Map
-            </Button>
-          </Link>
-        </div>
-      </div>
-    )
-  },
-  {
-    id: 7,
     category: 'Documentation Standards Compliance',
     title: 'CUSoC Documentation Standards Checklist',
     subtitle: '100% Compliance with Section 4 of CUSoC Contributor Guidelines',
@@ -424,7 +371,7 @@ const SLIDES = [
     )
   },
   {
-    id: 8,
+    id: 7,
     category: 'Requirements & Milestone Verification',
     title: 'CUSoC Deliverable & Verification Matrix',
     subtitle: 'Comprehensive Fulfillment of Foundation, Product Engineering & Production Milestones',
@@ -526,7 +473,7 @@ const ProjectPresentation = () => {
   }, [currentSlide]);
 
   return (
-    <div className="min-h-screen bg-background text-textMain flex flex-col font-sans select-none">
+    <div className="min-h-screen bg-background text-textMain flex flex-col font-sans select-text">
       {/* Top Presentation Bar */}
       <header className="glass sticky top-0 z-50 border-b border-gray-100/50 px-6 py-3.5 flex justify-between items-center">
         <div className="flex items-center gap-3">
