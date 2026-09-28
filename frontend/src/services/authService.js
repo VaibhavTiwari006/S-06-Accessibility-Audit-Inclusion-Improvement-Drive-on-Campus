@@ -8,6 +8,11 @@ const authService = {
     return response.data.data;
   },
 
+  register: async (fullName, email, password) => {
+    const response = await api.post('/auth/register', { fullName, email, password });
+    return response.data.data;
+  },
+
   getCurrentUser: async () => {
     return {
       role: localStorage.getItem('userRole'),
