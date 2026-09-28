@@ -9,6 +9,7 @@ import {
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { Card, CardContent } from '../components/ui/Card';
+import api from '../services/api';
 
 const SLIDES = [
   {
@@ -456,6 +457,11 @@ const ProjectPresentation = () => {
       setCurrentSlide(prev => prev - 1);
     }
   };
+
+  useEffect(() => {
+    // Proactively warm up backend service on Render
+    api.get('/health').catch(() => {});
+  }, []);
 
   // Keyboard navigation support
   useEffect(() => {

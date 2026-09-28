@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import api from '../services/api';
 import { 
   ArrowRight, ShieldCheck, Map, Users, BarChart3, ChevronRight, 
   Sparkles, BookOpen, Wrench, Camera, CheckCircle2, 
@@ -118,6 +119,12 @@ const ROLES = [
 const Landing = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Proactively warm up backend service on Render
+    api.get('/health').catch(() => {});
+  }, []);
+
   const scrollToRoles = () => {
     document.getElementById('role-selector-section')?.scrollIntoView({ behavior: 'smooth' });
   };
