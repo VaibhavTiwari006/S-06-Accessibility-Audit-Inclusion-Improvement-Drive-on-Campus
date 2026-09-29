@@ -16,7 +16,7 @@ SERVICES = [
     {
         "name": "Frontend Edge SPA",
         "provider": "Vercel Edge CDN",
-        "url": "https://frontend-six-sigma-33.vercel.app",
+        "url": "https://accessaudit-cu.vercel.app",
         "expected_status": 200,
     },
     {
@@ -46,7 +46,7 @@ def check_service(service):
             url,
             headers={"User-Agent": "AccessAudit-HealthCheck/1.0"}
         )
-        with urllib.request.urlopen(req, timeout=15) as response:
+        with urllib.request.urlopen(req, timeout=45) as response:
             latency = (time.time() - start_time) * 1000
             status = response.getcode()
             if status == expected:

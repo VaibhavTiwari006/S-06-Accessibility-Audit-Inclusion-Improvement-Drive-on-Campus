@@ -22,8 +22,8 @@
 
 | Resource | Direct Access Link | Description & Usage |
 |:---|:---|:---|
-| 🚀 **Live Web Platform** | **[👉 Click Here to Access the Live Website (https://frontend-six-sigma-33.vercel.app)](https://frontend-six-sigma-33.vercel.app)** | Production frontend deployed on Vercel Global Edge CDN with sub-second response times. |
-| 🏆 **CUSoC Presentation Deck** | **[👉 Click Here to View Interactive Presentation Deck](https://frontend-six-sigma-33.vercel.app/presentation)** | In-app 8-slide presentation detailing methodology, field survey findings, and architecture. |
+| 🚀 **Live Web Platform** | **[👉 Click Here to Access the Live Website (https://accessaudit-cu.vercel.app)](https://accessaudit-cu.vercel.app)** | Production frontend deployed on Vercel Global Edge CDN with sub-second response times. |
+| 🏆 **CUSoC Presentation Deck** | **[👉 Click Here to View Interactive Presentation Deck](https://accessaudit-cu.vercel.app/presentation)** | In-app 8-slide presentation detailing methodology, field survey findings, and architecture. |
 | 🔗 **Production Backend API** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/api`](https://s-06-accessibility-audit-inclusion.onrender.com/api)** | Spring Boot 3.4.1 (Java 21) REST microservice container hosted on Render Cloud. |
 | 📖 **Swagger / OpenAPI Specs** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html`](https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html)** | Interactive API documentation and testing sandbox for all 38 endpoints. |
 | 📋 **Evaluation Dossier** | [**`docs/CUSOC_FINAL_EVALUATION.md`**](docs/CUSOC_FINAL_EVALUATION.md) | Official CUSoC milestone verification framework, delivery evidence, and 5-min demo script. |
@@ -33,7 +33,7 @@
 
 ### 🔑 Instant Demonstration Credentials & Role Access
 
-The platform features Role-Based Access Control (RBAC) across 4 operational roles. Evaluators and visitors can **[Create a New Account](https://frontend-six-sigma-33.vercel.app/login)** via the in-app Sign Up tab or use the pre-configured credentials below:
+The platform features Role-Based Access Control (RBAC) across 4 operational roles. Evaluators and visitors can **[Create a New Account](https://accessaudit-cu.vercel.app/login)** via the in-app Sign Up tab or use the pre-configured credentials below:
 
 | Role | Email | Password | Primary Capabilities & What to Test |
 |:---|:---|:---:|:---|
@@ -42,7 +42,7 @@ The platform features Role-Based Access Control (RBAC) across 4 operational role
 | **Student / Campus Citizen** | `student@campus.edu` | `student123` | Geotagged barrier reporting, community proposals & upvoting, accessibility quiz, public QR tracking |
 | **Maintenance Engineer** | `maintenance@campus.edu` | `maintenance123` | 5-stage interactive remediation Kanban roadmap (`REPORTED` → `ASSIGNED` → `IN_PROGRESS` → `FIXED` → `VERIFIED`) |
 
-> 💡 **Quick Login Feature:** On the [Sign In Page](https://frontend-six-sigma-33.vercel.app/login), click any of the 4 role cards at the top for instant 1-click credential auto-fill!
+> 💡 **Quick Login Feature:** On the [Sign In Page](https://accessaudit-cu.vercel.app/login), click any of the 4 role cards at the top for instant 1-click credential auto-fill!
 
 ---
 
