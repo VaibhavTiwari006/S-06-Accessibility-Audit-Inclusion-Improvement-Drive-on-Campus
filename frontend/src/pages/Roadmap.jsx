@@ -371,33 +371,33 @@ const Roadmap = () => {
   return (
     <div className="space-y-6 animate-fade-in pb-12">
       {/* Header & Metrics */}
-      <div className="bg-white dark:bg-slate-800/50 rounded-3xl p-6 shadow-sm border border-gray-100 dark:border-slate-700/60 relative overflow-hidden">
+      <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 relative overflow-hidden">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative z-10">
           <div>
             <h1 className="text-3xl font-bold font-heading text-textMain flex items-center gap-3">
               <Wrench className="text-primary" size={28} /> 5-Stage Maintenance Workflow
             </h1>
-            <p className="text-textLight mt-1 font-medium text-sm">
+            <p className="text-gray-500 mt-1 font-medium text-sm">
               Track accessibility barriers from Report → Assignment → Work → Repair → Verification.
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <div className="bg-gray-50 dark:bg-slate-800/80 rounded-2xl p-4 border border-gray-100 dark:border-slate-700/60 flex items-center gap-4">
-              <div className="p-3 bg-white dark:bg-slate-700 rounded-xl shadow-xs text-primary"><AlertCircle size={20} /></div>
+            <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center gap-4">
+              <div className="p-3 bg-white rounded-xl shadow-xs text-primary"><AlertCircle size={20} /></div>
               <div>
-                <p className="text-[10px] font-bold text-textLight uppercase tracking-wider">Pending Tasks</p>
-                <p className="text-lg font-extrabold text-textMain">{tasks.filter(t => t.workflowStatus !== 'COMPLETED').length}</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Pending Tasks</p>
+                <p className="text-lg font-extrabold text-gray-800">{tasks.filter(t => t.workflowStatus !== 'COMPLETED').length}</p>
               </div>
             </div>
-            <div className="bg-gray-50 dark:bg-slate-800/80 rounded-2xl p-4 border border-gray-100 dark:border-slate-700/60 flex items-center gap-4">
-              <div className="p-3 bg-white dark:bg-slate-700 rounded-xl shadow-xs text-emerald-500"><CheckCircle size={20} /></div>
+            <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center gap-4">
+              <div className="p-3 bg-white rounded-xl shadow-xs text-emerald-600"><CheckCircle size={20} /></div>
               <div>
-                <p className="text-[10px] font-bold text-textLight uppercase tracking-wider">Verified</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Verified</p>
                 <div className="flex items-center gap-2">
-                  <div className="w-16 h-2 bg-gray-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                  <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-500 rounded-full transition-all" style={{ width: `${getCompletionPercentage()}%` }}></div>
                   </div>
-                  <span className="text-lg font-extrabold text-textMain">{getCompletionPercentage()}%</span>
+                  <span className="text-lg font-extrabold text-gray-800">{getCompletionPercentage()}%</span>
                 </div>
               </div>
             </div>
@@ -406,7 +406,7 @@ const Roadmap = () => {
       </div>
 
       {/* ── Visual Pipeline Stepper ── */}
-      <div className="bg-white dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/60 shadow-sm p-6">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <div className="flex items-center justify-between relative">
           {WORKFLOW_STAGES.map((stage, idx) => {
             const count = tasks.filter((t) => t.workflowStatus === stage.id).length;
@@ -425,16 +425,16 @@ const Roadmap = () => {
                     isActive
                       ? `${stage.activeBg} text-white shadow-lg scale-110 ring-4 ring-offset-2 ${stage.ring}`
                       : isPast
-                        ? 'bg-gray-200 dark:bg-slate-700 text-gray-500 dark:text-gray-300'
-                        : 'bg-gray-100 dark:bg-slate-800 text-gray-400 group-hover:bg-gray-200 dark:group-hover:bg-slate-700'
+                        ? 'bg-gray-200 text-gray-500'
+                        : 'bg-gray-100 text-gray-400 group-hover:bg-gray-200'
                   }`}>
                     {stage.icon}
                   </div>
-                  <span className={`text-xs font-bold transition-colors ${isActive ? 'text-textMain' : 'text-textLight group-hover:text-textMain'}`}>
+                  <span className={`text-xs font-bold transition-colors ${isActive ? 'text-gray-900' : 'text-gray-400 group-hover:text-gray-600'}`}>
                     {stage.label}
                   </span>
                   <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full ${
-                    isActive ? `${stage.activeBg} text-white` : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300'
+                    isActive ? `${stage.activeBg} text-white` : 'bg-gray-100 text-gray-500'
                   }`}>
                     {count}
                   </span>
@@ -443,7 +443,7 @@ const Roadmap = () => {
                 {/* Connector Line */}
                 {idx < WORKFLOW_STAGES.length - 1 && (
                   <div className="flex-1 h-0.5 mx-2 rounded-full relative" style={{ marginTop: '-28px' }}>
-                    <div className="absolute inset-0 bg-gray-200 dark:bg-slate-700 rounded-full"></div>
+                    <div className="absolute inset-0 bg-gray-200 rounded-full"></div>
                     <div
                       className={`absolute inset-y-0 left-0 rounded-full transition-all duration-500 ${
                         isPast ? stage.line : 'bg-transparent'
@@ -462,35 +462,35 @@ const Roadmap = () => {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-5 h-48 animate-pulse"></div>
+            <div key={i} className="bg-gray-50 rounded-2xl p-5 h-48 animate-pulse"></div>
           ))}
         </div>
       ) : activeTasks.length === 0 ? (
-        <div className="bg-white dark:bg-slate-800/50 rounded-2xl border border-gray-100 dark:border-slate-700/60 p-12 flex flex-col items-center justify-center text-center">
+        <div className="bg-white rounded-2xl border border-gray-100 p-12 flex flex-col items-center justify-center text-center">
           <CheckCircle2 size={36} className="text-gray-300 mb-3" />
-          <p className="text-sm font-semibold text-textLight">No tasks in {activeStageObj?.label}</p>
-          <p className="text-xs text-textLight mt-1">Tasks will appear here when moved to this stage.</p>
+          <p className="text-sm font-semibold text-gray-400">No tasks in {activeStageObj?.label}</p>
+          <p className="text-xs text-gray-400 mt-1">Tasks will appear here when moved to this stage.</p>
         </div>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {pagedTasks.map((task) => {
               const priorityColor =
-                (task.priority || 'HIGH') === 'HIGH' ? 'bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 border-red-200 dark:border-red-900/60' :
-                (task.priority || 'HIGH') === 'MEDIUM' ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-900/60' :
-                'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/60';
+                (task.priority || 'HIGH') === 'HIGH' ? 'bg-red-100 text-red-700 border-red-200' :
+                (task.priority || 'HIGH') === 'MEDIUM' ? 'bg-amber-100 text-amber-700 border-amber-200' :
+                'bg-emerald-100 text-emerald-700 border-emerald-200';
 
               return (
                 <div
                   key={task.id}
-                  className="bg-white dark:bg-slate-800/80 p-4 rounded-2xl border border-gray-100 dark:border-slate-700/60 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-3"
+                  className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col gap-3"
                 >
                   {/* Priority + ID */}
                   <div className="flex items-center justify-between">
                     <span className={`text-[10px] font-extrabold uppercase px-2 py-1 rounded-md border ${priorityColor}`}>
                       {task.priority || 'HIGH'}
                     </span>
-                    <span className="text-xs text-textLight font-mono">#{task.id}</span>
+                    <span className="text-xs text-gray-400 font-mono">#{task.id}</span>
                   </div>
 
                   {/* Title */}
@@ -499,13 +499,13 @@ const Roadmap = () => {
                   </h4>
 
                   {/* Description */}
-                  <p className="text-xs text-textLight line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
                     {task.description}
                   </p>
 
                   {/* Location */}
-                  <div className="pt-2.5 mt-auto border-t border-gray-100 dark:border-slate-700/60 flex items-center justify-between">
-                    <span className="text-xs text-textLight font-medium truncate flex items-center gap-1">
+                  <div className="pt-2.5 mt-auto border-t border-gray-100 flex items-center justify-between">
+                    <span className="text-xs text-gray-500 font-medium truncate flex items-center gap-1">
                       <MapPin size={12} className="text-red-400 flex-shrink-0" />
                       {task.buildingName || 'Campus Wide'}
                     </span>
