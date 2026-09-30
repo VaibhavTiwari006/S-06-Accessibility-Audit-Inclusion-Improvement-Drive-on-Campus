@@ -36,7 +36,7 @@ const SLIDES = [
           className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black text-slate-900 tracking-tight leading-tight"
         >
           Empowering Universal Campus Accessibility <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-600 to-red-500">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-600 to-red-500 hero-gradient-text">
             Through Empirical Audits & Intelligent Systems
           </span>
         </motion.h1>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useAccessibility } from '../context/AccessibilityContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../services/api';
 import { 
   ArrowRight, ShieldCheck, Map, Users, BarChart3, ChevronRight, 
   Sparkles, BookOpen, Wrench, Camera, CheckCircle2, 
-  UserCheck, Lock, LogIn, Award, Building2, HelpCircle
+  UserCheck, Lock, LogIn, Award, Building2, HelpCircle, Sun, Moon
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
@@ -118,6 +119,7 @@ const ROLES = [
 
 const Landing = () => {
   const { user } = useAuth();
+  const { darkMode, setDarkMode } = useAccessibility();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -149,6 +151,14 @@ const Landing = () => {
         </div>
 
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-xl text-gray-500 hover:text-primary hover:bg-primary/5 border border-gray-200/80 transition-all cursor-pointer flex items-center justify-center shadow-2xs"
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle theme"
+          >
+            {darkMode ? <Sun size={18} className="text-amber-400" /> : <Moon size={18} />}
+          </button>
           <Link to="/presentation">
             <Button variant="secondary" size="sm" icon={Award} className="border-primary/30 text-primary hover:bg-primary/5">
               🏆 CUSoC '26 Presentation

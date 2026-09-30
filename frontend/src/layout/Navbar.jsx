@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Menu, Bell, Settings, Search, Award } from 'lucide-react';
+import { useAccessibility } from '../context/AccessibilityContext';
+import { LogOut, User, Menu, Bell, Settings, Search, Award, Sun, Moon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
@@ -17,6 +18,7 @@ const roleColors = {
 
 const Navbar = ({ toggleSidebar }) => {
   const { user, logout } = useAuth();
+  const { darkMode, setDarkMode } = useAccessibility();
   const navigate = useNavigate();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isCmdOpen, setIsCmdOpen] = useState(false);
@@ -125,6 +127,16 @@ const Navbar = ({ toggleSidebar }) => {
             >
               <Award size={15} />
               <span className="hidden xl:inline">CUSoC '26</span>
+            </button>
+
+            {/* Theme toggle */}
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-2 rounded-xl text-gray-500 hover:text-primary hover:bg-primary/5 transition-all cursor-pointer"
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              aria-label="Toggle theme"
+            >
+              {darkMode ? <Sun size={18} className="text-amber-400" /> : <Moon size={18} />}
             </button>
 
             {/* Settings shortcut - available for all users */}
