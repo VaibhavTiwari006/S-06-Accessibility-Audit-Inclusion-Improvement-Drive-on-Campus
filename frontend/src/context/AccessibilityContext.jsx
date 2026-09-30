@@ -30,16 +30,7 @@ export const AccessibilityProvider = ({ children }) => {
   const [distractionFree, setDistractionFree] = useState(() => getStoredBool('access_distractionFree', false));
   const [magnifyMode, setMagnifyMode] = useState(() => getStoredBool('access_magnifyMode', false));
   const [visualAlerts, setVisualAlerts] = useState(() => getStoredBool('access_visualAlerts', false));
-  const [darkMode, setDarkMode] = useState(() => {
-    try {
-      const stored = localStorage.getItem('access_darkMode');
-      if (stored === 'true') return true;
-      if (stored === 'false') return false;
-      return typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    } catch {
-      return false;
-    }
-  });
+  const [darkMode, setDarkMode] = useState(() => getStoredBool('access_darkMode', false));
   const [textToSpeech, setTextToSpeech] = useState(() => getStoredBool('access_textToSpeech', false));
   const [ttsVoice, setTtsVoice] = useState(() => getStoredStr('access_ttsVoice', 'default'));
 
