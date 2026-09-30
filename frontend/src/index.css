@@ -518,10 +518,10 @@
   body.dark-mode .hero-gradient-text,
   .dark .hero-gradient-text,
   html.dark .hero-gradient-text {
-    background: none !important;
+    background: transparent !important;
     background-image: none !important;
-    -webkit-background-clip: unset !important;
-    background-clip: unset !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
     -webkit-text-fill-color: #fb7185 !important;
     color: #fb7185 !important;
     display: inline-block !important;
@@ -532,10 +532,10 @@
   body.dark-mode .gradient-text,
   .dark .gradient-text,
   html.dark .gradient-text {
-    background: none !important;
+    background: transparent !important;
     background-image: none !important;
-    -webkit-background-clip: unset !important;
-    background-clip: unset !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
     -webkit-text-fill-color: #fb7185 !important;
     color: #fb7185 !important;
     display: inline-block !important;
@@ -544,10 +544,10 @@
 
   @media (prefers-color-scheme: dark) {
     body:not(.light-mode) .hero-gradient-text {
-      background: none !important;
+      background: transparent !important;
       background-image: none !important;
-      -webkit-background-clip: unset !important;
-      background-clip: unset !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
       -webkit-text-fill-color: #fb7185 !important;
       color: #fb7185 !important;
       display: inline-block !important;
@@ -555,10 +555,10 @@
       text-shadow: 0 0 20px rgba(251, 113, 133, 0.4) !important;
     }
     body:not(.light-mode) .gradient-text {
-      background: none !important;
+      background: transparent !important;
       background-image: none !important;
-      -webkit-background-clip: unset !important;
-      background-clip: unset !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
       -webkit-text-fill-color: #fb7185 !important;
       color: #fb7185 !important;
       display: inline-block !important;
