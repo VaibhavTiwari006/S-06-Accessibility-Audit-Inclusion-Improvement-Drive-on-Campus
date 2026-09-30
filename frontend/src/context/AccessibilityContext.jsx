@@ -91,11 +91,9 @@ export const AccessibilityProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('access_darkMode', darkMode);
     if (darkMode) {
-      document.body.classList.add('dark-mode', 'dark');
-      document.documentElement.classList.add('dark', 'dark-mode');
+      document.body.classList.add('dark-mode');
     } else {
-      document.body.classList.remove('dark-mode', 'dark');
-      document.documentElement.classList.remove('dark', 'dark-mode');
+      document.body.classList.remove('dark-mode');
     }
   }, [darkMode]);
 

@@ -78,8 +78,8 @@ const ROLES = [
     icon: ShieldCheck,
     desc: 'Full administrative access, department comparisons, system settings, and user management.',
     gradient: 'from-rose-500 to-red-600',
-    bgLight: 'bg-rose-50 text-rose-700 border-rose-100 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-800/50',
-    hoverRing: 'hover:ring-rose-200 dark:hover:ring-rose-900/50'
+    bgLight: 'bg-rose-50 text-rose-700 border-rose-100',
+    hoverRing: 'hover:ring-rose-200'
   },
   {
     role: 'AUDITOR',
@@ -89,8 +89,8 @@ const ROLES = [
     icon: UserCheck,
     desc: 'Conduct physical audits, upload photo evidence, calculate wheelchair routes, and evaluate WCAG scores.',
     gradient: 'from-blue-500 to-indigo-600',
-    bgLight: 'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800/50',
-    hoverRing: 'hover:ring-blue-200 dark:hover:ring-blue-900/50'
+    bgLight: 'bg-blue-50 text-blue-700 border-blue-100',
+    hoverRing: 'hover:ring-blue-200'
   },
   {
     role: 'STUDENT',
@@ -100,8 +100,8 @@ const ROLES = [
     icon: Users,
     desc: 'Report barriers, view resolved items, take awareness quizzes, and view public campus maps.',
     gradient: 'from-emerald-500 to-teal-600',
-    bgLight: 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/50',
-    hoverRing: 'hover:ring-emerald-200 dark:hover:ring-emerald-900/50'
+    bgLight: 'bg-emerald-50 text-emerald-700 border-emerald-100',
+    hoverRing: 'hover:ring-emerald-200'
   },
   {
     role: 'MAINTENANCE',
@@ -111,8 +111,8 @@ const ROLES = [
     icon: Wrench,
     desc: 'Manage the 5-stage repair Kanban board, update issue status, and mark barriers as fixed.',
     gradient: 'from-amber-500 to-orange-500',
-    bgLight: 'bg-amber-50 text-amber-700 border-amber-100 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/50',
-    hoverRing: 'hover:ring-amber-200 dark:hover:ring-amber-900/50'
+    bgLight: 'bg-amber-50 text-amber-700 border-amber-100',
+    hoverRing: 'hover:ring-amber-200'
   }
 ];
 
@@ -165,27 +165,27 @@ const Landing = () => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col">
         {/* Hero Section */}
-        <section className="relative pt-16 pb-20 px-6 overflow-hidden flex flex-col items-center text-center bg-gradient-to-b from-white via-red-50/20 to-background dark:from-slate-900/90 dark:via-red-950/20 dark:to-slate-950 border-b border-gray-100 dark:border-slate-800">
+        <section className="relative pt-16 pb-20 px-6 overflow-hidden flex flex-col items-center text-center bg-gradient-to-b from-white via-red-50/20 to-background border-b border-gray-100">
           <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 dark:bg-rose-500/10 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
           </div>
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="relative z-10 max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/70 dark:text-rose-300 dark:border-rose-800/80 font-bold text-xs mb-6 border uppercase tracking-wider shadow-xs">
-              <Award size={14} className="text-rose-600 dark:text-rose-300" /> CUSoC 2026 Finalist &bull; Track S-06 &bull; Chandigarh University
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary font-bold text-xs mb-6 border border-primary/20 uppercase tracking-wider">
+              <Award size={14} /> CUSoC 2026 Finalist &bull; Track S-06 &bull; Chandigarh University
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-secondary dark:text-slate-100 tracking-tight leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-secondary tracking-tight leading-tight mb-6">
               Building Inclusive Campuses <br />
-              <span className="text-rose-600 dark:text-rose-400 font-extrabold inline-block mt-2">
+              <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-primary-light hero-gradient-text">
                 Through Intelligent Accessibility
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-textLight dark:text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
+            <p className="text-lg md:text-xl text-textLight mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
               Explore how AccessAudit evaluates WCAG compliance, plans wheelchair routes, tracks maintenance workflows, and empowers the campus community.
             </p>
 
@@ -200,7 +200,7 @@ const Landing = () => {
                   Select Campus Role & Sign In
                 </Button>
               </Link>
-              <Button variant="ghost" size="lg" className="px-8 text-textLight dark:text-slate-300 hover:text-textMain dark:hover:text-white" icon={Sparkles} onClick={() => document.getElementById('impact-features-section')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button variant="ghost" size="lg" className="px-8 text-textLight hover:text-textMain" icon={Sparkles} onClick={() => document.getElementById('impact-features-section')?.scrollIntoView({ behavior: 'smooth' })}>
                 Explore 5 Impactful Features
               </Button>
             </div>
@@ -208,24 +208,24 @@ const Landing = () => {
         </section>
 
         {/* Live Platform Stats */}
-        <section className="py-10 bg-white dark:bg-slate-900/60 border-b border-gray-100 dark:border-slate-800">
+        <section className="py-10 bg-white">
           <div className="w-full px-6 md:px-12 lg:px-16">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100 dark:divide-slate-800">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-gray-100">
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-primary dark:text-rose-400 mb-1 text-shine">29</p>
-                <p className="text-xs font-bold text-textLight dark:text-slate-400 uppercase tracking-wider">Buildings Audited</p>
+                <p className="text-4xl font-heading font-extrabold text-primary mb-1 text-shine">29</p>
+                <p className="text-xs font-bold text-textLight uppercase tracking-wider">Buildings Audited</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-emerald-600 dark:text-emerald-400 mb-1 text-shine" style={{ animationDelay: '1s' }}>1,102</p>
-                <p className="text-xs font-bold text-textLight dark:text-slate-400 uppercase tracking-wider">Checkpoints Evaluated</p>
+                <p className="text-4xl font-heading font-extrabold text-emerald-600 mb-1 text-shine" style={{ animationDelay: '1s' }}>1,102</p>
+                <p className="text-xs font-bold text-textLight uppercase tracking-wider">Checkpoints Evaluated</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-blue-600 dark:text-blue-400 mb-1 text-shine" style={{ animationDelay: '2s' }}>7</p>
-                <p className="text-xs font-bold text-textLight dark:text-slate-400 uppercase tracking-wider">Campus Blocks</p>
+                <p className="text-4xl font-heading font-extrabold text-blue-600 mb-1 text-shine" style={{ animationDelay: '2s' }}>7</p>
+                <p className="text-xs font-bold text-textLight uppercase tracking-wider">Campus Blocks</p>
               </div>
               <div className="text-center px-4">
-                <p className="text-4xl font-heading font-extrabold text-indigo-600 dark:text-indigo-400 mb-1 text-shine" style={{ animationDelay: '3s' }}>68.2%</p>
-                <p className="text-xs font-bold text-textLight dark:text-slate-400 uppercase tracking-wider">RPWD Compliance</p>
+                <p className="text-4xl font-heading font-extrabold text-indigo-600 mb-1 text-shine" style={{ animationDelay: '3s' }}>68.2%</p>
+                <p className="text-xs font-bold text-textLight uppercase tracking-wider">RPWD Compliance</p>
               </div>
             </div>
           </div>
@@ -236,9 +236,9 @@ const Landing = () => {
         </div>
 
         {/* Role Selector & Credential Authentication Section */}
-        <section id="role-selector-section" className="relative pt-12 pb-8 px-6 md:px-12 lg:px-16 bg-white dark:bg-slate-900/40 overflow-hidden">
+        <section id="role-selector-section" className="relative pt-12 pb-8 px-6 md:px-12 lg:px-16 bg-white overflow-hidden">
           <div className="absolute inset-0 z-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 dark:bg-rose-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
+            <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '4s' }} />
             <div className="absolute bottom-0 right-1/4 translate-x-1/4 translate-y-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s' }} />
           </div>
           <div className="relative z-10 w-full space-y-12">
@@ -249,13 +249,13 @@ const Landing = () => {
               transition={{ duration: 0.6 }}
               className="text-center max-w-2xl mx-auto space-y-3"
             >
-              <span className="inline-block text-xs font-bold text-primary dark:text-rose-300 uppercase tracking-widest bg-primary/10 dark:bg-rose-500/15 px-3 py-1.5 rounded-full border border-primary/20 dark:border-rose-500/30">
+              <span className="inline-block text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
                 Authentication Required
               </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary dark:text-slate-100">
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary">
                 Select Your Campus Role to Proceed
               </h2>
-              <p className="text-textLight dark:text-slate-300 text-base font-medium">
+              <p className="text-textLight text-base font-medium">
                 Access to the AccessAudit dashboard requires role-based authentication. Choose your role below to test with sample credentials.
               </p>
             </motion.div>
@@ -276,7 +276,7 @@ const Landing = () => {
                     className="group relative h-full"
                   >
                     {/* Card */}
-                    <div className="relative overflow-hidden rounded-2xl border border-white/60 dark:border-slate-700/60 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-between">
+                    <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-between">
                       {/* Gradient top strip */}
                       <div className={`h-1.5 w-full bg-gradient-to-r ${r.gradient}`} />
 
@@ -309,8 +309,8 @@ const Landing = () => {
 
                         {/* Title & desc */}
                         <div className="space-y-2">
-                          <h3 className="text-lg font-bold font-heading text-gray-900 dark:text-slate-100 group-hover:text-primary dark:group-hover:text-rose-400 transition-colors leading-tight">{r.title}</h3>
-                          <p className="text-sm text-gray-500 dark:text-slate-300 leading-relaxed font-medium">{r.desc}</p>
+                          <h3 className="text-lg font-bold font-heading text-gray-900 group-hover:text-gray-800 transition-colors leading-tight">{r.title}</h3>
+                          <p className="text-sm text-gray-500 leading-relaxed font-medium">{r.desc}</p>
                         </div>
                       </div>
 
@@ -344,13 +344,13 @@ const Landing = () => {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto space-y-3"
             >
-              <span className="inline-block text-xs font-bold text-primary dark:text-rose-300 uppercase tracking-widest bg-primary/10 dark:bg-rose-500/15 px-3 py-1.5 rounded-full border border-primary/20 dark:border-rose-500/30">
+              <span className="inline-block text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">
                 Platform Demonstrations
               </span>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary dark:text-slate-100">
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-secondary">
                 5 Impactful Features of AccessAudit
               </h2>
-              <p className="text-textLight dark:text-slate-300 text-base font-medium">
+              <p className="text-textLight text-base font-medium">
                 Click any feature below to inspect how it transforms accessibility management on campus.
               </p>
             </motion.div>
@@ -367,9 +367,9 @@ const Landing = () => {
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                     whileHover={{ y: -6, scale: 1.02 }}
-                    className={`group relative p-6 rounded-3xl border transition-all flex flex-col justify-between bg-white dark:bg-slate-800/90 border-gray-100 dark:border-slate-700/60 shadow-sm hover:shadow-xl ${feat.hoverRing} hover:ring-4`}
+                    className={`group relative p-6 rounded-3xl border transition-all flex flex-col justify-between bg-white border-gray-100 shadow-sm hover:shadow-xl ${feat.hoverRing} hover:ring-4`}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50/50 dark:from-slate-800 dark:to-slate-850 rounded-3xl -z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50/50 rounded-3xl -z-10" />
 
                     <div>
                       <div className="flex items-center justify-between mb-4">
@@ -380,8 +380,8 @@ const Landing = () => {
                           {feat.badge}
                         </span>
                       </div>
-                      <h3 className="font-bold text-gray-900 dark:text-slate-100 group-hover:text-primary dark:group-hover:text-rose-400 transition-colors text-xl font-heading mb-2">{feat.title}</h3>
-                      <p className="text-xs text-gray-500 dark:text-slate-300 font-medium leading-relaxed">{feat.desc}</p>
+                      <h3 className="font-bold text-gray-900 group-hover:text-primary transition-colors text-xl font-heading mb-2">{feat.title}</h3>
+                      <p className="text-xs text-gray-500 font-medium leading-relaxed">{feat.desc}</p>
                     </div>
 
                     <div className="mt-8">
@@ -402,7 +402,7 @@ const Landing = () => {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-gray-500 dark:text-slate-400 text-sm border-t border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+      <footer className="py-8 text-center text-gray-500 text-sm border-t border-gray-200 bg-white">
         <p>© 2026 Chandigarh University. Accessibility Audit & Inclusion Improvement Drive (S-06).</p>
       </footer>
     </div>

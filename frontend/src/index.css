@@ -515,17 +515,13 @@
   }
 
   /* High-Contrast Hero & Subtitle Text Visibility in Dark Mode */
-  body.dark-mode .hero-gradient-text,
-  .dark .hero-gradient-text,
-  html.dark .hero-gradient-text {
+  body.dark-mode .hero-gradient-text {
     color: #f87171 !important;
     -webkit-text-fill-color: #f87171 !important;
     display: inline-block !important;
   }
   
-  body.dark-mode .gradient-text,
-  .dark .gradient-text,
-  html.dark .gradient-text {
+  body.dark-mode .gradient-text {
     color: #f87171 !important;
     -webkit-text-fill-color: #f87171 !important;
     display: inline-block !important;
