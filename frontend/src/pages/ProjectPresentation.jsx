@@ -11,6 +11,19 @@ import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import { Card, CardContent } from '../components/ui/Card';
 import api from '../services/api';
+import { useAccessibility } from '../context/AccessibilityContext';
+
+const PresentationHeroSubtitle = () => {
+  const { darkMode } = useAccessibility();
+  return (
+    <span 
+      className={darkMode ? "hero-subtitle-dark" : "hero-subtitle-light"}
+      style={darkMode ? { color: '#fb7185', WebkitTextFillColor: '#fb7185', background: 'none', display: 'inline-block' } : undefined}
+    >
+      Through Empirical Audits & Intelligent Systems
+    </span>
+  );
+};
 
 const SLIDES = [
   {
@@ -36,9 +49,7 @@ const SLIDES = [
           className="text-4xl sm:text-5xl lg:text-6xl font-heading font-black text-slate-900 tracking-tight leading-tight"
         >
           Empowering Universal Campus Accessibility <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-rose-600 to-red-500 hero-gradient-text">
-            Through Empirical Audits & Intelligent Systems
-          </span>
+          <PresentationHeroSubtitle />
         </motion.h1>
 
         <motion.p 
