@@ -118,7 +118,7 @@ const ROLES = [
 ];
 
 const Landing = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { darkMode, setDarkMode } = useAccessibility();
   const navigate = useNavigate();
 
@@ -164,11 +164,29 @@ const Landing = () => {
               🏆 CUSoC '26 Presentation
             </Button>
           </Link>
-          <Link to="/login">
-            <Button variant="primary" icon={LogIn}>
-              Select Role & Sign In
-            </Button>
-          </Link>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <Link to="/dashboard">
+                <Button variant="primary" size="sm" icon={ArrowRight}>
+                  Dashboard ({user.role})
+                </Button>
+              </Link>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={logout}
+                className="text-xs text-gray-600 hover:text-red-600"
+              >
+                Sign Out
+              </Button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <Button variant="primary" icon={LogIn}>
+                Select Role & Sign In
+              </Button>
+            </Link>
+          )}
         </div>
       </nav>
 
@@ -208,11 +226,24 @@ const Landing = () => {
                   🏆 CUSoC '26 Presentation Deck
                 </Button>
               </Link>
-              <Link to="/login">
-                <Button variant="secondary" size="lg" className="px-8 shadow-sm" icon={ArrowRight}>
-                  Select Campus Role & Sign In
-                </Button>
-              </Link>
+              {user ? (
+                <>
+                  <Link to="/dashboard">
+                    <Button variant="secondary" size="lg" className="px-8 shadow-sm" icon={ArrowRight}>
+                      Go to Dashboard ({user.role})
+                    </Button>
+                  </Link>
+                  <Button variant="ghost" size="lg" className="px-6 text-red-500 hover:text-red-700 font-semibold" onClick={logout}>
+                    Sign Out Session
+                  </Button>
+                </>
+              ) : (
+                <Link to="/login">
+                  <Button variant="secondary" size="lg" className="px-8 shadow-sm" icon={ArrowRight}>
+                    Select Campus Role & Sign In
+                  </Button>
+                </Link>
+              )}
               <Button variant="ghost" size="lg" className="px-8 text-textLight hover:text-textMain" icon={Sparkles} onClick={() => document.getElementById('impact-features-section')?.scrollIntoView({ behavior: 'smooth' })}>
                 Explore 5 Impactful Features
               </Button>

@@ -5,11 +5,36 @@ const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
-// Validate that a JWT token has the correct 3-part structure
-const isValidJwt = (token) => {
-  if (!token || typeof token !== 'string') return false;
-  const parts = token.split('.');
-  return parts.length === 3;
+// Cryptographic JWT parser and expiration validator
+export const parseJwt = (token) => {
+  try {
+    if (!token || typeof token !== 'string') return null;
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    const base64Url = parts[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  } catch {
+    return null;
+  }
+};
+
+export const isTokenValid = (token) => {
+  const payload = parseJwt(token);
+  if (!payload) return false;
+  if (payload.exp && typeof payload.exp === 'number') {
+    // Check if expiration timestamp in seconds has passed
+    if (payload.exp * 1000 <= Date.now()) {
+      return false; // Token has expired
+    }
+  }
+  return true;
 };
 
 const AUTH_KEYS = ['accessToken', 'userRole', 'userFullName', 'userEmail', 'userId', 'userAvatar'];
@@ -31,20 +56,21 @@ export const AuthProvider = ({ children }) => {
         const email = localStorage.getItem('userEmail');
         const userId = localStorage.getItem('userId');
 
-        // Validate JWT structure — 3 parts separated by dots
-        if (!isValidJwt(token)) {
-          // Corrupt or missing token — wipe everything
+        // Strictly validate JWT structure AND expiration
+        if (!isTokenValid(token)) {
           clearSession();
+          setUser(null);
           setLoading(false);
           return;
         }
 
-        // Token looks valid — restore the session from localStorage
+        // Token is cryptographically valid and unexpired — restore session
         setUser({ id: userId ? parseInt(userId) : null, role, fullName, email });
         setLoading(false);
       } catch (err) {
         console.error('Failed to initialize auth state:', err);
         clearSession();
+        setUser(null);
         setLoading(false);
       }
     };
@@ -56,7 +82,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const data = await authService.login(email, password);
       // data is the unwrapped AuthResponse: { token, role, fullName, email, userId }
-      if (!isValidJwt(data.token)) {
+      if (!isTokenValid(data.token)) {
         return { success: false, message: 'Invalid token received from server.' };
       }
       localStorage.setItem('accessToken', data.token);
@@ -74,7 +100,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (fullName, email, password) => {
     try {
       const data = await authService.register(fullName, email, password);
-      if (!isValidJwt(data.token)) {
+      if (!isTokenValid(data.token)) {
         return { success: false, message: 'Invalid token received from server.' };
       }
       localStorage.setItem('accessToken', data.token);
