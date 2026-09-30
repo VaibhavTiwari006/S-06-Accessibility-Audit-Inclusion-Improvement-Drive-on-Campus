@@ -92,8 +92,10 @@ export const AccessibilityProvider = ({ children }) => {
     localStorage.setItem('access_darkMode', darkMode);
     if (darkMode) {
       document.body.classList.add('dark-mode');
+      document.body.classList.remove('light-mode');
     } else {
       document.body.classList.remove('dark-mode');
+      document.body.classList.add('light-mode');
     }
   }, [darkMode]);
 

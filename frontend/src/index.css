@@ -518,28 +518,66 @@
   body.dark-mode .hero-gradient-text,
   .dark .hero-gradient-text,
   html.dark .hero-gradient-text {
-    background-image: linear-gradient(135deg, #f87171 0%, #fb7185 45%, #fecdd3 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
+    background: none !important;
+    background-image: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #fb7185 !important;
+    color: #fb7185 !important;
     display: inline-block !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 20px rgba(251, 113, 133, 0.4) !important;
   }
   
   body.dark-mode .gradient-text,
   .dark .gradient-text,
   html.dark .gradient-text {
-    background-image: linear-gradient(135deg, #f87171 0%, #fb7185 50%, #fecdd3 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
+    background: none !important;
+    background-image: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #fb7185 !important;
+    color: #fb7185 !important;
     display: inline-block !important;
+    font-weight: 800 !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body:not(.light-mode) .hero-gradient-text {
+      background: none !important;
+      background-image: none !important;
+      -webkit-background-clip: unset !important;
+      background-clip: unset !important;
+      -webkit-text-fill-color: #fb7185 !important;
+      color: #fb7185 !important;
+      display: inline-block !important;
+      font-weight: 800 !important;
+      text-shadow: 0 0 20px rgba(251, 113, 133, 0.4) !important;
+    }
+    body:not(.light-mode) .gradient-text {
+      background: none !important;
+      background-image: none !important;
+      -webkit-background-clip: unset !important;
+      background-clip: unset !important;
+      -webkit-text-fill-color: #fb7185 !important;
+      color: #fb7185 !important;
+      display: inline-block !important;
+      font-weight: 800 !important;
+    }
   }
 
   /* Brand Primary High-Contrast Visibility in Dark Mode */
   body.dark-mode .text-primary {
     color: #f87171 !important;
+  }
+  body.dark-mode .text-primary-light {
+    color: #fca5a5 !important;
+  }
+  body.dark-mode .text-primary-dark {
+    color: #f87171 !important;
+  }
+  body.dark-mode .text-primary-50 {
+    color: #fecdd3 !important;
   }
   body.dark-mode .border-primary {
     border-color: #f87171 !important;
@@ -558,6 +596,42 @@
   }
   body.dark-mode .bg-primary\/20 {
     background-color: rgba(248, 113, 113, 0.25) !important;
+  }
+
+  body.dark-mode .border-white\/60,
+  body.dark-mode .border-white\/70,
+  body.dark-mode .border-white\/80 {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  body.dark-mode .text-black {
+    color: #ffffff !important;
+  }
+  body.dark-mode .text-indigo-900,
+  body.dark-mode .text-indigo-800 {
+    color: #e0e7ff !important;
+  }
+  body.dark-mode .text-indigo-700,
+  body.dark-mode .text-indigo-600 {
+    color: #a5b4fc !important;
+  }
+  body.dark-mode .text-indigo-500 {
+    color: #818cf8 !important;
+  }
+  body.dark-mode .bg-indigo-50 {
+    background-color: rgba(99, 102, 241, 0.16) !important;
+    color: #a5b4fc !important;
+    border-color: rgba(99, 102, 241, 0.35) !important;
+  }
+  body.dark-mode .bg-indigo-100 {
+    background-color: rgba(99, 102, 241, 0.25) !important;
+    color: #a5b4fc !important;
+    border-color: rgba(99, 102, 241, 0.45) !important;
+  }
+
+  body.dark-mode .group:hover .group-hover\:text-gray-800,
+  body.dark-mode .group-hover\:text-gray-800:hover {
+    color: #ffffff !important;
   }
 
   /* High Contrast Dark Mode Text Color Adaptations */
