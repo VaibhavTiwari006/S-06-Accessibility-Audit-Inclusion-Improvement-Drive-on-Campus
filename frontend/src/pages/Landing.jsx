@@ -190,10 +190,10 @@ const Landing = () => {
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold text-secondary tracking-tight leading-tight mb-6">
               Building Inclusive Campuses <br />
-              <span className={darkMode 
-                ? "inline-block font-extrabold text-rose-400 drop-shadow-sm hero-gradient-text" 
-                : "inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary via-red-500 to-primary-light hero-gradient-text"
-              }>
+              <span 
+                className={darkMode ? "hero-subtitle-dark" : "hero-subtitle-light"}
+                style={darkMode ? { color: '#fb7185', WebkitTextFillColor: '#fb7185', background: 'none' } : undefined}
+              >
                 Through Intelligent Accessibility
               </span>
             </h1>

@@ -514,10 +514,36 @@
     border-color: rgba(16, 185, 129, 0.25) !important;
   }
 
+  /* Hero Subtitle Styles - Light & Dark Modes */
+  .hero-subtitle-light {
+    display: inline-block;
+    font-weight: 800;
+    color: #C8102E;
+    background-image: linear-gradient(to right, #C8102E, #ef4444, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle-dark {
+    display: inline-block !important;
+    font-weight: 800 !important;
+    color: #fb7185 !important;
+    -webkit-text-fill-color: #fb7185 !important;
+    background: transparent !important;
+    background-image: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    text-shadow: 0 0 20px rgba(251, 113, 133, 0.45) !important;
+  }
+
   /* High-Contrast Hero & Subtitle Text Visibility in Dark Mode */
   body.dark-mode .hero-gradient-text,
+  body.dark-mode .hero-subtitle-light,
   .dark .hero-gradient-text,
-  html.dark .hero-gradient-text {
+  .dark .hero-subtitle-light,
+  html.dark .hero-gradient-text,
+  html.dark .hero-subtitle-light {
     background: transparent !important;
     background-image: none !important;
     -webkit-background-clip: border-box !important;
@@ -543,7 +569,8 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    body:not(.light-mode) .hero-gradient-text {
+    body:not(.light-mode) .hero-gradient-text,
+    body:not(.light-mode) .hero-subtitle-light {
       background: transparent !important;
       background-image: none !important;
       -webkit-background-clip: border-box !important;
