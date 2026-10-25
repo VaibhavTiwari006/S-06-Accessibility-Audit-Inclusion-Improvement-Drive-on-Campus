@@ -27,6 +27,7 @@
 | 🔗 **Production Backend API** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/api`](https://s-06-accessibility-audit-inclusion.onrender.com/api)** | Spring Boot 3.4.1 (Java 21) REST microservice container hosted on Render Cloud. |
 | 📖 **Swagger / OpenAPI Specs** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html`](https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html)** | Interactive API documentation and testing sandbox for all 38 endpoints. |
 | 📋 **Evaluation Dossier** | [**`docs/CUSOC_FINAL_EVALUATION.md`**](docs/CUSOC_FINAL_EVALUATION.md) | Official CUSoC milestone verification framework, delivery evidence, and 5-min demo script. |
+| 📦 **CUSoC Section 6 Deliverables** | [**`DELIVERABLES.md`**](DELIVERABLES.md) &bull; [**`deliverables/`**](deliverables/) | Complete 8-part official CUSoC deliverables suite (Proposal, Repo, Docs, Reports, Tests, Slides, Final Report, Live URL). |
 | 🎓 **Viva Voce Defense Guide** | [**`docs/VIVA_VOCE_DEFENSE.md`**](docs/VIVA_VOCE_DEFENSE.md) | 25 in-depth technical Q&A defense answers covering architecture, RPWD law, and cybersecurity. |
 
 ---
