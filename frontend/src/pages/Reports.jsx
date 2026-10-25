@@ -154,13 +154,24 @@ const Reports = () => {
           <p className="text-textLight mt-1">Campus-wide accessibility metrics and issue tracking.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button
-            onClick={handleDownloadFinalReport}
-            isLoading={downloadingFinal}
-            icon={FileText}
+          <a
+            href="/AccessAudit_Technical_Report.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            download="AccessAudit_Technical_Report.pdf"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-white font-bold text-sm shadow-sm hover:bg-primary-dark transition-colors"
           >
-            Final Project Report
-          </Button>
+            <FileText size={18} /> Technical Report (PDF)
+          </a>
+          <a
+            href="/AccessAudit_Testing_Report.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            download="AccessAudit_Testing_Report.pdf"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-300 text-slate-800 font-bold text-sm shadow-sm hover:bg-slate-50 transition-colors"
+          >
+            <ShieldCheck size={18} /> Testing Report (PDF)
+          </a>
           <Button 
             variant="outline"
             onClick={handleDownloadAdvocacy}
