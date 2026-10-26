@@ -218,8 +218,12 @@ public class ReportServiceImpl implements ReportService {
                 
                 // Audit info details
                 Font valueFont = FontFactory.getFont(FontFactory.HELVETICA, 11, new Color(74, 74, 74));
+                String auditorName = (audit.getAuditor() != null && audit.getAuditor().getFullName() != null)
+                        ? audit.getAuditor().getFullName()
+                        : "Certified Accessibility Auditor";
+                String auditDate = audit.getAuditDate() != null ? audit.getAuditDate().toString() : "Recent Audit";
                 Paragraph auditInfo = new Paragraph(
-                    "Auditor: " + audit.getAuditor().getFullName() + " | Date: " + audit.getAuditDate() + "\n" +
+                    "Auditor: " + auditorName + " | Date: " + auditDate + "\n" +
                     "Remarks: " + (audit.getRemarks() != null ? audit.getRemarks() : "No remarks provided."),
                     valueFont
                 );
@@ -307,7 +311,8 @@ public class ReportServiceImpl implements ReportService {
     }
     
     private PdfPCell createTableCell(String text, int alignment) {
-        PdfPCell cell = new PdfPCell(new Phrase(text, FontFactory.getFont(FontFactory.HELVETICA, 9, new Color(74, 74, 74))));
+        String safeText = text != null ? text : "";
+        PdfPCell cell = new PdfPCell(new Phrase(safeText, FontFactory.getFont(FontFactory.HELVETICA, 9, new Color(74, 74, 74))));
         cell.setPadding(8);
         cell.setHorizontalAlignment(alignment);
         cell.setBorderColor(new Color(230, 230, 230));
@@ -354,10 +359,10 @@ public class ReportServiceImpl implements ReportService {
             document.add(intro);
             
             // Tasks Table
-            PdfPTable table = new PdfPTable(new float[]{3, 2, 2, 2, 2});
+            PdfPTable table = new PdfPTable(new float[]{3.5f, 2.5f, 2f, 2f, 2.5f});
             table.setWidthPercentage(100);
             
-            String[] headers = {"Task", "Building", "Severity", "Cost (INR)", "Due Date"};
+            String[] headers = {"Task", "Building", "Severity", "Cost (INR)", "Target Timeline"};
             for (String header : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(header, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10, Color.WHITE)));
                 cell.setBackgroundColor(new Color(27, 54, 93));
@@ -367,7 +372,7 @@ public class ReportServiceImpl implements ReportService {
             }
             
             List<MaintenanceTask> openTasks = maintenanceTaskRepository.findAll().stream()
-                    .filter(t -> !"COMPLETED".equals(t.getStatus()))
+                    .filter(t -> t != null && !"COMPLETED".equalsIgnoreCase(t.getStatus()))
                     .sorted((t1, t2) -> {
                         // Sort by Severity: CRITICAL > HIGH > MEDIUM > LOW
                         int s1 = getSeverityRank(t1.getSeverity());
@@ -378,20 +383,39 @@ public class ReportServiceImpl implements ReportService {
             
             double totalCost = 0;
             
-            for (MaintenanceTask task : openTasks) {
-                table.addCell(createTableCell(task.getTitle(), Element.ALIGN_LEFT));
-                table.addCell(createTableCell(task.getBuilding().getBuildingName(), Element.ALIGN_CENTER));
-                
-                PdfPCell sevCell = createTableCell(task.getSeverity(), Element.ALIGN_CENTER);
-                if ("CRITICAL".equals(task.getSeverity())) {
-                    sevCell.setBackgroundColor(new Color(255, 235, 238)); // Light Red
+            if (openTasks.isEmpty()) {
+                PdfPCell emptyCell = new PdfPCell(new Phrase("No pending remediation tasks identified.", normalFont));
+                emptyCell.setColspan(5);
+                emptyCell.setPadding(12);
+                emptyCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(emptyCell);
+            } else {
+                for (MaintenanceTask task : openTasks) {
+                    String taskTitle = task.getTitle() != null ? task.getTitle() : "Remediation Task";
+                    String buildingName = (task.getBuilding() != null && task.getBuilding().getBuildingName() != null)
+                            ? task.getBuilding().getBuildingName()
+                            : "General Campus";
+                    String severity = task.getSeverity() != null ? task.getSeverity().toUpperCase() : "MEDIUM";
+                    double cost = task.getEstimatedCost() != null ? task.getEstimatedCost() : 0.0;
+                    totalCost += cost;
+                    String dueDateStr = task.getDueDate() != null
+                            ? task.getDueDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                            : "Immediate (30 Days)";
+
+                    table.addCell(createTableCell(taskTitle, Element.ALIGN_LEFT));
+                    table.addCell(createTableCell(buildingName, Element.ALIGN_CENTER));
+                    
+                    PdfPCell sevCell = createTableCell(severity, Element.ALIGN_CENTER);
+                    if ("CRITICAL".equals(severity)) {
+                        sevCell.setBackgroundColor(new Color(255, 235, 238)); // Light Red
+                    } else if ("HIGH".equals(severity)) {
+                        sevCell.setBackgroundColor(new Color(255, 243, 224)); // Light Orange
+                    }
+                    table.addCell(sevCell);
+                    
+                    table.addCell(createTableCell(String.format("INR %.2f", cost), Element.ALIGN_RIGHT));
+                    table.addCell(createTableCell(dueDateStr, Element.ALIGN_CENTER));
                 }
-                table.addCell(sevCell);
-                
-                double cost = task.getEstimatedCost() != null ? task.getEstimatedCost() : 0.0;
-                totalCost += cost;
-                table.addCell(createTableCell(String.format("%.2f", cost), Element.ALIGN_RIGHT));
-                table.addCell(createTableCell(task.getDueDate().toString(), Element.ALIGN_CENTER));
             }
             document.add(table);
             
