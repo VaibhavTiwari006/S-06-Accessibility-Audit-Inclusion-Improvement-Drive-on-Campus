@@ -38,3 +38,6 @@ node_modules/
 skills-lock.json
 *.tsbuildinfo
 temp_*.html
+
+# Local Interview Evidence Pack (Kept local for interview prep)
+INTERVIEW_EVIDENCE_PACK/
