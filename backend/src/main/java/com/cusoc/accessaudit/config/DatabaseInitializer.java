@@ -40,7 +40,21 @@ public class DatabaseInitializer implements CommandLineRunner {
             initializeFeedbackSessions();
             initializeAwarenessCampaigns();
             initializePilotImprovements();
+        } else {
+            syncHighRiseFloors();
         }
+    }
+
+    private void syncHighRiseFloors() {
+        buildingRepository.findAll().forEach(b -> {
+            if (b.getBuildingCode() != null &&
+               (b.getBuildingCode().startsWith("Zakir") || b.getBuildingCode().startsWith("NC"))) {
+                if (b.getNumberOfFloors() != 11) {
+                    b.setNumberOfFloors(11);
+                    buildingRepository.save(b);
+                }
+            }
+        });
     }
 
     // ═══════════════════════════════════════════════════════════
