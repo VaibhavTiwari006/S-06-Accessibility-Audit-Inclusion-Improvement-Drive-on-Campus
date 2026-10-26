@@ -153,14 +153,14 @@ public class DatabaseInitializer implements CommandLineRunner {
     // ═══════════════════════════════════════════════════════════
     private List<Building> initializeBuildings() {
         String[][] buildingData = {
-            {"Zakir A", "ZakirA", "Zakir Husain Block A - Academic & lecture halls", "South-West Campus, Zakir Zone", "5"},
-            {"Zakir B", "ZakirB", "Zakir Husain Block B - Academic & lecture halls", "South-West Campus, Zakir Zone", "5"},
-            {"Zakir C", "ZakirC", "Zakir Husain Block C - Academic & lecture halls", "South-West Campus, Zakir Zone", "5"},
-            {"NC 1", "NC1", "Nek Chand Block 1 - Academic complex & labs", "North Campus, Academic Complex", "6"},
-            {"NC 2", "NC2", "Nek Chand Block 2 - Academic complex & labs", "North Campus, Academic Complex", "6"},
-            {"NC 3", "NC3", "Nek Chand Block 3 - Academic complex & labs", "North Campus, Academic Complex", "6"},
-            {"NC 4", "NC4", "Nek Chand Block 4 - Academic complex & labs", "North Campus, Academic Complex", "6"},
-            {"NC 5", "NC5", "Nek Chand Block 5 - Academic complex & labs", "North Campus, Academic Complex", "6"},
+            {"Zakir A", "ZakirA", "Zakir Husain Block A - Academic & lecture halls", "South-West Campus, Zakir Zone", "11"},
+            {"Zakir B", "ZakirB", "Zakir Husain Block B - Academic & lecture halls", "South-West Campus, Zakir Zone", "11"},
+            {"Zakir C", "ZakirC", "Zakir Husain Block C - Academic & lecture halls", "South-West Campus, Zakir Zone", "11"},
+            {"NC 1", "NC1", "Nek Chand Block 1 - Academic complex & labs", "North Campus, Academic Complex", "11"},
+            {"NC 2", "NC2", "Nek Chand Block 2 - Academic complex & labs", "North Campus, Academic Complex", "11"},
+            {"NC 3", "NC3", "Nek Chand Block 3 - Academic complex & labs", "North Campus, Academic Complex", "11"},
+            {"NC 4", "NC4", "Nek Chand Block 4 - Academic complex & labs", "North Campus, Academic Complex", "11"},
+            {"NC 5", "NC5", "Nek Chand Block 5 - Academic complex & labs", "North Campus, Academic Complex", "11"},
             {"D1", "D1", "D Block 1 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
             {"D2", "D2", "D Block 2 - Central Academic Ring", "Central Academic Ring, Block D", "4"},
             {"D3", "D3", "D Block 3 - Central Academic Ring", "Central Academic Ring, Block D", "4"},

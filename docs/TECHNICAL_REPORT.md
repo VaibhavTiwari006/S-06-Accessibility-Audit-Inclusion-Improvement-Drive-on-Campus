@@ -171,9 +171,9 @@ The quantitative dataset encompasses **1,102 checkpoints** compiled in [`docs/Ca
 | **Central Library** | Central University Library | 38 | **88.0%** | 🟢 Compliant | Wide turnstile gates, elevator access to all book stacks; minor fading on accessible parking bays. |
 | **D-Block Cluster** | D1, D2, D3, D4, D5, D6, D7, D8 | 304 | **74.8%** | 🟡 Partial | Standardized entrance ramps, accessible ground-floor washrooms; upper floors require tactile door signage. |
 | **C-Block Cluster** | C1, C2, C3 | 114 | **73.2%** | 🟡 Partial | C1/C2 feature wide entrances; C2 ramp slope at 1:10 exceeds 1:12 threshold; C3 needs washroom grab bar retrofits. |
-| **NC-Block Cluster**| NC 1, NC 2, NC 3, NC 4, NC 5 | 190 | **62.9%** | 🟡 Partial | High-capacity passenger elevators; lacks continuous tactile ground indicators from main entrance. |
+| **NC-Block Cluster**| NC 1, NC 2, NC 3, NC 4, NC 5 (11 Floors) | 190 | **62.9%** | 🟡 Partial | 11-story high-rise towers; high-capacity passenger elevators require tactile floor plates and arrival chimes. |
 | **B-Block Complex** | B1, B2, B3, B4, B5 | 190 | **59.8%** | 🟡 Partial | Heavy manual fire doors with high closing tension (>20N); door thresholds exceed 25mm in workshop zones. |
-| **Zakir Complex** | Zakir A, Zakir B, Zakir C | 114 | **57.2%** | 🟡 Partial | Heavy lecture volume; entrance portico ramp requires gradient reconstruction; lacks audible elevator guidance. |
+| **Zakir Complex** | Zakir A, Zakir B, Zakir C (11 Floors) | 114 | **57.2%** | 🟡 Partial | 11-story high-rise complex; heavy student traffic; portico entrance ramp gradient needs rebuild; audio lift chimes needed. |
 | **DD-Block Cluster**| DD1, DD2 | 76 | **41.6%** | 🔴 Non-Compliant | Multi-story academic wing lacking elevator infrastructure; wheelchair students cannot reach upper lecture halls. |
 | **CAMPUS TOTAL** | **29 Academic Buildings** | **1,102** | **68.2% (Mean)**| **Institutional Baseline** | **187 Verified Barriers (24 Critical, 61 High, 73 Med, 29 Low)** |
 
