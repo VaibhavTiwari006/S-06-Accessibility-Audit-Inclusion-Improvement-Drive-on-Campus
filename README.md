@@ -27,7 +27,7 @@
 | 🔗 **Production Backend API** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/api`](https://s-06-accessibility-audit-inclusion.onrender.com/api)** | Spring Boot 3.4.1 (Java 21) REST microservice container hosted on Render Cloud. |
 | 📖 **Swagger / OpenAPI Specs** | **[`https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html`](https://s-06-accessibility-audit-inclusion.onrender.com/swagger-ui.html)** | Interactive API documentation and testing sandbox for all 38 endpoints. |
 | 📋 **Evaluation Dossier** | [**`docs/CUSOC_FINAL_EVALUATION.md`**](docs/CUSOC_FINAL_EVALUATION.md) | Official CUSoC milestone verification framework, delivery evidence, and 5-min demo script. |
-| 📦 **CUSoC Section 6 Deliverables** | [**`DELIVERABLES.md`**](DELIVERABLES.md) &bull; [**`deliverables/`**](deliverables/) | Complete 8-part official CUSoC deliverables suite (Proposal, Repo, Docs, Reports, Tests, Slides, Final Report, Live URL). |
+| 📦 **CUSoC Section 6 Deliverables** | [**`deliverables/`**](deliverables/) &bull; [**`report/` (PDFs)](report/) | Complete 8-part official CUSoC deliverables suite (Proposal, Repo, Docs, Reports, Tests, Slides, Final Report, Live URL). |
 | 🎓 **Viva Voce Defense Guide** | [**`docs/VIVA_VOCE_DEFENSE.md`**](docs/VIVA_VOCE_DEFENSE.md) | 25 in-depth technical Q&A defense answers covering architecture, RPWD law, and cybersecurity. |
 
 ---
@@ -332,25 +332,28 @@ Empirical WCAG 2.1 & RPWD compliance metrics across university academic departme
 # 📂 Project Structure
 
 ```
-S-06-Accessibility-Audit/
+AccessAudit/
 │
-├── frontend/                   # React 18 + Vite + Tailwind CSS + Framer Motion UI
+├── .github/                    # Workflows, issue templates, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY
 ├── backend/                    # Spring Boot 3.4.1 (Java 21) REST API + Spring Security
-├── database/                   # PostgreSQL schemas and seed initialization
+├── frontend/                   # React 18 + Vite + Tailwind CSS + Framer Motion UI
+├── deliverables/               # CUSoC 2026 Section 6 deliverables suite (Items 1–8)
+├── report/                     # Official PDF deliverables (Technical Report & Testing Report)
 ├── docs/                       # Architectural, requirements, and compliance specs
 │   ├── architecture/           # System architecture, DB schema & component diagrams
 │   ├── requirements/           # SRS, user stories & functional requirements
 │   ├── Campus_Accessibility_Audit_Survey.xlsx # Complete quantitative Excel audit dataset
-│   ├── TECHNICAL_REPORT.md     # Comprehensive project technical report
+│   ├── TECHNICAL_REPORT.md     # Comprehensive 15-chapter technical report
 │   ├── API_DOCUMENTATION.md    # REST API endpoints & Swagger schemas
 │   ├── INSTALLATION.md         # Local & Docker installation guide
 │   ├── DEPLOYMENT.md           # Production deployment & Nginx guide
 │   └── TESTING_REPORT.md       # JUnit test suite & coverage documentation
+├── scripts/                    # Automation scripts (PDF generation, healthcheck, dev)
 │
 ├── CHANGELOG.md                # Detailed version release notes
-├── SECURITY.md                 # Security policy & vulnerability reporting
-├── CONTRIBUTING.md             # Open source contribution guidelines
-├── CODE_OF_CONDUCT.md          # Contributor code of conduct
+├── Dockerfile                  # Production container definition
+├── docker-compose.yml          # Local multi-service orchestration
+├── render.yaml                 # Render cloud web service definition
 ├── README.md                   # Project overview & quick start
 └── LICENSE                     # MIT License
 ```
@@ -493,9 +496,9 @@ To support scalability and code reliability, this repository integrates:
 # 🤝 Contributing & Community
 
 We welcome community collaborations! Please review our:
-*   [**Contributing Guidelines**](CONTRIBUTING.md)
-*   [**Code of Conduct**](CODE_OF_CONDUCT.md)
-*   [**Security Policy**](SECURITY.md) — Security Contact: [vaibhav.cse006@gmail.com](mailto:vaibhav.cse006@gmail.com)
+*   [**Contributing Guidelines**](.github/CONTRIBUTING.md)
+*   [**Code of Conduct**](.github/CODE_OF_CONDUCT.md)
+*   [**Security Policy**](.github/SECURITY.md) — Security Contact: [vaibhav.cse006@gmail.com](mailto:vaibhav.cse006@gmail.com)
 
 ---
 

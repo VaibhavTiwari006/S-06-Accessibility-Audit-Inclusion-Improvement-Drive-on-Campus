@@ -32,3 +32,9 @@ runs.json
 .neon
 .env.local
 node_modules/
+
+# AI Agent & Skills
+.agents/
+skills-lock.json
+*.tsbuildinfo
+temp_*.html

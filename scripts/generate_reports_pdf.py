@@ -2,6 +2,7 @@ import os
 import re
 import base64
 import subprocess
+import shutil
 from markdown_it import MarkdownIt
 
 def read_file(path):
@@ -18,18 +19,12 @@ def get_base64_image(image_path):
     return f"data:{mime};base64,{b64}"
 
 def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
-    # Initialize MarkdownIt with tables and strikethrough
     md = MarkdownIt("commonmark").enable(["table", "strikethrough"])
     
-    # Process image links before markdown rendering or in html
-    # Replace markdown image syntax with base64 embedded images
     def replace_img(match):
         alt = match.group(1)
         src = match.group(2).strip()
-        
-        # Strip file:/// if present
         cleaned_src = src.replace("file:///", "").replace("file://", "")
-        # Try finding image relative to workspace or docs
         potential_paths = [
             cleaned_src,
             os.path.join(base_dir, cleaned_src),
@@ -47,17 +42,11 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
             return f'<figure class="report-figure"><img src="{data_uri}" alt="{alt}" /><figcaption>{alt}</figcaption></figure>'
         return match.group(0)
 
-    # Replace markdown images
     md_content_processed = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_img, md_content)
-    
-    # Render body HTML
     body_html = md.render(md_content_processed)
-    
-    # Post-process body_html: wrap tables in table-container for responsive styling
     body_html = re.sub(r'<table>', '<div class="table-container"><table>', body_html)
     body_html = re.sub(r'</table>', '</table></div>', body_html)
 
-    # HTML document template with publication-grade CSS
     full_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,7 +74,6 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
       padding: 0;
     }}
 
-    /* Header Banner */
     .header-banner {{
       border-bottom: 3px solid #C8102E;
       padding-bottom: 14px;
@@ -160,7 +148,6 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
       margin-top: 2px;
     }}
 
-    /* Typography */
     h1, h2, h3, h4, h5, h6 {{
       color: #0f172a;
       font-weight: 800;
@@ -214,7 +201,6 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
       margin-bottom: 4px;
     }}
 
-    /* Tables */
     .table-container {{
       width: 100%;
       margin: 14px 0;
@@ -251,7 +237,6 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
       background-color: #f8fafc;
     }}
 
-    /* Code & Pre */
     code {{
       font-family: "Cascadia Code", "Fira Code", Consolas, "Courier New", monospace;
       font-size: 8pt;
@@ -282,7 +267,6 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
       border: none;
     }}
 
-    /* Blockquotes */
     blockquote {{
       margin: 12px 0;
       padding: 10px 16px;
@@ -300,7 +284,6 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
       margin: 0;
     }}
 
-    /* Figures & Images */
     figure.report-figure {{
       margin: 16px 0;
       text-align: center;
@@ -323,7 +306,6 @@ def convert_md_to_html(md_content, title, subtitle, doc_category, base_dir="."):
       font-weight: 600;
     }}
 
-    /* Footer styling */
     .report-footer {{
       margin-top: 28px;
       padding-top: 12px;
@@ -396,7 +378,7 @@ def convert_html_to_pdf(html_path, pdf_path):
         f"--print-to-pdf={pdf_path}",
         html_path
     ]
-    print(f"Generating PDF via Chrome: {pdf_path}")
+    print(f"Generating PDF: {pdf_path}")
     result = subprocess.run(cmd, capture_output=True, text=True)
     if os.path.exists(pdf_path):
         size_kb = os.path.getsize(pdf_path) / 1024
@@ -407,13 +389,15 @@ def convert_html_to_pdf(html_path, pdf_path):
         return False
 
 def main():
-    workspace_dir = os.path.abspath(".")
+    # Resolve project root from scripts/ directory
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    workspace_dir = os.path.abspath(os.path.join(script_dir, ".."))
+    
+    report_dir = os.path.join(workspace_dir, "report")
+    os.makedirs(report_dir, exist_ok=True)
     
     # 1. Generate Technical Report PDF
     tech_md_path = os.path.join(workspace_dir, "docs", "TECHNICAL_REPORT.md")
-    if not os.path.exists(tech_md_path):
-        tech_md_path = os.path.join(workspace_dir, "TECHNICAL_REPORT.md")
-    
     tech_md = read_file(tech_md_path)
     tech_html = convert_md_to_html(
         tech_md,
@@ -423,18 +407,15 @@ def main():
         base_dir=workspace_dir
     )
     
-    temp_tech_html = os.path.join(workspace_dir, "temp_technical_report.html")
+    temp_tech_html = os.path.join(report_dir, "temp_tech.html")
     with open(temp_tech_html, "w", encoding="utf-8") as f:
         f.write(tech_html)
     
-    pdf_tech_root = os.path.join(workspace_dir, "AccessAudit_Technical_Report.pdf")
-    convert_html_to_pdf(temp_tech_html, pdf_tech_root)
+    pdf_tech = os.path.join(report_dir, "AccessAudit_Technical_Report.pdf")
+    convert_html_to_pdf(temp_tech_html, pdf_tech)
     
     # 2. Generate Testing Report PDF
     test_md_path = os.path.join(workspace_dir, "deliverables", "05_TESTING_REPORT.md")
-    if not os.path.exists(test_md_path):
-        test_md_path = os.path.join(workspace_dir, "docs", "TESTING_REPORT.md")
-        
     test_md = read_file(test_md_path)
     test_html = convert_md_to_html(
         test_md,
@@ -444,25 +425,24 @@ def main():
         base_dir=workspace_dir
     )
     
-    temp_test_html = os.path.join(workspace_dir, "temp_testing_report.html")
+    temp_test_html = os.path.join(report_dir, "temp_test.html")
     with open(temp_test_html, "w", encoding="utf-8") as f:
         f.write(test_html)
         
-    pdf_test_root = os.path.join(workspace_dir, "AccessAudit_Testing_Report.pdf")
-    convert_html_to_pdf(temp_test_html, pdf_test_root)
+    pdf_test = os.path.join(report_dir, "AccessAudit_Testing_Report.pdf")
+    convert_html_to_pdf(temp_test_html, pdf_test)
     
-    # Clean up temp HTML files
+    # Clean up temp HTML
     for p in [temp_tech_html, temp_test_html]:
         if os.path.exists(p):
             os.remove(p)
             
-    # Also copy copies into deliverables/
-    deliv_dir = os.path.join(workspace_dir, "deliverables")
-    if os.path.exists(deliv_dir):
-        import shutil
-        shutil.copy(pdf_tech_root, os.path.join(deliv_dir, "AccessAudit_Technical_Report.pdf"))
-        shutil.copy(pdf_test_root, os.path.join(deliv_dir, "AccessAudit_Testing_Report.pdf"))
-        print("Copied PDFs into deliverables/ directory.")
+    # Sync to deliverables/ and frontend/public/
+    for target_dir in [os.path.join(workspace_dir, "deliverables"), os.path.join(workspace_dir, "frontend", "public")]:
+        if os.path.exists(target_dir):
+            shutil.copy(pdf_tech, os.path.join(target_dir, "AccessAudit_Technical_Report.pdf"))
+            shutil.copy(pdf_test, os.path.join(target_dir, "AccessAudit_Testing_Report.pdf"))
+            print(f"Synced PDFs to {target_dir}")
 
 if __name__ == "__main__":
     main()
