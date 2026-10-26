@@ -2,3 +2,8 @@
 backend/mvnw text eol=lf
 *.sh text eol=lf
 *.bash text eol=lf
+
+# Explicit GitHub Linguist technology classifications
+backend/** linguist-detectable=true
+frontend/** linguist-detectable=true
+scripts/** linguist-documentation=true
